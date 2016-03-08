@@ -1,0 +1,10 @@
+﻿.panel-bodybefore{
+   width:100%;
+   margin-left: 18%; 
+   border: solid;
+}
+.panel-body{
+   width:100%;
+   margin-left: 0%; 
+   border: dashed;
+}
