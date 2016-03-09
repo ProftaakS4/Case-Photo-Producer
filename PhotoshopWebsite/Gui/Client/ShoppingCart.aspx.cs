@@ -5,15 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace PhotoshopWebsite
+namespace PhotoshopWebsite.Gui
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class ShoppingCart : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Label x = new Label();
-            x.Text = "test";
-            pnlProduct.Controls.Add(x);
+
         }
     }
 }

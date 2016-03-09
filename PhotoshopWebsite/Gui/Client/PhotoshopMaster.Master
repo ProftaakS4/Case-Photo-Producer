@@ -1,14 +1,14 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PhotoshopMaster.master.cs" Inherits="PhotoshopWebsite.PhotoshopMaster" %>
 
 <!DOCTYPE html>
-<link href="../Bootstrap/Content/bootstrap.css" rel="stylesheet" />
-<script src="../Bootstrap/Scripts/bootstrap.js"></script>
+<link href="../../Bootstrap/Content/bootstrap.css" rel="stylesheet" />
+<script src="../../Bootstrap/Scripts/bootstrap.js"></script>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Photoshop</title>
-    <link href="../Bootstrap/Content/Custom.css" rel="stylesheet" />
-    <link href="../Bootstrap/Menu/simple-sidebar.css" rel="stylesheet" />
-    <link href="../Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Bootstrap/Content/Custom.css" rel="stylesheet" />
+    <link href="../../Bootstrap/Menu/simple-sidebar.css" rel="stylesheet" />
+    <link href="../../Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
     </head>
 <body>
 
@@ -22,16 +22,16 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">Pictures</a>
+                    <a href="Mainstore.aspx">Pictures</a>
                 </li>
                 <li>
-                    <a href="#">Group pictures</a>
+                    <a href="Mainstore.aspx">Group pictures</a>
                 </li>
                 <li>
                     <a href="Account.aspx">My Account</a>
                 </li>
                 <li>
-                    <a href="#">Shopping Cart <img src="../Images/Shoppingcart.png" style="height: 20px; width:20px; margin-left:10px;"/></a>
+                    <a href="ShoppingCart.aspx">Shopping Cart <img src="../Images/Shoppingcart.png" style="height: 20px; width:20px; margin-left:10px;"/></a>
                 </li>
                 <div runat="server" class="col-lg-6">
                     <div  class="input-group" runat="server">
@@ -50,7 +50,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1>My Pictures</h1>
+                        <asp:Label ID="LabelTitle" runat="server" Text="Label"></asp:Label>
                         <p>Click to Toggle button for the Menu to appear or dissapear</p>                        
                         <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                     </div>
@@ -63,11 +63,11 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="../Bootstrap/Menu/JS/jquery.js"></script>
+    <script src="../../Bootstrap/Menu/JS/jquery.js"></script>
 
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../Bootstrap/Menu/JS/bootstrap.min.js"></script>
+    <script src="../../Bootstrap/Menu/JS/bootstrap.min.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>

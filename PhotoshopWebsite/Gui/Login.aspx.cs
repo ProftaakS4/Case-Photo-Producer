@@ -28,7 +28,7 @@ namespace PhotoshopWebsite
             if (LoginSuccess)
             {
                 Session["logindata"] = loginName;
-                Response.Redirect("Mainstore.aspx");
+                Response.Redirect("~/Gui/Client/Mainstore.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
         }
 

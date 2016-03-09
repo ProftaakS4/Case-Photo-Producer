@@ -7,5 +7,9 @@ namespace PhotoshopWebsite.Controller
 {
     public class Order
     {
+        public Order()
+        {
+
+        }
     }
 }

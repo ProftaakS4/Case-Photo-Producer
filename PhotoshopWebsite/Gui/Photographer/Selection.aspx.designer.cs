@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PhotoshopWebsite.Gui
+namespace PhotoshopWebsite.Gui.Photographer
 {
 
 
-    public partial class Account
+    public partial class Selection
     {
     }
 }

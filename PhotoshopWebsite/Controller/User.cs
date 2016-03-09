@@ -27,6 +27,7 @@ namespace PhotoshopWebsite.Controller
             this.Type = Type;
             this.Firstname = Firstname;
             this.Lastname = Lastname;
+            this.Streetname = Streetname;
             this.Housenumber = Housenumber;
             this.Zipcode = Zipcode;
             this.City = City;

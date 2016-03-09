@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PhotoshopWebsite {
+namespace PhotoshopWebsite.Gui {
     
     
-    public partial class PhotoshopMaster {
+    public partial class FinancialAdmin {
         
         /// <summary>
         /// Labelklantnaam control.
@@ -29,15 +29,6 @@ namespace PhotoshopWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton Btntoggle;
-        
-        /// <summary>
-        /// head control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
         /// ContentPlaceHolder1 control.

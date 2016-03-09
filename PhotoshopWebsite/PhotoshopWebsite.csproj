@@ -64,18 +64,30 @@
     <Content Include="Bootstrap\Menu\JS\bootstrap.min.js" />
     <Content Include="Bootstrap\Menu\JS\jquery.js" />
     <Content Include="Bootstrap\Menu\simple-sidebar.css" />
-    <Content Include="Gui\Account.aspx" />
-    <Content Include="Gui\AdminPage.aspx" />
-    <Content Include="Gui\PhotoshopMaster.Master" />
-    <Content Include="Images\Shoppingcart.png" />
+    <Content Include="Gui\Admin\Account.aspx" />
+    <Content Include="Gui\Admin\Clients.aspx" />
+    <Content Include="Gui\Admin\Mainadmin.aspx" />
+    <Content Include="Gui\Admin\Stock.aspx" />
+    <Content Include="Gui\Client\Account.aspx" />
+    <Content Include="Gui\Finance\Account.aspx" />
+    <Content Include="Gui\Finance\Finance.aspx" />
+    <Content Include="Gui\Client\PhotoshopMaster.Master" />
+    <Content Include="Gui\Client\ShoppingCart.aspx" />
+    <Content Include="Gui\Finance\Orders.aspx" />
+    <Content Include="Gui\Finance\Stock.aspx" />
+    <Content Include="Gui\Images\Shoppingcart.png" />
     <Content Include="Bootstrap\Content\Custom.css" />
+    <Content Include="Gui\Finance\FinancialAdmin.Master" />
+    <Content Include="Gui\Admin\AdminMaster.Master" />
+    <Content Include="Gui\Photographer\Account.aspx" />
+    <Content Include="Gui\Photographer\Clients.aspx" />
+    <Content Include="Gui\Photographer\PhotographerMaster.Master" />
     <None Include="Gui\Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Gui\Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="Gui\PhotographerPage.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bootstrap\Content\bootstrap-theme.css" />
@@ -98,8 +110,10 @@
     <Content Include="Bootstrap\Scripts\bootstrap.min.js" />
     <Content Include="Bootstrap\Scripts\jquery-1.9.1.js" />
     <Content Include="Bootstrap\Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Gui\Photographer\Pictures.aspx" />
+    <Content Include="Gui\Photographer\Selection.aspx" />
     <Content Include="Gui\Web.config" />
-    <Content Include="Gui\Mainstore.aspx" />
+    <Content Include="Gui\Client\Mainstore.aspx" />
     <Content Include="Bootstrap\Scripts\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup>
@@ -111,19 +125,75 @@
     <Compile Include="Controller\Product.cs" />
     <Compile Include="Controller\Transaction.cs" />
     <Compile Include="Controller\User.cs" />
-    <Compile Include="Gui\Account.aspx.cs">
+    <Compile Include="Gui\Admin\Account.aspx.cs">
       <DependentUpon>Account.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gui\Account.aspx.designer.cs">
+    <Compile Include="Gui\Admin\Account.aspx.designer.cs">
       <DependentUpon>Account.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Gui\AdminPage.aspx.cs">
-      <DependentUpon>AdminPage.aspx</DependentUpon>
+    <Compile Include="Gui\Admin\AdminMaster.Master.cs">
+      <DependentUpon>AdminMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gui\AdminPage.aspx.designer.cs">
-      <DependentUpon>AdminPage.aspx</DependentUpon>
+    <Compile Include="Gui\Admin\AdminMaster.Master.designer.cs">
+      <DependentUpon>AdminMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Admin\Clients.aspx.cs">
+      <DependentUpon>Clients.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Admin\Clients.aspx.designer.cs">
+      <DependentUpon>Clients.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Admin\Mainadmin.aspx.cs">
+      <DependentUpon>Mainadmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Admin\Mainadmin.aspx.designer.cs">
+      <DependentUpon>Mainadmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Admin\Stock.aspx.cs">
+      <DependentUpon>Stock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Admin\Stock.aspx.designer.cs">
+      <DependentUpon>Stock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Client\Account.aspx.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Client\Account.aspx.designer.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Finance\Account.aspx.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Finance\Account.aspx.designer.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Finance\Finance.aspx.cs">
+      <DependentUpon>Finance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Finance\Finance.aspx.designer.cs">
+      <DependentUpon>Finance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Finance\FinancialAdmin.Master.cs">
+      <DependentUpon>FinancialAdmin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Finance\FinancialAdmin.Master.designer.cs">
+      <DependentUpon>FinancialAdmin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Finance\Orders.aspx.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Finance\Orders.aspx.designer.cs">
+      <DependentUpon>Orders.aspx</DependentUpon>
     </Compile>
     <Compile Include="Gui\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -132,26 +202,68 @@
     <Compile Include="Gui\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Gui\PhotoshopMaster.Master.cs">
+    <Compile Include="Gui\Client\PhotoshopMaster.Master.cs">
       <DependentUpon>PhotoshopMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gui\PhotoshopMaster.Master.designer.cs">
+    <Compile Include="Gui\Client\PhotoshopMaster.Master.designer.cs">
       <DependentUpon>PhotoshopMaster.Master</DependentUpon>
     </Compile>
-    <Compile Include="Gui\PhotographerPage.aspx.cs">
-      <DependentUpon>PhotographerPage.aspx</DependentUpon>
+    <Compile Include="Gui\Photographer\Account.aspx.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gui\PhotographerPage.aspx.designer.cs">
-      <DependentUpon>PhotographerPage.aspx</DependentUpon>
+    <Compile Include="Gui\Photographer\Account.aspx.designer.cs">
+      <DependentUpon>Account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Photographer\Clients.aspx.cs">
+      <DependentUpon>Clients.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Photographer\Clients.aspx.designer.cs">
+      <DependentUpon>Clients.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Photographer\PhotographerMaster.Master.cs">
+      <DependentUpon>PhotographerMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Photographer\PhotographerMaster.Master.designer.cs">
+      <DependentUpon>PhotographerMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Client\ShoppingCart.aspx.cs">
+      <DependentUpon>ShoppingCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Client\ShoppingCart.aspx.designer.cs">
+      <DependentUpon>ShoppingCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Finance\Stock.aspx.cs">
+      <DependentUpon>Stock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Finance\Stock.aspx.designer.cs">
+      <DependentUpon>Stock.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Photographer\Pictures.aspx.cs">
+      <DependentUpon>Pictures.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Photographer\Pictures.aspx.designer.cs">
+      <DependentUpon>Pictures.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Photographer\Selection.aspx.cs">
+      <DependentUpon>Selection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Photographer\Selection.aspx.designer.cs">
+      <DependentUpon>Selection.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Gui\Mainstore.aspx.cs">
+    <Compile Include="Gui\Client\Mainstore.aspx.cs">
       <DependentUpon>Mainstore.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gui\Mainstore.aspx.designer.cs">
+    <Compile Include="Gui\Client\Mainstore.aspx.designer.cs">
       <DependentUpon>Mainstore.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
