@@ -69,6 +69,7 @@
     <Content Include="Gui\Admin\Mainadmin.aspx" />
     <Content Include="Gui\Admin\Stock.aspx" />
     <Content Include="Gui\Client\Account.aspx" />
+    <Content Include="Gui\Client\CreateAccount.aspx" />
     <Content Include="Gui\Finance\Account.aspx" />
     <Content Include="Gui\Finance\Finance.aspx" />
     <Content Include="Gui\Client\PhotoshopMaster.Master" />
@@ -166,6 +167,13 @@
     </Compile>
     <Compile Include="Gui\Client\Account.aspx.designer.cs">
       <DependentUpon>Account.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Client\CreateAccount.aspx.cs">
+      <DependentUpon>CreateAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Client\CreateAccount.aspx.designer.cs">
+      <DependentUpon>CreateAccount.aspx</DependentUpon>
     </Compile>
     <Compile Include="Gui\Finance\Account.aspx.cs">
       <DependentUpon>Account.aspx</DependentUpon>

@@ -36,5 +36,18 @@ namespace PhotoshopWebsite.Controller
             this.Emailaddress = Emailaddress;
             this.Password = Password;
         }
+        public User(String Firstname,String Lastname,String Streetname,String Housenumber, String Zipcode, String City, String Phonenumber,String IBAN,String Emailaddress, String Password)
+        {
+            this.Firstname = Firstname;
+            this.Lastname = Lastname;
+            this.Streetname = Streetname;
+            this.Housenumber = Housenumber;
+            this.Zipcode = Zipcode;
+            this.City = City;
+            this.Phonenumber = Phonenumber;
+            this.IBAN = IBAN;
+            this.Emailaddress = Emailaddress;
+            this.Password = Password;
+        }
     }
 }

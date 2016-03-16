@@ -13,7 +13,8 @@ namespace PhotoshopWebsite
         private String loginName;
         private String passWord;
         private Boolean Rememberme = false;
-        private Boolean LoginSuccess = true; 
+        private Boolean LoginSuccess = true;
+        private String loginCode; 
        
 
         protected void Page_Load(object sender, EventArgs e)
@@ -39,7 +40,9 @@ namespace PhotoshopWebsite
 
         protected void BtnCreateAccount_Click(object sender, EventArgs e)
         {
-
+            loginCode = tbInputCode.Text;
+            Session["loginCode"] = loginCode;
+            Response.Redirect("~/Gui/Client/CreateAccount.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
         }
     }
 }
