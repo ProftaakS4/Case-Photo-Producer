@@ -30,5 +30,7 @@
     min-width: 200px;
 }
 .jumbotron{
-    background-color:#cdbfe3;
+    background-color:black;
+    padding-top: 10px; 
+    padding-bottom: 0px;
 }
