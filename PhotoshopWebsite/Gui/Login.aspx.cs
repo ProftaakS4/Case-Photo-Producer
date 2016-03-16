@@ -36,5 +36,10 @@ namespace PhotoshopWebsite
         {
             Rememberme = true;
         }
+
+        protected void BtnCreateAccount_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

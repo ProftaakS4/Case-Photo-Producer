@@ -17,23 +17,32 @@ namespace PhotoshopWebsite
         Product testproduct4 = new Product(4, "PHOTO1x2", "Rubber", "Foto van formaat loek zien lul(500x1500)", "../Images/Shoppingcart.png", -1);
 
         private List<Product> testproducts;
+        private List<Product> shoppingCart;
 
+        
         protected void Page_Load(object sender, EventArgs e)
-        {
+        {          
+            Session["shoppingCart"] = shoppingCart;
             testproducts = new List<Product>();
             testproducts.Add(testproduct1);
             testproducts.Add(testproduct2);
             testproducts.Add(testproduct3);
-            testproducts.Add(testproduct4);
+            testproducts.Add(testproduct4);            
             foreach (Product x in testproducts)
             {
+                Button btnAddToCart = new Button();
+                btnAddToCart.ID = "btAddtoCart" + x.ID;
+                btnAddToCart.CssClass = "btn btn-default;";
+                btnAddToCart.Click += btnAddToCart_Click;
                 HtmlGenericControl newControl = new HtmlGenericControl("div");
                 newControl.ID = "NewControl";
-                newControl.InnerHtml = " <div class='col-md-6' ;> <div class='thumbnail'> <img src='" + x.Image + "'alt='Unable to load image, please contact admin'> <div class='caption'> <h3>" + x.ID + "</h3> <p>" + x.Description + "</p>   <asp:LinkButton ID='LinkButton1'" + x.ID + "' class='btn btn-default' runat='server'>Add to cart</asp:LinkButton> <asp:LinkButton ID='Color'" + x.ID + "' class='btn btn-default' runat='server'>Show Color</asp:LinkButton> <asp:LinkButton ID='Sepia'" + x.ID + "' class='btn btn-default' runat='server'>Show Sepia</asp:LinkButton> <asp:LinkButton ID='Black&White'" + x.ID + "' class='btn btn-default' runat='server'>Show Black and white</asp:LinkButton> </div> </div>";
+                newControl.InnerHtml = " <div class='col-md-6' ;> <div class='thumbnail'> <img src='" + x.Image + "'alt='Unable to load image, please contact admin'> <div class='caption'> <h3>" + x.ID + "</h3> <p>" + x.Description + "</p>   <asp:LinkButton ID='btnOrder'" + x.ID + "'  OnClick='btnAddToCart_Click' class='btn btn-default' runat='server'>Add to Card</asp:LinkButton><asp:LinkButton ID='Color'" + x.ID + "' class='btn btn-default' runat='server'>Show Color</asp:LinkButton> <asp:LinkButton ID='Sepia'" + x.ID + "' class='btn btn-default' runat='server'>Show Sepia</asp:LinkButton> <asp:LinkButton ID='Black&White'" + x.ID + "' class='btn btn-default' runat='server'>Show Black and white</asp:LinkButton> </div> </div>";
                 pnlProduct.Controls.Add(newControl);
-            }
+            }   
+        }
 
-
+        void btnAddToCart_Click(object sender, EventArgs e)
+        {
         }
     }
 }
