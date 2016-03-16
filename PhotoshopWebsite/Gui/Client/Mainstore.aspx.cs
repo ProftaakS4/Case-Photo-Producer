@@ -19,29 +19,91 @@ namespace PhotoshopWebsite
         private List<Product> testproducts;
         private List<Product> shoppingCart;
 
-        
+
         protected void Page_Load(object sender, EventArgs e)
-        {          
+        {            
             Session["shoppingCart"] = shoppingCart;
             testproducts = new List<Product>();
             testproducts.Add(testproduct1);
             testproducts.Add(testproduct2);
             testproducts.Add(testproduct3);
-            testproducts.Add(testproduct4);            
+            testproducts.Add(testproduct4);
             foreach (Product x in testproducts)
             {
+                //create button
                 Button btnAddToCart = new Button();
-                btnAddToCart.ID = "btAddtoCart" + x.ID;
-                btnAddToCart.CssClass = "btn btn-default;";
+                btnAddToCart.ID = "btnAddtoCart" + x.ID;
+                btnAddToCart.CssClass = "btn btn-default";
                 btnAddToCart.Click += btnAddToCart_Click;
-                HtmlGenericControl newControl = new HtmlGenericControl("div");
-                newControl.ID = "NewControl";
-                newControl.InnerHtml = " <div class='col-md-6' ;> <div class='thumbnail'> <img src='" + x.Image + "'alt='Unable to load image, please contact admin'> <div class='caption'> <h3>" + x.ID + "</h3> <p>" + x.Description + "</p>   <asp:LinkButton ID='btnOrder'" + x.ID + "'  OnClick='btnAddToCart_Click' class='btn btn-default' runat='server'>Add to Card</asp:LinkButton><asp:LinkButton ID='Color'" + x.ID + "' class='btn btn-default' runat='server'>Show Color</asp:LinkButton> <asp:LinkButton ID='Sepia'" + x.ID + "' class='btn btn-default' runat='server'>Show Sepia</asp:LinkButton> <asp:LinkButton ID='Black&White'" + x.ID + "' class='btn btn-default' runat='server'>Show Black and white</asp:LinkButton> </div> </div>";
-                pnlProduct.Controls.Add(newControl);
-            }   
+                btnAddToCart.Height = 30;
+                btnAddToCart.Text = "Order";
+                
+
+                Button btnSepia = new Button();
+                btnSepia.ID = "btnSepia" + x.ID;
+                btnSepia.CssClass = "btn btn-default";
+                btnSepia.Click += btnSepia_Click;
+                btnSepia.Height = 30;
+                btnSepia.Text = "Sepia";
+
+                Button btnBlackWhite = new Button();
+                btnBlackWhite.ID = "btnBlackWhite" + x.ID;
+                btnBlackWhite.CssClass = "btn btn-default";
+                btnBlackWhite.Click += btnBlackWhite_Click;
+                btnBlackWhite.Height = 30;
+                btnBlackWhite.Text = "Black & White";
+
+                Button btnColor = new Button();
+                btnColor.ID = "btnColor" + x.ID;
+                btnColor.CssClass = "btn btn-default";
+                btnColor.Click += btnColor_Click;
+                btnColor.Height = 30;
+                btnColor.Text = "Color";
+
+                //create image
+                Image Picture = new Image();
+                Picture.ID = "Picture" + x.ID;
+                Picture.AlternateText = "Couldn't find picture";
+                Picture.ImageUrl = x.Image;
+                //
+
+                HtmlGenericControl firstControl = new HtmlGenericControl("div");
+                HtmlGenericControl lastControl = new HtmlGenericControl("div");
+                firstControl.InnerHtml = "<div id='thumbnailcontroll'> <div class='col-md-6' ;> <div class='thumbnail'>";
+                lastControl.InnerHtml = "</div> </div> </div>";
+                firstControl.Controls.Add(Picture);
+                //add buttons
+                firstControl.Controls.Add(btnAddToCart);
+                firstControl.Controls.Add(btnSepia);
+                firstControl.Controls.Add(btnBlackWhite);
+                firstControl.Controls.Add(btnColor);
+                pnlProduct.Controls.Add(firstControl);
+                pnlProduct.Controls.Add(lastControl);
+
+            }
         }
 
         void btnAddToCart_Click(object sender, EventArgs e)
+        {
+            
+            Response.Write("<script LANGUAGE='JavaScript' >alert('test')</script>");
+
+            //foreach(Control control in pnlProduct.Controls)
+            //{
+            //    if (control.GetType() == typeof(Button))
+            //    {
+
+            //    }
+            //}
+        }
+
+        void btnSepia_Click(object sender, EventArgs e)
+        {
+        }
+        void btnBlackWhite_Click(object sender, EventArgs e)
+        {
+        }
+        void btnColor_Click(object sender, EventArgs e)
         {
         }
     }

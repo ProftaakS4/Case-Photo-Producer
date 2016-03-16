@@ -30,7 +30,11 @@
     min-width: 200px;
 }
 .jumbotron{
-    background-color:black;
+    background-color:#777;
     padding-top: 10px; 
     padding-bottom: 0px;
+}
+#thumbnailcontroll .btn{
+    margin-right: 10px!important;
+    width: 120px;
 }

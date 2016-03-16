@@ -4,8 +4,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
             <div ID="panel-body" class="panel-bodybefore">
                 <div class='container'><div class='row'>
-                    <asp:Label ID="testlabel"></asp:Label>
+                    <form runat="server">
     <asp:Panel ID="pnlProduct" runat="server"></asp:Panel>
-        </asp:Panel></div>
+                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        </asp:Panel></form></div>
                   
 </asp:Content>
