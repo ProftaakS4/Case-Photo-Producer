@@ -17,14 +17,13 @@ namespace PhotoshopWebsite
         Product testproduct4 = new Product(4, "PHOTO1x2", "Rubber", "Foto van formaat loek zien lul(500x1500)", "../Images/Shoppingcart.png", -1);
 
         private List<Product> testproducts;
-        private List<Product> shoppingCart;
+        private List<Product> shoppingCart = new List<Product>();
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            shoppingCart = new List<Product>();
             Session["shoppingCart"] = shoppingCart;
-
+          
             testproducts = new List<Product>();
             testproducts.Add(testproduct1);
             testproducts.Add(testproduct2);
@@ -100,15 +99,15 @@ namespace PhotoshopWebsite
         {
             Button x = sender as Button;
             string id = x.ID.Substring(x.ID.Length -1 ,1);
-            foreach (Product product in testproducts)
-            {
-                if (product.ID.ToString() == id)
+                foreach (Product product in testproducts)
                 {
-                    shoppingCart.Add(product);
-                    Response.Redirect(Request.RawUrl);
+                    if (product.ID.ToString() == id)
+                    {
+                        shoppingCart.Add(product);
+                    }
                 }
-            }
         }
+        
 
         void btnSepia_Click(object sender, EventArgs e)
         {
@@ -129,13 +128,12 @@ namespace PhotoshopWebsite
         }
         void btnBlackWhite_Click(object sender, EventArgs e)
         {
+            //Not yet implemented
         }
         void btnColor_Click(object sender, EventArgs e)
         {
+            //Not yet implemented
         }
-
-
-
     }
 }
 

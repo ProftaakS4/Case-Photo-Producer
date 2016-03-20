@@ -1,6 +1,6 @@
 ﻿.panel-bodybefore{
    width:100%;
-   margin-left: 13.5%; 
+   margin-left: 20%; 
 }
 .panel-body{
    width:100%;
@@ -37,4 +37,7 @@
 #thumbnailcontroll .btn{
     margin-right: 10px!important;
     width: 120px;
+}
+.checkbox{
+    margin-left: 40px;
 }

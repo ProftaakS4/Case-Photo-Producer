@@ -9,11 +9,9 @@
     <link href="../../Bootstrap/Content/Custom.css" rel="stylesheet" />
     <link href="../../Bootstrap/Menu/simple-sidebar.css" rel="stylesheet" />
     <link href="../../Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
-    </head>
+</head>
 <body>
-
     <div id="wrapper">
-
         <!-- Sidebar -->
         <div id="sidebar-wrapper" >
             <ul class="sidebar-nav">
@@ -58,17 +56,12 @@
             </div>
         </div>
         <!-- /#page-content-wrapper -->
-
     </div>
     <!-- /#wrapper -->
-
     <!-- jQuery -->
     <script src="../../Bootstrap/Menu/JS/jquery.js"></script>
-
-
     <!-- Bootstrap Core JavaScript -->
     <script src="../../Bootstrap/Menu/JS/bootstrap.min.js"></script>
-
     <!-- Menu Toggle Script -->
     <script>
     $("#menu-toggle").click(function(e) {
@@ -77,8 +70,6 @@
         $("#panel-body").toggleClass("panel-body");
     });
     </script>
-
-
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
