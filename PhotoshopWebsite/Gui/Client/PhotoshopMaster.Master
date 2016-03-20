@@ -29,7 +29,8 @@
                     <a href="Account.aspx">My Account</a>
                 </li>
                 <li>
-                    <a href="ShoppingCart.aspx">Shopping Cart <img src="../Images/Shoppingcart.png" style="height: 20px; width:20px; margin-left:10px;"/></a>
+                    <a href="ShoppingCart.aspx">Shopping Cart <img src="../Images/Shoppingcart.png" style="height: 20px; width:20px; margin-left:10px;"/>
+                    <asp:Label ID="Labelquantity" runat="server" Text="" style="color:white;"></asp:Label></a>
                 </li>
                 <div runat="server" class="col-lg-6">
                     <div  class="input-group" runat="server">

@@ -4,15 +4,27 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using PhotoshopWebsite.Controller;
 
 namespace PhotoshopWebsite
 {
     public partial class PhotoshopMaster : System.Web.UI.MasterPage
     {
-        String clientName;
-        String pageName;
+        private String clientName;
+        private String pageName;
+        private int size = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (HttpContext.Current.Session["shoppingCart"] != null)
+            {
+                Dictionary<Product, int> dict  = Session["shoppingCart"] as Dictionary<Product, int>;
+                foreach(Product product in dict.Keys)
+                {
+                    size += dict[product];
+                }
+                Labelquantity.Text = size.ToString();
+            }
             if (Session["logindata"] != null)
             {
                 clientName = Session["logindata"] as String;

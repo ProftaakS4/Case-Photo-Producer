@@ -12,9 +12,9 @@ namespace PhotoshopWebsite
     public partial class WebForm1 : System.Web.UI.Page
     {
         Product testproduct1 = new Product(1, "PHOTO1x2", "PAPIER", "Foto van formaat 1x2", "../Images/Shoppingcart.png", -1);
-        Product testproduct2 = new Product(2, "PHOTO1x2", "Hout", "Foto van formaat Dien mam", "../Images/Shoppingcart.png", -1);
-        Product testproduct3 = new Product(3, "PHOTO1x2", "Steen", "Foto van formaat Stan zien mam", "../Images/Shoppingcart.png", -1);
-        Product testproduct4 = new Product(4, "PHOTO1x2", "Rubber", "Foto van formaat loek zien lul(500x1500)", "../Images/Shoppingcart.png", -1);
+        Product testproduct2 = new Product(2, "PHOTO1x2", "Hout", "Foto van formaat 200X200", "../Images/Shoppingcart.png", -1);
+        Product testproduct3 = new Product(3, "PHOTO1x2", "Steen", "Foto van formaat 300x300", "../Images/Shoppingcart.png", -1);
+        Product testproduct4 = new Product(4, "PHOTO1x2", "Rubber", "Foto van formaat 500x1500", "../Images/Shoppingcart.png", -1);
 
 
 
@@ -23,12 +23,12 @@ namespace PhotoshopWebsite
         {
             get
             {
-                if (!(ViewState["shoppingCart"] is Dictionary<Product, int>))
+                if (!(Session["shoppingCart"] is Dictionary<Product, int>))
                 {
-                    ViewState["shoppingCart"] = new Dictionary<Product, int>();
+                    Session["shoppingCart"] = new Dictionary<Product, int>();
                 }
 
-                return (Dictionary<Product, int>)ViewState["shoppingCart"];
+                return (Dictionary<Product, int>)Session["shoppingCart"];
             }
         }
 
@@ -89,7 +89,7 @@ namespace PhotoshopWebsite
             HtmlGenericControl lastControl = new HtmlGenericControl("div");
             //adding other div elements containing discriptions
             //firstControl.InnerHtml = "<div id='thumbnailcontroll'> <div class='col-md-6';> <div class='caption'> <h3>" + x.ID + "</h3> <p>" + x.Description + "</p> <div class='thumbnail'>";
-            firstControl.InnerHtml = "<div class='col-sm-6'> <div class='thumbnail'> <img src=" + x.Image + " " + "alt=" + x.Description + ">  <div class='caption'>";
+            firstControl.InnerHtml = "<div class='col-sm-4'> <div class='thumbnail' style='max-width:330px;'> <img src=" + x.Image + " " + "alt=" + x.Description + ">  <div class='caption'>";
             //add image
             //firstControl.Controls.Add(Picture);
 
@@ -102,14 +102,14 @@ namespace PhotoshopWebsite
             firstControl.Controls.Add(btnBlackWhite);
             firstControl.Controls.Add(btnColor);
             pnlProduct.Controls.Add(firstControl);
+            lastControl.InnerHtml = "</div> </div>  </div>";
             pnlProduct.Controls.Add(lastControl);
 
-            lastControl.InnerHtml = "</div> </div>  </div>";
+ 
         }
 
         void btnAddToCart_Click(object sender, EventArgs e)
         {
-            Boolean contained = false;
             Button x = sender as Button;
             string id = x.ID;
             foreach (Product product in testproducts)
@@ -134,6 +134,7 @@ namespace PhotoshopWebsite
                 }
             }
             HttpContext.Current.Session["shoppingCart"] = shoppingCart;
+            Response.Redirect(Request.RawUrl);
         }
 
 

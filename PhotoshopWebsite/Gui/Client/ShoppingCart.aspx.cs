@@ -11,14 +11,15 @@ namespace PhotoshopWebsite.Gui
 {
     public partial class ShoppingCart : System.Web.UI.Page
     {
-        private Dictionary<Product, int> shoppingCart;
+        private Dictionary<Product, int> shoppingCart; 
         protected void Page_Load(object sender, EventArgs e)
-        {          
-                if (Session["shoppingCart"] != null)
+        {
+            if (Session["shoppingCart"] != null)
                 {
                     shoppingCart = Session["shoppingCart"] as Dictionary<Product, int>;
                     Fillpage(shoppingCart);
-                }            
+                }
+            
         }
         private void Fillpage(Dictionary<Product, int> productlist)
         {
@@ -101,14 +102,14 @@ namespace PhotoshopWebsite.Gui
                     {
                      if(shoppingCart[product] > 1)
                      {
-                         shoppingCart[product]--;
+                        shoppingCart[product]--;
                      }
                      else
                      {
                          shoppingCart.Remove(product);
-                     }                
-                        Session["shoppingCart"] = shoppingCart;
-                        Response.Redirect("ShoppingCart.aspx",false);
+                     }
+                     Session["shoppingCart"] = shoppingCart;
+                     Response.Redirect(Request.RawUrl);
                     }
             }                   
                 }     
