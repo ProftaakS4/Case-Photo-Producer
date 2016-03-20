@@ -10,17 +10,17 @@ using System.Web.UI.HtmlControls;
 namespace PhotoshopWebsite.Gui
 {
     public partial class ShoppingCart : System.Web.UI.Page
-    {        
-        private List<Product> shoppingCart;
+    {
+        private Dictionary<Product, int> shoppingCart;
         protected void Page_Load(object sender, EventArgs e)
         {          
                 if (Session["shoppingCart"] != null)
                 {
-                    shoppingCart = Session["shoppingCart"] as List<Product>;
+                    shoppingCart = Session["shoppingCart"] as Dictionary<Product, int>;
                     Fillpage(shoppingCart);
                 }            
         }
-        private void Fillpage(List<Product> productList)
+        private void Fillpage(Dictionary<Product, int> productlist)
         {
             HtmlGenericControl firstcontrol = new HtmlGenericControl();
             firstcontrol.InnerHtml = "<div class='table-responsive'>";
@@ -40,14 +40,17 @@ namespace PhotoshopWebsite.Gui
             Descriptionheader.Text = "Product Description";
             TableHeaderCell Removeheader = new TableHeaderCell();
             Removeheader.Text = "Remove";
+            TableHeaderCell  Quantityheader = new TableHeaderCell();
+            Quantityheader.Text = "Quantity";
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(TypeHeader);
             MainHeaderRow.Cells.Add(MaterialHeader);
             MainHeaderRow.Cells.Add(Descriptionheader);
             MainHeaderRow.Cells.Add(Removeheader);
+            MainHeaderRow.Cells.Add(Quantityheader);
             MainTable.Rows.Add(MainHeaderRow);
 
-            foreach (Product product in productList)
+            foreach (Product product in productlist.Keys)
             {                                  
                 TableRow MainRow = new TableRow();
                 MainRow.Height = 80;
@@ -59,11 +62,14 @@ namespace PhotoshopWebsite.Gui
                 Material.Text = product.Material;
                 TableCell Description = new TableCell();
                 Description.Text = product.Description;
+                TableCell Quantity = new TableCell();
+                Quantity.Text = productlist[product].ToString();
                 
                 MainRow.Cells.Add(ID);
                 MainRow.Cells.Add(Type);
                 MainRow.Cells.Add(Material);
                 MainRow.Cells.Add(Description);
+                MainRow.Cells.Add(Quantity);
 
 
                 TableCell ButtonCell = new TableCell();
@@ -87,21 +93,27 @@ namespace PhotoshopWebsite.Gui
         }
 
         private void Check_Clicked(object sender, EventArgs e)
-        {
-           
-                CheckBox cbremove = sender as CheckBox;
-                shoppingCart.ForEach(item =>
-                {
-                    if (item.ID.ToString() == cbremove.ID)
+        {           
+            CheckBox cbremove = sender as CheckBox;
+            foreach(Product product in shoppingCart.Keys.ToList())
+            {
+                 if (product.ID.ToString() == cbremove.ID)
                     {
-                        shoppingCart.Remove(item);
+                     if(shoppingCart[product] > 1)
+                     {
+                         shoppingCart[product]--;
+                     }
+                     else
+                     {
+                         shoppingCart.Remove(product);
+                     }                
                         Session["shoppingCart"] = shoppingCart;
                         Response.Redirect("ShoppingCart.aspx",false);
                     }
+            }                   
                 }     
-            );
+
         }
 
 
     }
-}

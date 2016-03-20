@@ -16,24 +16,24 @@ namespace PhotoshopWebsite
         Product testproduct3 = new Product(3, "PHOTO1x2", "Steen", "Foto van formaat Stan zien mam", "../Images/Shoppingcart.png", -1);
         Product testproduct4 = new Product(4, "PHOTO1x2", "Rubber", "Foto van formaat loek zien lul(500x1500)", "../Images/Shoppingcart.png", -1);
 
+
+
         private List<Product> testproducts;
-        public List<Product> shoppingCart
+        public Dictionary<Product, int> shoppingCart
         {
             get
             {
-                if (!(ViewState["shoppingCart"] is List<Product>))
+                if (!(ViewState["shoppingCart"] is Dictionary<Product, int>))
                 {
-                    ViewState["shoppingCart"] = new List<Product>();
+                    ViewState["shoppingCart"] = new Dictionary<Product, int>();
                 }
 
-                return (List<Product>)ViewState["shoppingCart"];
+                return (Dictionary<Product, int>)ViewState["shoppingCart"];
             }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            HttpContext.Current.Session["shoppingCart"] = shoppingCart;
-          
             testproducts = new List<Product>();
             testproducts.Add(testproduct1);
             testproducts.Add(testproduct2);
@@ -79,45 +79,63 @@ namespace PhotoshopWebsite
             btnColor.Text = "Color";
 
             //create image
-            Image Picture = new Image();
-            Picture.ID = "Picture" + x.ID;
-            Picture.AlternateText = "Couldn't find picture";
-            Picture.ImageUrl = x.Image;
+            //Image Picture = new Image();
+            //Picture.ID = "Picture" + x.ID;
+            //Picture.AlternateText = "Couldn't find picture";
+            //Picture.ImageUrl = x.Image;
             //creating 2 controlls to echo div elements into the page
             HtmlGenericControl firstControl = new HtmlGenericControl("div");
             HtmlGenericControl secondControl = new HtmlGenericControl("div");
             HtmlGenericControl lastControl = new HtmlGenericControl("div");
             //adding other div elements containing discriptions
-            firstControl.InnerHtml = "<div id='thumbnailcontroll'> <div class='col-md-6';> <div class='caption'> <h3>" + x.ID + "</h3> <p>" + x.Description + "</p> <div class='thumbnail'>";
-
+            //firstControl.InnerHtml = "<div id='thumbnailcontroll'> <div class='col-md-6';> <div class='caption'> <h3>" + x.ID + "</h3> <p>" + x.Description + "</p> <div class='thumbnail'>";
+            firstControl.InnerHtml = "<div class='col-sm-6'> <div class='thumbnail'> <img src=" + x.Image + " " + "alt=" + x.Description + ">  <div class='caption'>";
             //add image
-            firstControl.Controls.Add(Picture);
+            //firstControl.Controls.Add(Picture);
 
             //add buttons
+
+            secondControl.InnerHtml = "<p>" + x.Description + "</p>";
+            firstControl.Controls.Add(secondControl);
             firstControl.Controls.Add(btnAddToCart);
             firstControl.Controls.Add(btnSepia);
             firstControl.Controls.Add(btnBlackWhite);
             firstControl.Controls.Add(btnColor);
             pnlProduct.Controls.Add(firstControl);
-            secondControl.InnerHtml = "<h3>" + x.ID + "</h3> <p>" + x.Description + "</p>";
             pnlProduct.Controls.Add(lastControl);
 
-            lastControl.InnerHtml = "</div> </div> </div>";
+            lastControl.InnerHtml = "</div> </div>  </div>";
         }
 
         void btnAddToCart_Click(object sender, EventArgs e)
         {
+            Boolean contained = false;
             Button x = sender as Button;
             string id = x.ID;
-                foreach (Product product in testproducts)
+            foreach (Product product in testproducts)
+            {
+                if (product.ID.ToString() == id)
                 {
-                    if (product.ID.ToString() == id)
+                    if (shoppingCart.Count == 0)
                     {
-                        shoppingCart.Add(product);
+                        shoppingCart.Add(product, 1);
+                    }
+                    else
+                    {
+                        if (shoppingCart.ContainsKey(product))
+                        {
+                            shoppingCart[product]++;
+                        }
+                        else
+                        {
+                            shoppingCart.Add(product, 1);
+                        }
                     }
                 }
+            }
+            HttpContext.Current.Session["shoppingCart"] = shoppingCart;
         }
-        
+
 
         void btnSepia_Click(object sender, EventArgs e)
         {
@@ -147,4 +165,5 @@ namespace PhotoshopWebsite
     }
 }
 
-   
+
+
