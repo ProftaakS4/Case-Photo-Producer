@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
 using System.Web.UI.HtmlControls;
-using System.Windows.Media;
 
 namespace PhotoshopWebsite.Gui
 {
@@ -97,7 +96,7 @@ namespace PhotoshopWebsite.Gui
                     {
                         shoppingCart.Remove(item);
                         Session["shoppingCart"] = shoppingCart;
-                        Response.Redirect("ShoppingCart.aspx");
+                        Response.Redirect("ShoppingCart.aspx",false);
                     }
                 }     
             );

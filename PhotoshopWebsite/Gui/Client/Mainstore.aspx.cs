@@ -17,12 +17,22 @@ namespace PhotoshopWebsite
         Product testproduct4 = new Product(4, "PHOTO1x2", "Rubber", "Foto van formaat loek zien lul(500x1500)", "../Images/Shoppingcart.png", -1);
 
         private List<Product> testproducts;
-        private List<Product> shoppingCart = new List<Product>();
+        public List<Product> shoppingCart
+        {
+            get
+            {
+                if (!(ViewState["shoppingCart"] is List<Product>))
+                {
+                    ViewState["shoppingCart"] = new List<Product>();
+                }
 
+                return (List<Product>)ViewState["shoppingCart"];
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["shoppingCart"] = shoppingCart;
+            HttpContext.Current.Session["shoppingCart"] = shoppingCart;
           
             testproducts = new List<Product>();
             testproducts.Add(testproduct1);
@@ -38,9 +48,9 @@ namespace PhotoshopWebsite
 
         private void Fillpage(Product x)
         {
-            //create button
+            //create buttons
             Button btnAddToCart = new Button();
-            btnAddToCart.ID = "btnAddtoCart" + x.ID;
+            btnAddToCart.ID = x.ID.ToString();
             btnAddToCart.CssClass = "btn btn-default";
             btnAddToCart.Click += btnAddToCart_Click;
             btnAddToCart.Height = 30;
@@ -98,7 +108,7 @@ namespace PhotoshopWebsite
         void btnAddToCart_Click(object sender, EventArgs e)
         {
             Button x = sender as Button;
-            string id = x.ID.Substring(x.ID.Length -1 ,1);
+            string id = x.ID;
                 foreach (Product product in testproducts)
                 {
                     if (product.ID.ToString() == id)

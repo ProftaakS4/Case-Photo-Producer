@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PhotoshopWebsite.Controller
+namespace PhotoshopWebsite.Controller 
 {
-    public class Product
+        [Serializable]
+    public class Product 
     {
         public int ID { get; set; }
         public String Type { get; set; }
