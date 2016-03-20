@@ -40,9 +40,9 @@ namespace PhotoshopWebsite.Gui
             TableHeaderCell Descriptionheader = new TableHeaderCell();
             Descriptionheader.Text = "Product Description";
             TableHeaderCell Removeheader = new TableHeaderCell();
-            Removeheader.Text = "Remove";
+            Removeheader.Text = "Quantity";
             TableHeaderCell  Quantityheader = new TableHeaderCell();
-            Quantityheader.Text = "Quantity";
+            Quantityheader.Text = "Remove";
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(TypeHeader);
             MainHeaderRow.Cells.Add(MaterialHeader);
