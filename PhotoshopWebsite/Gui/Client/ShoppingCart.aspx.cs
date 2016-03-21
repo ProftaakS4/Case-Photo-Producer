@@ -11,15 +11,15 @@ namespace PhotoshopWebsite.Gui
 {
     public partial class ShoppingCart : System.Web.UI.Page
     {
-        private Dictionary<Product, int> shoppingCart; 
+        private Dictionary<Product, int> shoppingCart;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["shoppingCart"] != null)
-                {
-                    shoppingCart = Session["shoppingCart"] as Dictionary<Product, int>;
-                    Fillpage(shoppingCart);
-                }
-            
+            {
+                shoppingCart = Session["shoppingCart"] as Dictionary<Product, int>;
+                Fillpage(shoppingCart);
+            }
+
         }
         private void Fillpage(Dictionary<Product, int> productlist)
         {
@@ -29,7 +29,7 @@ namespace PhotoshopWebsite.Gui
             closingcontrol.InnerHtml = "</div>";
             Table MainTable = new Table();
             MainTable.CssClass = "table table-striped table-hover table-bordered";
-            MainTable.Width = 600; 
+            MainTable.Width = 600;
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
             TableHeaderCell IDHeader = new TableHeaderCell();
             IDHeader.Text = "Product ID";
@@ -41,7 +41,7 @@ namespace PhotoshopWebsite.Gui
             Descriptionheader.Text = "Product Description";
             TableHeaderCell Removeheader = new TableHeaderCell();
             Removeheader.Text = "Quantity";
-            TableHeaderCell  Quantityheader = new TableHeaderCell();
+            TableHeaderCell Quantityheader = new TableHeaderCell();
             Quantityheader.Text = "Remove";
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(TypeHeader);
@@ -52,7 +52,7 @@ namespace PhotoshopWebsite.Gui
             MainTable.Rows.Add(MainHeaderRow);
 
             foreach (Product product in productlist.Keys)
-            {                                  
+            {
                 TableRow MainRow = new TableRow();
                 MainRow.Height = 80;
                 TableCell ID = new TableCell();
@@ -65,7 +65,7 @@ namespace PhotoshopWebsite.Gui
                 Description.Text = product.Description;
                 TableCell Quantity = new TableCell();
                 Quantity.Text = productlist[product].ToString();
-                
+
                 MainRow.Cells.Add(ID);
                 MainRow.Cells.Add(Type);
                 MainRow.Cells.Add(Material);
@@ -82,7 +82,7 @@ namespace PhotoshopWebsite.Gui
                 cbRemove.AutoPostBack = true;
                 cbRemove.Checked = false;
 
-               
+
 
                 ButtonCell.Controls.Add(cbRemove);
                 MainRow.Cells.Add(ButtonCell);
@@ -94,27 +94,27 @@ namespace PhotoshopWebsite.Gui
         }
 
         private void Check_Clicked(object sender, EventArgs e)
-        {           
+        {
             CheckBox cbremove = sender as CheckBox;
-            foreach(Product product in shoppingCart.Keys.ToList())
+            foreach (Product product in shoppingCart.Keys.ToList())
             {
-                 if (product.ID.ToString() == cbremove.ID)
+                if (product.ID.ToString() == cbremove.ID)
+                {
+                    if (shoppingCart[product] > 1)
                     {
-                     if(shoppingCart[product] > 1)
-                     {
                         shoppingCart[product]--;
-                     }
-                     else
-                     {
-                         shoppingCart.Remove(product);
-                     }
-                     Session["shoppingCart"] = shoppingCart;
-                     Response.Redirect(Request.RawUrl);
                     }
-            }                   
-                }     
-
+                    else
+                    {
+                        shoppingCart.Remove(product);
+                    }
+                    Session["shoppingCart"] = shoppingCart;
+                    Response.Redirect(Request.RawUrl);
+                }
+            }
         }
 
-
     }
+
+
+}

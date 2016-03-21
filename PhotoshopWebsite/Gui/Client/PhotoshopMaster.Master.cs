@@ -18,8 +18,8 @@ namespace PhotoshopWebsite
         {
             if (HttpContext.Current.Session["shoppingCart"] != null)
             {
-                Dictionary<Product, int> dict  = Session["shoppingCart"] as Dictionary<Product, int>;
-                foreach(Product product in dict.Keys)
+                Dictionary<Product, int> dict = Session["shoppingCart"] as Dictionary<Product, int>;
+                foreach (Product product in dict.Keys)
                 {
                     size += dict[product];
                 }
@@ -35,11 +35,11 @@ namespace PhotoshopWebsite
             }
             Labelklantnaam.Text = "Welcome! " + " " + clientName;
             pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
-            if(pageName.Contains("account"))
+            if (pageName.Contains("account"))
             {
                 LabelTitle.Text = "<h1>My Account</h1>";
             }
-            else if(pageName.Contains("mainstore"))
+            else if (pageName.Contains("mainstore"))
             {
                 LabelTitle.Text = "<h1>My Pictures</h1>";
             }

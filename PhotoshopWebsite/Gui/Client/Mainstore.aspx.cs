@@ -11,13 +11,14 @@ namespace PhotoshopWebsite
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        Product testproduct1 = new Product(1, "PHOTO1x2", "PAPIER", "Foto van formaat 1x2", "../Images/Shoppingcart.png", -1);
-        Product testproduct2 = new Product(2, "PHOTO1x2", "Hout", "Foto van formaat 200X200", "../Images/Shoppingcart.png", -1);
-        Product testproduct3 = new Product(3, "PHOTO1x2", "Steen", "Foto van formaat 300x300", "../Images/Shoppingcart.png", -1);
-        Product testproduct4 = new Product(4, "PHOTO1x2", "Rubber", "Foto van formaat 500x1500", "../Images/Shoppingcart.png", -1);
+        Product testproduct1 = new Product(1, "PHOTO1x2", "PAPIER", "Foto van formaat 1x2", "../Images/Visitekaart-Delahaye-IT.png", -1);
+        Product testproduct2 = new Product(2, "PHOTO1x2", "Hout", "Foto van formaat 200X200", "../Images/Visitekaart-Delahaye-IT.png", -1);
+        Product testproduct3 = new Product(3, "PHOTO1x2", "Steen", "Foto van formaat 300x300", "../Images/Visitekaart-Delahaye-IT.png", -1);
+        Product testproduct4 = new Product(4, "PHOTO1x2", "Rubber", "Foto van formaat 500x1500", "../Images/Visitekaart-Delahaye-IT.png", -1);
+        Product testproduct5 = new Product(5, "PHOTO1x2", "Rubber", "Foto van formaat 500x1500", "../Images/Visitekaart-Delahaye-IT.png", -1);
 
 
-
+        private int number;
         private List<Product> testproducts;
         public Dictionary<Product, int> shoppingCart
         {
@@ -39,6 +40,8 @@ namespace PhotoshopWebsite
             testproducts.Add(testproduct2);
             testproducts.Add(testproduct3);
             testproducts.Add(testproduct4);
+            testproducts.Add(testproduct5);
+            number = testproducts.Count();
             foreach (Product x in testproducts)
             {
                 Fillpage(x);
@@ -78,20 +81,22 @@ namespace PhotoshopWebsite
             btnColor.Height = 30;
             btnColor.Text = "Color";
 
-            //create image
-            //Image Picture = new Image();
-            //Picture.ID = "Picture" + x.ID;
-            //Picture.AlternateText = "Couldn't find picture";
-            //Picture.ImageUrl = x.Image;
-            //creating 2 controlls to echo div elements into the page
             HtmlGenericControl firstControl = new HtmlGenericControl("div");
             HtmlGenericControl secondControl = new HtmlGenericControl("div");
             HtmlGenericControl lastControl = new HtmlGenericControl("div");
             //adding other div elements containing discriptions
-            //firstControl.InnerHtml = "<div id='thumbnailcontroll'> <div class='col-md-6';> <div class='caption'> <h3>" + x.ID + "</h3> <p>" + x.Description + "</p> <div class='thumbnail'>";
-            firstControl.InnerHtml = "<div class='col-sm-4'> <div class='thumbnail' style='max-width:330px;'> <img src=" + x.Image + " " + "alt=" + x.Description + ">  <div class='caption'>";
-            //add image
-            //firstControl.Controls.Add(Picture);
+            string div;
+            if (number > 4)
+            {
+                div = "<div class='col-sm-4'>";
+            }
+            else
+            {
+                div= "<div class='col-sm-6'>";
+            }
+           
+            firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'> <img src=" + x.Image + " " + "alt=" + x.Description + ">  <div class='caption'>";
+
 
             //add buttons
 
@@ -105,7 +110,7 @@ namespace PhotoshopWebsite
             lastControl.InnerHtml = "</div> </div>  </div>";
             pnlProduct.Controls.Add(lastControl);
 
- 
+
         }
 
         void btnAddToCart_Click(object sender, EventArgs e)
