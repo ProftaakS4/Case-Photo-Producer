@@ -31,13 +31,22 @@ namespace PhotoshopWebsite {
         protected global::System.Web.UI.WebControls.Label Labelquantity;
         
         /// <summary>
-        /// Btntoggle control.
+        /// tbSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton Btntoggle;
+        protected global::System.Web.UI.WebControls.TextBox tbSearch;
+        
+        /// <summary>
+        /// Btnsearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Btnsearch;
         
         /// <summary>
         /// LabelTitle control.

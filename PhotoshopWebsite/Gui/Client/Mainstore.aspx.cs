@@ -99,7 +99,6 @@ namespace PhotoshopWebsite
 
 
             //add buttons
-
             secondControl.InnerHtml = "<p>" + x.Description + "</p>";
             firstControl.Controls.Add(secondControl);
             firstControl.Controls.Add(btnAddToCart);

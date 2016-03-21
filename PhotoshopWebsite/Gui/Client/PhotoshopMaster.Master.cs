@@ -48,5 +48,12 @@ namespace PhotoshopWebsite
                 LabelTitle.Text = "<h1>My Shoppingcart</h1>";
             }
         }
+
+        protected void Btnsearch_Click(object sender, EventArgs e)
+        {
+            //not yet implemented 
+        }
+
+
     }
 }

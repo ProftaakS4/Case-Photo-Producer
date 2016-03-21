@@ -4,9 +4,7 @@
     <div ID="panel-body" class="panel-bodybefore">
         <div class='container' style="margin-left:0px; margin-right:0px;">
             <div class='row'>
-              <form runat="server">
-                <asp:Panel ID="pnlProduct" runat="server"></asp:Panel>    
-              </form>                    
+                <asp:Panel ID="pnlProduct" runat="server"></asp:Panel>                      
             </div>
         </div>
     </div>                  

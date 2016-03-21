@@ -22,7 +22,7 @@
 }
 #panel-body .form-control{
     width: 40%!important;
-    height: 22px;
+    height: 24px;
     display: inline-block!important;
 }
 .thumbnail{
@@ -30,7 +30,7 @@
     min-width: 200px;
 }
 .jumbotron{
-    background-color:#777;
+    background-color:#000;
     padding-top: 10px; 
     padding-bottom: 0px;
 }

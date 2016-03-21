@@ -4,7 +4,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <div ID="panel-body" class="panel-bodybefore">
                 <div class='container' style="margin-left:0px; margin-right:0px;">
-                    <form runat="server">
                         <div class='row'>
                             <div class='col-md-6';>
                                 <asp:Label class="label label-default" ID="Firstname" runat="server" Text="Firstname :"></asp:Label>
@@ -71,6 +70,4 @@
                             <asp:Button class="btn btn-default" ID="btnChange" runat="server" Text="Change" />
                         </div>
                     </div>
-               </form>                     
-                         
     </asp:Content>
