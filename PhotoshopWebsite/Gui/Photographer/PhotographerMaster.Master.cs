@@ -13,14 +13,14 @@ namespace PhotoshopWebsite.Gui.Photographer
         private String pageName;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["logindata"] != null)
-            //{
-            //    clientName = Session["logindata"] as String;
-            //}
-            //else
-            //{
-            //    Response.Redirect("../Login.aspx");
-            //}
+            if (Session["logindata"] != null)
+            {
+                clientName = Session["logindata"] as String;
+            }
+            else
+            {
+                Response.Redirect("../Login.aspx");
+            }
             Labelklantnaam.Text = "Welcome! " + " " + clientName;
             pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
             if (pageName.Contains("account"))

@@ -157,13 +157,13 @@ namespace PhotoshopWebsite.Gui.Client {
         protected global::System.Web.UI.WebControls.TextBox tbIBAN;
         
         /// <summary>
-        /// EMail control.
+        /// Email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label EMail;
+        protected global::System.Web.UI.WebControls.Label Email;
         
         /// <summary>
         /// tbEMail control.
