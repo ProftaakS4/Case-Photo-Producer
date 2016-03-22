@@ -30,16 +30,52 @@ namespace PhotoshopWebsite
             passWord = tbInputPassword.Text;
             bool result = login.loginUser(loginName, passWord);
 
-            if (result == true)
+            if (result)
             {
                 Session["logindata"] = loginName;
-                Response.Redirect("~/Gui/Client/Mainstore.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                Controller.User newUser = new Controller.User(loginName);
+                newUser = newUser.getUserData(loginName);
+                Session["UserData"] = newUser;
+                Response.Write("<script>alert('" + newUser.ID.ToString() + " " + newUser.Type + " " + newUser.Firstname + " " + newUser.Lastname + "')</script>");
+                redirectToUserTypePage(newUser.Type);
             }
             else
             {
                 Response.Write("<script>alert('Wrong emailaddress or password')</script>");
             }
 
+        }
+
+        private void redirectToUserTypePage(string type)
+        {
+            if (type == "School photographer")
+            {
+                Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+            }
+            else if (type == "Portrait photographer")
+            {
+                Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+            }
+            else if (type == "School- Portraitphotographe")
+            {
+                Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+            }
+            else if (type == "Customer")
+            {
+                Response.Redirect("~/Gui/Client/Mainstore.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+            }
+            else if (type == "Financial Administration")
+            {
+                Response.Redirect("~/Gui/Finance/Finance.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+            }
+            else if (type == "Admin")
+            {
+                Response.Redirect("~/Gui/Admin/Mainadmin.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+            }
+            else
+            {
+                Response.Write("No type found");
+            }
         }
 
         protected void CheckBox1_CheckedChanged(object sender, EventArgs e)

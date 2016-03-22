@@ -282,6 +282,7 @@
     <Compile Include="Gui\Photographer\Selection.aspx.designer.cs">
       <DependentUpon>Selection.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Gui\userType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Gui\Client\Mainstore.aspx.cs">
       <DependentUpon>Mainstore.aspx</DependentUpon>

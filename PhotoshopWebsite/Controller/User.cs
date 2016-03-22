@@ -7,6 +7,8 @@ namespace PhotoshopWebsite.Controller
 {
     public class User
     {
+        private DatabaseTier.Login login = new DatabaseTier.Login();
+
         public int ID { get; set; }
         public string Type { get; set; }
         public string Firstname { get; set; }
@@ -14,14 +16,13 @@ namespace PhotoshopWebsite.Controller
         public string Streetname { get; set; }
         public string Housenumber { get; set; }
         public string Zipcode { get; set; }
-
         public string City { get; set; }
         public string Phonenumber { get; set; }
         public string IBAN { get; set; }
         public string Emailaddress { get; set; }
         public string Password { get; set; }
 
-        public User(int ID,String Type, String Firstname,String Lastname,String Streetname,String Housenumber, String Zipcode, String City, String Phonenumber,String IBAN,String Emailaddress, String Password)
+        public User(int ID, String Type, String Firstname, String Lastname, String Streetname, String Housenumber, String Zipcode, String City, String Phonenumber, String IBAN, String Emailaddress)
         {
             this.ID = ID;
             this.Type = Type;
@@ -34,9 +35,8 @@ namespace PhotoshopWebsite.Controller
             this.Phonenumber = Phonenumber;
             this.IBAN = IBAN;
             this.Emailaddress = Emailaddress;
-            this.Password = Password;
         }
-        public User(String Firstname,String Lastname,String Streetname,String Housenumber, String Zipcode, String City, String Phonenumber,String IBAN,String Emailaddress, String Password)
+        public User(String Firstname, String Lastname, String Streetname, String Housenumber, String Zipcode, String City, String Phonenumber, String IBAN, String Emailaddress, String password)
         {
             this.Firstname = Firstname;
             this.Lastname = Lastname;
@@ -47,7 +47,38 @@ namespace PhotoshopWebsite.Controller
             this.Phonenumber = Phonenumber;
             this.IBAN = IBAN;
             this.Emailaddress = Emailaddress;
-            this.Password = Password;
+            this.Password = password;
+        }
+
+        public User(string emailaddress)
+        {
+            this.Emailaddress = emailaddress;
+        }
+
+        public User getUserData(string emailaddress)
+        {
+            int userID = login.getUserID(emailaddress);
+            if (userID != -1)
+            {
+                this.ID = userID;
+                Dictionary<string, string> userData = login.getUserData(userID);
+                if (userData != null)
+                {
+                    if (userData.ContainsKey("type")) { this.Type = userData["type"]; }
+                    else if (userData.ContainsKey("firstname")) { this.Firstname = userData["firstname"]; }
+                    else if (userData.ContainsKey("lastname")) { this.Lastname = userData["lastname"]; }
+                    else if (userData.ContainsKey("streetname")) { this.Streetname = userData["streetname"]; }
+                    else if (userData.ContainsKey("housenumber")) { this.Housenumber = userData["housenumber"]; }
+                    else if (userData.ContainsKey("zipcode")) { this.Zipcode = userData["zipcode"]; }
+                    else if (userData.ContainsKey("city")) { this.City = userData["city"]; }
+                    else if (userData.ContainsKey("phonenumber")) { this.Phonenumber = userData["phonenumber"]; }
+                    else if (userData.ContainsKey("iban")) { this.IBAN = userData["iban"]; }
+
+                }
+                System.Windows.Forms.MessageBox.Show(Firstname + Lastname + Streetname + Housenumber + Zipcode + City + Phonenumber + IBAN);
+
+            }
+            return this;
         }
     }
 }
