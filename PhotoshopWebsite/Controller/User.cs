@@ -55,10 +55,18 @@ namespace PhotoshopWebsite.Controller
             this.Emailaddress = emailaddress;
         }
 
+        /// <summary>
+        /// login the user, when succesfull retrieve its data from the database
+        /// </summary>
+        /// <param name="emailaddress"></param> emailaddress of the user
+        /// <param name="password"></param> password of the user
+        /// <returns></returns>
         public User loginUser(string emailaddress, string password)
         {
+            // when login credentials are verified
            if(login.loginUser(emailaddress, password))
             {
+                // when user data is found
                 if(getUserData(emailaddress) != null)
                 {
                     return this;

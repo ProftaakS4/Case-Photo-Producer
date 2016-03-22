@@ -1,11 +1,8 @@
-﻿/*enum userType
+﻿/* public enum userType
 {
-        School photographer,
-        Portrait photographer,    
-        School- Portraitphotographer,
-        Customer,
-        Financial Administration, 
-        Admin,
-};
-  
-*/  
+    School_photographer,
+    Hearts,
+    Spades,
+    Diamonds
+}
+*/
