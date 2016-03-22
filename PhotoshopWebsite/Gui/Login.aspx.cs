@@ -36,7 +36,7 @@ namespace PhotoshopWebsite
                 Controller.User newUser = new Controller.User(loginName);
                 newUser = newUser.getUserData(loginName);
                 Session["UserData"] = newUser;
-                Response.Write("<script>alert('" + newUser.ID.ToString() + " " + newUser.Type + " " + newUser.Firstname + " " + newUser.Lastname + "')</script>");
+                //Response.Write("<script>alert('" + newUser.ID.ToString() + " " + newUser.Type + " " + newUser.Firstname + " " + newUser.Lastname + "')</script>");
                 redirectToUserTypePage(newUser.Type);
             }
             else
@@ -56,7 +56,7 @@ namespace PhotoshopWebsite
             {
                 Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
-            else if (type == "School- Portraitphotographe")
+            else if (type == "School- Portraitphotographer")
             {
                 Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
