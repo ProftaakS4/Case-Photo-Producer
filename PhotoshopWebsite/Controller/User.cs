@@ -55,15 +55,36 @@ namespace PhotoshopWebsite.Controller
             this.Emailaddress = emailaddress;
         }
 
+        public User loginUser(string emailaddress, string password)
+        {
+           if(login.loginUser(emailaddress, password))
+            {
+                if(getUserData(emailaddress) != null)
+                {
+                    return this;
+                }
+                return null;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// get userdata of the user corresponding to email address
+        /// </summary>
+        /// <param name="emailaddress"></param>
+        /// <returns></returns>
         public User getUserData(string emailaddress)
         {
             int userID = login.getUserID(emailaddress);
+            // when user id is validated
             if (userID != -1)
             {
                 this.ID = userID;
                 Dictionary<string, string> userData = login.getUserData(userID);
+                // when userdata is found and returned
                 if (userData != null)
                 {
+                    // set the data for the current user
                     if (userData.ContainsKey("type")) { this.Type = userData["type"]; }
                     else if (userData.ContainsKey("firstname")) { this.Firstname = userData["firstname"]; }
                     else if (userData.ContainsKey("lastname")) { this.Lastname = userData["lastname"]; }
@@ -73,12 +94,12 @@ namespace PhotoshopWebsite.Controller
                     else if (userData.ContainsKey("city")) { this.City = userData["city"]; }
                     else if (userData.ContainsKey("phonenumber")) { this.Phonenumber = userData["phonenumber"]; }
                     else if (userData.ContainsKey("iban")) { this.IBAN = userData["iban"]; }
-
+                    // return the user with its data
+                    return this;
                 }
-                System.Windows.Forms.MessageBox.Show(Firstname + Lastname + Streetname + Housenumber + Zipcode + City + Phonenumber + IBAN);
-
+                //System.Windows.Forms.MessageBox.Show(Firstname + Lastname + Streetname + Housenumber + Zipcode + City + Phonenumber + IBAN);
             }
-            return this;
+            return null;
         }
     }
 }

@@ -16,28 +16,28 @@ namespace PhotoshopWebsite
         private Boolean Rememberme = false;
         private Boolean LoginSuccess = true;
         private String loginCode;
-        private DatabaseTier.Login login = new DatabaseTier.Login();
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void BtnLogin_Click(object sender, EventArgs e)
         {
+
             loginName = tbInputEmail.Text;
             passWord = tbInputPassword.Text;
-            bool result = login.loginUser(loginName, passWord);
+            // check is emailaddress and password are legit
+            Controller.User userWithNoData = new Controller.User(loginName);
+            Controller.User userWithData = userWithNoData.loginUser(loginName, passWord);
 
-            if (result)
+            if (userWithData != null)
             {
+                // save user's login name into session
                 Session["logindata"] = loginName;
-                Controller.User newUser = new Controller.User(loginName);
-                newUser = newUser.getUserData(loginName);
-                Session["UserData"] = newUser;
+                Session["UserData"] = userWithData;
+                redirectToUserTypePage(userWithData.Type);
                 //Response.Write("<script>alert('" + newUser.ID.ToString() + " " + newUser.Type + " " + newUser.Firstname + " " + newUser.Lastname + "')</script>");
-                redirectToUserTypePage(newUser.Type);
             }
             else
             {
@@ -46,6 +46,10 @@ namespace PhotoshopWebsite
 
         }
 
+        /// <summary>
+        /// this method redirects the user by type to it's allowed page. When not type found the browser will give feedback
+        /// </summary>
+        /// <param name="type"></param> the type of the user
         private void redirectToUserTypePage(string type)
         {
             if (type == "School photographer")
@@ -74,7 +78,7 @@ namespace PhotoshopWebsite
             }
             else
             {
-                Response.Write("No type found");
+                Response.Write("<script>alert('Unknown user type')</script>");
             }
         }
 

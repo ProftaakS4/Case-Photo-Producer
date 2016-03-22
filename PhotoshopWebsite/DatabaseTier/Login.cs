@@ -16,6 +16,9 @@ namespace PhotoshopWebsite.DatabaseTier
         private MySqlCommand myCommand = null;
         private string result = "";
 
+        /// <summary>
+        /// constructor of the class
+        /// </summary>
         public Login()
         {
             // get the mysqlconnection singleton
@@ -35,13 +38,16 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand = new MySqlCommand(null, mysqlConnection);
                 myCommand.CommandText = "getUserPassword";
                 myCommand.CommandType = CommandType.StoredProcedure;
+                // input
                 myCommand.Parameters.Add("@p_account_Email", MySqlDbType.VarChar).Value = emailadres;
                 myCommand.Parameters.Add("@p_password", MySqlDbType.VarChar).Value = password;
+                // output
                 myCommand.Parameters.Add("@p_passed", MySqlDbType.VarChar);
                 myCommand.Parameters["@p_passed"].Direction = ParameterDirection.Output;
+                //execute query
                 mysqlConnection.Open();
                 myCommand.ExecuteNonQuery();
-
+                //return true when output is validated
                 if (myCommand.Parameters["@p_passed"].Value.ToString() == "true")
                 {
                     return true;
@@ -60,7 +66,11 @@ namespace PhotoshopWebsite.DatabaseTier
             return false;
         }
 
-
+        /// <summary>
+        /// this method get the user id of the given emailaddress. when not found, method returns -1
+        /// </summary>
+        /// <param name="emailaddress"></param> of the user
+        /// <returns></returns>
         public int getUserID(string emailaddress)
         {
             int id = -1;
@@ -69,11 +79,15 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand = new MySqlCommand(null, mysqlConnection);
                 myCommand.CommandText = "getUserID";
                 myCommand.CommandType = CommandType.StoredProcedure;
+                // input
                 myCommand.Parameters.Add("@p_emailaddress", MySqlDbType.VarChar).Value = emailaddress;
+                //output
                 myCommand.Parameters.Add("@p_ID", MySqlDbType.Int32);
                 myCommand.Parameters["@p_ID"].Direction = ParameterDirection.Output;
+                // execute query
                 mysqlConnection.Open();
                 myCommand.ExecuteNonQuery();
+                //add output to integer
                 id = (int)myCommand.Parameters["@p_ID"].Value;
                 return id;
             }
@@ -89,9 +103,14 @@ namespace PhotoshopWebsite.DatabaseTier
             return -1;
         }
 
+        /// <summary>
+        /// this method returns a dictionary containing all the user data. when user not found, method returns null
+        /// </summary>
+        /// <param name="id"></param> id of the user
+        /// <returns></returns>
         public Dictionary<string,string> getUserData(int id)
         {
-            Dictionary<string,string> userData = new Dictionary<string, string>();
+            Dictionary<string, string> userData = null;
             try
             {
                 myCommand = new MySqlCommand(null, mysqlConnection);
@@ -122,6 +141,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 mysqlConnection.Open();
                 myCommand.ExecuteNonQuery();
                 // add OUTPUT to DICTIONARY
+                userData = new Dictionary<string, string>();
                 userData.Add("type", (string)myCommand.Parameters["@p_type"].Value);
                 userData.Add("firstname", (string)myCommand.Parameters["@p_firstname"].Value);
                 userData.Add("lastname", (string)myCommand.Parameters["@p_lastname"].Value);
