@@ -56,7 +56,7 @@ namespace PhotoshopWebsite
             {
                 Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
-            else if (type == "School- Portraitphotographe")
+            else if (type == "School- Portraitphotographer")
             {
                 Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
