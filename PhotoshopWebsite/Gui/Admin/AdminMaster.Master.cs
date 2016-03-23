@@ -36,5 +36,10 @@ namespace PhotoshopWebsite.Gui.Admin
                 LabelTitle.Text = "<h1>My Stock</h1>";
             }
         }
+
+        protected void Btnsearch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

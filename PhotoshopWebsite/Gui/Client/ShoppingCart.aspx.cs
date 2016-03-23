@@ -35,20 +35,17 @@ namespace PhotoshopWebsite.Gui
             IDHeader.Text = "Product ID";
             TableHeaderCell TypeHeader = new TableHeaderCell();
             TypeHeader.Text = "Product Type";
-            TableHeaderCell MaterialHeader = new TableHeaderCell();
-            MaterialHeader.Text = "Product Material";
             TableHeaderCell Descriptionheader = new TableHeaderCell();
             Descriptionheader.Text = "Product Description";
-            TableHeaderCell Removeheader = new TableHeaderCell();
-            Removeheader.Text = "Quantity";
             TableHeaderCell Quantityheader = new TableHeaderCell();
-            Quantityheader.Text = "Remove";
+            Quantityheader.Text = "Quantity";
+            TableHeaderCell Removeheader = new TableHeaderCell();
+            Removeheader.Text = "Remove";
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(TypeHeader);
-            MainHeaderRow.Cells.Add(MaterialHeader);
             MainHeaderRow.Cells.Add(Descriptionheader);
-            MainHeaderRow.Cells.Add(Removeheader);
             MainHeaderRow.Cells.Add(Quantityheader);
+            MainHeaderRow.Cells.Add(Removeheader);
             MainTable.Rows.Add(MainHeaderRow);
 
             foreach (Product product in productlist.Keys)
@@ -59,8 +56,6 @@ namespace PhotoshopWebsite.Gui
                 ID.Text = product.ID.ToString();
                 TableCell Type = new TableCell();
                 Type.Text = product.Type;
-                TableCell Material = new TableCell();
-                Material.Text = product.Material;
                 TableCell Description = new TableCell();
                 Description.Text = product.Description;
                 TableCell Quantity = new TableCell();
@@ -68,7 +63,6 @@ namespace PhotoshopWebsite.Gui
 
                 MainRow.Cells.Add(ID);
                 MainRow.Cells.Add(Type);
-                MainRow.Cells.Add(Material);
                 MainRow.Cells.Add(Description);
                 MainRow.Cells.Add(Quantity);
 
@@ -82,15 +76,31 @@ namespace PhotoshopWebsite.Gui
                 cbRemove.AutoPostBack = true;
                 cbRemove.Checked = false;
 
-
-
                 ButtonCell.Controls.Add(cbRemove);
                 MainRow.Cells.Add(ButtonCell);
                 MainTable.Rows.Add(MainRow);
             }
+            Button btnORder = new Button();
+            btnORder.ID = "btnOrder";
+            btnORder.CssClass = "btn btn-default";
+            btnORder.Click += btnORder_Click;
+            btnORder.Height = 30;
+            btnORder.Text = "Order";
+
+
             pnlProduct.Controls.Add(firstcontrol);
             pnlProduct.Controls.Add(MainTable);
             pnlProduct.Controls.Add(closingcontrol);
+            pnlProduct.Controls.Add(btnORder);
+        }
+
+        void btnORder_Click(object sender, EventArgs e)
+        {
+            if (shoppingCart.Count == 0)
+            {
+                Response.Write("<script>alert('ShoppingCart is emty, please fill your cart first')</script>");
+            }
+            //not yet implemented 
         }
 
         private void Check_Clicked(object sender, EventArgs e)

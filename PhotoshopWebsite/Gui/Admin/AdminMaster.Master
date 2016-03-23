@@ -9,6 +9,7 @@
     <link href="../../Bootstrap/Menu/simple-sidebar.css" rel="stylesheet" />
     <link href="../../Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
     </head>
+                <form runat="server">
 <body>
 
     <div id="wrapper">
@@ -31,9 +32,9 @@
                 </li>
                 <div runat="server" class="col-lg-6">
                     <div  class="input-group" runat="server">
-                        <input type="text" class="form-control" placeholder="Search for..." style="width:150px;">
+                        <asp:TextBox ID="tbSearch" class="form-control" runat="server" placeholder="Search for..."  style="width: 150px;"></asp:TextBox>
                         <span class="input-group-btn">
-                    <button id="Btntoggle" class="btn btn-default" runat="server" type="button">Go!</button>
+                    <asp:Button ID="Btnsearch" class="btn btn-default" runat="server" type="button" Text="Go!" OnClick="Btnsearch_Click" style="height:34px"></asp:Button>
                 </span>
                 </div><!-- /input-group -->
                 </div><!-- /.col-lg-6 -->
@@ -79,8 +80,9 @@
 <body>
    
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
         </asp:ContentPlaceHolder>
     </div>
-    </form>
 </body>
+    </form>
 </html>

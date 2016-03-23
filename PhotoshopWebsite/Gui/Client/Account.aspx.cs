@@ -24,6 +24,7 @@ namespace PhotoshopWebsite.Gui.Client
             tbIBAN.Text = testuser.IBAN;
             tbEMail.Text = testuser.Emailaddress;
             tbPassword.Text = testuser.Password;
+
         }
     }
 }

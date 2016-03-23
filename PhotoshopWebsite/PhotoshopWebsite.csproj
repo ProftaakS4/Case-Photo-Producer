@@ -131,6 +131,7 @@
     <Compile Include="Controller\LoginCode.cs" />
     <Compile Include="Controller\Map.cs" />
     <Compile Include="Controller\Order.cs" />
+    <Compile Include="Controller\PaymentType.cs" />
     <Compile Include="Controller\Printorder.cs" />
     <Compile Include="Controller\Product.cs" />
     <Compile Include="Controller\Transaction.cs" />
