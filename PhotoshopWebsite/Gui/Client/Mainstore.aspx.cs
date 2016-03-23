@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
+using System.Drawing;
 
 namespace PhotoshopWebsite
 {
@@ -144,20 +145,22 @@ namespace PhotoshopWebsite
 
         void btnSepia_Click(object sender, EventArgs e)
         {
-            //Image image1 = new Image();
-            //for (x = 0; x < image1.Width; x++)
-            //{
-            //    for (y = 0; y < image1.Height; y++)
-            //    {
-            //        Color pixelColor = image1.GetPixel(x, y);
-            //        int grayScale = (int)((originalColor.R * .3) +
-            //            (originalColor.G * .59) + (originalColor.B * .11));
+        }
 
-            //        //create the color object
-            //        Color newColor = Color.FromArgb(grayScale, grayScale, grayScale);
-            //        image1.SetPixel(x, y, newColor);
-            //    }
-            //}
+        private System.Drawing.Image grayscale(Product image)
+        {
+            System.Drawing.Image returnimage;
+            Bitmap btm = new Bitmap(image.Image);
+            for (int i = 0; i < btm.Width; i++)
+            {
+                for (int j = 0; j < btm.Height; j++)
+                {
+                    int ser = (btm.GetPixel(i, j).R + btm.GetPixel(i, j).G + btm.GetPixel(i, j).B) / 3;
+                    btm.SetPixel(i, j, Color.FromArgb(ser, ser, ser));
+                }
+            }
+            returnimage = (System.Drawing.Image)btm;
+            return returnimage;
         }
         void btnBlackWhite_Click(object sender, EventArgs e)
         {

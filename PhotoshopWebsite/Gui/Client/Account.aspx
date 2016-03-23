@@ -41,17 +41,13 @@
                     <span>
                         <asp:Label class="label label-default" ID="EMail" runat="server" Text="EMail :"></asp:Label>
                         <asp:TextBox class="form-control" ID="tbEMail" runat="server"></asp:TextBox>   
-                    </span>  <br />    
-                    <span>
-                        <asp:Label class="label label-default" ID="Password" runat="server" Text="Password :"></asp:Label>
-                        <asp:TextBox class="form-control" ID="tbPassword" runat="server"></asp:TextBox>   
-                    </span>  <br />    
+                    </span>  <br />     
                     <span>
                         <asp:Button class="btn btn-default" ID="btnChange" runat="server" Text="Change" />
                     </span>  
                 </div>
                  <div class='col-md-6';>
-                     <asp:Table ID="MainTable" runat="server"></asp:Table>
+                     <asp:Table id="MainTable" runat="server" CssClass="table table-bordered table-responsive table-hover"></asp:Table>
                      </div>
             </div>
     </asp:Content>
