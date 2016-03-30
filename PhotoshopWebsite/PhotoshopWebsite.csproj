@@ -93,7 +93,7 @@
     <Content Include="Gui\Admin\AdminMaster.Master" />
     <Content Include="Gui\Images\Visitekaart-Delahaye-IT.png" />
     <Content Include="Gui\Photographer\Account.aspx" />
-    <Content Include="Gui\Photographer\Clients.aspx" />
+    <Content Include="Gui\Photographer\Codes.aspx" />
     <Content Include="Gui\Photographer\PhotographerMaster.Master" />
     <None Include="Gui\Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -258,12 +258,12 @@
     <Compile Include="Gui\Photographer\Account.aspx.designer.cs">
       <DependentUpon>Account.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Gui\Photographer\Clients.aspx.cs">
-      <DependentUpon>Clients.aspx</DependentUpon>
+    <Compile Include="Gui\Photographer\Codes.aspx.cs">
+      <DependentUpon>Codes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gui\Photographer\Clients.aspx.designer.cs">
-      <DependentUpon>Clients.aspx</DependentUpon>
+    <Compile Include="Gui\Photographer\Codes.aspx.designer.cs">
+      <DependentUpon>Codes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Gui\Photographer\PhotographerMaster.Master.cs">
       <DependentUpon>PhotographerMaster.Master</DependentUpon>

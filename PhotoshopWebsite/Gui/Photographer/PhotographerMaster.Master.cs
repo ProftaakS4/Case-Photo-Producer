@@ -21,24 +21,24 @@ namespace PhotoshopWebsite.Gui.Photographer
         //    {
         //        Response.Redirect("../Login.aspx");
         //    }
-        //    Labelklantnaam.Text = "Welcome! " + " " + clientName;
-        //    pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
-        //    if (pageName.Contains("account"))
-        //    {
-        //        LabelTitle.Text = "<h1>My Account</h1>";
-        //    }
-        //    else if (pageName.Contains("clients"))
-        //    {
-        //        LabelTitle.Text = "<h1>My Clients</h1>";
-        //    }
-        //    else if (pageName.Contains("selection"))
-        //    {
-        //        LabelTitle.Text = "<h1>My selection</h1>";
-        //    }
-        //    else
-        //    {
-        //        LabelTitle.Text = "<h1>My Pictures</h1>";
-        //    }
+            Labelklantnaam.Text = "Welcome! " + " " + clientName;
+            pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
+            if (pageName.Contains("account"))
+            {
+                LabelTitle.Text = "<h1>My Account</h1>";
+            }
+            else if (pageName.Contains("codes"))
+            {
+                LabelTitle.Text = "<h1>My Codes</h1>";
+            }
+            else if (pageName.Contains("selection"))
+            {
+                LabelTitle.Text = "<h1>My selection</h1>";
+            }
+            else
+            {
+                LabelTitle.Text = "<h1>My Pictures</h1>";
+            }
         }
     }
 }
