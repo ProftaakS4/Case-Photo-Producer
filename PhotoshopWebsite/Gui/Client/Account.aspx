@@ -6,6 +6,7 @@
         <div class='container' style="margin-left:0px; margin-right:0px;">
             <div class='row'>
                 <div class='col-md-6';>
+                    <h3>Change account data</h3>
                     <span>
                         <asp:Label class="label label-default" ID="Firstname" runat="server" Text="Firstname :"></asp:Label>
                         <asp:TextBox class="form-control" ID="tbFirstname" runat="server"></asp:TextBox>                           
@@ -47,6 +48,7 @@
                     </span>  
                 </div>
                  <div class='col-md-6';>
+                      <h3>Order history</h3>
                      <asp:Table id="MainTable" runat="server" CssClass="table table-bordered table-responsive table-hover"></asp:Table>
                      </div>
             </div>

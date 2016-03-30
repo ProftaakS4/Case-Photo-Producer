@@ -14,32 +14,32 @@ namespace PhotoshopWebsite.Gui
         protected void Page_Load(object sender, EventArgs e)
         {
             
-            if (Session["logindata"] != null)
-            {
-                clientName = Session["logindata"] as String;
-            }
-            else
-            {
-                Response.Redirect("../Login.aspx");
-            }
-            Labelklantnaam.Text = "Welcome! " + " " + clientName;
-            pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
-            if (pageName.Contains("account"))
-            {
-                LabelTitle.Text = "<h1>My Account</h1>";
-            }
-            else if (pageName.Contains("orders"))
-            {
-                LabelTitle.Text = "<h1>Orders</h1>";
-            }
-            else if (pageName.Contains("finance"))
-            {
-                LabelTitle.Text = "<h1>Finance</h1>";
-            }
-            else
-            {
-                LabelTitle.Text = "<h1>stock</h1>";
-            }
+        //    if (Session["logindata"] != null)
+        //    {
+        //        clientName = Session["logindata"] as String;
+        //    }
+        //    else
+        //    {
+        //        Response.Redirect("../Login.aspx");
+        //    }
+        //    Labelklantnaam.Text = "Welcome! " + " " + clientName;
+        //    pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
+        //    if (pageName.Contains("account"))
+        //    {
+        //        LabelTitle.Text = "<h1>My Account</h1>";
+        //    }
+        //    else if (pageName.Contains("orders"))
+        //    {
+        //        LabelTitle.Text = "<h1>Orders</h1>";
+        //    }
+        //    else if (pageName.Contains("finance"))
+        //    {
+        //        LabelTitle.Text = "<h1>Finance</h1>";
+        //    }
+        //    else
+        //    {
+        //        LabelTitle.Text = "<h1>stock</h1>";
+        //    }
         }
         
         }

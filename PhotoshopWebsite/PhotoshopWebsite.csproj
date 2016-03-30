@@ -79,6 +79,7 @@
     <Content Include="Gui\Admin\Stock.aspx" />
     <Content Include="Gui\Client\Account.aspx" />
     <Content Include="Gui\Client\CreateAccount.aspx" />
+    <Content Include="Gui\Client\GreyscaleConverter.aspx" />
     <Content Include="Gui\Finance\Account.aspx" />
     <Content Include="Gui\Finance\Finance.aspx" />
     <Content Include="Gui\Client\PhotoshopMaster.Master" />
@@ -151,6 +152,7 @@
     <Compile Include="DatabaseTier\ConnectionSingleton.cs" />
     <Compile Include="DatabaseTier\Login.cs" />
     <Compile Include="DatabaseTier\Order.cs" />
+    <Compile Include="DatabaseTier\Photo.cs" />
     <Compile Include="Gui\Admin\Account.aspx.cs">
       <DependentUpon>Account.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -199,6 +201,13 @@
     </Compile>
     <Compile Include="Gui\Client\CreateAccount.aspx.designer.cs">
       <DependentUpon>CreateAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Client\GreyscaleConverter.aspx.cs">
+      <DependentUpon>GreyscaleConverter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Client\GreyscaleConverter.aspx.designer.cs">
+      <DependentUpon>GreyscaleConverter.aspx</DependentUpon>
     </Compile>
     <Compile Include="Gui\Finance\Account.aspx.cs">
       <DependentUpon>Account.aspx</DependentUpon>

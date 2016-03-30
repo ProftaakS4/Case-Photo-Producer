@@ -16,37 +16,37 @@ namespace PhotoshopWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (HttpContext.Current.Session["shoppingCart"] != null)
-            {
-                Dictionary<Product, int> dict = Session["shoppingCart"] as Dictionary<Product, int>;
-                foreach (Product product in dict.Keys)
-                {
-                    size += dict[product];
-                }
-                Labelquantity.Text = size.ToString();
-            }
-            if (Session["logindata"] != null)
-            {
-                clientName = Session["logindata"] as String;
-            }
-            else
-            {
-                Response.Redirect("../Login.aspx");
-            }
-            Labelklantnaam.Text = "Welcome! " + " " + clientName;
-            pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
-            if (pageName.Contains("account"))
-            {
-                LabelTitle.Text = "<h1>My Account</h1>";
-            }
-            else if (pageName.Contains("mainstore"))
-            {
-                LabelTitle.Text = "<h1>My Pictures</h1>";
-            }
-            else
-            {
-                LabelTitle.Text = "<h1>My Shoppingcart</h1>";
-            }
+            //if (HttpContext.Current.Session["shoppingCart"] != null)
+            //{
+            //    Dictionary<Product, int> dict = Session["shoppingCart"] as Dictionary<Product, int>;
+            //    foreach (Product product in dict.Keys)
+            //    {
+            //        size += dict[product];
+            //    }
+            //    Labelquantity.Text = size.ToString();
+            //}
+            //if (Session["logindata"] != null)
+            //{
+            //    clientName = Session["logindata"] as String;
+            //}
+            //else
+            //{
+            //    Response.Redirect("../Login.aspx");
+            //}
+            //Labelklantnaam.Text = "Welcome! " + " " + clientName;
+            //pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
+            //if (pageName.Contains("account"))
+            //{
+            //    LabelTitle.Text = "<h1>My Account</h1>";
+            //}
+            //else if (pageName.Contains("mainstore"))
+            //{
+            //    LabelTitle.Text = "<h1>My Pictures</h1>";
+            //}
+            //else
+            //{
+            //    LabelTitle.Text = "<h1>My Shoppingcart</h1>";
+            //}
         }
 
         protected void Btnsearch_Click(object sender, EventArgs e)
