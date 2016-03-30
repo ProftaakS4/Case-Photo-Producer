@@ -32,7 +32,7 @@ namespace PhotoshopWebsite.Gui
             MainTable.Width = 600;
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
             TableHeaderCell IDHeader = new TableHeaderCell();
-            IDHeader.Text = "Product ID";
+            IDHeader.Text = "Photo ID";
             TableHeaderCell TypeHeader = new TableHeaderCell();
             TypeHeader.Text = "Product Type";
             TableHeaderCell Descriptionheader = new TableHeaderCell();
@@ -59,7 +59,13 @@ namespace PhotoshopWebsite.Gui
                 TableCell Description = new TableCell();
                 Description.Text = product.Description;
                 TableCell Quantity = new TableCell();
-                Quantity.Text = productlist[product].ToString();
+                TextBox tbQuantity = new TextBox();
+                tbQuantity.ID = "TextBoxRow_" + product.ID;
+                tbQuantity.Text = productlist[product].ToString();
+                tbQuantity.TextChanged += new EventHandler(this.Quantity_Change);
+                tbQuantity.AutoPostBack = true;
+                tbQuantity.MaxLength = 3;
+                Quantity.Controls.Add(tbQuantity);
 
                 MainRow.Cells.Add(ID);
                 MainRow.Cells.Add(Type);
@@ -110,9 +116,22 @@ namespace PhotoshopWebsite.Gui
             {
                 if (product.ID.ToString() == cbremove.ID)
                 {
-                    if (shoppingCart[product] > 1)
+                    shoppingCart.Remove(product);
+                    Session["shoppingCart"] = shoppingCart;
+                    Response.Redirect(Request.RawUrl);
+                }
+            }
+        }
+        private void Quantity_Change(object sender, EventArgs e)
+        {
+            TextBox tbQuantity = sender as TextBox;
+            foreach (Product product in shoppingCart.Keys.ToList())
+            {
+                if ("TextBoxRow_" + product.ID.ToString() == tbQuantity.ID.ToString())
+                {
+                    if (int.Parse(tbQuantity.Text) > 0)
                     {
-                        shoppingCart[product]--;
+                        shoppingCart[product] = int.Parse(tbQuantity.Text);
                     }
                     else
                     {
