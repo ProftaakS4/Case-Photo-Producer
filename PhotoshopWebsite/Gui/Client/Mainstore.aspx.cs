@@ -12,6 +12,9 @@ namespace PhotoshopWebsite
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+
+        PhotoController photoController = new PhotoController();
+
         Product testproduct1 = new Product(1, "PHOTO1x2", "PAPIER", "Foto van formaat 1x2", "../Images/Visitekaart-Delahaye-IT.png", -1);
         Product testproduct2 = new Product(2, "PHOTO1x2", "Hout", "Foto van formaat 200X200", "../Images/Visitekaart-Delahaye-IT.png", -1);
         Product testproduct3 = new Product(3, "PHOTO1x2", "Steen", "Foto van formaat 300x300", "../Images/Visitekaart-Delahaye-IT.png", -1);
@@ -36,17 +39,21 @@ namespace PhotoshopWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            testproducts = new List<Product>();
-            testproducts.Add(testproduct1);
-            testproducts.Add(testproduct2);
-            testproducts.Add(testproduct3);
-            testproducts.Add(testproduct4);
-            testproducts.Add(testproduct5);
-            number = testproducts.Count();
-            foreach (Product x in testproducts)
-            {
-                Fillpage(x);
-            }
+            User currenUser = (User)Session["UserData"];
+            string userID = Convert.ToString(currenUser.ID);
+            Response.Write("ID = " + userID);
+            photoController.getUserPhotoIDs(userID);
+            //testproducts = new List<Product>();
+            //testproducts.Add(testproduct1);
+            //testproducts.Add(testproduct2);
+            //testproducts.Add(testproduct3);
+            //testproducts.Add(testproduct4);
+            //testproducts.Add(testproduct5);
+            //number = testproducts.Count();
+            //foreach (Product x in testproducts)
+            //{
+            //    Fillpage(x);
+            //}
         }
 
 
