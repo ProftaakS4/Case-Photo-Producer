@@ -251,8 +251,6 @@ namespace PhotoshopWebsite
                     }
                 }
             }
-            returnimage = (System.Drawing.Image)btm;
-            return returnimage;
         }
 
         private void convertBlackWhite(Product product)
