@@ -140,15 +140,17 @@
     <Content Include="Bootstrap\Scripts\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\Dvd.cs" />
-    <Compile Include="Controller\LoginCode.cs" />
-    <Compile Include="Controller\Map.cs" />
-    <Compile Include="Controller\Order.cs" />
-    <Compile Include="Controller\PaymentType.cs" />
-    <Compile Include="Controller\Printorder.cs" />
-    <Compile Include="Controller\Product.cs" />
-    <Compile Include="Controller\Transaction.cs" />
-    <Compile Include="Controller\User.cs" />
+    <Compile Include="Controller\LoginCodeController.cs" />
+    <Compile Include="DatabaseTier\LoginCode.cs" />
+    <Compile Include="Domain\Dvd.cs" />
+    <Compile Include="Domain\LoginCode.cs" />
+    <Compile Include="Domain\Map.cs" />
+    <Compile Include="Domain\Order.cs" />
+    <Compile Include="Domain\PaymentType.cs" />
+    <Compile Include="Domain\Printorder.cs" />
+    <Compile Include="Domain\Product.cs" />
+    <Compile Include="Domain\Transaction.cs" />
+    <Compile Include="Domain\User.cs" />
     <Compile Include="DatabaseTier\ConnectionSingleton.cs" />
     <Compile Include="DatabaseTier\Login.cs" />
     <Compile Include="DatabaseTier\Order.cs" />
