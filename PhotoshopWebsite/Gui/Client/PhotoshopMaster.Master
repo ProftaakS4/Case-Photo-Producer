@@ -1,8 +1,10 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PhotoshopMaster.master.cs" Inherits="PhotoshopWebsite.PhotoshopMaster" %>
 
 <!DOCTYPE html>
+<script src="../../Bootstrap/Scripts/jquery-1.9.1.min.js"></script>
 <link href="../../Bootstrap/Content/bootstrap.css" rel="stylesheet" />
 <script src="../../Bootstrap/Scripts/bootstrap.js"></script>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Photoshop</title>
@@ -11,79 +13,80 @@
     <link href="../../Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
 </head>
 <form runat="server">
-<body>
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#">
-                        <asp:Label runat="server" ID="Labelklantnaam"></asp:Label>
-                    </a>
-                </li>
-                <li>
-                    <a href="Mainstore.aspx">Pictures</a>
-                </li>
-                <li>
-                    <a href="Mainstore.aspx">Group pictures</a>
-                </li>
-                <li>
-                    <a href="Account.aspx">My Account</a>
-                </li>
-                <li>
-                    <a href="ShoppingCart.aspx">Shopping Cart
+    <body>
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="#">
+                            <asp:Label runat="server" ID="Labelklantnaam"></asp:Label>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="Mainstore.aspx">Pictures</a>
+                    </li>
+                    <li>
+                        <a href="Mainstore.aspx">Group pictures</a>
+                    </li>
+                    <li>
+                        <a href="Account.aspx">My Account</a>
+                    </li>
+                    <li>
+                        <a href="ShoppingCart.aspx">Shopping Cart
                         <img src="../Images/Shoppingcart.png" style="height: 20px; width: 20px; margin-left: 10px;" />
-                        <asp:Label ID="Labelquantity" runat="server" Text="" Style="color: white;"></asp:Label></a>
-                </li>
-                <div runat="server" class="col-lg-6">
-                    <div class="input-group" runat="server">
-                        <asp:TextBox ID="tbSearch" class="form-control" runat="server" placeholder="Search for..."  style="width: 150px;"></asp:TextBox>
-                        <span class="input-group-btn">
-                            <asp:Button ID="Btnsearch" class="btn btn-default" runat="server" type="button" Text="Go!" OnClick="Btnsearch_Click" style="height:34px"></asp:Button>
-                        </span>
+                            <asp:Label ID="Labelquantity" runat="server" Text="" Style="color: white;"></asp:Label></a>
+                    </li>
+                    <div runat="server" class="col-lg-6">
+                        <div class="input-group" runat="server">
+                            <asp:TextBox ID="tbSearch" class="form-control" runat="server" placeholder="Search for..." Style="width: 150px;"></asp:TextBox>
+                            <%--                        <input type="text" class="form-control" placeholder="Search for..." style="width: 150px;">--%>
+                            <span class="input-group-btn">
+                                <asp:Button ID="Btnsearch" class="btn btn-default" runat="server" type="button" Text="Go!" OnClick="Btnsearch_Click" Style="height: 34px"></asp:Button>
+                            </span>
+                        </div>
+                        <!-- /input-group -->
                     </div>
-                    <!-- /input-group -->
-                </div>
-                <!-- /.col-lg-6 -->
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
+                    <!-- /.col-lg-6 -->
+                </ul>
+            </div>
+            <!-- /#sidebar-wrapper -->
 
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <asp:Label ID="LabelTitle" runat="server" Text="Label"></asp:Label>
-                        <p>Click to Toggle button for the Menu to appear or dissapear</p>
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <asp:Label ID="LabelTitle" runat="server" Text="Label"></asp:Label>
+                            <p>Click to Toggle button for the Menu to appear or dissapear</p>
+                            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- /#page-content-wrapper -->
         </div>
-        <!-- /#page-content-wrapper -->
-    </div>
-    <!-- /#wrapper -->
-    <!-- jQuery -->
-    <script src="../../Bootstrap/Menu/JS/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../../Bootstrap/Menu/JS/bootstrap.min.js"></script>
-    <!-- Menu Toggle Script -->
-    <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-            $("#panel-body").toggleClass("panel-body");
-        });
-    </script>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
-    </head>
+        <!-- /#wrapper -->
+        <!-- jQuery -->
+        <script src="../../Bootstrap/Menu/JS/jquery.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="../../Bootstrap/Menu/JS/bootstrap.min.js"></script>
+        <!-- Menu Toggle Script -->
+        <script>
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+                $("#panel-body").toggleClass("panel-body");
+            });
+        </script>
+        <asp:ContentPlaceHolder ID="head" runat="server">
+        </asp:ContentPlaceHolder>
+        </head>
     <body>
 
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
         </div>
     </body>
-    </form>
+</form>
 </html>

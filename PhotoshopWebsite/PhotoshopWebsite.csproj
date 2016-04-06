@@ -79,6 +79,7 @@
     <Content Include="Gui\Admin\Stock.aspx" />
     <Content Include="Gui\Client\Account.aspx" />
     <Content Include="Gui\Client\CreateAccount.aspx" />
+    <Content Include="Gui\Client\GroupPictures.aspx" />
     <Content Include="Gui\Finance\Account.aspx" />
     <Content Include="Gui\Finance\Finance.aspx" />
     <Content Include="Gui\Client\PhotoshopMaster.Master" />
@@ -139,18 +140,19 @@
     <Content Include="Bootstrap\Scripts\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\LoginCodeController.cs" />
     <Compile Include="Controller\PhotoController.cs" />
-    <Compile Include="DatabaseTier\Search.cs" />
+    <Compile Include="DatabaseTier\LoginCode.cs" />
     <Compile Include="Domain\Dvd.cs" />
     <Compile Include="Domain\LoginCode.cs" />
     <Compile Include="Domain\Map.cs" />
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\PaymentType.cs" />
-    <Compile Include="Domain\Photo.cs" />
     <Compile Include="Domain\Printorder.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\Transaction.cs" />
     <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\Photo.cs" />
     <Compile Include="DatabaseTier\ConnectionSingleton.cs" />
     <Compile Include="DatabaseTier\Login.cs" />
     <Compile Include="DatabaseTier\Order.cs" />
@@ -203,6 +205,13 @@
     </Compile>
     <Compile Include="Gui\Client\CreateAccount.aspx.designer.cs">
       <DependentUpon>CreateAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Client\GroupPictures.aspx.cs">
+      <DependentUpon>GroupPictures.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Client\GroupPictures.aspx.designer.cs">
+      <DependentUpon>GroupPictures.aspx</DependentUpon>
     </Compile>
     <Compile Include="Gui\Finance\Account.aspx.cs">
       <DependentUpon>Account.aspx</DependentUpon>
