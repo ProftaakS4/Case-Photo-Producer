@@ -137,9 +137,10 @@ namespace PhotoshopWebsite
             if (sender is Button)
             {
                 Button button = sender as Button;
-                foreach (Product product in testproducts)
+                List<Domain.Photo> userPhotos = (List<Domain.Photo>)Session["PhotosList"];
+                foreach (Domain.Photo photo in userPhotos)
                 {
-                    if ("btnColor" + product.ID.ToString() == button.ID)
+                    if ("btnColor" + photo.ID.ToString() == button.ID)
                     {
                         foreach (HtmlGenericControl control in pnlProduct.Controls)
                         {
@@ -148,9 +149,9 @@ namespace PhotoshopWebsite
                                 if (item is System.Web.UI.WebControls.Image)
                                 {
                                     System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
-                                    if (currentImage.ID.ToString() == "image" + product.ID.ToString())
+                                    if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
                                     {
-                                        currentImage.ImageUrl = product.Image;
+                                        currentImage.ImageUrl = photo.Path;
                                     }
                                 }
                             }
@@ -196,11 +197,12 @@ namespace PhotoshopWebsite
             if (sender is Button)
             {
                 Button button = sender as Button;
-                foreach (Product product in testproducts)
+                List<Domain.Photo> userPhotos = (List<Domain.Photo>)Session["PhotosList"];
+                foreach (Domain.Photo photo in userPhotos)
                 {
-                    if ("btnSepia" + product.ID.ToString() == button.ID)
+                    if ("btnSepia" + photo.ID.ToString() == button.ID)
                     {
-                        convertSepia(product);
+                        convertSepia(photo);
                         break;
                     }
                 }
@@ -213,7 +215,8 @@ namespace PhotoshopWebsite
             if (sender is Button)
             {
                 Button button = sender as Button;
-                foreach (Domain.Photo photo in photos)
+                List<Domain.Photo> userPhotos = (List<Domain.Photo>)Session["PhotosList"];
+                foreach (Domain.Photo photo in userPhotos)
                 {
                     if ("btnBlackWhite" + photo.ID.ToString() == button.ID)
                     {
@@ -224,9 +227,9 @@ namespace PhotoshopWebsite
             }
         }
 
-        private void convertSepia(Product product)
+        private void convertSepia(Domain.Photo photo)
         {
-            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(product.Image.ToString()));
+            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Path.ToString()));
             Bitmap temp = (Bitmap)_current;
             Bitmap bmap = (Bitmap)temp.Clone();
 
@@ -241,7 +244,7 @@ namespace PhotoshopWebsite
                 }
             }
             _current = (Bitmap)bmap.Clone();
-            _current.Save(Server.MapPath("../Images/Sepia.png"));
+            _current.Save(Server.MapPath("../Images/Sepia" + photo.ID +".png"));
 
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
@@ -250,9 +253,9 @@ namespace PhotoshopWebsite
                     if (item is System.Web.UI.WebControls.Image)
             {
                         System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
-                        if (currentImage.ID.ToString() == "image" + product.ID.ToString())
+                        if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
                 {
-                            currentImage.ImageUrl = "../Images/Sepia.png";
+                            currentImage.ImageUrl = "../Images/Sepia" + photo.ID + ".png";
                         }
                     }
                 }
@@ -261,9 +264,9 @@ namespace PhotoshopWebsite
             //return returnimage;
         }
 
-        private void convertBlackWhite(Domain.Photo product)
+        private void convertBlackWhite(Domain.Photo photo)
         {
-            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(product.Path.ToString()));
+            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Path.ToString()));
             Bitmap temp = (Bitmap)_current;
             Bitmap bmap = (Bitmap)temp.Clone();
             Color col;
@@ -279,7 +282,7 @@ namespace PhotoshopWebsite
             _current = (Bitmap)bmap.Clone();
             Random rnd = new Random();
             int a = rnd.Next();
-            _current.Save(Server.MapPath("../Images/BlackWhite.png"));
+            _current.Save(Server.MapPath("../Images/BlackWhite"+ photo.ID + ".png"));
 
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
@@ -288,9 +291,9 @@ namespace PhotoshopWebsite
                     if (item is System.Web.UI.WebControls.Image)
                     {
                         System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
-                        if (currentImage.ID.ToString() == "image" + product.ID.ToString())
+                        if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
         {
-                            currentImage.ImageUrl = "../Images/BlackWhite.png";
+                            currentImage.ImageUrl = "../Images/BlackWhite"+ photo.ID + ".png";
                         }
                     }
                 }
