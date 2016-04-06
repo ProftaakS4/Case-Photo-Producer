@@ -12,7 +12,7 @@ namespace PhotoshopWebsite.Gui.Photographer
     public partial class Clients : System.Web.UI.Page
     {
         List<LoginCode> loginCodes;
-        //LoginCodeController lcc;
+        LoginCodeController lcc;
         string mailTO = "";
         protected void Page_Load(object sender, EventArgs e)
         {

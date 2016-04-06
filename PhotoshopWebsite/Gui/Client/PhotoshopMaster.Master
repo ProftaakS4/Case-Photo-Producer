@@ -27,7 +27,7 @@
                         <a href="Mainstore.aspx">Pictures</a>
                     </li>
                     <li>
-                        <a href="Mainstore.aspx">Group pictures</a>
+                        <a href="GroupPictures.aspx">Group pictures</a>
                     </li>
                     <li>
                         <a href="Account.aspx">My Account</a>
