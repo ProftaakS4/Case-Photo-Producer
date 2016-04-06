@@ -16,11 +16,12 @@ namespace PhotoshopWebsite
         PhotoController photoController = new PhotoController();
 
         private Bitmap _current;
-        Product testproduct1 = new Product(1, "PHOTO1x2", "PAPIER", "Foto van formaat 1x2", "../Images/Visitekaart-Delahaye-IT.png", -1);
-        Product testproduct2 = new Product(2, "PHOTO1x2", "Hout", "Foto van formaat 200X200", "../Images/Visitekaart-Delahaye-IT.png", -1);
-        Product testproduct3 = new Product(3, "PHOTO1x2", "Steen", "Foto van formaat 300x300", "../Images/Visitekaart-Delahaye-IT.png", -1);
-        Product testproduct4 = new Product(4, "PHOTO1x2", "Rubber", "Foto van formaat 500x1500", "../Images/Visitekaart-Delahaye-IT.png", -1);
-        Product testproduct5 = new Product(5, "PHOTO1x2", "Rubber", "Foto van formaat 500x1500", "../Images/Visitekaart-Delahaye-IT.png", -1);
+        //Product testproduct1 = new Product(1, "PHOTO1x2", "PAPIER", "Foto van formaat 1x2", "../Images/Visitekaart-Delahaye-IT.png", -1);
+        //Product testproduct2 = new Product(2, "PHOTO1x2", "Hout", "Foto van formaat 200X200", "../Images/Visitekaart-Delahaye-IT.png", -1);
+        //Product testproduct3 = new Product(3, "PHOTO1x2", "Steen", "Foto van formaat 300x300", "../Images/Visitekaart-Delahaye-IT.png", -1);
+        //Product testproduct4 = new Product(4, "PHOTO1x2", "Rubber", "Foto van formaat 500x1500", "../Images/Visitekaart-Delahaye-IT.png", -1);
+        //Product testproduct5 = new Product(5, "PHOTO1x2", "Rubber", "Foto van formaat 500x1500", "../Images/Visitekaart-Delahaye-IT.png", -1);
+
 
 
         private int number;
@@ -50,6 +51,11 @@ namespace PhotoshopWebsite
             }
             Session["PhotosList"] = photos;
 
+            foreach(Domain.Photo photo in photos)
+            {
+                Fillpage(photo);
+            }
+
             //Response.Write("Amount photos " + Convert.ToString(photos.Count()));
 
             //testproducts = new List<Product>();
@@ -66,7 +72,7 @@ namespace PhotoshopWebsite
         }
 
 
-        private void Fillpage(Product x)
+        private void Fillpage(Domain.Photo x)
         {
             //create buttons
             Button btnAddToCart = new Button();
@@ -100,7 +106,7 @@ namespace PhotoshopWebsite
             System.Web.UI.WebControls.Image imgProduct = new System.Web.UI.WebControls.Image();
             imgProduct.ID = "image" + x.ID.ToString();
             imgProduct.AlternateText = "No Image found, please contact administrator";
-            imgProduct.ImageUrl = x.Image;
+            imgProduct.ImageUrl = x.Path;
             imgProduct.Height = 200;
             imgProduct.Width = 330;
 

@@ -136,7 +136,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 photoElements.Add(myCommand.Parameters["@p_description"].Value.ToString());
 
                 //return the result of the query
-                System.Windows.Forms.MessageBox.Show("Succes");
+                //System.Windows.Forms.MessageBox.Show("Succes");
                 return photoElements;
 
             }
