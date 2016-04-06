@@ -13,16 +13,24 @@ namespace PhotoshopWebsite.Controller
 
         }
 
-        public string getUserPhotoIDs(string userID)
+        public List<string> getUserPhotoIDs(string userID)
         {
-            string result = photoDatabase.getPhotosUser(userID);
-            System.Windows.Forms.MessageBox.Show(result);
-            //return photoDatabase.getPhotosUser(userID);
-            return result;
+            List<string> result = photoDatabase.getPhotosUser(userID);
+            if (result!= null)
+            {
+                return result;
+            }
+            return null;
         }
 
-        public List<DatabaseTier.Photo> photos (string photoID)
+        public Domain.Photo getPhoto(string photoID)
         {
+            List<string> photoElements = photoDatabase.getPhoto(photoID);
+            Domain.Photo photo = new Domain.Photo(photoElements.ElementAt(0), photoElements.ElementAt(1), photoElements.ElementAt(2), photoElements.ElementAt(3), photoElements.ElementAt(4), photoElements.ElementAt(5), photoElements.ElementAt(6), photoElements.ElementAt(7));
+            if(photo != null)
+            {
+                return photo;
+            }
             return null;
         }
     }

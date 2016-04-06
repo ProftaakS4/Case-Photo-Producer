@@ -42,8 +42,16 @@ namespace PhotoshopWebsite
         {
             User currenUser = (User)Session["UserData"];
             string userID = Convert.ToString(currenUser.ID);
-            Response.Write("ID = " + userID);
-            photoController.getUserPhotoIDs(userID);
+            List<string> photoIDS = photoController.getUserPhotoIDs(userID);
+            List<Domain.Photo> photos = new List<Domain.Photo>();
+            foreach(string s in photoIDS)
+            {
+                photos.Add(photoController.getPhoto(s));
+            }
+            Session["PhotosList"] = photos;
+
+            //Response.Write("Amount photos " + Convert.ToString(photos.Count()));
+
             //testproducts = new List<Product>();
             //testproducts.Add(testproduct1);
             //testproducts.Add(testproduct2);
@@ -251,8 +259,8 @@ namespace PhotoshopWebsite
                     }
                 }
             }
-            returnimage = (System.Drawing.Image)btm;
-            return returnimage;
+            //returnimage = (System.Drawing.Image)btm;
+            //return returnimage;
         }
 
         private void convertBlackWhite(Product product)
