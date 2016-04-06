@@ -1,9 +1,9 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Web;
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace PhotoshopWebsite.DatabaseTier
 {
@@ -15,35 +15,68 @@ namespace PhotoshopWebsite.DatabaseTier
         // Create a new MySQL connections
         private MySqlConnection mysqlConnection;
         private MySqlCommand myCommand = null;
+        private string result = "";
 
+        /// <summary>
+        /// constructor of the class
+        /// </summary>
         public Photo()
         {
+            // get the mysqlconnection singleton
             mysqlConnection = connectionSingleton.getSqlConnection();
         }
 
-        public String getPhotos(int userid)
+        /// <summary>
+        /// This method gets all the photoIDS from the specified userID. When there are no photo found the method returns null
+        /// </summary>
+        /// <param name="userID"></param> the user id of the account
+        /// <returns></returns>
+        public List<string> getPhotosUser(string userID)
         {
-            String Photos = null;
+            List<string> photoIDS = null;
             try
             {
-                myCommand = new MySqlCommand(null, mysqlConnection);
-                myCommand.CommandText = "getPhotosUser";
-                // input
+                myCommand = new MySqlCommand("getPhotosUser", mysqlConnection);
                 myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Add("@p_id", MySqlDbType.Int32).Value = userid;
+
+                // input
+                myCommand.Parameters.Add("@p_id", MySqlDbType.Int32).Value = Convert.ToInt32(userID);
+
                 // output
                 myCommand.Parameters.Add("@p_photos", MySqlDbType.VarChar);
                 myCommand.Parameters["@p_photos"].Direction = ParameterDirection.Output;
 
-                // execute query
+                //execute query
                 mysqlConnection.Open();
                 myCommand.ExecuteNonQuery();
-                // add OUTPUT to string
 
-                Photos = (string)myCommand.Parameters["@p_photos"].Value;
+                //capture the out parameter form the databas into a variable
+                result = (string)myCommand.Parameters["@p_photos"].Value + " ";
 
-                // return dictionary
-                return Photos;
+                // check if the result has some numeric values into it, meaning that there are indeed photoIDS returned
+                if (result.Any(char.IsDigit))
+                {                    
+                    string photoID = "";
+                    // create new string list and iterate over the result and break down the photoIDS into idividual photoIDS
+                    photoIDS = new List<string>();                  
+                    foreach (char c in result)
+                    {
+                        if (c != ' ')
+                        {
+                            photoID = photoID + c;
+                        }
+                        else
+                        {
+                            if(photoID != "")
+                            {
+                                // replace potential whitespace
+                                photoIDS.Add(photoID.Replace(" ",""));
+                                photoID = "";
+                            }                            
+                        }
+                    }
+                    return photoIDS;
+                }                
             }
             catch (Exception ex)
             {
@@ -57,5 +90,66 @@ namespace PhotoshopWebsite.DatabaseTier
             return null;
         }
 
+        /// <summary>
+        /// this method will get all the photo information thats stored in the database from the specified photoid
+        /// </summary>
+        /// <param name="photoID"></param> the photoid of the photo
+        /// <returns></returns>
+        public List<string> getPhoto(string photoID)
+        {
+            List<string> photoElements;
+            try
+            {
+                myCommand = new MySqlCommand("getPhoto", mysqlConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+                // input
+                myCommand.Parameters.Add("@p_photo_ID", MySqlDbType.VarChar).Value = photoID;
+                // output
+                myCommand.Parameters.Add("@p_account_id", MySqlDbType.Int32);
+                myCommand.Parameters["@p_account_id"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@p_map_id", MySqlDbType.Int32);
+                myCommand.Parameters["@p_map_id"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@p_logincode", MySqlDbType.Int32);
+                myCommand.Parameters["@p_logincode"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@p_type", MySqlDbType.VarChar);
+                myCommand.Parameters["@p_type"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@p_path", MySqlDbType.VarChar);
+                myCommand.Parameters["@p_path"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@p_resolution", MySqlDbType.VarChar);
+                myCommand.Parameters["@p_resolution"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@p_description", MySqlDbType.VarChar);
+                myCommand.Parameters["@p_description"].Direction = ParameterDirection.Output;
+
+                //execute query
+                mysqlConnection.Open();
+                myCommand.ExecuteNonQuery();
+
+                // add all the outputs to the list
+                photoElements = new List<string>();
+                photoElements.Add(photoID);
+                photoElements.Add(myCommand.Parameters["@p_account_id"].Value.ToString());
+                photoElements.Add(myCommand.Parameters["@p_map_id"].Value.ToString());
+                photoElements.Add(myCommand.Parameters["@p_logincode"].Value.ToString());
+                photoElements.Add(myCommand.Parameters["@p_type"].Value.ToString());
+                photoElements.Add(myCommand.Parameters["@p_path"].Value.ToString());
+                photoElements.Add(myCommand.Parameters["@p_resolution"].Value.ToString());
+                photoElements.Add(myCommand.Parameters["@p_description"].Value.ToString());
+
+                //return the result of the query
+                //System.Windows.Forms.MessageBox.Show("Succes");
+                return photoElements;
+
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return null;
+        }
     }
 }
