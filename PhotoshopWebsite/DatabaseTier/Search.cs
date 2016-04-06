@@ -1,9 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
-using MySql.Data.MySqlClient;
-using System.Data;
 
 namespace PhotoshopWebsite.DatabaseTier
 {
@@ -38,7 +38,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 // output
                 myCommand.Parameters.Add("@p_photos", MySqlDbType.Int32);
                 myCommand.Parameters["@p_photos"].Direction = ParameterDirection.Output;
-                
+
 
                 //execute query
                 mysqlConnection.Open();
@@ -58,6 +58,5 @@ namespace PhotoshopWebsite.DatabaseTier
             }
             return null;
         }
-                  
     }
 }
