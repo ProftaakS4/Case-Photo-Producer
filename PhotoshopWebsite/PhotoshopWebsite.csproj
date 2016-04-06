@@ -152,6 +152,7 @@
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\Transaction.cs" />
     <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\Photo.cs" />
     <Compile Include="DatabaseTier\ConnectionSingleton.cs" />
     <Compile Include="DatabaseTier\Login.cs" />
     <Compile Include="DatabaseTier\Order.cs" />
