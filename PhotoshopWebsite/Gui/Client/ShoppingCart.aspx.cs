@@ -11,17 +11,17 @@ namespace PhotoshopWebsite.Gui
 {
     public partial class ShoppingCart : System.Web.UI.Page
     {
-        private Dictionary<Product, int> shoppingCart;
+        private Dictionary<Domain.Photo, int> shoppingCart;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["shoppingCart"] != null)
             {
-                shoppingCart = Session["shoppingCart"] as Dictionary<Product, int>;
+                shoppingCart = Session["shoppingCart"] as Dictionary<Domain.Photo, int>;
                 Fillpage(shoppingCart);
             }
 
         }
-        private void Fillpage(Dictionary<Product, int> productlist)
+        private void Fillpage(Dictionary<Domain.Photo, int> productlist)
         {
             HtmlGenericControl firstcontrol = new HtmlGenericControl();
             firstcontrol.InnerHtml = "<div class='table-responsive'>";
@@ -48,7 +48,7 @@ namespace PhotoshopWebsite.Gui
             MainHeaderRow.Cells.Add(Removeheader);
             MainTable.Rows.Add(MainHeaderRow);
 
-            foreach (Product product in productlist.Keys)
+            foreach(Domain.Photo product in productlist.Keys)
             {
                 TableRow MainRow = new TableRow();
                 MainRow.Height = 80;
@@ -112,7 +112,7 @@ namespace PhotoshopWebsite.Gui
         private void Check_Clicked(object sender, EventArgs e)
         {
             CheckBox cbremove = sender as CheckBox;
-            foreach (Product product in shoppingCart.Keys.ToList())
+            foreach (Domain.Photo product in shoppingCart.Keys.ToList())
             {
                 if (product.ID.ToString() == cbremove.ID)
                 {
@@ -125,7 +125,7 @@ namespace PhotoshopWebsite.Gui
         private void Quantity_Change(object sender, EventArgs e)
         {
             TextBox tbQuantity = sender as TextBox;
-            foreach (Product product in shoppingCart.Keys.ToList())
+            foreach (Domain.Photo product in shoppingCart.Keys.ToList())
             {
                 if ("TextBoxRow_" + product.ID.ToString() == tbQuantity.ID.ToString())
                 {

@@ -21,17 +21,17 @@ namespace PhotoshopWebsite
 
         private Bitmap _current;
         private int number;
-        private List<Product> testproducts;
-        public Dictionary<Product, int> shoppingCart
+        //private List<Product> testproducts;
+        public Dictionary<Domain.Photo, int> shoppingCart
         {
             get
             {
-                if (!(Session["shoppingCart"] is Dictionary<Product, int>))
+                if (!(Session["shoppingCart"] is Dictionary<Domain.Photo, int>))
                 {
-                    Session["shoppingCart"] = new Dictionary<Product, int>();
+                    Session["shoppingCart"] = new Dictionary<Domain.Photo, int>();
                 }
 
-                return (Dictionary<Product, int>)Session["shoppingCart"];
+                return (Dictionary<Domain.Photo, int>)Session["shoppingCart"];
             }
         }
 
@@ -166,23 +166,24 @@ namespace PhotoshopWebsite
         {
             Button x = sender as Button;
             string id = x.ID;
-            foreach (Product product in testproducts)
+            List<Domain.Photo> userPhotos = (List<Domain.Photo>)Session["PhotosList"];
+            foreach (Domain.Photo photo in userPhotos)
             {
-                if (product.ID.ToString() == id)
+                if (photo.ID.ToString() == id)
                 {
                     if (shoppingCart.Count == 0)
                     {
-                        shoppingCart.Add(product, 1);
+                        shoppingCart.Add(photo, 1);
                     }
                     else
                     {
-                        if (shoppingCart.ContainsKey(product))
+                        if (shoppingCart.ContainsKey(photo))
                         {
-                            shoppingCart[product]++;
+                            shoppingCart[photo]++;
                         }
                         else
                         {
-                            shoppingCart.Add(product, 1);
+                            shoppingCart.Add(photo, 1);
                         }
                     }
                 }
