@@ -13,17 +13,13 @@ namespace PhotoshopWebsite
     public partial class WebForm1 : System.Web.UI.Page
     {
 
+        // create instance of the photoController for future database connections through busisness layer
         PhotoController photoController = new PhotoController();
 
+        // create a list of all the current user photos
+        List<Domain.Photo> photos;
+
         private Bitmap _current;
-        //Product testproduct1 = new Product(1, "PHOTO1x2", "PAPIER", "Foto van formaat 1x2", "../Images/Visitekaart-Delahaye-IT.png", -1);
-        //Product testproduct2 = new Product(2, "PHOTO1x2", "Hout", "Foto van formaat 200X200", "../Images/Visitekaart-Delahaye-IT.png", -1);
-        //Product testproduct3 = new Product(3, "PHOTO1x2", "Steen", "Foto van formaat 300x300", "../Images/Visitekaart-Delahaye-IT.png", -1);
-        //Product testproduct4 = new Product(4, "PHOTO1x2", "Rubber", "Foto van formaat 500x1500", "../Images/Visitekaart-Delahaye-IT.png", -1);
-        //Product testproduct5 = new Product(5, "PHOTO1x2", "Rubber", "Foto van formaat 500x1500", "../Images/Visitekaart-Delahaye-IT.png", -1);
-
-
-
         private int number;
         private List<Product> testproducts;
         public Dictionary<Product, int> shoppingCart
@@ -41,34 +37,30 @@ namespace PhotoshopWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            // cast the session into the current user
             User currenUser = (User)Session["UserData"];
+
+            // get the userid of the current user
             string userID = Convert.ToString(currenUser.ID);
+
+            // get all the photoID's of the current user
             List<string> photoIDS = photoController.getUserPhotoIDs(userID);
+
+            // get all the photos of the current user and add them to a list
             List<Domain.Photo> photos = new List<Domain.Photo>();
             foreach(string s in photoIDS)
-            {
+            {                
                 photos.Add(photoController.getPhoto(s));
             }
+
+            // store all the photos in the session
             Session["PhotosList"] = photos;
 
+            // fill the page with the users photos
             foreach(Domain.Photo photo in photos)
             {
                 Fillpage(photo);
             }
-
-            //Response.Write("Amount photos " + Convert.ToString(photos.Count()));
-
-            //testproducts = new List<Product>();
-            //testproducts.Add(testproduct1);
-            //testproducts.Add(testproduct2);
-            //testproducts.Add(testproduct3);
-            //testproducts.Add(testproduct4);
-            //testproducts.Add(testproduct5);
-            //number = testproducts.Count();
-            //foreach (Product x in testproducts)
-            //{
-            //    Fillpage(x);
-            //}
         }
 
 
@@ -221,11 +213,11 @@ namespace PhotoshopWebsite
             if (sender is Button)
             {
                 Button button = sender as Button;
-                foreach (Product product in testproducts)
+                foreach (Domain.Photo photo in photos)
                 {
-                    if ("btnBlackWhite" + product.ID.ToString() == button.ID)
+                    if ("btnBlackWhite" + photo.ID.ToString() == button.ID)
                     {
-                        convertBlackWhite(product);
+                        convertBlackWhite(photo);
                         break;
                     }
                 }
@@ -269,9 +261,9 @@ namespace PhotoshopWebsite
             //return returnimage;
         }
 
-        private void convertBlackWhite(Product product)
+        private void convertBlackWhite(Domain.Photo product)
         {
-            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(product.Image.ToString()));
+            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(product.Path.ToString()));
             Bitmap temp = (Bitmap)_current;
             Bitmap bmap = (Bitmap)temp.Clone();
             Color col;
