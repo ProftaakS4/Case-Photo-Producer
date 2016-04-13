@@ -32,10 +32,10 @@ namespace PhotoshopWebsite
             }
             if (HttpContext.Current.Session["shoppingCart"] != null)
             {
-                Dictionary<Product, int> dict = Session["shoppingCart"] as Dictionary<Product, int>;
-                foreach (Product product in dict.Keys)
+                Dictionary<Domain.Photo, int> dict = Session["shoppingCart"] as Dictionary<Domain.Photo, int>;
+                foreach (Domain.Photo photo in dict.Keys)
                 {
-                    size += dict[product];
+                    size += dict[photo];
                 }
                 Labelquantity.Text = size.ToString();
             }
