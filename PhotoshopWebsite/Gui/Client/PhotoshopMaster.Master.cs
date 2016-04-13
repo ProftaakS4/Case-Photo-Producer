@@ -66,17 +66,24 @@ namespace PhotoshopWebsite
         protected void Btnsearch_Click(object sender, EventArgs e)
         {
             searchedPhotos = new List<Domain.Photo>();
-            string output = s.searchPhoto(tbSearch.Text, curUser.ID);
-            char[] charoutput = output.ToCharArray();
-            PhotoshopWebsite.DatabaseTier.Photo photo = new PhotoshopWebsite.DatabaseTier.Photo();
-            for(int i = 0;i < charoutput.Count(); i++)
+            if(tbSearch.Text != "")
             {
-                List<String> data = photo.getPhoto(charoutput[i].ToString());
-                Domain.Photo newphoto = new Domain.Photo(Convert.ToInt32(data.ElementAt(0)), Convert.ToInt32(data.ElementAt(1)), Convert.ToInt32(data.ElementAt(2)), data.ElementAt(3), data.ElementAt(4), data.ElementAt(5), data.ElementAt(6), data.ElementAt(7));
-                searchedPhotos.Add(newphoto);
+                string output = s.searchPhoto(tbSearch.Text, curUser.ID);
+                char[] charoutput = output.ToCharArray();
+                PhotoshopWebsite.DatabaseTier.Photo photo = new PhotoshopWebsite.DatabaseTier.Photo();
+                for (int i = 0; i < charoutput.Count(); i++)
+                {
+                    List<String> data = photo.getPhoto(charoutput[i].ToString());
+                    Domain.Photo newphoto = new Domain.Photo(Convert.ToInt32(data.ElementAt(0)), Convert.ToInt32(data.ElementAt(1)), Convert.ToInt32(data.ElementAt(2)), data.ElementAt(3), data.ElementAt(4), data.ElementAt(5), data.ElementAt(6), data.ElementAt(7));
+                    searchedPhotos.Add(newphoto);
+                }
+                Session["SearchedPhotos"] = searchedPhotos;
+                Response.Redirect(Request.RawUrl);
             }
-            Session["SearchedPhotos"] = searchedPhotos;
-            Response.Redirect(Request.RawUrl);
+            else
+            {
+                Response.Write("<script>alert('Voer zoekcriteria in')</script>");
+            }
         }
     }
 }
