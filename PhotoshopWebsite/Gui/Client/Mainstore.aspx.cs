@@ -52,9 +52,16 @@ namespace PhotoshopWebsite
 
             // get all the photos of the current user and add them to a list
             List<Domain.Photo> photos = new List<Domain.Photo>();
-            foreach(string s in photoIDS)
-            {                
-                photos.Add(photoController.getPhoto(s));
+            if(photoIDS != null)
+            {
+                foreach (string s in photoIDS)
+                {
+                    photos.Add(photoController.getPhoto(s));
+                }
+            }
+            else
+            {
+                Response.Write("No Photo's of user");
             }
 
             // store all the photos in the session
