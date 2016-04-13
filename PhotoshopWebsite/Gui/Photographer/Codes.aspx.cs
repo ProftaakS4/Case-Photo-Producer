@@ -13,7 +13,7 @@ namespace PhotoshopWebsite.Gui.Photographer
 {
     public partial class Clients : System.Web.UI.Page
     {
-        private List<LoginCode> loginCodes;
+        private List<LoginCode> loginCodes = new List<LoginCode>();
         private LoginCodeController lcc;
         private List<int> loginCodesChecked;
         protected void Page_Load(object sender, EventArgs e)
@@ -44,7 +44,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             TableHeaderCell IDHeader = new TableHeaderCell();
             IDHeader.Text = "Code ID";
             TableHeaderCell userHeader = new TableHeaderCell();
-            userHeader.Text = "Account ID user";
+            userHeader.Text = "Times used";
             TableHeaderCell checkheader = new TableHeaderCell();
             checkheader.Text = "Send";
 
@@ -61,7 +61,7 @@ namespace PhotoshopWebsite.Gui.Photographer
                 TableCell ID = new TableCell();
                 ID.Text = code.ID.ToString();
                 TableCell User = new TableCell();
-                User.Text = code.UserID.ToString();
+                User.Text = code.Used.ToString();
                 TableCell ButtonCell = new TableCell();
                 CheckBox cbAdd = new CheckBox();
                 cbAdd.ID = code.ID.ToString();

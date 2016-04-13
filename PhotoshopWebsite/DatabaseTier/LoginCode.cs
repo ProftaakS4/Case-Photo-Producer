@@ -13,7 +13,6 @@ namespace PhotoshopWebsite.DatabaseTier
         // Create a new MySQL connections
         private MySqlConnection mysqlConnection;
         private MySqlCommand myCommand = null;
-        private string result = "";
 
         /// <summary>
         /// constructor of the class
@@ -30,12 +29,11 @@ namespace PhotoshopWebsite.DatabaseTier
         /// <param name="photographerID"></param> id of the photographer
         /// <returns></returns>
         public DataTable getLoginCodeData(int photographerID)
-        {
-           
+        {           
             try
             {
                 myCommand = new MySqlCommand("getLoginCodesFromPhotographer", mysqlConnection);
-
+                // input
                 myCommand.CommandType = CommandType.StoredProcedure;
                 myCommand.Parameters.Add("@p_photographer_ID", MySqlDbType.Int32).Value = photographerID;
                 // output
@@ -43,19 +41,13 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Parameters["@p_id"].Direction = ParameterDirection.Output;
                 myCommand.Parameters.Add("@p_map_id", MySqlDbType.Int32);
                 myCommand.Parameters["@p_map_id"].Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add("@p_superuser_ID", MySqlDbType.Int32);
-                myCommand.Parameters["@p_superuser_ID"].Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add("@p_user_id", MySqlDbType.Int32);
-                myCommand.Parameters["@p_user_id"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@p_photographerout_ID", MySqlDbType.Int32);
+                myCommand.Parameters["@p_photographerout_ID"].Direction = ParameterDirection.Output;
                 myCommand.Parameters.Add("@p_used", MySqlDbType.Int32);
                 myCommand.Parameters["@p_used"].Direction = ParameterDirection.Output;
-                //myCommand.Parameters.Add("@p_validUntil", MySqlDbType.Int32);
-                //myCommand.Parameters["@p_validUntil"].Direction = ParameterDirection.Output;
                 // execute query
                 mysqlConnection.Open();
-                //myCommand.ExecuteNonQuery();
 
-                //MySqlDataAdapter da = new MySqlDataAdapter(myCommand);
                 MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
                 DataTable dt = new DataTable();
                 dt.Load(dr);
