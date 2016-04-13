@@ -120,7 +120,7 @@ namespace PhotoshopWebsite.Gui
                         }
                         photoIDAndQuantity = photo.ID + ";" + Convert.ToString(quantity);
                         socket.sendData(photoIDAndQuantity);
-                    }
+                    }                    
                 }
                 //Order NUMMERS doorsturen
             }
