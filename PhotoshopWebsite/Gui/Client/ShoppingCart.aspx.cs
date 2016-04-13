@@ -110,7 +110,7 @@ namespace PhotoshopWebsite.Gui
             {
 
             }
-            //not yet implemented 
+            //not yet implemented
         }
 
         private void Check_Clicked(object sender, EventArgs e)
