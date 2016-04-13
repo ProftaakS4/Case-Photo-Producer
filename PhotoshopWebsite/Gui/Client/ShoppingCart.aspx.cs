@@ -54,8 +54,6 @@ namespace PhotoshopWebsite.Gui
                 MainRow.Height = 80;
                 TableCell ID = new TableCell();
                 ID.Text = product.ID.ToString();
-                TableCell Type = new TableCell();
-                Type.Text = product.Type;
                 TableCell Description = new TableCell();
                 Description.Text = product.Description;
                 TableCell Quantity = new TableCell();
@@ -68,7 +66,6 @@ namespace PhotoshopWebsite.Gui
                 Quantity.Controls.Add(tbQuantity);
 
                 MainRow.Cells.Add(ID);
-                MainRow.Cells.Add(Type);
                 MainRow.Cells.Add(Description);
                 MainRow.Cells.Add(Quantity);
 

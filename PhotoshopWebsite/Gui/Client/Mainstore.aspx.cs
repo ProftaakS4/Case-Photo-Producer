@@ -122,7 +122,7 @@ namespace PhotoshopWebsite
             System.Web.UI.WebControls.Image imgProduct = new System.Web.UI.WebControls.Image();
             imgProduct.ID = "image" + x.ID.ToString();
             imgProduct.AlternateText = "No Image found, please contact administrator";
-            imgProduct.ImageUrl = x.Path;
+            imgProduct.ImageUrl = x.Image;
             imgProduct.Height = 200;
             imgProduct.Width = 330;
 
@@ -175,7 +175,7 @@ namespace PhotoshopWebsite
                                     System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
                                     if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
                                     {
-                                        currentImage.ImageUrl = photo.Path;
+                                        currentImage.ImageUrl = photo.Image;
                                     }
                                 }
                             }
@@ -254,7 +254,7 @@ namespace PhotoshopWebsite
 
         private void convertSepia(Domain.Photo photo)
         {
-            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Path.ToString()));
+            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Image.ToString()));
             Bitmap temp = (Bitmap)_current;
             Bitmap bmap = (Bitmap)temp.Clone();
 
@@ -291,7 +291,7 @@ namespace PhotoshopWebsite
 
         private void convertBlackWhite(Domain.Photo photo)
         {
-            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Path.ToString()));
+            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Image.ToString()));
             Bitmap temp = (Bitmap)_current;
             Bitmap bmap = (Bitmap)temp.Clone();
             Color col;
