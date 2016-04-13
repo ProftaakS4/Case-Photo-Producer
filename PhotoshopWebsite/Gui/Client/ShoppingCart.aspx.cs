@@ -106,6 +106,10 @@ namespace PhotoshopWebsite.Gui
             {
                 Response.Write("<script>alert('ShoppingCart is emty, please fill your cart first')</script>");
             }
+            else
+            {
+
+            }
             //not yet implemented 
         }
 
