@@ -18,7 +18,7 @@ namespace PhotoshopWebsite
 
         // create a list of all the current user photos
         List<Domain.Photo> photos;
-
+        List<Domain.Photo> searchedPhotos;
         private Bitmap _current;
         private int number;
         //private List<Product> testproducts;
@@ -37,6 +37,10 @@ namespace PhotoshopWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["searchedPhotos"] is List<Domain.Photo>)
+            {
+                searchedPhotos =  Session["searchedPhotos"] as List<Domain.Photo>;
+            }
             // cast the session into the current user
             User currenUser = (User)Session["UserData"];
 
@@ -56,10 +60,23 @@ namespace PhotoshopWebsite
             // store all the photos in the session
             Session["PhotosList"] = photos;
 
-            // fill the page with the users photos
-            foreach(Domain.Photo photo in photos)
+            // check if a search has taken place
+            if(searchedPhotos != null && searchedPhotos.Count > 0)
             {
-                Fillpage(photo);
+                // fill the page with the users photos
+                foreach (Domain.Photo photo in searchedPhotos)
+                {
+                    Fillpage(photo);
+                }
+            }
+            // if no search then show the normal photos
+            else
+            {
+                // fill the page with the users photos
+                foreach (Domain.Photo photo in photos)
+                {
+                    Fillpage(photo);
+                }
             }
         }
 
