@@ -43,6 +43,10 @@
       <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.9.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.9\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data">
       <HintPath>..\MySql.Data.dll</HintPath>
@@ -143,6 +147,7 @@
     <Compile Include="Controller\LoginCodeController.cs" />
     <Compile Include="Controller\PhotoController.cs" />
     <Compile Include="DatabaseTier\LoginCode.cs" />
+    <Compile Include="DatabaseTier\Search.cs" />
     <Compile Include="Domain\Dvd.cs" />
     <Compile Include="Domain\LoginCode.cs" />
     <Compile Include="Domain\Map.cs" />

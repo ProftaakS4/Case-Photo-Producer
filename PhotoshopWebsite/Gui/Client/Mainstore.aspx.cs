@@ -18,25 +18,29 @@ namespace PhotoshopWebsite
 
         // create a list of all the current user photos
         List<Domain.Photo> photos;
-
+        List<Domain.Photo> searchedPhotos;
         private Bitmap _current;
         private int number;
-        private List<Product> testproducts;
-        public Dictionary<Product, int> shoppingCart
+        //private List<Product> testproducts;
+        public Dictionary<Domain.Photo, int> shoppingCart
         {
             get
             {
-                if (!(Session["shoppingCart"] is Dictionary<Product, int>))
+                if (!(Session["shoppingCart"] is Dictionary<Domain.Photo, int>))
                 {
-                    Session["shoppingCart"] = new Dictionary<Product, int>();
+                    Session["shoppingCart"] = new Dictionary<Domain.Photo, int>();
                 }
 
-                return (Dictionary<Product, int>)Session["shoppingCart"];
+                return (Dictionary<Domain.Photo, int>)Session["shoppingCart"];
             }
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["searchedPhotos"] is List<Domain.Photo>)
+            {
+                searchedPhotos =  Session["searchedPhotos"] as List<Domain.Photo>;
+            }
             // cast the session into the current user
             User currenUser = (User)Session["UserData"];
 
@@ -56,10 +60,23 @@ namespace PhotoshopWebsite
             // store all the photos in the session
             Session["PhotosList"] = photos;
 
-            // fill the page with the users photos
-            foreach(Domain.Photo photo in photos)
+            // check if a search has taken place
+            if(searchedPhotos != null && searchedPhotos.Count > 0)
             {
-                Fillpage(photo);
+                // fill the page with the users photos
+                foreach (Domain.Photo photo in searchedPhotos)
+                {
+                    Fillpage(photo);
+                }
+            }
+            // if no search then show the normal photos
+            else
+            {
+                // fill the page with the users photos
+                foreach (Domain.Photo photo in photos)
+                {
+                    Fillpage(photo);
+                }
             }
         }
 
@@ -166,23 +183,24 @@ namespace PhotoshopWebsite
         {
             Button x = sender as Button;
             string id = x.ID;
-            foreach (Product product in testproducts)
+            List<Domain.Photo> userPhotos = (List<Domain.Photo>)Session["PhotosList"];
+            foreach (Domain.Photo photo in userPhotos)
             {
-                if (product.ID.ToString() == id)
+                if (photo.ID.ToString() == id)
                 {
                     if (shoppingCart.Count == 0)
                     {
-                        shoppingCart.Add(product, 1);
+                        shoppingCart.Add(photo, 1);
                     }
                     else
                     {
-                        if (shoppingCart.ContainsKey(product))
+                        if (shoppingCart.ContainsKey(photo))
                         {
-                            shoppingCart[product]++;
+                            shoppingCart[photo]++;
                         }
                         else
                         {
-                            shoppingCart.Add(product, 1);
+                            shoppingCart.Add(photo, 1);
                         }
                     }
                 }
