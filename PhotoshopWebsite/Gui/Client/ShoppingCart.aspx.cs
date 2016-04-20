@@ -12,6 +12,8 @@ namespace PhotoshopWebsite.Gui
     public partial class ShoppingCart : System.Web.UI.Page
     {
         private Dictionary<Domain.Photo, int> shoppingCart = null;
+        private string orderName = "Photo Shop";
+        private string orderPrice;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["shoppingCart"] != null)
@@ -68,7 +70,7 @@ namespace PhotoshopWebsite.Gui
                 MainRow.Cells.Add(ID);
                 MainRow.Cells.Add(Description);
                 MainRow.Cells.Add(Quantity);
-
+                 
 
                 TableCell ButtonCell = new TableCell();
                 CheckBox cbRemove = new CheckBox();
@@ -84,18 +86,31 @@ namespace PhotoshopWebsite.Gui
                 MainTable.Rows.Add(MainRow);
             }
             //TODO - Remove commented
-            //Button btnORder = new Button();
-            //btnORder.ID = "btnOrder";
-            //btnORder.CssClass = "btn btn-default";
-            //btnORder.Click += btnORder_Click;
-            //btnORder.Height = 30;
-            //btnORder.Text = "Order";
+            Button btnORder = new Button();
+            btnORder.ID = "btnOrder";
+            btnORder.CssClass = "btn btn-default";
+            btnORder.Click += btnORder_Click;
+            btnORder.Height = 30;
+            btnORder.Text = "Order";
 
+            ImageButton btnPayPal = new ImageButton();
+            btnPayPal.ID = "btnPaypal";
+            btnPayPal.Click += btnPayPal_Click;
+            btnORder.CssClass = "btn btn-default";
+            btnPayPal.Height = 30;
+            btnPayPal.AlternateText = "Buy Now!";
+            btnPayPal.OnClientClick = "target='blank'";
+            btnPayPal.ImageUrl = "http://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif";
+            
 
             pnlProduct.Controls.Add(firstcontrol);
             pnlProduct.Controls.Add(MainTable);
             pnlProduct.Controls.Add(closingcontrol);
-            //pnlProduct.Controls.Add(btnORder);
+            pnlProduct.Controls.Add(btnORder);
+            pnlProduct.Controls.Add(new LiteralControl(" <br />"));
+            pnlProduct.Controls.Add(new LiteralControl(" <br />"));
+            pnlProduct.Controls.Add(btnPayPal);
+
         }
 
         void btnORder_Click(object sender, EventArgs e)
@@ -110,10 +125,10 @@ namespace PhotoshopWebsite.Gui
 
                 int quantity = 1;
                 string photoIDAndQuantity = "";
-                
-                if(shoppingCart != null)
+
+                if (shoppingCart != null)
                 {
-                    foreach(Domain.Photo photo in shoppingCart.Keys.ToList())
+                    foreach (Domain.Photo photo in shoppingCart.Keys.ToList())
                     {
                         if (shoppingCart.ContainsKey(photo))
                         {
@@ -121,11 +136,17 @@ namespace PhotoshopWebsite.Gui
                         }
                         photoIDAndQuantity = photo.ID + ";" + Convert.ToString(quantity);
                         socket.sendData(photoIDAndQuantity);
-                    }                    
+                    }
                 }
                 //Order NUMMERS doorsturen
             }
             //not yet implemented 
+        }
+
+        void btnPayPal_Click(object sender, EventArgs e)
+        {
+            orderPrice = "0.01";
+            Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + orderPrice);
         }
 
         private void Check_Clicked(object sender, EventArgs e)
