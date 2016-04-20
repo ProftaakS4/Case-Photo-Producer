@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
+using PhotoshopWebsite.DatabaseTier;
 using System.Drawing;
 
 namespace PhotoshopWebsite
@@ -117,15 +118,23 @@ namespace PhotoshopWebsite
 
             DropDownList ddType = new DropDownList();
             ddType.ID = "ddType" + x.ID;
-            ddType.Text = "test";
-
-            Response.Write("<script>alert('"+ x.getTypes(x.ID.ToString()) + "') </script>");
-                        
+            ddType.CssClass = "form-control";
+            ddType.Width = 94;
+            ddType.Height = 30;
+            //Gets the product types offered by the prhotagrapher per picture
+            List<ETypes> types = x.getTypes(x.ID.ToString());
+            foreach (ETypes type in types)
+            {
+                ListItem Li = new ListItem();
+                Li.Value = type.ToString();
+                Li.Text = type.ToString();
+                ddType.Items.Add(Li);
+            }
 
             System.Web.UI.WebControls.Image imgProduct = new System.Web.UI.WebControls.Image();
             imgProduct.ID = "image" + x.ID.ToString();
             imgProduct.AlternateText = "No Image found, please contact administrator";
-            imgProduct.ImageUrl = x.Path;
+            imgProduct.ImageUrl = x.Image;
             imgProduct.Height = 200;
             imgProduct.Width = 330;
 
@@ -154,7 +163,9 @@ namespace PhotoshopWebsite
             firstControl.Controls.Add(btnSepia);
             firstControl.Controls.Add(btnBlackWhite);
             firstControl.Controls.Add(btnColor);
+            firstControl.Controls.Add(new LiteralControl("<br />"));
             firstControl.Controls.Add(ddType);
+
             pnlProduct.Controls.Add(firstControl);
 
             lastControl.InnerHtml = "</div></div></div>";
@@ -180,7 +191,7 @@ namespace PhotoshopWebsite
                                     System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
                                     if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
                                     {
-                                        currentImage.ImageUrl = photo.Path;
+                                        currentImage.ImageUrl = photo.Image;
                                     }
                                 }
                             }
@@ -196,7 +207,7 @@ namespace PhotoshopWebsite
             Button x = sender as Button;
             string id = x.ID;
             List<Domain.Photo> userPhotos = (List<Domain.Photo>)Session["PhotosList"];
-            foreach (Domain.Photo photo in userPhotos)
+            foreach (PhotoshopWebsite.Domain.Photo photo in userPhotos)
             {
                 if (photo.ID.ToString() == id)
                 {
@@ -259,7 +270,7 @@ namespace PhotoshopWebsite
 
         private void convertSepia(Domain.Photo photo)
         {
-            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Path.ToString()));
+            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Image.ToString()));
             Bitmap temp = (Bitmap)_current;
             Bitmap bmap = (Bitmap)temp.Clone();
 
@@ -290,13 +301,11 @@ namespace PhotoshopWebsite
                     }
                 }
             }
-            //returnimage = (System.Drawing.Image)btm;
-            //return returnimage;
         }
 
         private void convertBlackWhite(Domain.Photo photo)
         {
-            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Path.ToString()));
+            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Image.ToString()));
             Bitmap temp = (Bitmap)_current;
             Bitmap bmap = (Bitmap)temp.Clone();
             Color col;

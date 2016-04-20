@@ -142,6 +142,7 @@
   <ItemGroup>
     <Compile Include="Controller\LoginCodeController.cs" />
     <Compile Include="Controller\PhotoController.cs" />
+    <Compile Include="DatabaseTier\ETypes.cs" />
     <Compile Include="DatabaseTier\LoginCode.cs" />
     <Compile Include="DatabaseTier\Search.cs" />
     <Compile Include="Domain\Dvd.cs" />
@@ -326,6 +327,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UnitTests\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
