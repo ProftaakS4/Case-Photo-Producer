@@ -36,6 +36,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 // input
                 myCommand.CommandType = CommandType.StoredProcedure;
                 myCommand.Parameters.Add("@p_photographer_ID", MySqlDbType.Int32).Value = photographerID;
+                myCommand.Parameters["@p_photographer_ID"].Direction = ParameterDirection.Input;
                 // output
                 myCommand.Parameters.Add("@p_id", MySqlDbType.Int32);
                 myCommand.Parameters["@p_id"].Direction = ParameterDirection.Output;
@@ -46,11 +47,13 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Parameters.Add("@p_used", MySqlDbType.Int32);
                 myCommand.Parameters["@p_used"].Direction = ParameterDirection.Output;
                 // execute query
-                mysqlConnection.Open();
-
-                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                mysqlConnection.Open();                
+                //MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
                 DataTable dt = new DataTable();
-                dt.Load(dr);
+                MySqlDataAdapter da = new MySqlDataAdapter(myCommand);
+                da.Fill(dt);
+                
+                //dt.Load(dr);
                 
                 //return datatable
                 return dt;
