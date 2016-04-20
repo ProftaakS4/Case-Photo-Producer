@@ -21,7 +21,6 @@ namespace PhotoshopWebsite.Gui
                 shoppingCart = Session["shoppingCart"] as Dictionary<Domain.Photo, int>;
                 Fillpage(shoppingCart);
             }
-
         }
         private void Fillpage(Dictionary<Domain.Photo, int> productlist)
         {
@@ -35,6 +34,8 @@ namespace PhotoshopWebsite.Gui
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
             TableHeaderCell IDHeader = new TableHeaderCell();
             IDHeader.Text = "Photo ID";
+            TableHeaderCell FilterHeader = new TableHeaderCell();
+            FilterHeader.Text = "Filter";
             TableHeaderCell TypeHeader = new TableHeaderCell();
             TypeHeader.Text = "Product Type";
             TableHeaderCell Descriptionheader = new TableHeaderCell();
@@ -44,18 +45,23 @@ namespace PhotoshopWebsite.Gui
             TableHeaderCell Removeheader = new TableHeaderCell();
             Removeheader.Text = "Remove";
             MainHeaderRow.Cells.Add(IDHeader);
+            MainHeaderRow.Cells.Add(FilterHeader);
             MainHeaderRow.Cells.Add(TypeHeader);
             MainHeaderRow.Cells.Add(Descriptionheader);
             MainHeaderRow.Cells.Add(Quantityheader);
             MainHeaderRow.Cells.Add(Removeheader);
             MainTable.Rows.Add(MainHeaderRow);
 
-            foreach(Domain.Photo product in productlist.Keys)
+            foreach (Domain.Photo product in productlist.Keys)
             {
                 TableRow MainRow = new TableRow();
                 MainRow.Height = 80;
                 TableCell ID = new TableCell();
                 ID.Text = product.ID.ToString();
+                TableCell Filter = new TableCell();
+                Filter.Text = product.ID.ToString();
+                TableCell Type = new TableCell();
+                Type.Text = product.ID.ToString();
                 TableCell Description = new TableCell();
                 Description.Text = product.Description;
                 TableCell Quantity = new TableCell();
@@ -68,8 +74,11 @@ namespace PhotoshopWebsite.Gui
                 Quantity.Controls.Add(tbQuantity);
 
                 MainRow.Cells.Add(ID);
+                MainRow.Cells.Add(Filter);
+                MainRow.Cells.Add(Type);
                 MainRow.Cells.Add(Description);
                 MainRow.Cells.Add(Quantity);
+
 
                 TableCell ButtonCell = new TableCell();
                 CheckBox cbRemove = new CheckBox();
@@ -100,7 +109,7 @@ namespace PhotoshopWebsite.Gui
             btnPayPal.AlternateText = "Buy Now!";
             btnPayPal.OnClientClick = "target='blank'";
             btnPayPal.ImageUrl = "http://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif";
-            
+
 
             pnlProduct.Controls.Add(firstcontrol);
             pnlProduct.Controls.Add(MainTable);
