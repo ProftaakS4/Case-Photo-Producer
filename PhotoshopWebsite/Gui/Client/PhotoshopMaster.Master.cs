@@ -74,7 +74,7 @@ namespace PhotoshopWebsite
                 for (int i = 0; i < charoutput.Count(); i++)
                 {
                     List<String> data = photo.getPhoto(charoutput[i].ToString());
-                    Domain.Photo newphoto = new Domain.Photo(Convert.ToInt32(data.ElementAt(0)), Convert.ToInt32(data.ElementAt(1)), Convert.ToInt32(data.ElementAt(2)), data.ElementAt(3), data.ElementAt(4), data.ElementAt(5), data.ElementAt(6), data.ElementAt(7));
+                    Domain.Photo newphoto = new Domain.Photo(Convert.ToInt32(data.ElementAt(0)), Convert.ToInt32(data.ElementAt(1)), Convert.ToInt32(data.ElementAt(2)), data.ElementAt(3), data.ElementAt(4), data.ElementAt(5));
                     searchedPhotos.Add(newphoto);
                 }
                 Session["SearchedPhotos"] = searchedPhotos;

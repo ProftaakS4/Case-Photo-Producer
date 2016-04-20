@@ -8,22 +8,18 @@ namespace PhotoshopWebsite.Domain
     public class Photo
     {
         public int ID { get; set; }
-        public int AccountID { get; set; }
+        public int PhotographerID { get; set; }
         public int MapID { get; set; }
-        public string LoginID { get; set; }
-        public string Type { get; set; }
-        public string Path { get; set; }
+        public string Image { get; set; }
         public string Resolution { get; set; }
         public string Description { get; set; }
 
-        public Photo(int id, int account_ID, int map_ID, string login_ID, string type, string path, string resolution, string description)
+        public Photo(int id, int photographerID, int map_ID , string image, string resolution, string description)
         {
             this.ID = id;
-            this.AccountID = account_ID;
+            this.PhotographerID = photographerID;
             this.MapID = map_ID;
-            this.LoginID = login_ID;
-            this.Type = type;
-            this.Path = path;
+            this.Image = image;
             this.Resolution = resolution;
             this.Description = description;
         }

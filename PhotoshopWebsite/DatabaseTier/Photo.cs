@@ -147,16 +147,12 @@ namespace PhotoshopWebsite.DatabaseTier
                 // input
                 myCommand.Parameters.Add("@p_photo_ID", MySqlDbType.VarChar).Value = photoID;
                 // output
-                myCommand.Parameters.Add("@p_account_id", MySqlDbType.Int32);
-                myCommand.Parameters["@p_account_id"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@p_photographer_id", MySqlDbType.Int32);
+                myCommand.Parameters["@p_photographer_id"].Direction = ParameterDirection.Output;
                 myCommand.Parameters.Add("@p_map_id", MySqlDbType.Int32);
                 myCommand.Parameters["@p_map_id"].Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add("@p_logincode", MySqlDbType.Int32);
-                myCommand.Parameters["@p_logincode"].Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add("@p_type", MySqlDbType.VarChar);
-                myCommand.Parameters["@p_type"].Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add("@p_path", MySqlDbType.VarChar);
-                myCommand.Parameters["@p_path"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@p_image", MySqlDbType.VarChar);
+                myCommand.Parameters["@p_image"].Direction = ParameterDirection.Output;
                 myCommand.Parameters.Add("@p_resolution", MySqlDbType.VarChar);
                 myCommand.Parameters["@p_resolution"].Direction = ParameterDirection.Output;
                 myCommand.Parameters.Add("@p_description", MySqlDbType.VarChar);
@@ -169,11 +165,9 @@ namespace PhotoshopWebsite.DatabaseTier
                 // add all the outputs to the list
                 photoElements = new List<string>();
                 photoElements.Add(photoID);
-                photoElements.Add(myCommand.Parameters["@p_account_id"].Value.ToString());
+                photoElements.Add(myCommand.Parameters["@p_photographer_id"].Value.ToString());
                 photoElements.Add(myCommand.Parameters["@p_map_id"].Value.ToString());
-                photoElements.Add(myCommand.Parameters["@p_logincode"].Value.ToString());
-                photoElements.Add(myCommand.Parameters["@p_type"].Value.ToString());
-                photoElements.Add(myCommand.Parameters["@p_path"].Value.ToString());
+                photoElements.Add(myCommand.Parameters["@p_image"].Value.ToString());
                 photoElements.Add(myCommand.Parameters["@p_resolution"].Value.ToString());
                 photoElements.Add(myCommand.Parameters["@p_description"].Value.ToString());
 

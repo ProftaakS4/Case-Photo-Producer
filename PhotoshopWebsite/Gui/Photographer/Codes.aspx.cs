@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -11,13 +13,21 @@ namespace PhotoshopWebsite.Gui.Photographer
 {
     public partial class Clients : System.Web.UI.Page
     {
-        List<LoginCode> loginCodes;
-        LoginCodeController lcc;
-        string mailTO = "";
+        private List<LoginCode> loginCodes = new List<LoginCode>();
+        private LoginCodeController lcc;
+        private List<int> loginCodesChecked;
         protected void Page_Load(object sender, EventArgs e)
         {
             lcc = new LoginCodeController(1);
             loginCodes = lcc.loginCodes;
+            if (Session["loginCodes"] != null)
+            {
+                loginCodesChecked = Session["loginCodes"] as List<int>;
+            }
+            else
+            {
+                loginCodesChecked = new List<int>();
+            }
             Fillpage(this.loginCodes);
         }
         private void Fillpage(List<LoginCode> loginCodes)
@@ -30,18 +40,18 @@ namespace PhotoshopWebsite.Gui.Photographer
             MainTable.CssClass = "table table-striped table-hover table-bordered";
             MainTable.Width = 600;
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
+
             TableHeaderCell IDHeader = new TableHeaderCell();
             IDHeader.Text = "Code ID";
             TableHeaderCell userHeader = new TableHeaderCell();
-            userHeader.Text = "Account ID user";
-            TableHeaderCell mailToHeader = new TableHeaderCell();
-            mailToHeader.Text = "MailTo";
-            TableHeaderCell sendHeader = new TableHeaderCell();
-            sendHeader.Text = "Send";
+            userHeader.Text = "Times used";
+            TableHeaderCell checkheader = new TableHeaderCell();
+            checkheader.Text = "Send";
+
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(userHeader);
-            MainHeaderRow.Cells.Add(mailToHeader);
-            MainHeaderRow.Cells.Add(sendHeader);
+            MainHeaderRow.Cells.Add(checkheader);
+
             MainTable.Rows.Add(MainHeaderRow);
 
             foreach (LoginCode code in loginCodes)
@@ -51,58 +61,126 @@ namespace PhotoshopWebsite.Gui.Photographer
                 TableCell ID = new TableCell();
                 ID.Text = code.ID.ToString();
                 TableCell User = new TableCell();
-                User.Text = code.UserID.ToString();
-                TableCell MailTo = new TableCell();
-                TextBox tbMailTo = new TextBox();
-                tbMailTo.ID = "TextBoxRow_" + code.ID;
-                tbMailTo.Text = "";
-                tbMailTo.TextChanged += new EventHandler(this.tbMailTo_Change);
-                tbMailTo.AutoPostBack = true;
-                MailTo.Controls.Add(tbMailTo);
-
+                User.Text = code.Used.ToString();
                 TableCell ButtonCell = new TableCell();
-                Button btSend = new Button();
-                btSend.ID = code.ID.ToString();
-                btSend.CssClass = "btn btn-default";
-                btSend.Click += new EventHandler(this.Mail_Clicked);
-                btSend.Height = 30;
-                ButtonCell.Controls.Add(btSend);
+                CheckBox cbAdd = new CheckBox();
+                cbAdd.ID = code.ID.ToString();
+                cbAdd.CssClass = "checkbox";
+                cbAdd.CheckedChanged += new EventHandler(this.Check_Clicked);
+                cbAdd.Height = 30;
+                cbAdd.AutoPostBack = true;
+                cbAdd.Checked = loginCodesChecked.Contains(code.ID);
+                ButtonCell.Controls.Add(cbAdd);
 
                 MainRow.Cells.Add(ID);
                 MainRow.Cells.Add(User);
-                MainRow.Cells.Add(MailTo);
                 MainRow.Cells.Add(ButtonCell);
 
                 MainTable.Rows.Add(MainRow);
             }
+            TextBox tbMailTo = new TextBox();
+            tbMailTo.ID = "TextBoxRow_mailto1";
+            tbMailTo.Text = "mailadress";
+            if (Session["mailTO"] as String != null)
+            {
+                tbMailTo.Text = Session["mailTO"] as String;
+            }
+            tbMailTo.TextChanged += new EventHandler(this.tbMailTo_Change);
+            tbMailTo.CssClass = "form-control";
+            tbMailTo.Width = 250;
+            tbMailTo.Height = 30;
+            tbMailTo.AutoPostBack = true;
 
+            Button btSend = new Button();
+            btSend.ID = "bt1";
+            btSend.Text = "Send Mail";
+            btSend.Click += new EventHandler(this.Mail_Clicked);
+            btSend.Height = 30;
 
             pnlCodes.Controls.Add(firstcontrol);
             pnlCodes.Controls.Add(MainTable);
             pnlCodes.Controls.Add(closingcontrol);
+            pnlCodes.Controls.Add(tbMailTo);
+            pnlCodes.Controls.Add(btSend);
         }
         private void Mail_Clicked(object sender, EventArgs e)
         {
             Button btSend = sender as Button;
-            LoginCode lc = null;
-            //mail
-            foreach (LoginCode code in loginCodes)
+            try
             {
-                if (code.ID == int.Parse(btSend.ID))
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                // Mail Header
+                mail.From = new MailAddress("photoshopPTS4@gmail.com");
+                mail.To.Add(Session["mailTO"] as String);
+                mail.Subject = "Your codes from The Photoshop";
+                // Mail Body
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Your codes are:"+ Environment.NewLine);
+                foreach (int code in loginCodesChecked)
                 {
-                    lc = code;
-                    break;
+                    sb.Append(code + Environment.NewLine);
                 }
+                sb.Append("You can use these codes on thephotoshop.nl when creating an account.");
+                mail.Body = sb.ToString();
+                // Mail Config
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("photoshopPTS4@gmail.com", "proftaak4");
+                SmtpServer.EnableSsl = true;
+                SmtpServer.Send(mail);
+                Response.Write("<script>alert('Mail has been send to " + Session["mailTO"] as String + "')</script>");
             }
-            if (lc != null)
+            catch (Exception ex)
             {
-                Response.Write("<script>alert('mail id number " + lc.ID.ToString() + " to: " + mailTO + "')</script>");
+                Response.Write("<script>alert('couldn't send mail to " + Session["mailTO"] as String + "')</script>");
             }
+
         }
         private void tbMailTo_Change(object sender, EventArgs e)
         {
             TextBox tbMailTo = sender as TextBox;
-            mailTO = tbMailTo.Text;
+            Session["mailTO"] = tbMailTo.Text;
+            Response.Redirect(Request.RawUrl);
+        }
+        private void Check_Clicked(object sender, EventArgs e)
+        {
+            CheckBox cbAdd = sender as CheckBox;
+            foreach (LoginCode code in loginCodes)
+            {
+                if (code.ID.ToString() == cbAdd.ID)
+                {
+                    if (loginCodesChecked.Contains(code.ID))
+                    {
+                        loginCodesChecked.Remove(code.ID);
+                        Session["loginCodes"] = loginCodesChecked;
+                        Response.Redirect(Request.RawUrl);
+                    }
+                    else
+                    {
+                        loginCodesChecked.Add(code.ID);
+                        Session["loginCodes"] = loginCodesChecked;
+                        Response.Redirect(Request.RawUrl);
+                    }
+                }
+            }
         }
     }
 }
+
+//MailMessage mail = new MailMessage();
+//SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+//// Mail opmaak
+//mail.From = new MailAddress("123safea93@gmail.com");
+//mail.To.Add("123safea93@gmail.com");
+//mail.Subject = "123Safe beveiliging";
+//mail.Body = "This is the picture service from 123Safe E-mail detectie" + Convert.ToInt32(images);
+//// Bijlage
+//System.Net.Mail.Attachment attachment;
+//attachment = new System.Net.Mail.Attachment(@"F:\123safe\Final\Final\bin\Debug\detectie" + Convert.ToInt32(images) + ".jpg");
+//mail.Attachments.Add(attachment);
+//// Poort email
+//SmtpServer.Port = 587;
+//SmtpServer.Credentials = new System.Net.NetworkCredential("123safea93@gmail.com", "A9groepC");
+//SmtpServer.EnableSsl = true;
+//SmtpServer.Send(mail);
+//listbStats.Items.Add("email send" + Convert.ToString(images));

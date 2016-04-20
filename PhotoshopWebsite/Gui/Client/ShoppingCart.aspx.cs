@@ -11,7 +11,7 @@ namespace PhotoshopWebsite.Gui
 {
     public partial class ShoppingCart : System.Web.UI.Page
     {
-        private Dictionary<Domain.Photo, int> shoppingCart;
+        private Dictionary<Domain.Photo, int> shoppingCart = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["shoppingCart"] != null)
@@ -54,8 +54,6 @@ namespace PhotoshopWebsite.Gui
                 MainRow.Height = 80;
                 TableCell ID = new TableCell();
                 ID.Text = product.ID.ToString();
-                TableCell Type = new TableCell();
-                Type.Text = product.Type;
                 TableCell Description = new TableCell();
                 Description.Text = product.Description;
                 TableCell Quantity = new TableCell();
@@ -68,7 +66,6 @@ namespace PhotoshopWebsite.Gui
                 Quantity.Controls.Add(tbQuantity);
 
                 MainRow.Cells.Add(ID);
-                MainRow.Cells.Add(Type);
                 MainRow.Cells.Add(Description);
                 MainRow.Cells.Add(Quantity);
 
@@ -108,7 +105,24 @@ namespace PhotoshopWebsite.Gui
             }
             else
             {
+                PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
 
+                int quantity = 1;
+                string photoIDAndQuantity = "";
+                
+                if(shoppingCart != null)
+                {
+                    foreach(Domain.Photo photo in shoppingCart.Keys.ToList())
+                    {
+                        if (shoppingCart.ContainsKey(photo))
+                        {
+                            quantity = shoppingCart[photo];
+                        }
+                        photoIDAndQuantity = photo.ID + ";" + Convert.ToString(quantity);
+                        socket.sendData(photoIDAndQuantity);
+                    }                    
+                }
+                //Order NUMMERS doorsturen
             }
             //not yet implemented 
         }

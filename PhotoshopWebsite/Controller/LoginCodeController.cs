@@ -28,12 +28,12 @@ namespace PhotoshopWebsite.Controller
             List<LoginCode> temp = new List<LoginCode>();
             DataTable dt = DB.getLoginCodeData(photographerID);
             // when userdata is found and returned
-            if (dt != null)
+            if (dt.Rows.Count != 0)
             {
                 DataRow[] datarowcategorie = dt.Select("ID=ID");
                 foreach (DataRow data in datarowcategorie)
                 {
-                    temp.Add(new LoginCode(int.Parse(data[0].ToString()), int.Parse(data[1].ToString()), int.Parse(data[2].ToString()), int.Parse(data[3].ToString()), true, new DateTime()));
+                    temp.Add(new LoginCode(int.Parse(data[0].ToString()), int.Parse(data[1].ToString()), int.Parse(data[2].ToString()), true, new DateTime()));
                 }
                 return temp;
             }

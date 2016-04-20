@@ -36,7 +36,7 @@ namespace PhotoshopWebsite.Controller
         public Domain.Photo getPhoto(string photoID)
         {
             List<string> photoElements = photoDatabase.getPhoto(photoID);
-            Domain.Photo photo = new Domain.Photo(Convert.ToInt32(photoElements.ElementAt(0)), Convert.ToInt32(photoElements.ElementAt(1)), Convert.ToInt32(photoElements.ElementAt(2)), photoElements.ElementAt(3), photoElements.ElementAt(4), photoElements.ElementAt(5), photoElements.ElementAt(6), photoElements.ElementAt(7));
+            Domain.Photo photo = new Domain.Photo(Convert.ToInt32(photoElements.ElementAt(0)), Convert.ToInt32(photoElements.ElementAt(1)), Convert.ToInt32(photoElements.ElementAt(2)), photoElements.ElementAt(3),photoElements.ElementAt(4), photoElements.ElementAt(5));
             if(photo != null)
             {
                 return photo;
