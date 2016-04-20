@@ -101,11 +101,14 @@ namespace PhotoshopWebsite.Gui
             btnPayPal.AlternateText = "Buy Now!";
             btnPayPal.OnClientClick = "target='blank'";
             btnPayPal.ImageUrl = "http://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif";
+            
 
             pnlProduct.Controls.Add(firstcontrol);
             pnlProduct.Controls.Add(MainTable);
             pnlProduct.Controls.Add(closingcontrol);
             pnlProduct.Controls.Add(btnORder);
+            pnlProduct.Controls.Add(new LiteralControl(" <br />"));
+            pnlProduct.Controls.Add(new LiteralControl(" <br />"));
             pnlProduct.Controls.Add(btnPayPal);
 
         }
