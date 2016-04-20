@@ -27,5 +27,11 @@ namespace PhotoshopWebsite.Domain
             this.Resolution = resolution;
             this.Description = description;
         }
+
+        public String getTypes(string photoID)
+        {
+            DatabaseTier.Photo photo = new DatabaseTier.Photo();
+            return photo.getTypes(photoID);
+        }
     }
 }

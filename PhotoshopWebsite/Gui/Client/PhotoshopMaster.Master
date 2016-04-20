@@ -40,19 +40,13 @@
                     <div runat="server" class="col-lg-6">
                         <div class="input-group" runat="server">
                             <asp:TextBox ID="tbSearch" class="form-control" runat="server" placeholder="Search for..." Style="width: 150px;"></asp:TextBox>
-                            <%--                        <input type="text" class="form-control" placeholder="Search for..." style="width: 150px;">--%>
                             <span class="input-group-btn">
                                 <asp:Button ID="Btnsearch" class="btn btn-default" runat="server" type="button" Text="Go!" OnClick="Btnsearch_Click" Style="height: 34px"></asp:Button>
                             </span>
                         </div>
-                        <!-- /input-group -->
                     </div>
-                    <!-- /.col-lg-6 -->
                 </ul>
             </div>
-            <!-- /#sidebar-wrapper -->
-
-            <!-- Page Content -->
             <div id="page-content-wrapper">
                 <div class="container-fluid">
                     <div class="row">

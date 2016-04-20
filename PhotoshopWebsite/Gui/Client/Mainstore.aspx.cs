@@ -52,9 +52,12 @@ namespace PhotoshopWebsite
 
             // get all the photos of the current user and add them to a list
             List<Domain.Photo> photos = new List<Domain.Photo>();
-            foreach(string s in photoIDS)
-            {                
-                photos.Add(photoController.getPhoto(s));
+            if (photoIDS != null)
+            {
+                foreach (string s in photoIDS)
+                {
+                    photos.Add(photoController.getPhoto(s));
+                }
             }
 
             // store all the photos in the session
@@ -112,6 +115,13 @@ namespace PhotoshopWebsite
             btnColor.Height = 30;
             btnColor.Text = "Color";
 
+            DropDownList ddType = new DropDownList();
+            ddType.ID = "ddType" + x.ID;
+            ddType.Text = "test";
+
+            Response.Write("<script>alert('"+ x.getTypes(x.ID.ToString()) + "') </script>");
+                        
+
             System.Web.UI.WebControls.Image imgProduct = new System.Web.UI.WebControls.Image();
             imgProduct.ID = "image" + x.ID.ToString();
             imgProduct.AlternateText = "No Image found, please contact administrator";
@@ -144,8 +154,10 @@ namespace PhotoshopWebsite
             firstControl.Controls.Add(btnSepia);
             firstControl.Controls.Add(btnBlackWhite);
             firstControl.Controls.Add(btnColor);
+            firstControl.Controls.Add(ddType);
             pnlProduct.Controls.Add(firstControl);
-            lastControl.InnerHtml = "</div> </div>  </div>";
+
+            lastControl.InnerHtml = "</div></div></div>";
             pnlProduct.Controls.Add(lastControl);
         }
 

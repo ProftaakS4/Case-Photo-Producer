@@ -55,10 +55,10 @@ namespace PhotoshopWebsite.DatabaseTier
 
                 // check if the result has some numeric values into it, meaning that there are indeed photoIDS returned
                 if (result.Any(char.IsDigit))
-                {                    
+                {
                     string photoID = "";
                     // create new string list and iterate over the result and break down the photoIDS into idividual photoIDS
-                    photoIDS = new List<string>();                  
+                    photoIDS = new List<string>();
                     foreach (char c in result)
                     {
                         if (c != ' ')
@@ -67,16 +67,58 @@ namespace PhotoshopWebsite.DatabaseTier
                         }
                         else
                         {
-                            if(photoID != "")
+                            if (photoID != "")
                             {
                                 // replace potential whitespace
-                                photoIDS.Add(photoID.Replace(" ",""));
+                                photoIDS.Add(photoID.Replace(" ", ""));
                                 photoID = "";
-                            }                            
+                            }
                         }
                     }
                     return photoIDS;
-                }                
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return null;
+        }
+        public string getTypes(string photoID)
+        {
+            string output;
+            try
+            {
+                myCommand = new MySqlCommand("getAccountIdperPhoto", mysqlConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+                // input
+                myCommand.Parameters.Add("@p_id", MySqlDbType.VarChar).Value = photoID;
+                // output
+                myCommand.Parameters.Add("@a_id", MySqlDbType.VarChar);
+                myCommand.Parameters["@a_id"].Direction = ParameterDirection.Output;
+                //execute query
+                mysqlConnection.Open();
+                myCommand.ExecuteNonQuery();
+
+                int accountid = Convert.ToInt32(myCommand.Parameters["@a_id"].Value);
+                // get the account id belonging to the picture             
+                myCommand = new MySqlCommand("getProductTypesByAccountId", mysqlConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+                // input
+                myCommand.Parameters.Add("@a_id", MySqlDbType.VarChar).Value = accountid;
+                // output
+                myCommand.Parameters.Add("@p_types", MySqlDbType.VarChar);
+                myCommand.Parameters["@p_types"].Direction = ParameterDirection.Output;
+                //execute query
+                myCommand.ExecuteNonQuery();
+                output = myCommand.Parameters["@p_types"].Value.ToString();
+                return output;
+
             }
             catch (Exception ex)
             {
