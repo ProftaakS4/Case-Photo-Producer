@@ -15,14 +15,15 @@
 <form runat="server">
     <body>
         <div id="wrapper">
+                              
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <a href="#">
-                            <asp:Label runat="server" ID="Labelklantnaam"></asp:Label>
-                        </a>
+                  <li class="sidebar-brand">
+                             <asp:Label runat="server" ID="Label1" Text="Welcome!" style="color: grey"></asp:Label>
+                            <asp:Label runat="server" ID="Labelklantnaam" style="color: grey; margin-bottom:100px;"></asp:Label>
                     </li>
+                <ul class="sidebar-nav" style="margin-top:30px;">
+
                     <li>
                         <a href="Mainstore.aspx">Pictures</a>
                     </li>

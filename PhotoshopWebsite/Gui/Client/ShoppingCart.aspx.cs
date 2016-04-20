@@ -70,7 +70,6 @@ namespace PhotoshopWebsite.Gui
                 MainRow.Cells.Add(ID);
                 MainRow.Cells.Add(Description);
                 MainRow.Cells.Add(Quantity);
-                 
 
                 TableCell ButtonCell = new TableCell();
                 CheckBox cbRemove = new CheckBox();
