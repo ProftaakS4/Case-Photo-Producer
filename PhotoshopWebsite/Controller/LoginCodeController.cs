@@ -37,7 +37,7 @@ namespace PhotoshopWebsite.Controller
                 }
                 return temp;
             }
-            return null;
+            return new List<LoginCode>();
         }
     }
 }
