@@ -151,6 +151,7 @@
     <Compile Include="Domain\PaymentType.cs" />
     <Compile Include="Domain\Printorder.cs" />
     <Compile Include="Domain\Product.cs" />
+    <Compile Include="Domain\ShoppingbasketItem.cs" />
     <Compile Include="Domain\Transaction.cs" />
     <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\Photo.cs" />

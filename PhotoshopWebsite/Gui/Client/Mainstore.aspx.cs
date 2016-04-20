@@ -19,6 +19,7 @@ namespace PhotoshopWebsite
         // create a list of all the current user photos
         List<Domain.Photo> photos;
         List<Domain.Photo> searchedPhotos;
+        List<Domain.ShoppingbasketItem> shoppingbasketItems;
         private Bitmap _current;
         private int number;
         //private List<Product> testproducts;
@@ -35,12 +36,22 @@ namespace PhotoshopWebsite
             }
         }
 
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if(Session["searchedPhotos"] is List<Domain.Photo>)
             {
                 searchedPhotos =  Session["searchedPhotos"] as List<Domain.Photo>;
             }
+            if (Session["shoppingbasketItems"] != null)
+            {
+                shoppingbasketItems = Session["shoppingbasketItems"] as List<Domain.ShoppingbasketItem>;
+            } else
+            {
+                shoppingbasketItems = new List<Domain.ShoppingbasketItem>();
+            }
+
             // cast the session into the current user
             User currenUser = (User)Session["UserData"];
 
@@ -180,6 +191,7 @@ namespace PhotoshopWebsite
                                 }
                             }
                         }
+                        savePhotoFilter(photo.ID.ToString(), "Color");
                         break;
                     }                   
                 }
@@ -189,6 +201,7 @@ namespace PhotoshopWebsite
         void btnAddToCart_Click(object sender, EventArgs e)
         {
             Button x = sender as Button;
+            
             string id = x.ID;
             List<Domain.Photo> userPhotos = (List<Domain.Photo>)Session["PhotosList"];
             foreach (Domain.Photo photo in userPhotos)
@@ -228,6 +241,7 @@ namespace PhotoshopWebsite
                     if ("btnSepia" + photo.ID.ToString() == button.ID)
                     {
                         convertSepia(photo);
+                        savePhotoFilter(photo.ID.ToString(), "Sepia");
                         break;
                     }
                 }
@@ -246,6 +260,7 @@ namespace PhotoshopWebsite
                     if ("btnBlackWhite" + photo.ID.ToString() == button.ID)
                     {
                         convertBlackWhite(photo);
+                        savePhotoFilter(photo.ID.ToString(), "Black");
                         break;
                     }
                 }
@@ -316,13 +331,37 @@ namespace PhotoshopWebsite
                     if (item is System.Web.UI.WebControls.Image)
                     {
                         System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
-                        if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
-        {
+                        if (currentImage.ID.ToString() == "image" + photo.ID.ToString()) {
                             currentImage.ImageUrl = "../Images/BlackWhite"+ photo.ID + ".png";
                         }
                     }
                 }
             }
+        }
+
+        private void savePhotoFilter(string photoID, string buttonType)
+        {
+            Domain.ShoppingbasketItem newItem = new Domain.ShoppingbasketItem(photoID, buttonType, null);
+            if (!shoppingbasketItems.Contains(newItem))
+            {
+                shoppingbasketItems.Add(newItem);
+            }            
+
+            //if (shoppingbasketItems.Count == 0)
+            //{
+            //        newItem = new Domain.ShoppingbasketItem(photoID, buttonType, null);
+            //        shoppingbasketItems.Add(newItem);                
+            //}
+
+            foreach(Domain.ShoppingbasketItem item in shoppingbasketItems)
+            {
+                if (item.photoID == photoID)
+                {
+                    item.type = buttonType;
+                }              
+            }
+
+            Session["shoppingbasketItems"] = shoppingbasketItems;
         }
     }
 }

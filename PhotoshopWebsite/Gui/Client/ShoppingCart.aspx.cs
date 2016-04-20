@@ -12,12 +12,19 @@ namespace PhotoshopWebsite.Gui
     public partial class ShoppingCart : System.Web.UI.Page
     {
         private Dictionary<Domain.Photo, int> shoppingCart = null;
+        private List<Domain.ShoppingbasketItem> shoppingbasketItems;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["shoppingCart"] != null)
             {
                 shoppingCart = Session["shoppingCart"] as Dictionary<Domain.Photo, int>;
                 Fillpage(shoppingCart);
+            }
+
+            if (Session["shoppingbasketItems"] != null)
+            {
+                shoppingbasketItems = (List<Domain.ShoppingbasketItem>)Session["shoppingbasketItems"];
             }
 
         }
@@ -101,14 +108,14 @@ namespace PhotoshopWebsite.Gui
         {
             if (shoppingCart.Count == 0)
             {
-                Response.Write("<script>alert('ShoppingCart is emty, please fill your cart first')</script>");
+                Response.Write("<script>alert('ShoppingCart is empty, please fill your cart first')</script>");
             }
             else
             {
                 PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
 
                 int quantity = 1;
-                string photoIDAndQuantity = "";
+                string photoIDQualtityType = "";
                 
                 if(shoppingCart != null)
                 {
@@ -118,13 +125,25 @@ namespace PhotoshopWebsite.Gui
                         {
                             quantity = shoppingCart[photo];
                         }
-                        photoIDAndQuantity = photo.ID + ";" + Convert.ToString(quantity);
-                        socket.sendData(photoIDAndQuantity);
+                        photoIDQualtityType = photo.ID + ";" + Convert.ToString(quantity) + "#" + getPhotoType(photo.ID.ToString());
+                        socket.sendData(photoIDQualtityType);
                     }                    
                 }
                 //Order NUMMERS doorsturen
             }
             //not yet implemented 
+        }
+
+        private string getPhotoType(string photoID)
+        {
+            foreach(Domain.ShoppingbasketItem item in shoppingbasketItems)
+            {
+                if (item.photoID == photoID)
+                {
+                    return item.type;
+                }               
+            }
+            return "Color";
         }
 
         private void Check_Clicked(object sender, EventArgs e)
@@ -160,6 +179,8 @@ namespace PhotoshopWebsite.Gui
                 }
             }
         }
+
+        
 
     }
 

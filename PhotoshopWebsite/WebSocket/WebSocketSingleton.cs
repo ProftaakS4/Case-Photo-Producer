@@ -48,26 +48,40 @@ namespace PhotoshopWebsite.WebSocket
             IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 4343);
 
             Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            clientSocket.Connect(serverAddress);
 
-            // Sending
-            int toSendLen = System.Text.Encoding.ASCII.GetByteCount(photoID);
-            byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(photoID);
-            byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);
-            clientSocket.Send(toSendLenBytes);
-            clientSocket.Send(toSendBytes);
+            try {
+                clientSocket.Connect(serverAddress);
 
-            // Receiving
-            byte[] rcvLenBytes = new byte[4];
-            clientSocket.Receive(rcvLenBytes);
-            int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
-            byte[] rcvBytes = new byte[rcvLen];
-            clientSocket.Receive(rcvBytes);
-            String rcv = System.Text.Encoding.ASCII.GetString(rcvBytes);
+                // Sending
+                int toSendLen = System.Text.Encoding.ASCII.GetByteCount(photoID);
+                byte[] toSendBytes = System.Text.Encoding.ASCII.GetBytes(photoID);
+                byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);
+                clientSocket.Send(toSendLenBytes);
+                clientSocket.Send(toSendBytes);
+            }
+            catch(Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show("No Socket Connection.");
+            }
+            finally
+            {
+                clientSocket.Close();
+            }
+            
 
-            System.Windows.Forms.MessageBox.Show("Client received: " + rcv);
+            
 
-            clientSocket.Close();
+            //// Receiving
+            //byte[] rcvLenBytes = new byte[4];
+            //clientSocket.Receive(rcvLenBytes);
+            //int rcvLen = System.BitConverter.ToInt32(rcvLenBytes, 0);
+            //byte[] rcvBytes = new byte[rcvLen];
+            //clientSocket.Receive(rcvBytes);
+            //String rcv = System.Text.Encoding.ASCII.GetString(rcvBytes);
+
+            //System.Windows.Forms.MessageBox.Show("Client received: " + rcv);
+
+            
         }
     }
 }
