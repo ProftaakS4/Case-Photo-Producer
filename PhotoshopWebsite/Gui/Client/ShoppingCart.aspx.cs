@@ -83,18 +83,19 @@ namespace PhotoshopWebsite.Gui
                 MainRow.Cells.Add(ButtonCell);
                 MainTable.Rows.Add(MainRow);
             }
-            Button btnORder = new Button();
-            btnORder.ID = "btnOrder";
-            btnORder.CssClass = "btn btn-default";
-            btnORder.Click += btnORder_Click;
-            btnORder.Height = 30;
-            btnORder.Text = "Order";
+            //TODO - Remove commented
+            //Button btnORder = new Button();
+            //btnORder.ID = "btnOrder";
+            //btnORder.CssClass = "btn btn-default";
+            //btnORder.Click += btnORder_Click;
+            //btnORder.Height = 30;
+            //btnORder.Text = "Order";
 
 
             pnlProduct.Controls.Add(firstcontrol);
             pnlProduct.Controls.Add(MainTable);
             pnlProduct.Controls.Add(closingcontrol);
-            pnlProduct.Controls.Add(btnORder);
+            //pnlProduct.Controls.Add(btnORder);
         }
 
         void btnORder_Click(object sender, EventArgs e)
