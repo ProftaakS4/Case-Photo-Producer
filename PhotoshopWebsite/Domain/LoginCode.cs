@@ -10,10 +10,10 @@ namespace PhotoshopWebsite.Controller
         public int ID { get; set; }
         public int MapID { get; set; }
         public int SuperUserID { get; set; }
-        public bool Used { get; set; }
+        public int Used { get; set; }
         public DateTime ValidUntil { get; set; }
 
-        public LoginCode(int id, int mapID, int superUserID, bool used, DateTime validUntil)
+        public LoginCode(int id, int mapID, int superUserID, int used, DateTime validUntil)
         {
             this.ID = id;
             this.MapID = mapID;

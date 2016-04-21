@@ -33,7 +33,7 @@ namespace PhotoshopWebsite.Controller
                 DataRow[] datarowcategorie = dt.Select("ID=ID");
                 foreach (DataRow data in datarowcategorie)
                 {
-                    temp.Add(new LoginCode(int.Parse(data[0].ToString()), int.Parse(data[1].ToString()), int.Parse(data[2].ToString()), true, new DateTime()));
+                    temp.Add(new LoginCode(int.Parse(data[0].ToString()), int.Parse(data[1].ToString()), int.Parse(data[2].ToString()), int.Parse(data[3].ToString()), new DateTime()));
                 }
                 return temp;
             }
