@@ -168,12 +168,6 @@ namespace PhotoshopWebsite.Gui
             //not yet implemented 
         }
 
-        void btnPayPal_Click(object sender, EventArgs e)
-        {
-            orderPrice = "0.01";
-            Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + orderPrice);
-        }
-
         private string getPhotoType(string photoID)
         {
             foreach(Domain.ShoppingbasketItem item in shoppingbasketItems)
