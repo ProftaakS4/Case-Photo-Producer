@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PhotoshopWebsite.DatabaseTier;
 
 namespace PhotoshopWebsite.Domain
 {
+    [Serializable]
     public class Photo
     {
         public int ID { get; set; }
@@ -22,6 +24,31 @@ namespace PhotoshopWebsite.Domain
             this.Image = image;
             this.Resolution = resolution;
             this.Description = description;
+        }
+        public List<ETypes> getTypes(string photoID)
+        {
+            DatabaseTier.Photo photo = new DatabaseTier.Photo();
+            return photo.getTypes(photoID);
+        }
+        public override bool Equals(System.Object obj)
+        {
+            // If parameter is null return false.
+            if (obj == null)
+            {
+                return false;
+            }
+            // If parameter cannot be cast to Point return false.
+            Photo p = obj as Photo;
+            if ((System.Object)p == null)
+            {
+                return false;
+            }
+            // Return true if the fields match:
+            return (this.ID == p.ID);
+        }
+        public override int GetHashCode()
+        {
+            return this.ID.GetHashCode();
         }
     }
 }

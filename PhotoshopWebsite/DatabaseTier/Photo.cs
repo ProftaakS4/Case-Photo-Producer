@@ -38,27 +38,22 @@ namespace PhotoshopWebsite.DatabaseTier
             {
                 myCommand = new MySqlCommand("getPhotosUser", mysqlConnection);
                 myCommand.CommandType = CommandType.StoredProcedure;
-
                 // input
                 myCommand.Parameters.Add("@p_id", MySqlDbType.Int32).Value = Convert.ToInt32(userID);
-
                 // output
                 myCommand.Parameters.Add("@p_photos", MySqlDbType.VarChar);
                 myCommand.Parameters["@p_photos"].Direction = ParameterDirection.Output;
-
                 //execute query
                 mysqlConnection.Open();
                 myCommand.ExecuteNonQuery();
-
                 //capture the out parameter form the databas into a variable
                 result = (string)myCommand.Parameters["@p_photos"].Value + " ";
-
                 // check if the result has some numeric values into it, meaning that there are indeed photoIDS returned
                 if (result.Any(char.IsDigit))
-                {                    
+                {
                     string photoID = "";
                     // create new string list and iterate over the result and break down the photoIDS into idividual photoIDS
-                    photoIDS = new List<string>();                  
+                    photoIDS = new List<string>();
                     foreach (char c in result)
                     {
                         if (c != ' ')
@@ -67,16 +62,16 @@ namespace PhotoshopWebsite.DatabaseTier
                         }
                         else
                         {
-                            if(photoID != "")
+                            if (photoID != "")
                             {
                                 // replace potential whitespace
-                                photoIDS.Add(photoID.Replace(" ",""));
+                                photoIDS.Add(photoID.Replace(" ", ""));
                                 photoID = "";
-                            }                            
+                            }
                         }
                     }
                     return photoIDS;
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -89,7 +84,83 @@ namespace PhotoshopWebsite.DatabaseTier
             }
             return null;
         }
+        public List<ETypes> getTypes(string photoID)
+        {
+            List<ETypes> types = new List<ETypes>();
+            string output;
+            try
+            {
+                myCommand = new MySqlCommand("getAccountIdperPhoto", mysqlConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+                // input
+                myCommand.Parameters.Add("@p_id", MySqlDbType.VarChar).Value = photoID;
+                // output
+                myCommand.Parameters.Add("@a_id", MySqlDbType.VarChar);
+                myCommand.Parameters["@a_id"].Direction = ParameterDirection.Output;
+                //execute query
+                mysqlConnection.Open();
+                myCommand.ExecuteNonQuery();
+                int accountid = Convert.ToInt32(myCommand.Parameters["@a_id"].Value);
+                // get the account id belonging to the picture             
+                myCommand = new MySqlCommand("getProductTypesByAccountId", mysqlConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+                // input
+                myCommand.Parameters.Add("@a_id", MySqlDbType.VarChar).Value = accountid;
+                // output
+                myCommand.Parameters.Add("@p_types", MySqlDbType.VarChar);
+                myCommand.Parameters["@p_types"].Direction = ParameterDirection.Output;
+                //execute query
+                myCommand.ExecuteNonQuery();
+                output = myCommand.Parameters["@p_types"].Value.ToString();
+                string[] id = output.Split(null);
+                // loop over output string and get types for the picture
+                for(int i = 0; i < id.Length; i++)
+                {
+                    switch (id[i])
+                    {
+                        case "1":
+                           types.Add(ETypes.PHOTO1x2);     
+                            break;
+                        case "2":
+                            types.Add(ETypes.PHOTO2x4);
+                            break;
+                        case "3":
+                            types.Add(ETypes.PHOTO5x8);
+                            break;
+                        case "4":
+                            types.Add(ETypes.MUISMAT);
+                            break;
+                        case "5":
+                            types.Add(ETypes.TASSEN);
+                            break;
+                        case "6":
+                            types.Add(ETypes.TSHIRT);
+                            break;
+                        case "7":
+                            types.Add(ETypes.MOK);
+                            break;
+                        case "8":
+                            types.Add(ETypes.CANVAS);
+                            break;
+                        case "9":
+                            types.Add(ETypes.DIBOND);
+                            break;
+                    }
 
+                }
+                return types;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return null;
+        }
         /// <summary>
         /// this method will get all the photo information thats stored in the database from the specified photoid
         /// </summary>

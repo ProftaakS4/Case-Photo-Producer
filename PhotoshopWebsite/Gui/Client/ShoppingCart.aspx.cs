@@ -27,7 +27,7 @@ namespace PhotoshopWebsite.Gui
             if (Session["shoppingbasketItems"] != null)
             {
                 shoppingbasketItems = (List<Domain.ShoppingbasketItem>)Session["shoppingbasketItems"];
-            }
+        }
 
         }
         private void Fillpage(Dictionary<Domain.Photo, int> productlist)
@@ -54,7 +54,7 @@ namespace PhotoshopWebsite.Gui
             Removeheader.Text = "Remove";
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(FilterHeader);
-            MainHeaderRow.Cells.Add(TypeHeader);            
+            MainHeaderRow.Cells.Add(TypeHeader);
             MainHeaderRow.Cells.Add(Descriptionheader);
             MainHeaderRow.Cells.Add(Quantityheader);
             MainHeaderRow.Cells.Add(Removeheader);
@@ -118,10 +118,15 @@ namespace PhotoshopWebsite.Gui
             btnPayPal.ImageUrl = "http://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif";
 
 
+
             pnlProduct.Controls.Add(firstcontrol);
             pnlProduct.Controls.Add(MainTable);
             pnlProduct.Controls.Add(closingcontrol);
             pnlProduct.Controls.Add(btnORder);
+            pnlProduct.Controls.Add(new LiteralControl(" <br />"));
+            pnlProduct.Controls.Add(new LiteralControl(" <br />"));
+            pnlProduct.Controls.Add(btnPayPal);
+
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
             pnlProduct.Controls.Add(btnPayPal);
@@ -146,9 +151,9 @@ namespace PhotoshopWebsite.Gui
                 int quantity = 1;
                 string photoIDQualtityType = "";
                 
-                if(shoppingCart != null)
+                if (shoppingCart != null)
                 {
-                    foreach(Domain.Photo photo in shoppingCart.Keys.ToList())
+                    foreach (Domain.Photo photo in shoppingCart.Keys.ToList())
                     {
                         if (shoppingCart.ContainsKey(photo))
                         {
@@ -161,6 +166,12 @@ namespace PhotoshopWebsite.Gui
                 //Order NUMMERS doorsturen
             }
             //not yet implemented 
+        }
+
+        void btnPayPal_Click(object sender, EventArgs e)
+        {
+            orderPrice = "0.01";
+            Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + orderPrice);
         }
 
         private string getPhotoType(string photoID)
@@ -208,8 +219,6 @@ namespace PhotoshopWebsite.Gui
                 }
             }
         }
-
-        
 
     }
 

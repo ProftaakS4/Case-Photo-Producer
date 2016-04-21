@@ -47,7 +47,7 @@ namespace PhotoshopWebsite
             {
                 Response.Redirect("../Login.aspx");
             }
-            Labelklantnaam.Text = "Welcome! " + " " + clientName;
+            Labelklantnaam.Text =  clientName;
             pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
             if (pageName.Contains("account"))
             {

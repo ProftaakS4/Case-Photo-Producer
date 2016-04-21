@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
+using PhotoshopWebsite.DatabaseTier;
 using System.Drawing;
 
 namespace PhotoshopWebsite
@@ -63,16 +64,12 @@ namespace PhotoshopWebsite
 
             // get all the photos of the current user and add them to a list
             List<Domain.Photo> photos = new List<Domain.Photo>();
-            if(photoIDS != null)
+            if (photoIDS != null)
             {
                 foreach (string s in photoIDS)
                 {
                     photos.Add(photoController.getPhoto(s));
                 }
-            }
-            else
-            {
-                Response.Write("No Photo's of user");
             }
 
             // store all the photos in the session
@@ -130,6 +127,21 @@ namespace PhotoshopWebsite
             btnColor.Height = 30;
             btnColor.Text = "Color";
 
+            DropDownList ddType = new DropDownList();
+            ddType.ID = "ddType" + x.ID;
+            ddType.CssClass = "form-control";
+            ddType.Width = 94;
+            ddType.Height = 30;
+            //Gets the product types offered by the prhotagrapher per picture
+            List<ETypes> types = x.getTypes(x.ID.ToString());
+            foreach (ETypes type in types)
+            {
+                ListItem Li = new ListItem();
+                Li.Value = type.ToString();
+                Li.Text = type.ToString();
+                ddType.Items.Add(Li);
+            }
+
             System.Web.UI.WebControls.Image imgProduct = new System.Web.UI.WebControls.Image();
             imgProduct.ID = "image" + x.ID.ToString();
             imgProduct.AlternateText = "No Image found, please contact administrator";
@@ -162,8 +174,12 @@ namespace PhotoshopWebsite
             firstControl.Controls.Add(btnSepia);
             firstControl.Controls.Add(btnBlackWhite);
             firstControl.Controls.Add(btnColor);
+            firstControl.Controls.Add(new LiteralControl("<br />"));
+            firstControl.Controls.Add(ddType);
+
             pnlProduct.Controls.Add(firstControl);
-            lastControl.InnerHtml = "</div> </div>  </div>";
+
+            lastControl.InnerHtml = "</div></div></div>";
             pnlProduct.Controls.Add(lastControl);
         }
 
@@ -204,7 +220,7 @@ namespace PhotoshopWebsite
             
             string id = x.ID;
             List<Domain.Photo> userPhotos = (List<Domain.Photo>)Session["PhotosList"];
-            foreach (Domain.Photo photo in userPhotos)
+            foreach (PhotoshopWebsite.Domain.Photo photo in userPhotos)
             {
                 if (photo.ID.ToString() == id)
                 {
@@ -300,8 +316,6 @@ namespace PhotoshopWebsite
                     }
                 }
             }
-            //returnimage = (System.Drawing.Image)btm;
-            //return returnimage;
         }
 
         private void convertBlackWhite(Domain.Photo photo)
