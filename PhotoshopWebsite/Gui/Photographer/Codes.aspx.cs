@@ -166,21 +166,3 @@ namespace PhotoshopWebsite.Gui.Photographer
         }
     }
 }
-
-//MailMessage mail = new MailMessage();
-//SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-//// Mail opmaak
-//mail.From = new MailAddress("123safea93@gmail.com");
-//mail.To.Add("123safea93@gmail.com");
-//mail.Subject = "123Safe beveiliging";
-//mail.Body = "This is the picture service from 123Safe E-mail detectie" + Convert.ToInt32(images);
-//// Bijlage
-//System.Net.Mail.Attachment attachment;
-//attachment = new System.Net.Mail.Attachment(@"F:\123safe\Final\Final\bin\Debug\detectie" + Convert.ToInt32(images) + ".jpg");
-//mail.Attachments.Add(attachment);
-//// Poort email
-//SmtpServer.Port = 587;
-//SmtpServer.Credentials = new System.Net.NetworkCredential("123safea93@gmail.com", "A9groepC");
-//SmtpServer.EnableSsl = true;
-//SmtpServer.Send(mail);
-//listbStats.Items.Add("email send" + Convert.ToString(images));

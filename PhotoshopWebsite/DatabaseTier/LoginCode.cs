@@ -36,25 +36,24 @@ namespace PhotoshopWebsite.DatabaseTier
                 // input
                 myCommand.CommandType = CommandType.StoredProcedure;
                 myCommand.Parameters.Add("@p_photographer_ID", MySqlDbType.Int32).Value = photographerID;
-                myCommand.Parameters["@p_photographer_ID"].Direction = ParameterDirection.Input;
                 // output
-                myCommand.Parameters.Add("@p_id", MySqlDbType.Int32);
-                myCommand.Parameters["@p_id"].Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add("@p_map_id", MySqlDbType.Int32);
-                myCommand.Parameters["@p_map_id"].Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add("@p_photographerout_ID", MySqlDbType.Int32);
-                myCommand.Parameters["@p_photographerout_ID"].Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add("@p_used", MySqlDbType.Int32);
-                myCommand.Parameters["@p_used"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@ID", MySqlDbType.Int32);
+                myCommand.Parameters["@ID"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@MAP_ID", MySqlDbType.Int32);
+                myCommand.Parameters["@MAP_ID"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@PHOTOGRAPHER_ID", MySqlDbType.Int32);
+                myCommand.Parameters["@PHOTOGRAPHER_ID"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@used", MySqlDbType.Int32);
+                myCommand.Parameters["@used"].Direction = ParameterDirection.Output;
                 // execute query
-                mysqlConnection.Open();                
-                //MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                mysqlConnection.Open();
+                //myCommand.ExecuteNonQuery();
+
+                //MySqlDataAdapter da = new MySqlDataAdapter(myCommand);
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
                 DataTable dt = new DataTable();
-                MySqlDataAdapter da = new MySqlDataAdapter(myCommand);
-                da.Fill(dt);
-                
-                //dt.Load(dr);
-                
+                dt.Load(dr);
+
                 //return datatable
                 return dt;
             }
