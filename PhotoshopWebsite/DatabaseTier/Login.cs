@@ -89,10 +89,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 mysqlConnection.Open();
                 myCommand.ExecuteNonQuery();
                 //add output to integer
-                if (myCommand.Parameters["@p_ID"].Value.ToString() != "")
-                {
-                    id = Int32.Parse(myCommand.Parameters["@p_ID"].Value.ToString());
-                }
+                id = (int)(myCommand.Parameters["@p_ID"].Value);
                 return id;
             }
             catch (Exception ex)
@@ -112,7 +109,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// </summary>
         /// <param name="id"></param> id of the user
         /// <returns></returns>
-        public Dictionary<string, string> getUserData(int id)
+        public Dictionary<string,string> getUserData(int id)
         {
             Dictionary<string, string> userData = null;
             try
@@ -124,7 +121,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Parameters.Add("@p_id", MySqlDbType.Int32).Value = id;
                 // output
                 myCommand.Parameters.Add("@p_type", MySqlDbType.VarChar);
-                myCommand.Parameters["@p_type"].Direction = ParameterDirection.Output;
+                myCommand.Parameters["@p_type"].Direction = ParameterDirection.Output;                
                 myCommand.Parameters.Add("@p_firstname", MySqlDbType.VarChar);
                 myCommand.Parameters["@p_firstname"].Direction = ParameterDirection.Output;
                 myCommand.Parameters.Add("@p_lastname", MySqlDbType.VarChar);
@@ -156,7 +153,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 userData.Add("phonenumber", (string)myCommand.Parameters["@p_phonenumber"].Value);
                 userData.Add("iban", (string)myCommand.Parameters["@p_iban"].Value);
                 // return dictionary
-                return userData;
+                return userData;                
             }
             catch (Exception ex)
             {
