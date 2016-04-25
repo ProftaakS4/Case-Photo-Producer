@@ -8,9 +8,11 @@ using PhotoshopWebsite.Controller;
 using PhotoshopWebsite.DatabaseTier;
 using PhotoshopWebsite.Domain;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PhotoshopWebsite
 {
+    [ExcludeFromCodeCoverage]
     public partial class PhotoshopMaster : System.Web.UI.MasterPage
     {
         private Search s = new Search();

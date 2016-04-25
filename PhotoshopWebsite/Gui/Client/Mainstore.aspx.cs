@@ -9,9 +9,11 @@ using PhotoshopWebsite.Controller;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using PhotoshopWebsite.Enumeration;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PhotoshopWebsite
 {
+    [ExcludeFromCodeCoverage]
     public partial class WebForm1 : System.Web.UI.Page
     {
 

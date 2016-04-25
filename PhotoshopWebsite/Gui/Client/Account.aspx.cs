@@ -7,9 +7,11 @@ using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
 using System.Web.UI.HtmlControls;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PhotoshopWebsite.Gui.Client
 {
+    [ExcludeFromCodeCoverage]
     public partial class Account : System.Web.UI.Page
     {
         User testuser = new User(1, "client", "Loek", "Delahaye", "Voogdijstraat", "5", "6041EX", "Roermond", "1235325", "NLRAB012309814", "Loekdelaaye@gmail.com");

@@ -7,9 +7,11 @@ using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
 using System.Web.UI.HtmlControls;
 using System.Text.RegularExpressions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PhotoshopWebsite.Gui
 {
+    [ExcludeFromCodeCoverage]
     public partial class ShoppingCart : System.Web.UI.Page
     {
         private string orderName = "Photo Shop";
