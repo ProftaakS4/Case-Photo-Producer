@@ -9,7 +9,7 @@ namespace PhotoshopWebsite.DatabaseTier
     public class Login
     {
         //Get the MySQL connection Singleton Instance
-        private ConnectionSingleton connectionSingleton = ConnectionSingleton.GetSingleton();
+        private ConnectionSingleton connectionSingleton;
 
         // Create a new MySQL connections
         private MySqlConnection mysqlConnection;
@@ -22,6 +22,7 @@ namespace PhotoshopWebsite.DatabaseTier
         public Login()
         {
             // get the mysqlconnection singleton
+            connectionSingleton = ConnectionSingleton.GetSingleton();
             mysqlConnection = connectionSingleton.getSqlConnection();
         }
 

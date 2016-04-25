@@ -11,14 +11,15 @@ namespace PhotoshopWebsite.DatabaseTier.Tests
     [TestClass()]
     public class LoginTests
     {
-        //private Login login = new Login();
+        private Login login = new Login();
+        private bool result;
 
         [TestMethod()]
         public void loginUserTest()
-        {
-            DatabaseTier.Login login = new DatabaseTier.Login();
-            bool result = login.loginUser("c.kleijnen@fontys.nl", "carlikleijnen");
-            Assert.IsTrue(result);
+        {            
+            result = login.loginUser("c.kleijnen@fontys.nl", "carlikleijnen");
+            //Assert.IsTrue(result);
+            Assert.Equals(true, result);
             
         }
 

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 
 namespace PhotoshopWebsite.DatabaseTier.Tests
@@ -18,8 +19,8 @@ namespace PhotoshopWebsite.DatabaseTier.Tests
             ConnectionSingleton connectionSingleton = ConnectionSingleton.GetSingleton();
             Assert.IsNotNull(connectionSingleton);
 
-            //MySqlConnection mysqlConnection = connectionSingleton.getSqlConnection();
-            //Assert.IsNotNull(mysqlConnection);
+            MySqlConnection mysqlConnection = connectionSingleton.getSqlConnection();
+            Assert.IsNotNull(mysqlConnection);
         }
     }
 }
