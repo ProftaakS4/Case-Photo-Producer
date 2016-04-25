@@ -12,17 +12,17 @@
     <link href="../../Bootstrap/Menu/simple-sidebar.css" rel="stylesheet" />
     <link href="../../Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
 </head>
-<form runat="server">
-    <body>
+<body>
+    <form runat="server">
         <div id="wrapper">
-                              
+
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
-                  <li class="sidebar-brand">
-                             <asp:Label runat="server" ID="Label1" Text="Welcome!" style="color: grey"></asp:Label>
-                            <asp:Label runat="server" ID="Labelklantnaam" style="color: grey; margin-bottom:100px;"></asp:Label>
-                    </li>
-                <ul class="sidebar-nav" style="margin-top:30px;">
+                <li class="sidebar-brand">
+                    <asp:Label runat="server" ID="Label1" Text="Welcome!" Style="color: grey"></asp:Label>
+                    <asp:Label runat="server" ID="Labelklantnaam" Style="color: grey; margin-bottom: 100px;"></asp:Label>
+                </li>
+                <ul class="sidebar-nav" style="margin-top: 30px;">
 
                     <li>
                         <a href="Mainstore.aspx">Pictures</a>
@@ -76,12 +76,10 @@
         </script>
         <asp:ContentPlaceHolder ID="head" runat="server">
         </asp:ContentPlaceHolder>
-        </head>
-    <body>
-
+        <div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
         </div>
-    </body>
-</form>
+    </form>
+</body>
 </html>

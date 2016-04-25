@@ -11,26 +11,27 @@ namespace PhotoshopWebsite.Gui
 {
     public partial class ShoppingCart : System.Web.UI.Page
     {
-        private Dictionary<Domain.Photo, int> shoppingCart = null;
-        private List<Domain.ShoppingbasketItem> shoppingbasketItems;
         private string orderName = "Photo Shop";
         private string orderPrice;
 
+        public List<Domain.ShoppingbasketItem> shoppingCart
+        {
+            get
+            {
+                if (!(Session["shoppingCart"] is List<Domain.ShoppingbasketItem>))
+                {
+                    Session["shoppingCart"] = new List<Domain.ShoppingbasketItem>();
+                }
+
+                return Session["shoppingCart"] as List<Domain.ShoppingbasketItem>;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["shoppingCart"] != null)
-            {
-                shoppingCart = Session["shoppingCart"] as Dictionary<Domain.Photo, int>;
-                Fillpage(shoppingCart);
-            }
-
-            if (Session["shoppingbasketItems"] != null)
-            {
-                shoppingbasketItems = (List<Domain.ShoppingbasketItem>)Session["shoppingbasketItems"];
+            Fillpage();
         }
-
-        }
-        private void Fillpage(Dictionary<Domain.Photo, int> productlist)
+        private void Fillpage()
         {
             HtmlGenericControl firstcontrol = new HtmlGenericControl();
             firstcontrol.InnerHtml = "<div class='table-responsive'>";
@@ -47,7 +48,7 @@ namespace PhotoshopWebsite.Gui
             TableHeaderCell TypeHeader = new TableHeaderCell();
             TypeHeader.Text = "Product Type";
             TableHeaderCell Descriptionheader = new TableHeaderCell();
-            Descriptionheader.Text = "Product Description";
+            Descriptionheader.Text = "Photo Description";
             TableHeaderCell Quantityheader = new TableHeaderCell();
             Quantityheader.Text = "Quantity";
             TableHeaderCell Removeheader = new TableHeaderCell();
@@ -60,23 +61,23 @@ namespace PhotoshopWebsite.Gui
             MainHeaderRow.Cells.Add(Removeheader);
             MainTable.Rows.Add(MainHeaderRow);
 
-            foreach (Domain.Photo product in productlist.Keys)
+            foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
                 TableRow MainRow = new TableRow();
                 MainRow.Height = 80;
                 TableCell ID = new TableCell();
-                ID.Text = product.ID.ToString();
+                ID.Text = item.photoID.ToString();
                 TableCell Filter = new TableCell();
-                Filter.Text = product.ID.ToString();
+                Filter.Text = item.filterType.ToString();
                 TableCell Type = new TableCell();
-                Type.Text = product.ID.ToString();
+                Type.Text = item.product.ToString();
                 TableCell Description = new TableCell();
-                Description.Text = product.Description;
+                Description.Text = item.description;
                 TableCell Quantity = new TableCell();
                 TextBox tbQuantity = new TextBox();
-                tbQuantity.ID = "TextBoxRow_" + product.ID;
-                tbQuantity.Text = productlist[product].ToString();
-                tbQuantity.TextChanged += new EventHandler(this.Quantity_Change);
+                tbQuantity.ID = item.GetHashCode().ToString();
+                tbQuantity.Text = item.quantity.ToString();
+                tbQuantity.TextChanged += Quantity_Change;
                 tbQuantity.AutoPostBack = true;
                 tbQuantity.MaxLength = 3;
                 Quantity.Controls.Add(tbQuantity);
@@ -90,9 +91,9 @@ namespace PhotoshopWebsite.Gui
 
                 TableCell ButtonCell = new TableCell();
                 CheckBox cbRemove = new CheckBox();
-                cbRemove.ID = product.ID.ToString();
+                cbRemove.ID = item.GetHashCode().ToString();
                 cbRemove.CssClass = "checkbox";
-                cbRemove.CheckedChanged += new EventHandler(this.Check_Clicked);
+                cbRemove.CheckedChanged += Check_Clicked;
                 cbRemove.Height = 30;
                 cbRemove.AutoPostBack = true;
                 cbRemove.Checked = false;
@@ -147,69 +148,51 @@ namespace PhotoshopWebsite.Gui
             else
             {
                 PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
-
-                int quantity = 1;
-                string photoIDQualtityType = "";
                 
                 if (shoppingCart != null)
                 {
-                    foreach (Domain.Photo photo in shoppingCart.Keys.ToList())
+                    foreach (Domain.ShoppingbasketItem item in shoppingCart)
                     {
-                        if (shoppingCart.ContainsKey(photo))
-                        {
-                            quantity = shoppingCart[photo];
-                        }
-                        photoIDQualtityType = photo.ID + ";" + Convert.ToString(quantity) + "#" + getPhotoType(photo.ID.ToString());
+                        string photoIDQualtityType = item.photoID.ToString() + ";" + item.quantity.ToString() + "#" + item.filterType;
                         socket.sendData(photoIDQualtityType);
-                    }                    
+                    }
                 }
                 //Order NUMMERS doorsturen
             }
             //not yet implemented 
         }
 
-        private string getPhotoType(string photoID)
-        {
-            foreach(Domain.ShoppingbasketItem item in shoppingbasketItems)
-            {
-                if (item.photoID == photoID)
-                {
-                    return item.type;
-                }               
-            }
-            return "Color";
-        }
 
         private void Check_Clicked(object sender, EventArgs e)
         {
             CheckBox cbremove = sender as CheckBox;
-            foreach (Domain.Photo product in shoppingCart.Keys.ToList())
+            foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
-                if (product.ID.ToString() == cbremove.ID)
+                if (item.GetHashCode().ToString() == cbremove.ID)
                 {
-                    shoppingCart.Remove(product);
-                    Session["shoppingCart"] = shoppingCart;
+                    shoppingCart.Remove(item);
                     Response.Redirect(Request.RawUrl);
+                    break;
                 }
             }
         }
         private void Quantity_Change(object sender, EventArgs e)
         {
             TextBox tbQuantity = sender as TextBox;
-            foreach (Domain.Photo product in shoppingCart.Keys.ToList())
+            foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
-                if ("TextBoxRow_" + product.ID.ToString() == tbQuantity.ID.ToString())
+                if (item.GetHashCode().ToString() == tbQuantity.ID.ToString())
                 {
                     if (int.Parse(tbQuantity.Text) > 0)
                     {
-                        shoppingCart[product] = int.Parse(tbQuantity.Text);
+                        item.quantity = int.Parse(tbQuantity.Text);
                     }
                     else
                     {
-                        shoppingCart.Remove(product);
+                        shoppingCart.Remove(item);
                     }
-                    Session["shoppingCart"] = shoppingCart;
                     Response.Redirect(Request.RawUrl);
+                    break;
                 }
             }
         }

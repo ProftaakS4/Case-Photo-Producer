@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PhotoshopWebsite.DatabaseTier;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,16 +8,18 @@ namespace PhotoshopWebsite.Domain
 {
     public class ShoppingbasketItem
     {
-        public string photoID { get; set; }
-        public string quantity { get; set; }
-        public string type { get; set; }
-        public string product { get; set; }
+        public int photoID { get; set; }
+        public string description { get; set; }
+        public int quantity { get; set; }
+        public string filterType { get; set; }
+        public ProductTypes.ETypes product { get; set; }
 
-        public ShoppingbasketItem(string photoID, string type, string product)
+        public ShoppingbasketItem(int photoID, string description, string type, ProductTypes.ETypes product)
         {
             this.photoID = photoID;
-            //this.quantity = quantity;
-            this.type = type;
+            this.description = description;
+            this.quantity = 1;
+            this.filterType = type;
             this.product = product;
         }
     }

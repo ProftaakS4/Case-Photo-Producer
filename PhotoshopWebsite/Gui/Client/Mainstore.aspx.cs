@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
 using PhotoshopWebsite.DatabaseTier;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace PhotoshopWebsite
 {
@@ -18,41 +19,77 @@ namespace PhotoshopWebsite
         PhotoController photoController = new PhotoController();
 
         // create a list of all the current user photos
-        List<Domain.Photo> photos;
-        List<Domain.Photo> searchedPhotos;
-        List<Domain.ShoppingbasketItem> shoppingbasketItems;
-        private Bitmap _current;
-        private int number;
-        //private List<Product> testproducts;
-        public Dictionary<Domain.Photo, int> shoppingCart
+        public List<Domain.Photo> photos
         {
             get
             {
-                if (!(Session["shoppingCart"] is Dictionary<Domain.Photo, int>))
+                if (!(Session["photos"] is List<Domain.Photo>))
                 {
-                    Session["shoppingCart"] = new Dictionary<Domain.Photo, int>();
+                    Session["photos"] = new List<Domain.Photo>();
                 }
 
-                return (Dictionary<Domain.Photo, int>)Session["shoppingCart"];
+                return Session["photos"] as List<Domain.Photo>;
+            }
+        }
+
+        public List<Domain.Photo> searchedPhotos
+        {
+            get
+            {
+                if (!(Session["searchedPhotos"] is List<Domain.Photo>))
+                {
+                    Session["searchedPhotos"] = new List<Domain.Photo>();
+                }
+
+                return Session["searchedPhotos"] as List<Domain.Photo>;
+            }
+        }
+
+        public List<Domain.ShoppingbasketItem> shoppingCart
+        {
+            get
+            {
+                if (!(Session["shoppingCart"] is List<Domain.ShoppingbasketItem>))
+                {
+                    Session["shoppingCart"] = new List<Domain.ShoppingbasketItem>();
+                }
+
+                return Session["shoppingCart"] as List<Domain.ShoppingbasketItem>;
+            }
+        }
+
+        public Dictionary<int, string> filters
+        {
+            get
+            {
+                if (!(Session["filters"] is Dictionary<int, string>))
+                {
+                    Session["filters"] = new Dictionary<int, string>();
+                }
+
+                return Session["filters"] as Dictionary<int, string>;
+            }
+        }
+
+        public Dictionary<int, ProductTypes.ETypes> products
+        {
+            get
+            {
+                if (!(Session["products"] is Dictionary<int, ProductTypes.ETypes>))
+                {
+                    Session["products"] = new Dictionary<int, ProductTypes.ETypes>();
+                }
+
+                return Session["products"] as Dictionary<int, ProductTypes.ETypes>;
             }
         }
 
 
+        private Bitmap _current;
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["searchedPhotos"] is List<Domain.Photo>)
-            {
-                searchedPhotos =  Session["searchedPhotos"] as List<Domain.Photo>;
-            }
-            if (Session["shoppingbasketItems"] != null)
-            {
-                shoppingbasketItems = Session["shoppingbasketItems"] as List<Domain.ShoppingbasketItem>;
-            } else
-            {
-                shoppingbasketItems = new List<Domain.ShoppingbasketItem>();
-            }
-
             // cast the session into the current user
             User currenUser = (User)Session["UserData"];
 
@@ -63,20 +100,17 @@ namespace PhotoshopWebsite
             List<string> photoIDS = photoController.getUserPhotoIDs(userID);
 
             // get all the photos of the current user and add them to a list
-            List<Domain.Photo> photos = new List<Domain.Photo>();
-            if (photoIDS != null)
+            if (photoIDS != null && photos.Count == 0)
             {
                 foreach (string s in photoIDS)
                 {
+                    // store all the photos in the session
                     photos.Add(photoController.getPhoto(s));
                 }
             }
 
-            // store all the photos in the session
-            Session["PhotosList"] = photos;
-
             // check if a search has taken place
-            if(searchedPhotos != null && searchedPhotos.Count > 0)
+            if (searchedPhotos.Count > 0)
             {
                 // fill the page with the users photos
                 foreach (Domain.Photo photo in searchedPhotos)
@@ -100,41 +134,70 @@ namespace PhotoshopWebsite
         {
             //create buttons
             Button btnAddToCart = new Button();
-            btnAddToCart.ID = x.ID.ToString();
+            btnAddToCart.ID = x.Description + x.ID.ToString();
             btnAddToCart.CssClass = "btn btn-default";
             btnAddToCart.Click += btnAddToCart_Click;
             btnAddToCart.Height = 30;
             btnAddToCart.Text = "Order";
 
-            Button btnSepia = new Button();
+            RadioButton btnSepia = new RadioButton();
             btnSepia.ID = "btnSepia" + x.ID;
-            btnSepia.CssClass = "btn btn-default";
-            btnSepia.Click += btnSepia_Click;
+            btnSepia.CheckedChanged += filterChange;
+            btnSepia.AutoPostBack = true;
+            btnSepia.GroupName = x.ID.ToString();
             btnSepia.Height = 30;
-            btnSepia.Text = "Sepia";
+            btnSepia.Text = "Sepia ";
 
-            Button btnBlackWhite = new Button();
+            RadioButton btnBlackWhite = new RadioButton();
             btnBlackWhite.ID = "btnBlackWhite" + x.ID;
-            btnBlackWhite.CssClass = "btn btn-default";
-            btnBlackWhite.Click += btnBlackWhite_Click;
+            btnBlackWhite.CheckedChanged += filterChange;
+            btnBlackWhite.AutoPostBack = true;
+            btnBlackWhite.GroupName = x.ID.ToString();
             btnBlackWhite.Height = 30;
-            btnBlackWhite.Text = "Black & White";
+            btnBlackWhite.Text = "Black & White ";
 
-            Button btnColor = new Button();
+            RadioButton btnColor = new RadioButton();
             btnColor.ID = "btnColor" + x.ID;
-            btnColor.CssClass = "btn btn-default";
-            btnColor.Click += btnColor_Click;
+            btnColor.CheckedChanged += filterChange;
+            btnColor.AutoPostBack = true;
+            btnColor.GroupName = x.ID.ToString();
             btnColor.Height = 30;
-            btnColor.Text = "Color";
+            btnColor.Text = "Color ";
+            if (!filters.ContainsKey(x.ID))
+            {
+                filters.Add(x.ID, "btnColor");
+            }
+            if (!products.ContainsKey(x.ID))
+            {
+                products.Add(x.ID, ProductTypes.ETypes.PHOTO1x2);
+            }
+
+            switch (filters[x.ID])
+            {
+                case "btnColor":
+                    btnColor.Checked = true;
+                    break;
+                case "btnBlackWhite":
+                    btnColor.Checked = true;
+                    break;
+                case "btnSepia":
+                    btnColor.Checked = true;
+                    break;
+                default:
+                    btnColor.Checked = true;
+                    break;
+            }
+            colorChange(x.ID);
 
             DropDownList ddType = new DropDownList();
             ddType.ID = "ddType" + x.ID;
             ddType.CssClass = "form-control";
             ddType.Width = 94;
             ddType.Height = 30;
-            //Gets the product types offered by the prhotagrapher per picture
-            List<ETypes> types = x.getTypes(x.ID.ToString());
-            foreach (ETypes type in types)
+            ddType.SelectedIndexChanged += ddType_SelectedIndexChanged;
+            //Gets the product types offered by the photographer per photo
+            List<ProductTypes.ETypes> types = x.getTypes(x.ID.ToString());
+            foreach (ProductTypes.ETypes type in types)
             {
                 ListItem Li = new ListItem();
                 Li.Value = type.ToString();
@@ -144,7 +207,7 @@ namespace PhotoshopWebsite
 
             System.Web.UI.WebControls.Image imgProduct = new System.Web.UI.WebControls.Image();
             imgProduct.ID = "image" + x.ID.ToString();
-            imgProduct.AlternateText = "No Image found, please contact administrator";
+            imgProduct.AlternateText = "No Image found, please the contact administrator";
             imgProduct.ImageUrl = x.Image;
             imgProduct.Height = 200;
             imgProduct.Width = 330;
@@ -154,7 +217,7 @@ namespace PhotoshopWebsite
             HtmlGenericControl lastControl = new HtmlGenericControl("div");
             //adding other div elements containing discriptions
             string div;
-            if (number > 4)
+            if (photos.Count > 4)
             {
                 div = "<div class='col-sm-4'>";
             }
@@ -162,7 +225,7 @@ namespace PhotoshopWebsite
             {
                 div = "<div class='col-sm-6'>";
             }
-           
+
             //firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'> <img src=" + x.Image + " " + "alt=" + x.Description + ">  <div class='caption'>";
             firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'><div class='caption'>";
 
@@ -170,12 +233,12 @@ namespace PhotoshopWebsite
             secondControl.InnerHtml = "<p>" + x.Description + "</p>";
             firstControl.Controls.Add(imgProduct);
             firstControl.Controls.Add(secondControl);
-            firstControl.Controls.Add(btnAddToCart);
-            firstControl.Controls.Add(btnSepia);
-            firstControl.Controls.Add(btnBlackWhite);
             firstControl.Controls.Add(btnColor);
+            firstControl.Controls.Add(btnBlackWhite);
+            firstControl.Controls.Add(btnSepia);
             firstControl.Controls.Add(new LiteralControl("<br />"));
             firstControl.Controls.Add(ddType);
+            firstControl.Controls.Add(btnAddToCart);
 
             pnlProduct.Controls.Add(firstControl);
 
@@ -183,101 +246,101 @@ namespace PhotoshopWebsite
             pnlProduct.Controls.Add(lastControl);
         }
 
-        void btnColor_Click(object sender, EventArgs e)
+        void ddType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (sender is Button)
+            DropDownList ddl = sender as DropDownList;
+            Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
+            Match match = regex.Match(ddl.ID);
+
+            int num = Int32.Parse(match.Groups["Numeric"].Value);
+            //set EType on ID
+            products[num] = ProductTypes.getEType(ddl.SelectedValue);
+        }
+
+        void filterChange(object sender, EventArgs e)
+        {
+            RadioButton button = sender as RadioButton;
+            Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
+            Match match = regex.Match(button.ID);
+
+            string name = match.Groups["Alpha"].Value;
+            int num = Int32.Parse(match.Groups["Numeric"].Value);
+
+            //set name on ID
+            filters[num] = name;
+            //change color
+            colorChange(num);
+        }
+        void colorChange(int num)
+        {
+            string name = filters[num];
+
+            foreach (Domain.Photo photo in photos)
             {
-                Button button = sender as Button;
-                List<Domain.Photo> userPhotos = (List<Domain.Photo>)Session["PhotosList"];
-                foreach (Domain.Photo photo in userPhotos)
+                if (photo.ID == num)
                 {
-                    if ("btnColor" + photo.ID.ToString() == button.ID)
+                    switch (name)
                     {
-                        foreach (HtmlGenericControl control in pnlProduct.Controls)
-                        {
-                            foreach (Control item in control.Controls)
-                            {
-                                if (item is System.Web.UI.WebControls.Image)
-                                {
-                                    System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
-                                    if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
-                                    {
-                                        currentImage.ImageUrl = photo.Image;
-                                    }
-                                }
-                            }
-                        }
-                        savePhotoFilter(photo.ID.ToString(), "Color");
-                        break;
-                    }                   
+                        case "btnColor":
+                            convertColor(photo);
+                            break;
+                        case "btnBlackWhite":
+                            convertBlackWhite(photo);
+                            break;
+                        case "btnSepia":
+                            convertSepia(photo);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
                 }
             }
         }
 
         void btnAddToCart_Click(object sender, EventArgs e)
         {
-            Button x = sender as Button;
+            Button button = sender as Button;
+            Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
+            Match match = regex.Match(button.ID);
             
-            string id = x.ID;
-            List<Domain.Photo> userPhotos = (List<Domain.Photo>)Session["PhotosList"];
-            foreach (PhotoshopWebsite.Domain.Photo photo in userPhotos)
+            string name = match.Groups["Alpha"].Value;
+            int num = Int32.Parse(match.Groups["Numeric"].Value);
+
+            Domain.ShoppingbasketItem found = null;
+            foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
-                if (photo.ID.ToString() == id)
+                if (item.photoID == num && item.filterType == filters[num])
                 {
-                    if (shoppingCart.Count == 0)
-                    {
-                        shoppingCart.Add(photo, 1);
-                    }
-                    else
-                    {
-                        if (shoppingCart.ContainsKey(photo))
-                        {
-                            shoppingCart[photo]++;
-                        }
-                        else
-                        {
-                            shoppingCart.Add(photo, 1);
-                        }
-                    }
+                    found = item;
+                    break;
                 }
             }
-            HttpContext.Current.Session["shoppingCart"] = shoppingCart;
-            Response.Redirect(Request.RawUrl);
-        }
-
-
-        void btnSepia_Click(object sender, EventArgs e)
-        {
-            if (sender is Button)
+            if (found != null)
             {
-                Button button = sender as Button;
-                List<Domain.Photo> userPhotos = (List<Domain.Photo>)Session["PhotosList"];
-                foreach (Domain.Photo photo in userPhotos)
-                {
-                    if ("btnSepia" + photo.ID.ToString() == button.ID)
-                    {
-                        convertSepia(photo);
-                        savePhotoFilter(photo.ID.ToString(), "Sepia");
-                        break;
-                    }
-                }
+                found.quantity++;
+            }
+            else
+            {
+                //TODO pakt ook de jaartallen niet alleen de ID's
+                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num]));
             }
         }
 
-
-        void btnBlackWhite_Click(object sender, EventArgs e)
+        private void convertColor(Domain.Photo photo)
         {
-            if (sender is Button)
+            foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
-                Button button = sender as Button;
-                List<Domain.Photo> userPhotos = (List<Domain.Photo>)Session["PhotosList"];
-                foreach (Domain.Photo photo in userPhotos)
+                foreach (Control item in control.Controls)
                 {
-                    if ("btnBlackWhite" + photo.ID.ToString() == button.ID)
+                    if (item is System.Web.UI.WebControls.Image)
                     {
-                        convertBlackWhite(photo);
-                        savePhotoFilter(photo.ID.ToString(), "Black");
-                        break;
+                        System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
+                        if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
+                        {
+                            currentImage.ImageUrl = photo.Image;
+                            return;
+                        }
                     }
                 }
             }
@@ -300,18 +363,19 @@ namespace PhotoshopWebsite
                 }
             }
             _current = (Bitmap)bmap.Clone();
-            _current.Save(Server.MapPath("../Images/Sepia" + photo.ID +".png"));
+            _current.Save(Server.MapPath("../Images/Sepia" + photo.ID + ".png"));
 
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
                 foreach (Control item in control.Controls)
-        {
+                {
                     if (item is System.Web.UI.WebControls.Image)
-            {
+                    {
                         System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
                         if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
-                {
+                        {
                             currentImage.ImageUrl = "../Images/Sepia" + photo.ID + ".png";
+                            break;
                         }
                     }
                 }
@@ -331,12 +395,12 @@ namespace PhotoshopWebsite
                     col = bmap.GetPixel(i, j);
                     byte grey = (byte)(.299 * col.R + .587 * col.G + .114 * col.B);
                     bmap.SetPixel(i, j, Color.FromArgb(grey, grey, grey));
-        }
+                }
             }
             _current = (Bitmap)bmap.Clone();
             Random rnd = new Random();
             int a = rnd.Next();
-            _current.Save(Server.MapPath("../Images/BlackWhite"+ photo.ID + ".png"));
+            _current.Save(Server.MapPath("../Images/BlackWhite" + photo.ID + ".png"));
 
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
@@ -345,37 +409,14 @@ namespace PhotoshopWebsite
                     if (item is System.Web.UI.WebControls.Image)
                     {
                         System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
-                        if (currentImage.ID.ToString() == "image" + photo.ID.ToString()) {
-                            currentImage.ImageUrl = "../Images/BlackWhite"+ photo.ID + ".png";
+                        if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
+                        {
+                            currentImage.ImageUrl = "../Images/BlackWhite" + photo.ID + ".png";
+                            break;
                         }
                     }
                 }
             }
-        }
-
-        private void savePhotoFilter(string photoID, string buttonType)
-        {
-            Domain.ShoppingbasketItem newItem = new Domain.ShoppingbasketItem(photoID, buttonType, null);
-            if (!shoppingbasketItems.Contains(newItem))
-            {
-                shoppingbasketItems.Add(newItem);
-            }            
-
-            //if (shoppingbasketItems.Count == 0)
-            //{
-            //        newItem = new Domain.ShoppingbasketItem(photoID, buttonType, null);
-            //        shoppingbasketItems.Add(newItem);                
-            //}
-
-            foreach(Domain.ShoppingbasketItem item in shoppingbasketItems)
-            {
-                if (item.photoID == photoID)
-                {
-                    item.type = buttonType;
-                }              
-            }
-
-            Session["shoppingbasketItems"] = shoppingbasketItems;
         }
     }
 }

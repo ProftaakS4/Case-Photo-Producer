@@ -84,9 +84,9 @@ namespace PhotoshopWebsite.DatabaseTier
             }
             return null;
         }
-        public List<ETypes> getTypes(string photoID)
+        public List<ProductTypes.ETypes> getTypes(string photoID)
         {
-            List<ETypes> types = new List<ETypes>();
+            List<ProductTypes.ETypes> types = new List<ProductTypes.ETypes>();
             string output;
             try
             {
@@ -119,31 +119,31 @@ namespace PhotoshopWebsite.DatabaseTier
                     switch (id[i])
                     {
                         case "1":
-                           types.Add(ETypes.PHOTO1x2);     
+                            types.Add(ProductTypes.ETypes.PHOTO1x2);     
                             break;
                         case "2":
-                            types.Add(ETypes.PHOTO2x4);
+                            types.Add(ProductTypes.ETypes.PHOTO2x4);
                             break;
                         case "3":
-                            types.Add(ETypes.PHOTO5x8);
+                            types.Add(ProductTypes.ETypes.PHOTO5x8);
                             break;
                         case "4":
-                            types.Add(ETypes.MUISMAT);
+                            types.Add(ProductTypes.ETypes.MUISMAT);
                             break;
                         case "5":
-                            types.Add(ETypes.TASSEN);
+                            types.Add(ProductTypes.ETypes.TASSEN);
                             break;
                         case "6":
-                            types.Add(ETypes.TSHIRT);
+                            types.Add(ProductTypes.ETypes.TSHIRT);
                             break;
                         case "7":
-                            types.Add(ETypes.MOK);
+                            types.Add(ProductTypes.ETypes.MOK);
                             break;
                         case "8":
-                            types.Add(ETypes.CANVAS);
+                            types.Add(ProductTypes.ETypes.CANVAS);
                             break;
                         case "9":
-                            types.Add(ETypes.DIBOND);
+                            types.Add(ProductTypes.ETypes.DIBOND);
                             break;
                     }
 

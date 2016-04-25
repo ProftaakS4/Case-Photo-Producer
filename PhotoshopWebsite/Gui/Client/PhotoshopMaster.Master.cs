@@ -32,12 +32,8 @@ namespace PhotoshopWebsite
             }
             if (HttpContext.Current.Session["shoppingCart"] != null)
             {
-                Dictionary<Domain.Photo, int> dict = Session["shoppingCart"] as Dictionary<Domain.Photo, int>;
-                foreach (Domain.Photo photo in dict.Keys)
-                {
-                    size += dict[photo];
-                }
-                Labelquantity.Text = size.ToString();
+                List<Domain.ShoppingbasketItem> list = Session["shoppingCart"] as List<Domain.ShoppingbasketItem>;
+                Labelquantity.Text = list.Count.ToString();
             }
             if (Session["logindata"] != null)
             {
@@ -47,7 +43,7 @@ namespace PhotoshopWebsite
             {
                 Response.Redirect("../Login.aspx");
             }
-            Labelklantnaam.Text =  clientName;
+            Labelklantnaam.Text = clientName;
             pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
             if (pageName.Contains("account"))
             {
@@ -66,7 +62,7 @@ namespace PhotoshopWebsite
         protected void Btnsearch_Click(object sender, EventArgs e)
         {
             searchedPhotos = new List<Domain.Photo>();
-            if(tbSearch.Text != "")
+            if (tbSearch.Text != "")
             {
                 string output = s.searchPhoto(tbSearch.Text, curUser.ID);
                 char[] charoutput = output.ToCharArray();
