@@ -136,7 +136,7 @@ namespace PhotoshopWebsite
         {
             //create buttons
             Button btnAddToCart = new Button();
-            btnAddToCart.ID = x.Description + x.ID.ToString();
+            btnAddToCart.ID = "{" + x.Description + "}" + x.ID.ToString();
             btnAddToCart.CssClass = "btn btn-default";
             btnAddToCart.Click += btnAddToCart_Click;
             btnAddToCart.Height = 30;
@@ -301,11 +301,8 @@ namespace PhotoshopWebsite
         void btnAddToCart_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
-            Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
-            Match match = regex.Match(button.ID);
-            
-            string name = match.Groups["Alpha"].Value;
-            int num = Int32.Parse(match.Groups["Numeric"].Value);
+            string name = button.ID.Split('{', '}')[1];
+            int num = Int32.Parse(button.ID.Split('{', '}')[2]);
 
             Domain.ShoppingbasketItem found = null;
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
