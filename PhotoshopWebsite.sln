@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoshopWebsite", "PhotoshopWebsite\PhotoshopWebsite.csproj", "{45CDCFCC-9291-40AD-A272-0CD98DD9DBC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoshopWebsiteTests", "PhotoshopWebsiteTests\PhotoshopWebsiteTests.csproj", "{BDDF6BE6-316F-4D9D-8044-76A54E52E96C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProjectPhotoshopWebsite", "UnitTestProjectPhotoshopWebsite\UnitTestProjectPhotoshopWebsite.csproj", "{E8BF9ED8-5889-4D30-9233-EA056DE146A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{45CDCFCC-9291-40AD-A272-0CD98DD9DBC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45CDCFCC-9291-40AD-A272-0CD98DD9DBC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45CDCFCC-9291-40AD-A272-0CD98DD9DBC0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BDDF6BE6-316F-4D9D-8044-76A54E52E96C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDDF6BE6-316F-4D9D-8044-76A54E52E96C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDDF6BE6-316F-4D9D-8044-76A54E52E96C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDDF6BE6-316F-4D9D-8044-76A54E52E96C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8BF9ED8-5889-4D30-9233-EA056DE146A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8BF9ED8-5889-4D30-9233-EA056DE146A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8BF9ED8-5889-4D30-9233-EA056DE146A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8BF9ED8-5889-4D30-9233-EA056DE146A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
