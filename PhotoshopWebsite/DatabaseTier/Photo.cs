@@ -34,7 +34,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// <returns></returns>
         public List<string> getPhotosUser(string userID)
         {
-            List<string> photoIDS = null;
+            List<string> photoIDS = new List<string>(); ;
             try
             {
                 myCommand = new MySqlCommand("getPhotosUser", mysqlConnection);
@@ -54,7 +54,6 @@ namespace PhotoshopWebsite.DatabaseTier
                 {
                     string photoID = "";
                     // create new string list and iterate over the result and break down the photoIDS into idividual photoIDS
-                    photoIDS = new List<string>();
                     foreach (char c in result)
                     {
                         if (c != ' ')
@@ -71,7 +70,6 @@ namespace PhotoshopWebsite.DatabaseTier
                             }
                         }
                     }
-                    return photoIDS;
                 }
             }
             catch (Exception ex)
@@ -83,7 +81,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Connection.Close();
                 mysqlConnection.Close();
             }
-            return null;
+            return photoIDS;
         }
         public List<ProductTypes.PTypes> getTypes(string photoID)
         {
@@ -115,12 +113,12 @@ namespace PhotoshopWebsite.DatabaseTier
                 output = myCommand.Parameters["@p_types"].Value.ToString();
                 string[] id = output.Split(null);
                 // loop over output string and get types for the picture
-                for(int i = 0; i < id.Length; i++)
+                for (int i = 0; i < id.Length; i++)
                 {
                     switch (id[i])
                     {
                         case "1":
-                            types.Add(ProductTypes.PTypes.PHOTO1x2);     
+                            types.Add(ProductTypes.PTypes.PHOTO1x2);
                             break;
                         case "2":
                             types.Add(ProductTypes.PTypes.PHOTO2x4);
