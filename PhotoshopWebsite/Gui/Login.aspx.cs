@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,6 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace PhotoshopWebsite
 {
+    [ExcludeFromCodeCoverage]
     public partial class Login : System.Web.UI.Page
     {
         private String loginName;

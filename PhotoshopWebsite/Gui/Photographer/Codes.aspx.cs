@@ -8,9 +8,11 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
 using System.Web.UI.HtmlControls;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PhotoshopWebsite.Gui.Photographer
 {
+    [ExcludeFromCodeCoverage]
     public partial class Clients : System.Web.UI.Page
     {
         private List<LoginCode> loginCodes = new List<LoginCode>();
