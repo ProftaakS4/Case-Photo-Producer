@@ -62,6 +62,7 @@
     <Compile Include="DatabaseTier\LoginTests.cs" />
     <Compile Include="DatabaseTier\PhotoTests.cs" />
     <Compile Include="DatabaseTier\SearchTests.cs" />
+    <Compile Include="Domain\OrderTests.cs" />
     <Compile Include="Domain\PhotoTests.cs" />
     <Compile Include="Domain\ProductTests.cs" />
     <Compile Include="Domain\UserTests.cs" />
