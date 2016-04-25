@@ -143,6 +143,7 @@
   <ItemGroup>
     <Compile Include="Controller\LoginCodeController.cs" />
     <Compile Include="Controller\PhotoController.cs" />
+    <Compile Include="Domain\Product.cs" />
     <Compile Include="Enumeration\FilterTypes.cs" />
     <Compile Include="Enumeration\ProductTypes.cs" />
     <Compile Include="DatabaseTier\LoginCode.cs" />
@@ -153,7 +154,6 @@
     <Compile Include="Domain\Order.cs" />
     <Compile Include="Domain\PaymentType.cs" />
     <Compile Include="Domain\Printorder.cs" />
-    <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\ShoppingbasketItem.cs" />
     <Compile Include="Domain\Transaction.cs" />
     <Compile Include="Domain\User.cs" />
