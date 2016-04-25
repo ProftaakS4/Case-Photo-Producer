@@ -54,6 +54,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Domain\PhotoTests.cs" />
+    <Compile Include="Enumeration\FilterTypesTests.cs" />
+    <Compile Include="Enumeration\ProductTypesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
