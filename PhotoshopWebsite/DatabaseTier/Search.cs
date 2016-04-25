@@ -34,7 +34,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.CommandType = CommandType.StoredProcedure;
                 // input
                 myCommand.Parameters.Add("@p_user_ID", MySqlDbType.Int32).Value = userID;
-                myCommand.Parameters.Add("@p_searchedtext", MySqlDbType.VarChar).Value = photoName;
+                myCommand.Parameters.Add("@p_searchedText", MySqlDbType.VarChar).Value = photoName;
                 // output
                 myCommand.Parameters.Add("@p_photos", MySqlDbType.Int32);
                 myCommand.Parameters["@p_photos"].Direction = ParameterDirection.Output;

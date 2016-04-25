@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace PhotoshopWebsite.DatabaseTier.Tests
 {
     [TestClass()]
@@ -37,7 +38,8 @@ namespace PhotoshopWebsite.DatabaseTier.Tests
         [TestMethod()]
         public void getUserDataTest()
         {
-            Assert.Fail();
+            Dictionary<string, string> result = login.getUserData(4);
+            Assert.IsNotNull(result);            
         }
     }
 }
