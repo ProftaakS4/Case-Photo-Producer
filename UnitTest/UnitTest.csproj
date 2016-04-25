@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{91F039DB-A555-4F9E-8F88-410EE88816E5}</ProjectGuid>
+    <ProjectGuid>{98E2ADB2-A954-47BE-BA70-3BD373589575}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PhotoshopWebsiteUnitTests</RootNamespace>
-    <AssemblyName>PhotoshopWebsiteUnitTests</AssemblyName>
+    <RootNamespace>UnitTest</RootNamespace>
+    <AssemblyName>UnitTest</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,14 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DomainPhotoTest.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PhotoshopWebsite\PhotoshopWebsite.csproj">
-      <Project>{45cdcfcc-9291-40ad-a272-0cd98dd9dbc0}</Project>
-      <Name>PhotoshopWebsite</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

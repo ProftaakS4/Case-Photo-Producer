@@ -12,16 +12,16 @@
     <link href="../../Bootstrap/Menu/simple-sidebar.css" rel="stylesheet" />
     <link href="../../Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
+    <body>
     <form runat="server">
         <div id="wrapper">
-
+                              
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
-                <li class="sidebar-brand">
+                  <li class="sidebar-brand">
                     <asp:Label runat="server" ID="Label1" Text="Welcome!" Style="color: grey"></asp:Label>
                     <asp:Label runat="server" ID="Labelklantnaam" Style="color: grey; margin-bottom: 100px;"></asp:Label>
-                </li>
+                    </li>
                 <ul class="sidebar-nav" style="margin-top: 30px;">
 
                     <li>
@@ -81,5 +81,5 @@
         </asp:ContentPlaceHolder>
         </div>
     </form>
-</body>
+    </body>
 </html>

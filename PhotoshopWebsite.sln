@@ -5,12 +5,7 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoshopWebsite", "PhotoshopWebsite\PhotoshopWebsite.csproj", "{45CDCFCC-9291-40AD-A272-0CD98DD9DBC0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E7728ACC-AC06-4E3F-9411-1AE44DC50A24}"
-	ProjectSection(SolutionItems) = preProject
-		TestSettings1.testsettings = TestSettings1.testsettings
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoshopWebsiteUnitTests", "PhotoshopWebsiteUnitTests\PhotoshopWebsiteUnitTests.csproj", "{91F039DB-A555-4F9E-8F88-410EE88816E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{98E2ADB2-A954-47BE-BA70-3BD373589575}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +17,10 @@ Global
 		{45CDCFCC-9291-40AD-A272-0CD98DD9DBC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45CDCFCC-9291-40AD-A272-0CD98DD9DBC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45CDCFCC-9291-40AD-A272-0CD98DD9DBC0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91F039DB-A555-4F9E-8F88-410EE88816E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91F039DB-A555-4F9E-8F88-410EE88816E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91F039DB-A555-4F9E-8F88-410EE88816E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91F039DB-A555-4F9E-8F88-410EE88816E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E2ADB2-A954-47BE-BA70-3BD373589575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E2ADB2-A954-47BE-BA70-3BD373589575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98E2ADB2-A954-47BE-BA70-3BD373589575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98E2ADB2-A954-47BE-BA70-3BD373589575}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
