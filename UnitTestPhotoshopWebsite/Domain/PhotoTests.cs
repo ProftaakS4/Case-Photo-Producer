@@ -23,6 +23,7 @@ namespace PhotoshopWebsite.Domain.Tests
         {
             Assert.IsTrue(testPhoto.Equals(testPhoto2));
         }
+        //This test doesnt work due to the database connection
         [TestMethod()]
         public void getTypesTest()
         {
@@ -30,13 +31,12 @@ namespace PhotoshopWebsite.Domain.Tests
             types.Add(ProductTypes.PTypes.PHOTO1x2);
             types.Add(ProductTypes.PTypes.PHOTO2x4);
             types.Add(ProductTypes.PTypes.PHOTO5x8);
-            Assert.etestPhoto.getTypes(testPhoto.ID.ToString());
-            Assert.Equals();
+            CollectionAssert.AreEqual(testPhoto.getTypes(testPhoto.ID.ToString()),types);
         }
         [TestMethod()]
         public void PhotoConstructortest()
         {
-            Assert.Fail();
+            Assert.IsInstanceOfType(testPhoto,typeof(Photo));
         }
     }
 }

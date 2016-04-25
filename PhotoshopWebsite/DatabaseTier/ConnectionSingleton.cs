@@ -12,10 +12,10 @@ namespace PhotoshopWebsite.DatabaseTier
     public class ConnectionSingleton
     {
         // create instance of its owne class
-        private static ConnectionSingleton _singleton;
+        private static ConnectionSingleton _singleton = null;
 
         // create connection bases on the connectionstring in the web.config 
-        private static MySqlConnection connection;
+        private static MySqlConnection connection = null;
 
         /// <summary>
         /// Private constructor of the Singleton class
