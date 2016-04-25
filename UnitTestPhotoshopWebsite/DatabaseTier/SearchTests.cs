@@ -16,7 +16,7 @@ namespace PhotoshopWebsite.DatabaseTier.Tests
         [TestMethod()]
         public void searchPhotoTest()
         {
-            string searchPhoto = search.searchPhoto("carli", 4);
+            var searchPhoto = search.searchPhoto("carli", 4);
             Assert.IsNotNull(searchPhoto);
            
         }

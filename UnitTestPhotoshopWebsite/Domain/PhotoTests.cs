@@ -16,7 +16,7 @@ namespace PhotoshopWebsite.Domain.Tests
         [TestMethod()]
         public void GetHashCodeTest()
         {
-            Assert.Equals(testPhoto.GetHashCode(), testPhoto2.GetHashCode());
+            Assert.IsNotNull(testPhoto.GetHashCode());
         }
         [TestMethod()]
         public void EqualsTest()
