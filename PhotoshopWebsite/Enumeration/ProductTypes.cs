@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PhotoshopWebsite.DatabaseTier
+namespace PhotoshopWebsite.Enumeration
 {
     public class ProductTypes
     {
-        public enum ETypes
+        public enum PTypes
         {
             PHOTO1x2,
             PHOTO2x4,
@@ -20,31 +20,31 @@ namespace PhotoshopWebsite.DatabaseTier
             DIBOND
         };
 
-        static public ETypes getEType(string eType)
+        static public PTypes getPType(string eType)
         {
             switch (eType)
             {
                 case "PHOTO1x2":
-                    return ETypes.PHOTO1x2;
+                    return PTypes.PHOTO1x2;
                 case "PHOTO2x4":
-                    return ETypes.PHOTO2x4;
+                    return PTypes.PHOTO2x4;
                 case "PHOTO5x8":
-                    return ETypes.PHOTO5x8;
+                    return PTypes.PHOTO5x8;
                 case "MUISMAT":
-                    return ETypes.MUISMAT;
+                    return PTypes.MUISMAT;
                 case "TASSEN":
-                    return ETypes.TASSEN;
+                    return PTypes.TASSEN;
                 case "TSHIRT":
-                    return ETypes.TSHIRT;
+                    return PTypes.TSHIRT;
                 case "MOK":
-                    return ETypes.MOK;
+                    return PTypes.MOK;
                 case "CANVAS":
-                    return ETypes.CANVAS;
+                    return PTypes.CANVAS;
                 case "DIBOND":
-                    return ETypes.DIBOND;
+                    return PTypes.DIBOND;
                     //default to photo1x2
                 default:
-                    return ETypes.PHOTO1x2;
+                    return PTypes.PHOTO1x2;
             }
         }
     }

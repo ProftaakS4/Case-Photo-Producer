@@ -143,7 +143,8 @@
   <ItemGroup>
     <Compile Include="Controller\LoginCodeController.cs" />
     <Compile Include="Controller\PhotoController.cs" />
-    <Compile Include="DatabaseTier\ProductTypes.cs" />
+    <Compile Include="Enumeration\FilterTypes.cs" />
+    <Compile Include="Enumeration\ProductTypes.cs" />
     <Compile Include="DatabaseTier\LoginCode.cs" />
     <Compile Include="DatabaseTier\Search.cs" />
     <Compile Include="Domain\Dvd.cs" />

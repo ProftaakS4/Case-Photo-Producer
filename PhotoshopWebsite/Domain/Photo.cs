@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using PhotoshopWebsite.DatabaseTier;
+using PhotoshopWebsite.Enumeration;
 
 namespace PhotoshopWebsite.Domain
 {
@@ -25,7 +25,7 @@ namespace PhotoshopWebsite.Domain
             this.Resolution = resolution;
             this.Description = description;
         }
-        public List<ProductTypes.ETypes> getTypes(string photoID)
+        public List<ProductTypes.PTypes> getTypes(string photoID)
         {
             DatabaseTier.Photo photo = new DatabaseTier.Photo();
             return photo.getTypes(photoID);

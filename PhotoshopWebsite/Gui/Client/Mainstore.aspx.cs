@@ -6,9 +6,9 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
-using PhotoshopWebsite.DatabaseTier;
 using System.Drawing;
 using System.Text.RegularExpressions;
+using PhotoshopWebsite.Enumeration;
 
 namespace PhotoshopWebsite
 {
@@ -58,29 +58,29 @@ namespace PhotoshopWebsite
             }
         }
 
-        public Dictionary<int, string> filters
+        public Dictionary<int, FilterTypes.FTypes> filters
         {
             get
             {
-                if (!(Session["filters"] is Dictionary<int, string>))
+                if (!(Session["filters"] is Dictionary<int, FilterTypes.FTypes>))
                 {
-                    Session["filters"] = new Dictionary<int, string>();
+                    Session["filters"] = new Dictionary<int, FilterTypes.FTypes>();
                 }
 
-                return Session["filters"] as Dictionary<int, string>;
+                return Session["filters"] as Dictionary<int, FilterTypes.FTypes>;
             }
         }
 
-        public Dictionary<int, ProductTypes.ETypes> products
+        public Dictionary<int, ProductTypes.PTypes> products
         {
             get
             {
-                if (!(Session["products"] is Dictionary<int, ProductTypes.ETypes>))
+                if (!(Session["products"] is Dictionary<int, ProductTypes.PTypes>))
                 {
-                    Session["products"] = new Dictionary<int, ProductTypes.ETypes>();
+                    Session["products"] = new Dictionary<int, ProductTypes.PTypes>();
                 }
 
-                return Session["products"] as Dictionary<int, ProductTypes.ETypes>;
+                return Session["products"] as Dictionary<int, ProductTypes.PTypes>;
             }
         }
 
@@ -141,7 +141,7 @@ namespace PhotoshopWebsite
             btnAddToCart.Text = "Order";
 
             RadioButton btnSepia = new RadioButton();
-            btnSepia.ID = "btnSepia" + x.ID;
+            btnSepia.ID = "SEPIA" + x.ID;
             btnSepia.CheckedChanged += filterChange;
             btnSepia.AutoPostBack = true;
             btnSepia.GroupName = x.ID.ToString();
@@ -149,7 +149,7 @@ namespace PhotoshopWebsite
             btnSepia.Text = "Sepia ";
 
             RadioButton btnBlackWhite = new RadioButton();
-            btnBlackWhite.ID = "btnBlackWhite" + x.ID;
+            btnBlackWhite.ID = "BLACKWHITE" + x.ID;
             btnBlackWhite.CheckedChanged += filterChange;
             btnBlackWhite.AutoPostBack = true;
             btnBlackWhite.GroupName = x.ID.ToString();
@@ -157,7 +157,7 @@ namespace PhotoshopWebsite
             btnBlackWhite.Text = "Black & White ";
 
             RadioButton btnColor = new RadioButton();
-            btnColor.ID = "btnColor" + x.ID;
+            btnColor.ID = "COLOR" + x.ID;
             btnColor.CheckedChanged += filterChange;
             btnColor.AutoPostBack = true;
             btnColor.GroupName = x.ID.ToString();
@@ -165,23 +165,23 @@ namespace PhotoshopWebsite
             btnColor.Text = "Color ";
             if (!filters.ContainsKey(x.ID))
             {
-                filters.Add(x.ID, "btnColor");
+                filters.Add(x.ID, FilterTypes.FTypes.COLOR);
             }
             if (!products.ContainsKey(x.ID))
             {
-                products.Add(x.ID, ProductTypes.ETypes.PHOTO1x2);
+                products.Add(x.ID, ProductTypes.PTypes.PHOTO1x2);
             }
 
             switch (filters[x.ID])
             {
-                case "btnColor":
+                case FilterTypes.FTypes.COLOR:
                     btnColor.Checked = true;
                     break;
-                case "btnBlackWhite":
-                    btnColor.Checked = true;
+                case FilterTypes.FTypes.BLACKWHITE:
+                    btnBlackWhite.Checked = true;
                     break;
-                case "btnSepia":
-                    btnColor.Checked = true;
+                case FilterTypes.FTypes.SEPIA:
+                    btnSepia.Checked = true;
                     break;
                 default:
                     btnColor.Checked = true;
@@ -196,8 +196,8 @@ namespace PhotoshopWebsite
             ddType.Height = 30;
             ddType.SelectedIndexChanged += ddType_SelectedIndexChanged;
             //Gets the product types offered by the photographer per photo
-            List<ProductTypes.ETypes> types = x.getTypes(x.ID.ToString());
-            foreach (ProductTypes.ETypes type in types)
+            List<ProductTypes.PTypes> types = x.getTypes(x.ID.ToString());
+            foreach (ProductTypes.PTypes type in types)
             {
                 ListItem Li = new ListItem();
                 Li.Value = type.ToString();
@@ -254,7 +254,7 @@ namespace PhotoshopWebsite
 
             int num = Int32.Parse(match.Groups["Numeric"].Value);
             //set EType on ID
-            products[num] = ProductTypes.getEType(ddl.SelectedValue);
+            products[num] = ProductTypes.getPType(ddl.SelectedValue);
         }
 
         void filterChange(object sender, EventArgs e)
@@ -267,27 +267,25 @@ namespace PhotoshopWebsite
             int num = Int32.Parse(match.Groups["Numeric"].Value);
 
             //set name on ID
-            filters[num] = name;
+            filters[num] = FilterTypes.getFType(name);
             //change color
             colorChange(num);
         }
         void colorChange(int num)
         {
-            string name = filters[num];
-
             foreach (Domain.Photo photo in photos)
             {
                 if (photo.ID == num)
                 {
-                    switch (name)
+                    switch (filters[num])
                     {
-                        case "btnColor":
+                        case FilterTypes.FTypes.COLOR:
                             convertColor(photo);
                             break;
-                        case "btnBlackWhite":
+                        case FilterTypes.FTypes.BLACKWHITE:
                             convertBlackWhite(photo);
                             break;
-                        case "btnSepia":
+                        case FilterTypes.FTypes.SEPIA:
                             convertSepia(photo);
                             break;
                         default:

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
 using System.Data;
+using PhotoshopWebsite.Enumeration;
 
 namespace PhotoshopWebsite.DatabaseTier
 {
@@ -84,9 +85,9 @@ namespace PhotoshopWebsite.DatabaseTier
             }
             return null;
         }
-        public List<ProductTypes.ETypes> getTypes(string photoID)
+        public List<ProductTypes.PTypes> getTypes(string photoID)
         {
-            List<ProductTypes.ETypes> types = new List<ProductTypes.ETypes>();
+            List<ProductTypes.PTypes> types = new List<ProductTypes.PTypes>();
             string output;
             try
             {
@@ -119,31 +120,31 @@ namespace PhotoshopWebsite.DatabaseTier
                     switch (id[i])
                     {
                         case "1":
-                            types.Add(ProductTypes.ETypes.PHOTO1x2);     
+                            types.Add(ProductTypes.PTypes.PHOTO1x2);     
                             break;
                         case "2":
-                            types.Add(ProductTypes.ETypes.PHOTO2x4);
+                            types.Add(ProductTypes.PTypes.PHOTO2x4);
                             break;
                         case "3":
-                            types.Add(ProductTypes.ETypes.PHOTO5x8);
+                            types.Add(ProductTypes.PTypes.PHOTO5x8);
                             break;
                         case "4":
-                            types.Add(ProductTypes.ETypes.MUISMAT);
+                            types.Add(ProductTypes.PTypes.MUISMAT);
                             break;
                         case "5":
-                            types.Add(ProductTypes.ETypes.TASSEN);
+                            types.Add(ProductTypes.PTypes.TASSEN);
                             break;
                         case "6":
-                            types.Add(ProductTypes.ETypes.TSHIRT);
+                            types.Add(ProductTypes.PTypes.TSHIRT);
                             break;
                         case "7":
-                            types.Add(ProductTypes.ETypes.MOK);
+                            types.Add(ProductTypes.PTypes.MOK);
                             break;
                         case "8":
-                            types.Add(ProductTypes.ETypes.CANVAS);
+                            types.Add(ProductTypes.PTypes.CANVAS);
                             break;
                         case "9":
-                            types.Add(ProductTypes.ETypes.DIBOND);
+                            types.Add(ProductTypes.PTypes.DIBOND);
                             break;
                     }
 
