@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
 using System.Web.UI.HtmlControls;
+using System.Text.RegularExpressions;
 
 namespace PhotoshopWebsite.Gui
 {
@@ -75,7 +76,7 @@ namespace PhotoshopWebsite.Gui
                 Description.Text = item.description;
                 TableCell Quantity = new TableCell();
                 TextBox tbQuantity = new TextBox();
-                tbQuantity.ID = item.GetHashCode().ToString();
+                tbQuantity.ID = item.filterType.ToString() + item.photoID.ToString();
                 tbQuantity.Text = item.quantity.ToString();
                 tbQuantity.TextChanged += Quantity_Change;
                 tbQuantity.AutoPostBack = true;
@@ -179,9 +180,15 @@ namespace PhotoshopWebsite.Gui
         private void Quantity_Change(object sender, EventArgs e)
         {
             TextBox tbQuantity = sender as TextBox;
+            Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
+            Match match = regex.Match(tbQuantity.ID);
+
+            string name = match.Groups["Alpha"].Value;
+            int num = Int32.Parse(match.Groups["Numeric"].Value);
+
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
-                if (item.GetHashCode().ToString() == tbQuantity.ID.ToString())
+                if (item.photoID == num && item.filterType.ToString() == name)
                 {
                     if (int.Parse(tbQuantity.Text) > 0)
                     {
