@@ -57,6 +57,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Controller\LoginCodeControllerTests.cs" />
+    <Compile Include="Controller\PhotoControllerTests.cs" />
     <Compile Include="DatabaseTier\ConnectionSingletonTests.cs" />
     <Compile Include="DatabaseTier\LoginCodeTests.cs" />
     <Compile Include="DatabaseTier\LoginTests.cs" />
