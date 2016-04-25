@@ -89,7 +89,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 mysqlConnection.Open();
                 myCommand.ExecuteNonQuery();
                 //add output to integer
-                id = (int)myCommand.Parameters["@p_ID"].Value;
+                id = (int)(myCommand.Parameters["@p_ID"].Value);
                 return id;
             }
             catch (Exception ex)
