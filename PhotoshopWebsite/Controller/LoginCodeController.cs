@@ -35,9 +35,8 @@ namespace PhotoshopWebsite.Controller
                 {
                     temp.Add(new LoginCode(int.Parse(data[0].ToString()), int.Parse(data[1].ToString()), int.Parse(data[2].ToString()), int.Parse(data[3].ToString()), new DateTime()));
                 }
-                return temp;
             }
-            return new List<LoginCode>();
+            return temp;
         }
     }
 }

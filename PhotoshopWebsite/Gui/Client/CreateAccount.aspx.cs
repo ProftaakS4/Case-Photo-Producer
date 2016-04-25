@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PhotoshopWebsite.Gui.Client
 {
+    [ExcludeFromCodeCoverage]
     public partial class CreateAccount : System.Web.UI.Page
     {
         private String loginCode;
