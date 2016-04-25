@@ -12,21 +12,26 @@ namespace PhotoshopWebsite.DatabaseTier.Tests
     public class LoginTests
     {
         private Login login = new Login();
-        private bool result;
+        
+       
 
         [TestMethod()]
         public void loginUserTest()
-        {            
+        {
+            bool result;
             result = login.loginUser("c.kleijnen@fontys.nl", "carlikleijnen");
-            //Assert.IsTrue(result);
-            Assert.Equals(true, result);
-            
+            Assert.IsTrue(result);
+            result = login.loginUser("c.kleijnen@fontys.nl", "nopassword");
+            Assert.IsFalse(result);
         }
 
         [TestMethod()]
         public void getUserIDTest()
         {
-            Assert.Fail();
+            int result = login.getUserID("c.kleijnen@fontys.nl");
+            Assert.AreEqual(4, result);
+            result = login.getUserID("cgstyle@gmail.com");
+            Assert.AreEqual(-1, result);            
         }
 
         [TestMethod()]
