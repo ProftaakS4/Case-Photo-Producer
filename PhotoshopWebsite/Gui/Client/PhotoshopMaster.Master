@@ -23,7 +23,6 @@
                             <asp:Label runat="server" ID="Labelklantnaam" style="color: grey; margin-bottom:100px;"></asp:Label>
                     </li>
                 <ul class="sidebar-nav" style="margin-top:30px;">
-
                     <li>
                         <a href="Mainstore.aspx">Pictures</a>
                     </li>

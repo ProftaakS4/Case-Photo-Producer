@@ -1,16 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PhotoshopWebsite.Domain;
 
-namespace PhotoshopWebsiteUnitTests
+namespace UnitTest
 {
     [TestClass]
-    public class PhotoTest
+    public class UnitTest1
     {
         [TestMethod]
-        public void TestConstructor()
+        public void TestMethod1()
         {
-
         }
     }
 }
