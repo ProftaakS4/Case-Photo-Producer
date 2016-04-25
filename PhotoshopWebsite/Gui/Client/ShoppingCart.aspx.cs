@@ -27,7 +27,11 @@ namespace PhotoshopWebsite.Gui
             if (Session["shoppingbasketItems"] != null)
             {
                 shoppingbasketItems = (List<Domain.ShoppingbasketItem>)Session["shoppingbasketItems"];
-        }
+            }
+            else
+            {
+                shoppingbasketItems = new List<Domain.ShoppingbasketItem>();
+            }
 
         }
         private void Fillpage(Dictionary<Domain.Photo, int> productlist)

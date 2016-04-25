@@ -16,6 +16,7 @@ namespace PhotoshopWebsite
 
         // create instance of the photoController for future database connections through busisness layer
         PhotoController photoController = new PhotoController();
+        private Dictionary<Domain.Photo, string> photoFilters;
 
         // create a list of all the current user photos
         List<Domain.Photo> photos;
@@ -52,6 +53,7 @@ namespace PhotoshopWebsite
             {
                 shoppingbasketItems = new List<Domain.ShoppingbasketItem>();
             }
+            
 
             // cast the session into the current user
             User currenUser = (User)Session["UserData"];
@@ -92,6 +94,35 @@ namespace PhotoshopWebsite
                 {
                     Fillpage(photo);
                 }
+            }
+
+            if (Session["photoFilters"] != null)
+            {
+                Button button = new Button();
+                string photoID;
+                photoFilters = Session["photoFilters"] as Dictionary<Domain.Photo, string>;
+                foreach (var value in photoFilters)
+                {
+                    if (value.Value == "Black")
+                    {
+                        convertBlackWhite(value.Key);
+                    }
+                    else if (value.Value == "Sepia")
+                    {
+                        convertSepia(value.Key);
+                    }
+                    else if (value.Value == "Color")
+                    {
+                        photoID = value.Key.ID.ToString();                        
+                        button.ID = photoID;
+                        btnColor_Click(button, null);
+                    }
+                }
+
+            }
+            else
+            {
+                photoFilters = new Dictionary<Domain.Photo, string>();
             }
         }
 
@@ -203,6 +234,7 @@ namespace PhotoshopWebsite
                                     if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
                                     {
                                         currentImage.ImageUrl = photo.Image;
+                                        continouslyPhotoFilter(photo, "Color");
                                     }
                                 }
                             }
@@ -241,6 +273,7 @@ namespace PhotoshopWebsite
                     }
                 }
             }
+            Session["photoFilters"] = photoFilters;
             HttpContext.Current.Session["shoppingCart"] = shoppingCart;
             Response.Redirect(Request.RawUrl);
         }
@@ -258,12 +291,25 @@ namespace PhotoshopWebsite
                     {
                         convertSepia(photo);
                         savePhotoFilter(photo.ID.ToString(), "Sepia");
+                        continouslyPhotoFilter(photo, "Sepia");                        
                         break;
                     }
                 }
+                Session["photoFilters"] = photoFilters;
             }
         }
 
+        private void continouslyPhotoFilter(Domain.Photo photo, string filterName)
+        {
+            if (!photoFilters.ContainsKey(photo))
+            {
+                photoFilters.Add(photo, filterName);
+            }
+            else
+            {
+                photoFilters[photo] = filterName;
+            }
+        }
 
         void btnBlackWhite_Click(object sender, EventArgs e)
         {
@@ -277,9 +323,11 @@ namespace PhotoshopWebsite
                     {
                         convertBlackWhite(photo);
                         savePhotoFilter(photo.ID.ToString(), "Black");
+                        continouslyPhotoFilter(photo, "Black");
                         break;
                     }
                 }
+                Session["photoFilters"] = photoFilters;
             }
         }
 
@@ -312,6 +360,7 @@ namespace PhotoshopWebsite
                         if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
                 {
                             currentImage.ImageUrl = "../Images/Sepia" + photo.ID + ".png";
+                            
                         }
                     }
                 }
@@ -347,6 +396,7 @@ namespace PhotoshopWebsite
                         System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
                         if (currentImage.ID.ToString() == "image" + photo.ID.ToString()) {
                             currentImage.ImageUrl = "../Images/BlackWhite"+ photo.ID + ".png";
+                            
                         }
                     }
                 }
