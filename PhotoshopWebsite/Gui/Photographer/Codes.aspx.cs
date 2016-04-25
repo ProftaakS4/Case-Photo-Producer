@@ -18,7 +18,8 @@ namespace PhotoshopWebsite.Gui.Photographer
         private List<int> loginCodesChecked;
         protected void Page_Load(object sender, EventArgs e)
         {
-            lcc = new LoginCodeController(1);
+            User currentUser = (User)Session["UserData"];
+            lcc = new LoginCodeController(currentUser.ID);
             loginCodes = lcc.loginCodes;
             if (Session["loginCodes"] != null)
             {
