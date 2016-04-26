@@ -43,7 +43,7 @@ namespace PhotoshopWebsite.WebSocket
         {
             //string toSend = "Hello!";
 
-            IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 4343);
+            IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse("192.168.27.123"), 4343);
 
             Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
