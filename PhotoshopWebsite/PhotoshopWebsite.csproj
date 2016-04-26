@@ -86,12 +86,10 @@
     <Content Include="Gui\Client\ShoppingCart.aspx" />
     <Content Include="Gui\Finance\Orders.aspx" />
     <Content Include="Gui\Finance\Stock.aspx" />
-    <Content Include="Gui\Images\TestpictureOne.jpg" />
     <Content Include="Gui\Images\Shoppingcart.png" />
     <Content Include="Bootstrap\Content\Custom.css" />
     <Content Include="Gui\Finance\FinancialAdmin.Master" />
     <Content Include="Gui\Admin\AdminMaster.Master" />
-    <Content Include="Gui\Images\Visitekaart-Delahaye-IT.png" />
     <Content Include="Gui\Photographer\Account.aspx" />
     <Content Include="Gui\Photographer\Codes.aspx" />
     <Content Include="Gui\Photographer\PhotographerMaster.Master" />
