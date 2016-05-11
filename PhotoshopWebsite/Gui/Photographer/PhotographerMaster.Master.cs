@@ -33,9 +33,9 @@ namespace PhotoshopWebsite.Gui.Photographer
             {
                 LabelTitle.Text = "<h1>My Codes</h1>";
             }
-            else if (pageName.Contains("selection"))
+            else if (pageName.Contains("products"))
             {
-                LabelTitle.Text = "<h1>My selection</h1>";
+                LabelTitle.Text = "<h1>My products</h1>";
             }
             else
             {
