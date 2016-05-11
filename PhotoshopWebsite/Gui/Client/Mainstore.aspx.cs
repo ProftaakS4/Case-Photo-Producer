@@ -150,6 +150,13 @@ namespace PhotoshopWebsite
             btnSepia.Height = 30;
             btnSepia.Text = "Sepia ";
 
+            Button btnCrop = new Button();
+            btnCrop.ID = "Crop" + x.ID.ToString();
+            btnCrop.CssClass = "btn btn-default";
+            btnCrop.Click += BtnCrop_Click;
+            btnCrop.Height = 30;
+            btnCrop.Text = "Crop";
+
             RadioButton btnBlackWhite = new RadioButton();
             btnBlackWhite.ID = "BLACKWHITE" + x.ID;
             btnBlackWhite.CheckedChanged += filterChange;
@@ -165,6 +172,9 @@ namespace PhotoshopWebsite
             btnColor.GroupName = x.ID.ToString();
             btnColor.Height = 30;
             btnColor.Text = "Color ";
+
+            
+
             if (!filters.ContainsKey(x.ID))
             {
                 filters.Add(x.ID, FilterTypes.FTypes.COLOR);
@@ -238,14 +248,21 @@ namespace PhotoshopWebsite
             firstControl.Controls.Add(btnColor);
             firstControl.Controls.Add(btnBlackWhite);
             firstControl.Controls.Add(btnSepia);
+            firstControl.Controls.Add(btnCrop);
             firstControl.Controls.Add(new LiteralControl("<br />"));
             firstControl.Controls.Add(ddType);
             firstControl.Controls.Add(btnAddToCart);
+            firstControl.Controls.Add(btnCrop);
 
             pnlProduct.Controls.Add(firstControl);
 
             lastControl.InnerHtml = "</div></div></div>";
             pnlProduct.Controls.Add(lastControl);
+        }
+
+        private void BtnCrop_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         void ddType_SelectedIndexChanged(object sender, EventArgs e)

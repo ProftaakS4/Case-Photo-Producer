@@ -59,6 +59,39 @@ namespace PhotoshopWebsite.DatabaseTier
             return null;
         }
 
+        public DataTable searchGroupPhoto(string photoName)
+        {
+            try
+            {
+                myCommand = new MySqlCommand("searchGroupPhoto", mysqlConnection);
+                // input
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_searchedText", MySqlDbType.VarChar).Value = photoName;
+                myCommand.Parameters["@p_searchedText"].Direction = ParameterDirection.Input;
+                // output
+                myCommand.Parameters.Add("@ID", MySqlDbType.Int32);
+                myCommand.Parameters["@ID"].Direction = ParameterDirection.Output;
+                // execute query
+                mysqlConnection.Open();
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+
+                //return datatable
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return null;
+        }
+
 
 
         //    // set the data for the current photo
