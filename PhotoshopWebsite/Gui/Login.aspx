@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <link href="../Bootstrap/Content/bootstrap.css" rel="stylesheet" />
 <head runat="server">
-    <title></title>
+    <title>Photoshop</title>
 </head>
 <body style="background-color:#eee">
     <form id="form1" runat="server">
