@@ -14,40 +14,20 @@ namespace PhotoshopWebsite.Gui.Client
     [ExcludeFromCodeCoverage]
     public partial class Account : System.Web.UI.Page
     {
-        User testuser = new User(1, "client", "Loek", "Delahaye", "Voogdijstraat", "5", "6041EX", "Roermond", "1235325", "NLRAB012309814", "Loekdelaaye@gmail.com");
-        
-        private Dictionary<Product, int> testproducts;
         private List<Order> orders;
         private List<Order> Reorders;
-
-        Product testproduct1 = new Product(1, "PHOTO1x2", "PAPIER", "Foto van formaat 1x2", "../Images/Visitekaart-Delahaye-IT.png", -1);
-        Product testproduct2 = new Product(2, "PHOTO1x2", "Hout", "Foto van formaat 200X200", "../Images/Visitekaart-Delahaye-IT.png", -1);
-        Product testproduct3 = new Product(3, "PHOTO1x2", "Steen", "Foto van formaat 300x300", "../Images/Visitekaart-Delahaye-IT.png", -1);
-        Product testproduct4 = new Product(4, "PHOTO1x2", "Rubber", "Foto van formaat 500x1500", "../Images/Visitekaart-Delahaye-IT.png", -1);
-        Product testproduct5 = new Product(5, "PHOTO1x2", "Rubber", "Foto van formaat 500x1500", "../Images/Visitekaart-Delahaye-IT.png", -1);
         private User currentUser;
         Order order1;
         Order order2;
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (Session["UserData"] != null)
             {
                 currentUser = Session["UserData"] as User;
                 FillAccountData(currentUser);
             }
-            testproducts = new Dictionary<Product, int>();
-            testproducts.Add(testproduct1, 1);
-            testproducts.Add(testproduct2, 2);
-            testproducts.Add(testproduct3, 3);
-            testproducts.Add(testproduct4, 4);
-            testproducts.Add(testproduct5, 5);
             Reorders = new List<Order>();
             orders = new List<Order>();
-            order1 = new Order(1, testproducts, new DateTime(2016 - 3 - 15), PaymentType.iDeal, "NLRABO1239871238761", 22.60);
-            order2 = new Order(2, testproducts, new DateTime(2016 - 3 - 15), PaymentType.iDeal, "NLRABO1239871238761", 22.60);
-            orders.Add(order1);
-            orders.Add(order2);
 
             FillPage(orders);
 
@@ -99,9 +79,12 @@ namespace PhotoshopWebsite.Gui.Client
                 ID.Text = order.getID().ToString();
                 TableCell products = new TableCell();
                 ListBox Products = new ListBox();
-                foreach (Product product in order.getProducts().Keys)
+                if (order != null)
                 {
-                    Products.Items.Add(product.Description);
+                    foreach (Product product in order.getProducts().Keys)
+                    {
+                        Products.Items.Add(product.Description);
+                    }
                 }
                 products.Controls.Add(Products);
                 TableCell Date = new TableCell();

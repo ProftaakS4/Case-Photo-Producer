@@ -66,10 +66,11 @@ namespace PhotoshopWebsite.Controller
             // when login credentials are verified
            if(login.loginUser(emailaddress, password))
             {
+                User returnUser = getUserData(emailaddress);
                 // when user data is found
-                if(getUserData(emailaddress) != null)
+                if(returnUser != null)
                 {
-                    return this;
+                    return returnUser;
                 }
                 return null;
             }
@@ -94,14 +95,14 @@ namespace PhotoshopWebsite.Controller
                 {
                     // set the data for the current user
                     if (userData.ContainsKey("type")) { this.Type = userData["type"]; }
-                    else if (userData.ContainsKey("firstname")) { this.Firstname = userData["firstname"]; }
-                    else if (userData.ContainsKey("lastname")) { this.Lastname = userData["lastname"]; }
-                    else if (userData.ContainsKey("streetname")) { this.Streetname = userData["streetname"]; }
-                    else if (userData.ContainsKey("housenumber")) { this.Housenumber = userData["housenumber"]; }
-                    else if (userData.ContainsKey("zipcode")) { this.Zipcode = userData["zipcode"]; }
-                    else if (userData.ContainsKey("city")) { this.City = userData["city"]; }
-                    else if (userData.ContainsKey("phonenumber")) { this.Phonenumber = userData["phonenumber"]; }
-                    else if (userData.ContainsKey("iban")) { this.IBAN = userData["iban"]; }
+                    if (userData.ContainsKey("firstname")) { this.Firstname = userData["firstname"]; }
+                    if (userData.ContainsKey("lastname")) { this.Lastname = userData["lastname"]; }
+                    if (userData.ContainsKey("streetname")) { this.Streetname = userData["streetname"]; }
+                    if (userData.ContainsKey("housenumber")) { this.Housenumber = userData["housenumber"]; }
+                    if (userData.ContainsKey("zipcode")) { this.Zipcode = userData["zipcode"]; }
+                    if (userData.ContainsKey("city")) { this.City = userData["city"]; }
+                    if (userData.ContainsKey("phonenumber")) { this.Phonenumber = userData["phonenumber"]; }
+                    if (userData.ContainsKey("iban")) { this.IBAN = userData["iban"]; }
                     // return the user with its data
                     return this;
                 }
