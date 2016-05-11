@@ -55,6 +55,10 @@ namespace PhotoshopWebsite
             {
                 LabelTitle.Text = "<h1>My Pictures</h1>";
             }
+            else if (pageName.Contains("group"))
+            {
+                LabelTitle.Text = "<h1>Group Pictures</h1>";
+            }
             else
             {
                 LabelTitle.Text = "<h1>My Shoppingcart</h1>";
