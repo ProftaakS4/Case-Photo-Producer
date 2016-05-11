@@ -34,13 +34,13 @@ namespace PhotoshopWebsite.Gui
             {
                 LabelTitle.Text = "<h1>Orders</h1>";
             }
+            else if (pageName.Contains("stock"))
+            {
+                LabelTitle.Text = "<h1>Stock</h1>";
+            }
             else if (pageName.Contains("finance"))
             {
                 LabelTitle.Text = "<h1>Finance</h1>";
-            }
-            else
-            {
-                LabelTitle.Text = "<h1>stock</h1>";
             }
         }
         
