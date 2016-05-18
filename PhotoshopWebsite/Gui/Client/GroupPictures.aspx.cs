@@ -19,18 +19,18 @@ namespace PhotoshopWebsite.Gui.Client
         PhotoController photoController = new PhotoController();
 
         // create a list of all the current user photos
-        public List<Domain.Photo> photos
-        {
-            get
-            {
-                if (!(Session["photos"] is List<Domain.Photo>))
-                {
-                    Session["photos"] = new List<Domain.Photo>();
-                }
+        public List<Domain.Photo> photos;
+        //{
+        //    get
+        //    {
+        //        if (!(Session["photos"] is List<Domain.Photo>))
+        //        {
+        //            Session["photos"] = new List<Domain.Photo>();
+        //        }
 
-                return Session["photos"] as List<Domain.Photo>;
-            }
-        }
+        //        return Session["photos"] as List<Domain.Photo>;
+        //    }
+        //}
 
         public List<Domain.Photo> searchedPhotos
         {
@@ -89,6 +89,11 @@ namespace PhotoshopWebsite.Gui.Client
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                Session["photos"] = null;
+            }
+
             // cast the session into the current user
             User currenUser = (User)Session["UserData"];
 
@@ -98,16 +103,25 @@ namespace PhotoshopWebsite.Gui.Client
             // get all the photoID's of the current user
             List<string> photoIDS = photoController.getGroupPhotos();
 
-            // get all the photos of the current user and add them to a list
-            if (photoIDS != null)
+            if (Session["photos"] != null)
             {
-                photos.Clear();
-                foreach (string s in photoIDS)
+                photos = (List<Domain.Photo>)Session["photos"];
+            }
+            else
+            {
+                photos = new List<Domain.Photo>();
+                // get all the photos of the current user and add them to a list
+                if (photoIDS != null)
                 {
-                    // store all the photos in the session
-                    photos.Add(photoController.getPhoto(s));
+                    foreach (string s in photoIDS)
+                    {
+                        // store all the photos in the session
+                        photos.Add(photoController.getPhoto(s));
+                    }
+                    Session["photos"] = photos;
                 }
             }
+            
 
             // check if a search has taken place
             if (searchedPhotos.Count > 0)
@@ -372,7 +386,7 @@ namespace PhotoshopWebsite.Gui.Client
                 }
             }
             _current = (Bitmap)bmap.Clone();
-            _current.Save(Server.MapPath("../Images/Sepia" + photo.ID + ".png"));
+            _current.Save(Server.MapPath("..\\Website Filter Cache\\Sepia" + photo.ID + ".png"));
 
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
@@ -383,7 +397,7 @@ namespace PhotoshopWebsite.Gui.Client
                         System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
                         if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
                         {
-                            currentImage.ImageUrl = "../Images/Sepia" + photo.ID + ".png";
+                            currentImage.ImageUrl = "..\\Website Filter Cache\\Sepia" + photo.ID + ".png";
                             break;
                         }
                     }
@@ -409,7 +423,7 @@ namespace PhotoshopWebsite.Gui.Client
             _current = (Bitmap)bmap.Clone();
             Random rnd = new Random();
             int a = rnd.Next();
-            _current.Save(Server.MapPath("../Images/BlackWhite" + photo.ID + ".png"));
+            _current.Save(Server.MapPath("..\\Website Filter Cache\\BlackWhite" + photo.ID + ".png"));
 
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
@@ -420,7 +434,7 @@ namespace PhotoshopWebsite.Gui.Client
                         System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
                         if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
                         {
-                            currentImage.ImageUrl = "../Images/BlackWhite" + photo.ID + ".png";
+                            currentImage.ImageUrl = "..\\Website Filter Cache\\BlackWhite" + photo.ID + ".png";
                             break;
                         }
                     }

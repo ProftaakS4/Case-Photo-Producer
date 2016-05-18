@@ -21,18 +21,7 @@ namespace PhotoshopWebsite
         PhotoController photoController = new PhotoController();
 
         // create a list of all the current user photos
-        public List<Domain.Photo> photos
-        {
-            get
-            {
-                if (!(Session["photos"] is List<Domain.Photo>))
-                {
-                    Session["photos"] = new List<Domain.Photo>();
-                }
-
-                return Session["photos"] as List<Domain.Photo>;
-            }
-        }
+        public List<Domain.Photo> photos;
 
         public List<Domain.Photo> searchedPhotos
         {
@@ -92,6 +81,10 @@ namespace PhotoshopWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
+             if (!IsPostBack)
+             {
+                Session["photos"] = null;
+            }
             // cast the session into the current user
             User currenUser = (User)Session["UserData"];
 
@@ -101,13 +94,23 @@ namespace PhotoshopWebsite
             // get all the photoID's of the current user
             List<string> photoIDS = photoController.getUserPhotoIDs(userID);
 
-            // get all the photos of the current user and add them to a list
-            if (photoIDS != null && photos.Count == 0)
+            if (Session["photos"] != null)
             {
-                foreach (string s in photoIDS)
+                photos = (List<Domain.Photo>)Session["photos"];
+            }
+            else
+            {
+                photos = new List<Domain.Photo>();
+
+                // get all the photos of the current user and add them to a list
+                if (photoIDS != null)
                 {
-                    // store all the photos in the session
-                    photos.Add(photoController.getPhoto(s));
+                    foreach (string s in photoIDS)
+                    {
+                        // store all the photos in the session
+                        photos.Add(photoController.getPhoto(s));
+                    }
+                    Session["photos"] = photos;
                 }
             }
 
@@ -173,7 +176,7 @@ namespace PhotoshopWebsite
             btnColor.Height = 30;
             btnColor.Text = "Color ";
 
-            
+
 
             if (!filters.ContainsKey(x.ID))
             {
