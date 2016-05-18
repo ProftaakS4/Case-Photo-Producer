@@ -150,12 +150,20 @@ namespace PhotoshopWebsite
             btnSepia.Height = 30;
             btnSepia.Text = "Sepia ";
 
-            Button btnCrop = new Button();
-            btnCrop.ID = "Crop" + x.ID.ToString();
-            btnCrop.CssClass = "btn btn-default";
-            btnCrop.Click += BtnCrop_Click;
-            btnCrop.Height = 30;
-            btnCrop.Text = "Crop";
+            HtmlGenericControl cropButtonControll = new HtmlGenericControl("div");
+            cropButtonControll.InnerHtml = "<button type='button' id='Crop" + x.ID + "'class='btn btn-default' data-toggle='modal' data-target='#myModal'>Crop</ button > ";
+
+            //Button btnCrop = new Button();
+            //btnCrop.ID = "Crop" + x.ID.ToString();
+            //btnCrop.CssClass = "btn btn-default";
+            //btnCrop.Attributes.Add("data-toggle", "modal");
+            //btnCrop.Attributes.Add("data-target", "#myModal");
+            //btnCrop.Height = 30;
+            //btnCrop.Text = "Crop";
+
+
+
+
 
             RadioButton btnBlackWhite = new RadioButton();
             btnBlackWhite.ID = "BLACKWHITE" + x.ID;
@@ -173,7 +181,7 @@ namespace PhotoshopWebsite
             btnColor.Height = 30;
             btnColor.Text = "Color ";
 
-            
+
 
             if (!filters.ContainsKey(x.ID))
             {
@@ -226,6 +234,7 @@ namespace PhotoshopWebsite
 
             HtmlGenericControl firstControl = new HtmlGenericControl("div");
             HtmlGenericControl secondControl = new HtmlGenericControl("div");
+            HtmlGenericControl cropControl = new HtmlGenericControl("div");
             HtmlGenericControl lastControl = new HtmlGenericControl("div");
             //adding other div elements containing discriptions
             string div;
@@ -240,7 +249,7 @@ namespace PhotoshopWebsite
 
             //firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'> <img src=" + x.Image + " " + "alt=" + x.Description + ">  <div class='caption'>";
             firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'><div class='caption'>";
-
+            cropControl.InnerHtml = "<div class='modal fade' id='myModal' tabindex=' - 1' role='dialog' aria-labelledby='myModalLabel'>< div class='modal-dialog' role='document'><div class='modal-content'><div class='modal-header'><button type = 'button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='myModalLabel'>Crop image</h4></div><div class='modal-body'> <img src='" + x.Image + "'> </img>'</div><div class='modal-footer'><button type = 'button' class='btn btn-default' data-dismiss='modal'>Close</button><button type = 'button' class='btn btn-primary'>Save changes</button></div></div></div></div>";
             //add buttons
             secondControl.InnerHtml = "<p>" + x.Description + "</p>";
             firstControl.Controls.Add(imgProduct);
@@ -248,21 +257,17 @@ namespace PhotoshopWebsite
             firstControl.Controls.Add(btnColor);
             firstControl.Controls.Add(btnBlackWhite);
             firstControl.Controls.Add(btnSepia);
-            firstControl.Controls.Add(btnCrop);
             firstControl.Controls.Add(new LiteralControl("<br />"));
             firstControl.Controls.Add(ddType);
             firstControl.Controls.Add(btnAddToCart);
-            firstControl.Controls.Add(btnCrop);
 
+            firstControl.Controls.Add(cropButtonControll);
             pnlProduct.Controls.Add(firstControl);
+
+            pnlProduct.Controls.Add(cropControl);
 
             lastControl.InnerHtml = "</div></div></div>";
             pnlProduct.Controls.Add(lastControl);
-        }
-
-        private void BtnCrop_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         void ddType_SelectedIndexChanged(object sender, EventArgs e)

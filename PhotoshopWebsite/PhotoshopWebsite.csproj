@@ -80,6 +80,7 @@
     <Content Include="Gui\Client\Account.aspx" />
     <Content Include="Gui\Client\CreateAccount.aspx" />
     <Content Include="Gui\Client\GroupPictures.aspx" />
+    <Content Include="Gui\Client\WebForm1.aspx" />
     <Content Include="Gui\Finance\Account.aspx" />
     <Content Include="Gui\Finance\Finance.aspx" />
     <Content Include="Gui\Client\PhotoshopMaster.Master" />
@@ -220,6 +221,13 @@
     </Compile>
     <Compile Include="Gui\Client\GroupPictures.aspx.designer.cs">
       <DependentUpon>GroupPictures.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Client\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Client\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Gui\Finance\Account.aspx.cs">
       <DependentUpon>Account.aspx</DependentUpon>
