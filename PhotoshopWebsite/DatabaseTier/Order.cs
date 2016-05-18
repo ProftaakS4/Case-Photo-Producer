@@ -28,7 +28,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// </summary>
         /// <param name="accountID"></param> id of the logged on account
         /// <returns></returns>
-        public DataTable getOrders(int accountID)
+        public DataTable getPurchases(int accountID)
         {
             try
             {
