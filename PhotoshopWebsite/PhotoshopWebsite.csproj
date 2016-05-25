@@ -123,7 +123,6 @@
     <Content Include="Gui\Photographer\Account.aspx" />
     <Content Include="Gui\Photographer\Codes.aspx" />
     <Content Include="Gui\Photographer\PhotographerMaster.Master" />
-    <Content Include="Gui\Client\Payment\PaymentMethod.Master" />
     <None Include="Gui\Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -267,13 +266,6 @@
     </Compile>
     <Compile Include="Gui\Client\Payment\Ogone.aspx.designer.cs">
       <DependentUpon>Ogone.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Gui\Client\Payment\PaymentMethod.Master.cs">
-      <DependentUpon>PaymentMethod.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gui\Client\Payment\PaymentMethod.Master.designer.cs">
-      <DependentUpon>PaymentMethod.Master</DependentUpon>
     </Compile>
     <Compile Include="Gui\Client\Payment\Transfer.aspx.cs">
       <DependentUpon>Transfer.aspx</DependentUpon>

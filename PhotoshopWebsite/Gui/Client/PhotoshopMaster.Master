@@ -1,9 +1,9 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PhotoshopMaster.master.cs" Inherits="PhotoshopWebsite.PhotoshopMaster" %>
 
 <!DOCTYPE html>
-<script src="../../Bootstrap/Scripts/jquery-1.9.1.min.js"></script>
-<link href="../../Bootstrap/Content/bootstrap.css" rel="stylesheet" />
-<script src="../../Bootstrap/Scripts/bootstrap.js"></script>
+<script src="/Bootstrap/Scripts/jquery-1.9.1.min.js"></script>
+<link href="/Bootstrap/Content/bootstrap.css" rel="stylesheet" />
+<script src="/Bootstrap/Scripts/bootstrap.js"></script>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">

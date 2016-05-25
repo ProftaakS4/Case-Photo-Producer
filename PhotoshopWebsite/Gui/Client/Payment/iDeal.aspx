@@ -1,16 +1,16 @@
-﻿<%@ Page Language="C#" MasterPageFile="PaymentMethod.Master" AutoEventWireup="true" CodeBehind="iDeal.aspx.cs" Inherits="PhotoshopWebsite.Gui.Client.Payment.iDeal" %>
+﻿<%@ Page Language="C#" MasterPageFile="../PhotoshopMaster.Master" AutoEventWireup="true" CodeBehind="iDeal.aspx.cs" Inherits="PhotoshopWebsite.Gui.Client.Payment.iDeal" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-            
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div id="panel-body" class="panel-bodybefore">
+        <div class='container' style="margin-left: 13px;">
+            <div class='row'>
+                <asp:Panel ID="pnlProduct" runat="server"></asp:Panel>
+                <asp:Panel ID="pnlPayment" runat="server"></asp:Panel>
+            </div>
+        </div>
+        <h1>Gay shit</h1>
     </div>
-    </form>
-</body>
-</html>
+    
+</asp:Content>

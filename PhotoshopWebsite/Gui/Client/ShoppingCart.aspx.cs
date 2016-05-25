@@ -16,6 +16,11 @@ namespace PhotoshopWebsite.Gui
     {
         private string orderName = "Photo Shop";
         private string orderPrice;
+        private ImageButton btnTransfer;
+        private ImageButton btnPayPal;
+        private ImageButton btniDeal;
+        private ImageButton btnGoogle;
+        private ImageButton btnOgone;
 
         public List<Domain.ShoppingbasketItem> shoppingCart
         {
@@ -33,6 +38,8 @@ namespace PhotoshopWebsite.Gui
         protected void Page_Load(object sender, EventArgs e)
         {
             Fillpage();
+            setupEventhandlersPaymentMethod();
+            createPaymentPanel();
         }
         private void Fillpage()
         {
@@ -121,50 +128,55 @@ namespace PhotoshopWebsite.Gui
 
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
+
+
         }
 
+        void setupEventhandlersPaymentMethod()
+        {
+            btnTransfer = new ImageButton();
+            btnTransfer.Click += BtnTransfer_Click;
+            btnPayPal = new ImageButton();
+            btnPayPal.Click += btnPayPal_Click;
+            btniDeal = new ImageButton();
+            btniDeal.Click += BtniDeal_Click;
+            btnGoogle = new ImageButton();
+            btnGoogle.Click += BtnGoogle_Click;
+            btnOgone = new ImageButton();
+            btnOgone.Click += BtnOgone_Click;
+        }
         void createPaymentPanel()
         {
-            ImageButton btnTransfer = new ImageButton();
             btnTransfer.ID = "btnTransfer";
-            btnTransfer.Click += btnTransfer_Click;
             btnTransfer.Height = 30;
             btnTransfer.Width = 90;
             btnTransfer.AlternateText = "Pay by Money Transfer";
             btnTransfer.ImageUrl = "http://www.glerups.nl/media/wysiwyg/infortis/ultimo/custom/overboeking.jpg";
 
-            ImageButton btnPayPal = new ImageButton();
             btnPayPal.ID = "btnPaypal";
-            btnPayPal.Click += btnPayPal_Click;
             btnPayPal.Height = 30;
             btnPayPal.Width = 90;
             btnPayPal.AlternateText = "Pay with PayPal";
             btnPayPal.ImageUrl = "http://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif";
 
-            ImageButton btniDeal = new ImageButton();
             btniDeal.ID = "btniDeal";
-            btniDeal.Click += btniDeal_Click;
             btniDeal.Height = 30;
             btniDeal.Width = 90;
             btniDeal.AlternateText = "Pay with iDeal";
             btniDeal.ImageUrl = "http://www.dcpfilm.nl/Uitgeverij/images/images_button-ideal.jpg";
 
-            ImageButton btnGoogle = new ImageButton();
             btnGoogle.ID = "btnGoogle";
-            btnGoogle.Click += btnGoogle_Click;
             btnGoogle.Height = 30;
             btnGoogle.Width = 90;
             btnGoogle.AlternateText = "Pay with Google-Checkout";
             btnGoogle.ImageUrl = "https://lh5.googleusercontent.com/-eES4aTLteqY/TWmvwSg2tQI/AAAAAAAAAjo/RXrOWfCy6m4/s1600/google_checkout_button.gif";
 
-            ImageButton btnOgone = new ImageButton();
             btnOgone.ID = "btnOgone";
-            btnOgone.Click += btnOgone_Click;
             btnOgone.Height = 30;
             btnOgone.Width = 90;
             btnOgone.AlternateText = "Pay with Ogone";
             btnOgone.ImageUrl = "https://tctechcrunch2011.files.wordpress.com/2012/07/87407v3-max-250x250.jpg";
-            
+
 
             pnlPayment.Controls.Add(btnTransfer);
             pnlPayment.Controls.Add(new LiteralControl(" <br />"));
@@ -178,9 +190,48 @@ namespace PhotoshopWebsite.Gui
             pnlPayment.Controls.Add(new LiteralControl(" <br />"));
         }
 
-        void btnTransfer_Click(object sender, EventArgs e)
+        void redirectPaymentMethod(string id)
         {
-            Response.Redirect("~/Gui/Client/Payment/Transfer.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+            switch (id)
+            {                
+                case "btnTransfer":
+                    Response.Redirect("Payment/iDeal.aspx");
+                    break;
+                case "btnPaypal":
+                    orderPrice = "0.01";
+                    Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + orderPrice);
+                    break;
+                case "btniDeal":
+                    Response.Redirect("Payment/iDeal.aspx");
+                    break;
+                case "btnGoogle":
+                    Response.Redirect("Payment/Google.aspx");
+                    break;
+                case "btnOgone":
+                    Response.Redirect("Payment/Ogone.aspx");
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void BtnOgone_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("Payment/Ogone.aspx");
+        }
+
+        private void BtnTransfer_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("Payment/iDeal.aspx");
+        }
+
+        private void BtnGoogle_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("Payment/Google.aspx");
+        }
+
+        private void BtniDeal_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("Payment/iDeal.aspx");
         }
 
         void btnPayPal_Click(object sender, EventArgs e)
@@ -189,20 +240,7 @@ namespace PhotoshopWebsite.Gui
             Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + orderPrice);
         }
 
-        void btniDeal_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Gui/Client/Payment/iDeal.aspx");            
-        }
 
-        void btnGoogle_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Gui/Client/Payment/Google.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
-        }
-
-        void btnOgone_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Gui/Client/Payment/Ogone.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
-        }
 
         void btnORder_Click(object sender, EventArgs e)
         {
@@ -211,11 +249,11 @@ namespace PhotoshopWebsite.Gui
                 //Response.Write("<script>alert('ShoppingCart is empty, please fill your cart first')</script>");
             }
 
-            createPaymentPanel();
+            //createPaymentPanel();
             //else
             //{
             //    PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
-                
+
             //    if (shoppingCart != null)
             //    {
             //        foreach (Domain.ShoppingbasketItem item in shoppingCart)
