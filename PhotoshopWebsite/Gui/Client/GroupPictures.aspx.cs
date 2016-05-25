@@ -172,7 +172,7 @@ namespace PhotoshopWebsite.Gui.Client
             btnCrop.ID = "Crop" + x.ID.ToString();
             btnCrop.Click += BtnCrop_Click;
             btnCrop.CssClass = "btn btn-default";
-            btnCrop.Text = "Crop Image";
+            btnCrop.Text = "Order image";
             btnCrop.Height = 30;
 
             if (!filters.ContainsKey(x.ID))
