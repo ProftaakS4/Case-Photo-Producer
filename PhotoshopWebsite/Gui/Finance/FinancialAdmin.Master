@@ -8,9 +8,9 @@
     <link href="../../Bootstrap/Content/Custom.css" rel="stylesheet" />
     <link href="../../Bootstrap/Menu/simple-sidebar.css" rel="stylesheet" />
     <link href="../../Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
-    </head>
-    <form runat="server">
-<body>
+</head>
+<form runat="server">
+    <body>
 
     <div id="wrapper">
 
@@ -78,10 +78,21 @@
     });
     </script>
 
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+   <%--     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>
     </div>
 </body>
+</form>--%>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        </asp:ContentPlaceHolder>
+        </head>
+    <body>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+        </div>
+    </body>
 </form>
 </html>
