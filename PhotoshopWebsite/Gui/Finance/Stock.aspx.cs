@@ -73,7 +73,13 @@ namespace PhotoshopWebsite.Gui
                 TableCell ID = new TableCell();
                 ID.Text = prod.ID.ToString();
                 TableCell Image = new TableCell();
-                // TODO TODO TODO TODO TODO TDOO TDOO TODO .Text = pur.accountID.ToString();
+                System.Web.UI.WebControls.Image imgProduct = new System.Web.UI.WebControls.Image();
+                imgProduct.ImageUrl = prod.Image;
+                imgProduct.Height = 100;
+                imgProduct.Width = 150;
+                
+                Image.Controls.Add(imgProduct);
+
                 TableCell Description = new TableCell();
                 Description.Text = prod.Description.ToString();
                 TableCell Stock = new TableCell();
@@ -126,7 +132,6 @@ namespace PhotoshopWebsite.Gui
         private void AddAmount_Clicked(object sender, EventArgs e)
         {
             foreach (KeyValuePair<int, int> item in productAmount)
-            //foreach (Item prod in productAmount)
             {
                 pc.updateProductStock(item.Key, item.Value);
             }
