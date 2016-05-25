@@ -17,7 +17,6 @@ namespace PhotoshopWebsite.Gui
 
         private List<Product> products = new List<Product>();
         private ProductController pc;
-        private List<int> productsCheck; // Amount which will be added to the stock.
         private Dictionary<int, int> productAmount;
 
 
@@ -51,6 +50,8 @@ namespace PhotoshopWebsite.Gui
             IDHeader.Text = "Product ID";
             TableHeaderCell imageHeader = new TableHeaderCell();
             imageHeader.Text = "Image";
+            TableHeaderCell descriptionHeader = new TableHeaderCell();
+            descriptionHeader.Text = "Description";
             TableHeaderCell stockHeader = new TableHeaderCell();
             stockHeader.Text = "Stock";
             TableHeaderCell amountHeader = new TableHeaderCell();
@@ -58,6 +59,7 @@ namespace PhotoshopWebsite.Gui
 
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(imageHeader);
+            MainHeaderRow.Cells.Add(descriptionHeader);
             MainHeaderRow.Cells.Add(stockHeader);
             MainHeaderRow.Cells.Add(amountHeader);
 
@@ -72,6 +74,8 @@ namespace PhotoshopWebsite.Gui
                 ID.Text = prod.ID.ToString();
                 TableCell Image = new TableCell();
                 // TODO TODO TODO TODO TODO TDOO TDOO TODO .Text = pur.accountID.ToString();
+                TableCell Description = new TableCell();
+                Description.Text = prod.Description.ToString();
                 TableCell Stock = new TableCell();
                 Stock.Text = prod.Stock.ToString();
                 TableCell TextBoxCell = new TableCell();
@@ -92,6 +96,7 @@ namespace PhotoshopWebsite.Gui
 
                 MainRow.Cells.Add(ID);
                 MainRow.Cells.Add(Image);
+                MainRow.Cells.Add(Description);
                 MainRow.Cells.Add(Stock);
                 MainRow.Cells.Add(TextBoxCell);
 
