@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PhotoshopWebsite.Gui.Finance {
+namespace PhotoshopWebsite.Gui.Photographer {
     
     
-    public partial class Orders {
+    public partial class Selection {
         
         /// <summary>
-        /// pnlCodes control.
+        /// pnlProducts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlCodes;
+        protected global::System.Web.UI.WebControls.Panel pnlProducts;
     }
 }

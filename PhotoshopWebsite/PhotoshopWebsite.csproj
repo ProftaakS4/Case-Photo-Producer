@@ -141,7 +141,7 @@
     <Content Include="Bootstrap\Scripts\jquery-1.9.1.js" />
     <Content Include="Bootstrap\Scripts\jquery-1.9.1.min.js" />
     <Content Include="Gui\Photographer\Pictures.aspx" />
-    <Content Include="Gui\Photographer\Selection.aspx" />
+    <Content Include="Gui\Photographer\Products.aspx" />
     <Content Include="Gui\Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -151,7 +151,12 @@
   <ItemGroup>
     <Compile Include="Controller\LoginCodeController.cs" />
     <Compile Include="Controller\PhotoController.cs" />
+    <Compile Include="Controller\ProductController.cs" />
+    <Compile Include="DatabaseTier\Product.cs" />
+    <Compile Include="Controller\PurchaseController.cs" />
     <Compile Include="Domain\Product.cs" />
+    <Compile Include="Domain\ProductPerPhotographer.cs" />
+    <Compile Include="Domain\Purchase.cs" />
     <Compile Include="Enumeration\FilterTypes.cs" />
     <Compile Include="Enumeration\ProductTypes.cs" />
     <Compile Include="DatabaseTier\LoginCode.cs" />
@@ -310,12 +315,12 @@
     <Compile Include="Gui\Photographer\Pictures.aspx.designer.cs">
       <DependentUpon>Pictures.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Gui\Photographer\Selection.aspx.cs">
-      <DependentUpon>Selection.aspx</DependentUpon>
+    <Compile Include="Gui\Photographer\Products.aspx.cs">
+      <DependentUpon>Products.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Gui\Photographer\Selection.aspx.designer.cs">
-      <DependentUpon>Selection.aspx</DependentUpon>
+    <Compile Include="Gui\Photographer\Products.aspx.designer.cs">
+      <DependentUpon>Products.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Gui\Client\Mainstore.aspx.cs">

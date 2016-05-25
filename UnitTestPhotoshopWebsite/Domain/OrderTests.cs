@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PhotoshopWebsite.Controller;
+using PhotoshopWebsite.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

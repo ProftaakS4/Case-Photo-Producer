@@ -30,8 +30,7 @@ namespace PhotoshopWebsite.Controller
             // when userdata is found and returned
             if (dt.Rows.Count != 0)
             {
-                DataRow[] datarowcategorie = dt.Select("ID=ID");
-                foreach (DataRow data in datarowcategorie)
+                foreach (DataRow data in dt.Rows)
                 {
                     temp.Add(new LoginCode(int.Parse(data[0].ToString()), int.Parse(data[1].ToString()), int.Parse(data[2].ToString()), int.Parse(data[3].ToString()), new DateTime()));
                 }
