@@ -15,6 +15,7 @@ namespace PhotoshopWebsite.Gui.Client
 {
     public partial class GroupPictures : System.Web.UI.Page
     {
+
         // create instance of the photoController for future database connections through busisness layer
         PhotoController photoController = new PhotoController();
 
@@ -87,6 +88,7 @@ namespace PhotoshopWebsite.Gui.Client
 
         private Bitmap _current;
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // cast the session into the current user
@@ -97,7 +99,6 @@ namespace PhotoshopWebsite.Gui.Client
 
             // get all the photoID's of the current user
             List<string> photoIDS = photoController.getGroupPhotos();
-
             // get all the photos of the current user and add them to a list
             if (photoIDS != null)
             {
@@ -128,6 +129,8 @@ namespace PhotoshopWebsite.Gui.Client
                 }
             }
         }
+
+
         private void Fillpage(Domain.Photo x)
         {
             //create buttons
@@ -146,12 +149,8 @@ namespace PhotoshopWebsite.Gui.Client
             btnSepia.Height = 30;
             btnSepia.Text = "Sepia ";
 
-            Button btnCrop = new Button();
-            btnCrop.ID = "Crop"  + x.ID.ToString();
-            btnCrop.CssClass = "btn btn-default";
-            btnCrop.Click += BtnCrop_Click; ;
-            btnCrop.Height = 30;
-            btnCrop.Text = "Crop";
+            HtmlGenericControl cropButtonControll = new HtmlGenericControl("div");
+            cropButtonControll.InnerHtml = "<button type='button' id='Crop" + x.ID + "'class='btn btn-default' data-toggle='modal' data-target='#myModal" + x.ID + "' >Crop</ button >";
 
             RadioButton btnBlackWhite = new RadioButton();
             btnBlackWhite.ID = "BLACKWHITE" + x.ID;
@@ -169,7 +168,12 @@ namespace PhotoshopWebsite.Gui.Client
             btnColor.Height = 30;
             btnColor.Text = "Color ";
 
-            
+            Button btnCrop = new Button();
+            btnCrop.Click += BtnCrop_Click;
+            btnCrop.ID = x.ID.ToString();
+            btnCrop.CssClass = "btn btn-default";
+            btnCrop.Text = "Crop Image";
+            btnCrop.Height = 30;
 
             if (!filters.ContainsKey(x.ID))
             {
@@ -222,7 +226,9 @@ namespace PhotoshopWebsite.Gui.Client
 
             HtmlGenericControl firstControl = new HtmlGenericControl("div");
             HtmlGenericControl secondControl = new HtmlGenericControl("div");
+            HtmlGenericControl cropControl = new HtmlGenericControl("div");
             HtmlGenericControl lastControl = new HtmlGenericControl("div");
+            HtmlGenericControl cropControlLast = new HtmlGenericControl("div");
             //adding other div elements containing discriptions
             string div;
             if (photos.Count > 4)
@@ -234,10 +240,11 @@ namespace PhotoshopWebsite.Gui.Client
                 div = "<div class='col-sm-6'>";
             }
 
-            //firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'> <img src=" + x.Image + " " + "alt=" + x.Description + ">  <div class='caption'>";
             firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'><div class='caption'>";
+            cropControl.InnerHtml = "<div class='modal fade' id='myModal" + x.ID + "' tabindex=' - 1' role='dialog' aria-labelledby='myModalLabel'>< div class='modal-dialog' role='document'><div class='modal-content'  style='width:400px'><div class='modal-header'><button type = 'button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='myModalLabel'>Crop image</h4></div><div class='modal-body'> <img src='" + x.Image + "' class='cropbox' style='height:600px;'></img> <H1>Image preview</h1><div style='width: 100px; height: 100px; overflow: hidden; margin - left:5px; '><img src='" + x.Image + "' class='preview'></img>'</div></div><div class='modal-footer'><button type = 'button' class='btn btn-default' data-dismiss='modal'>Close</button>";
+            cropControl.Controls.Add(btnCrop);
+            cropControlLast.InnerHtml = "</div></div</div></div>";
 
-            //add buttons
             secondControl.InnerHtml = "<p>" + x.Description + "</p>";
             firstControl.Controls.Add(imgProduct);
             firstControl.Controls.Add(secondControl);
@@ -247,9 +254,12 @@ namespace PhotoshopWebsite.Gui.Client
             firstControl.Controls.Add(new LiteralControl("<br />"));
             firstControl.Controls.Add(ddType);
             firstControl.Controls.Add(btnAddToCart);
-            firstControl.Controls.Add(btnCrop);
 
+            firstControl.Controls.Add(cropButtonControll);
             pnlProduct.Controls.Add(firstControl);
+
+            pnlProduct.Controls.Add(cropControl);
+            pnlProduct.Controls.Add(cropControlLast);
 
             lastControl.InnerHtml = "</div></div></div>";
             pnlProduct.Controls.Add(lastControl);
@@ -257,7 +267,13 @@ namespace PhotoshopWebsite.Gui.Client
 
         private void BtnCrop_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+
+            int X = Convert.ToInt32(input_X.Value);
+            int y = Convert.ToInt32(input_Y.Value);
+            int w = Convert.ToInt32(input_W.Value);
+            int h = Convert.ToInt32(input_H.Value);
+
+
         }
 
         void ddType_SelectedIndexChanged(object sender, EventArgs e)
