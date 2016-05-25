@@ -126,20 +126,30 @@ namespace PhotoshopWebsite.Gui.Photographer
                     productPerPhotographer.Available = !productPerPhotographer.Available;
                     Session["products"] = ProductsChecked;
                     Response.Redirect(Request.RawUrl);
+                    break;
                 }
             }
         }
 
         private void Save_Clicked(object sender, EventArgs e)
         {
-
-            throw new NotImplementedException();
+            //change status products
+            productController.updateProductsPerPhotographer(ProductsChecked);
         }
 
         private void PriceChange(object sender, EventArgs e)
         {
-
-            throw new NotImplementedException();
+            TextBox cbPrice = sender as TextBox;
+            foreach (ProductPerPhotographer productPerPhotographer in ProductsChecked)
+            {
+                if (productPerPhotographer.Product_ID.ToString() == cbPrice.ID)
+                {
+                    productPerPhotographer.Price = int.Parse(cbPrice.Text);
+                    Session["products"] = ProductsChecked;
+                    Response.Redirect(Request.RawUrl);
+                    break;
+                }
+            }
         }
     }
 }

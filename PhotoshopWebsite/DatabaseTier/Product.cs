@@ -165,7 +165,37 @@ namespace PhotoshopWebsite.DatabaseTier
         /// <param name="productID"></param> id of the product
         /// /// <param name="addedStock"></param> amount added to the stock.
         /// <returns></returns>
-        public void updateProductStock(int productID, int addedStock) // TODO
+        public void updateProductStock(int productID, int addedStock)
+        {
+            try
+            {
+                myCommand = new MySqlCommand("addStock", mysqlConnection);
+                // input
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_product_ID", MySqlDbType.Int32).Value = productID;
+
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_amount", MySqlDbType.VarChar).Value = addedStock;
+                // output - There is no output.
+                // execute query
+                mysqlConnection.Open();
+                //myCommand.ExecuteNonQuery();
+
+                //MySqlDataAdapter da = new MySqlDataAdapter(myCommand);
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+        }
+
+        public void updateProductsPerPhotographer(int productID, int addedStock)
         {
             try
             {
