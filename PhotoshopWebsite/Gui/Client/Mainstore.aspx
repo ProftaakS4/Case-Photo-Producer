@@ -38,7 +38,7 @@
                     }
                     function getCoords(coords) {
                           
-                        $('#head_input_X').val(coords.y);
+                        $('#head_input_X').val(coords.x);
                         $('#head_input_Y').val(coords.y);
                         $('#head_input_W').val(coords.w);
                         $('#head_input_H').val(coords.h);

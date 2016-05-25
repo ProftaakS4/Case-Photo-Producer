@@ -13,6 +13,7 @@ namespace PhotoshopWebsite.Domain
         public int quantity { get; set; }
         public FilterTypes.FTypes filterType { get; set; }
         public ProductTypes.PTypes product { get; set; }
+        public string boundaries { get; set; }
 
         public ShoppingbasketItem(int photoID, string description, FilterTypes.FTypes filterType, ProductTypes.PTypes product)
         {
@@ -21,6 +22,12 @@ namespace PhotoshopWebsite.Domain
             this.quantity = 1;
             this.filterType = filterType;
             this.product = product;
+            this.boundaries = "";
+        }
+
+        public void setBoundaries(string boundaries)
+        {
+            this.boundaries = boundaries;
         }
     }
 }

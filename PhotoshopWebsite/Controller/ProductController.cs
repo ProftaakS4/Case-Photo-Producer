@@ -13,12 +13,12 @@ namespace PhotoshopWebsite.Controller
 
         public int ID { get; set; }
         public List<Product> products { get; set; }
-        
+
         public ProductController()
         {
             this.products = this.getAllProducts();
         }
-        
+
         public ProductController(int photographerID)
         {
             this.ID = photographerID;
@@ -65,7 +65,7 @@ namespace PhotoshopWebsite.Controller
             {
                 foreach (DataRow data in dt.Rows)
                 {
-                    temp.Add(new Product(int.Parse(data[0].ToString()), data[1].ToString(), data[2].ToString(),data[3].ToString(),data[4].ToString(),int.Parse(data[5].ToString())));
+                    temp.Add(new Product(int.Parse(data[0].ToString()), data[1].ToString(), data[2].ToString(), data[3].ToString(), data[4].ToString(), int.Parse(data[5].ToString())));
                 }
             }
             return temp;
@@ -85,10 +85,18 @@ namespace PhotoshopWebsite.Controller
             {
                 foreach (DataRow data in dt.Rows)
                 {
-                    temp.Add(new ProductPerPhotographer(int.Parse(data[0].ToString()),int.Parse(data[1].ToString()),int.Parse(data[2].ToString()),int.Parse(data[3].ToString())));
+                    temp.Add(new ProductPerPhotographer(int.Parse(data[0].ToString()), int.Parse(data[1].ToString()), int.Parse(data[2].ToString()), int.Parse(data[3].ToString())));
                 }
             }
             return temp;
+        }
+
+        public void updateProductsPerPhotographer(List<ProductPerPhotographer> productPerPhotographer)
+        {
+            foreach (ProductPerPhotographer p in productPerPhotographer)
+            {
+               // DB.updateProductsPerPhotographer();
+            }
         }
     }
 }
