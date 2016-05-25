@@ -149,6 +149,7 @@
     <Compile Include="Controller\ProductController.cs" />
     <Compile Include="DatabaseTier\Product.cs" />
     <Compile Include="Domain\Product.cs" />
+    <Compile Include="Domain\ProductPerPhotographer.cs" />
     <Compile Include="Enumeration\FilterTypes.cs" />
     <Compile Include="Enumeration\ProductTypes.cs" />
     <Compile Include="DatabaseTier\LoginCode.cs" />

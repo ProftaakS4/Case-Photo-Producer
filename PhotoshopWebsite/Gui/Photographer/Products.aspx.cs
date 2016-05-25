@@ -1,4 +1,5 @@
 ﻿using PhotoshopWebsite.Controller;
+using PhotoshopWebsite.Domain;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -29,6 +30,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             {
                 ProductsChecked = new List<int>();
             }
+            // producten in checked zetten als ze available zijn
             Fillpage(this.Products);
         }
         private void Fillpage(List<Product> Products)
@@ -48,43 +50,55 @@ namespace PhotoshopWebsite.Gui.Photographer
             descriptionHeader.Text = "Description";
             TableHeaderCell priceHeader = new TableHeaderCell();
             descriptionHeader.Text = "Price";
-            TableHeaderCell availabilityHeader = new TableHeaderCell();
-            availabilityHeader.Text = "Availability";
+            TableHeaderCell availableHeader = new TableHeaderCell();
+            availableHeader.Text = "Available";
 
             MainHeaderRow.Cells.Add(typeHeader);
             MainHeaderRow.Cells.Add(descriptionHeader);
-            MainHeaderRow.Cells.Add(availabilityHeader);
+            MainHeaderRow.Cells.Add(priceHeader);
+            MainHeaderRow.Cells.Add(availableHeader);
 
             MainTable.Rows.Add(MainHeaderRow);
 
             foreach (Product product in Products)
             {
                 TableRow MainRow = new TableRow();
-                MainRow.Height = 80;
-                TableCell ID = new TableCell();
-                ID.Text = product.ID.ToString();
-                TableCell User = new TableCell();
-                User.Text = product.Used.ToString();
-                TableCell ButtonCell = new TableCell();
-                CheckBox cbAdd = new CheckBox();
-                cbAdd.ID = product.ID.ToString();
-                cbAdd.CssClass = "checkbox";
-                cbAdd.CheckedChanged += new EventHandler(this.Check_Clicked);
-                cbAdd.Height = 30;
-                cbAdd.AutoPostBack = true;
-                cbAdd.Checked = ProductsChecked.Contains(product.ID);
-                ButtonCell.Controls.Add(cbAdd);
+                MainRow.Height = 60;
+                TableCell typeCell = new TableCell();
+                typeCell.Text = product.Type;
+                TableCell descriptionCell = new TableCell();
+                descriptionCell.Text = product.Description;
+                TableCell priceCell = new TableCell();
+                //textbox
+                TextBox tbPrice = new TextBox();
+                tbPrice.ID = product.ID.ToString();
+                tbPrice.Text = product.ID.ToString();//get price per photographer
+                tbPrice.TextChanged += new EventHandler(this.PriceChange); // pricechange edit
+                tbPrice.AutoPostBack = true;
+                tbPrice.MaxLength = 3;
+                priceCell.Controls.Add(tbPrice);
 
-                MainRow.Cells.Add(ID);
-                MainRow.Cells.Add(User);
-                MainRow.Cells.Add(ButtonCell);
+                TableCell availableCell = new TableCell();
+                CheckBox cbAvailable = new CheckBox();
+                cbAvailable.ID = product.ID.ToString();
+                cbAvailable.CssClass = "checkbox";
+                cbAvailable.CheckedChanged += new EventHandler(this.Check_Clicked);
+                cbAvailable.Height = 30;
+                cbAvailable.AutoPostBack = true;
+                cbAvailable.Checked = ProductsChecked.Contains(product.ID);
+                availableCell.Controls.Add(cbAvailable);
+
+                MainRow.Cells.Add(typeCell);
+                MainRow.Cells.Add(descriptionCell);
+                MainRow.Cells.Add(priceCell);
+                MainRow.Cells.Add(availableCell);
 
                 MainTable.Rows.Add(MainRow);
             }
 
             Button btSave = new Button();
             btSave.ID = "bt1";
-            btSave.Text = "Send Mail";
+            btSave.Text = "Save";
             btSave.Click += new EventHandler(this.Save_Clicked);
             btSave.Height = 30;
 
@@ -96,11 +110,36 @@ namespace PhotoshopWebsite.Gui.Photographer
 
         private void Check_Clicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            CheckBox cbAvailable = sender as CheckBox;
+            foreach (Product product in Products)
+            {
+                if (product.ID.ToString() == cbAvailable.ID)
+                {
+                    if (ProductsChecked.Contains(product.ID))
+                    {
+                        ProductsChecked.Remove(product.ID);
+                        Session["products"] = ProductsChecked;
+                        Response.Redirect(Request.RawUrl);
+                    }
+                    else
+                    {
+                        ProductsChecked.Add(product.ID);
+                        Session["products"] = ProductsChecked;
+                        Response.Redirect(Request.RawUrl);
+                    }
+                }
+            }
         }
 
         private void Save_Clicked(object sender, EventArgs e)
         {
+
+            throw new NotImplementedException();
+        }
+
+        private void PriceChange(object sender, EventArgs e)
+        {
+
             throw new NotImplementedException();
         }
     }
