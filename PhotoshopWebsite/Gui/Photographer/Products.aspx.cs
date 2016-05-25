@@ -21,7 +21,7 @@ namespace PhotoshopWebsite.Gui.Photographer
         {
             User currentUser = (User)Session["UserData"];
             productController = new ProductController(currentUser.ID);
-            Products = productController.Products;
+            Products = productController.products;
             if (Session["products"] != null)
             {
                 ProductsChecked = Session["products"] as List<ProductPerPhotographer>;

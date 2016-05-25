@@ -22,7 +22,7 @@ namespace PhotoshopWebsite.Controller
         public ProductController(int photographerID)
         {
             this.ID = photographerID;
-            this.Products = this.getProductData(ID);
+            this.products = this.getProductData(ID);
         }
 
         /// <summary>
