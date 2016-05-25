@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
@@ -20,7 +21,7 @@ namespace PhotoshopWebsite.Gui.Photographer
         protected void Page_Load(object sender, EventArgs e)
         {
             User currentUser = (User)Session["UserData"];
-            productController = new ProductController(currentUser.ID);
+            productController = new ProductController();
             Products = productController.products;
             if (Session["products"] != null)
             {
@@ -28,7 +29,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             }
             else
             {
-                ProductsChecked = new List<ProductPerPhotographer>();
+                ProductsChecked = productController.getProductDataPerPhotographer(currentUser.ID);
             }
             Fillpage(this.Products);
         }
@@ -70,20 +71,7 @@ namespace PhotoshopWebsite.Gui.Photographer
                 TableCell priceCell = new TableCell();
                 //textbox
                 TextBox tbPrice = new TextBox();
-                tbPrice.ID = product.ID.ToString();
-                tbPrice.Text = product.ID.ToString();//get price per photographer
-                tbPrice.TextChanged += new EventHandler(this.PriceChange); // pricechange edit
-                tbPrice.AutoPostBack = true;
-                tbPrice.MaxLength = 3;
-                priceCell.Controls.Add(tbPrice);
-
-                TableCell availableCell = new TableCell();
-                CheckBox cbAvailable = new CheckBox();
-                cbAvailable.ID = product.ID.ToString();
-                cbAvailable.CssClass = "checkbox";
-                cbAvailable.CheckedChanged += new EventHandler(this.Check_Clicked);
-                cbAvailable.Height = 30;
-                cbAvailable.AutoPostBack = true;
+                tbPrice.ID = "tbPrice" + product.ID.ToString();
                 ProductPerPhotographer productPerPhotographer = null;
                 foreach (ProductPerPhotographer check in ProductsChecked)
                 {
@@ -93,6 +81,19 @@ namespace PhotoshopWebsite.Gui.Photographer
                         break;
                     }
                 }
+                tbPrice.Text = productPerPhotographer.Price.ToString();
+                tbPrice.TextChanged += new EventHandler(this.PriceChange);
+                tbPrice.AutoPostBack = true;
+                tbPrice.MaxLength = 3;
+                priceCell.Controls.Add(tbPrice);
+
+                TableCell availableCell = new TableCell();
+                CheckBox cbAvailable = new CheckBox();
+                cbAvailable.ID = "cbAvailable" + product.ID.ToString();
+                cbAvailable.CssClass = "checkbox";
+                cbAvailable.CheckedChanged += new EventHandler(this.Check_Clicked);
+                cbAvailable.Height = 30;
+                cbAvailable.AutoPostBack = true;
                 cbAvailable.Checked = productPerPhotographer.Available;
                 availableCell.Controls.Add(cbAvailable);
 
@@ -105,7 +106,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             }
 
             Button btSave = new Button();
-            btSave.ID = "bt1";
+            btSave.ID = "btSave";
             btSave.Text = "Save";
             btSave.Click += new EventHandler(this.Save_Clicked);
             btSave.Height = 30;
@@ -119,9 +120,14 @@ namespace PhotoshopWebsite.Gui.Photographer
         private void Check_Clicked(object sender, EventArgs e)
         {
             CheckBox cbAvailable = sender as CheckBox;
+            Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
+            Match match = regex.Match(cbAvailable.ID);
+
+            int num = Int32.Parse(match.Groups["Numeric"].Value);
+
             foreach (ProductPerPhotographer productPerPhotographer in ProductsChecked)
             {
-                if (productPerPhotographer.Product_ID.ToString() == cbAvailable.ID)
+                if (productPerPhotographer.Product_ID == num)
                 {
                     productPerPhotographer.Available = !productPerPhotographer.Available;
                     Session["products"] = ProductsChecked;
@@ -133,16 +139,21 @@ namespace PhotoshopWebsite.Gui.Photographer
 
         private void Save_Clicked(object sender, EventArgs e)
         {
-            //change status products
             productController.updateProductsPerPhotographer(ProductsChecked);
+            Response.Redirect(Request.RawUrl);
         }
 
         private void PriceChange(object sender, EventArgs e)
         {
             TextBox cbPrice = sender as TextBox;
+            Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
+            Match match = regex.Match(cbPrice.ID);
+
+            int num = Int32.Parse(match.Groups["Numeric"].Value);
+
             foreach (ProductPerPhotographer productPerPhotographer in ProductsChecked)
             {
-                if (productPerPhotographer.Product_ID.ToString() == cbPrice.ID)
+                if (productPerPhotographer.Product_ID == num)
                 {
                     productPerPhotographer.Price = int.Parse(cbPrice.Text);
                     Session["products"] = ProductsChecked;
