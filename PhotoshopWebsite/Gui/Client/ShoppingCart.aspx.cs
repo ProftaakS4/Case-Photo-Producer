@@ -112,28 +112,75 @@ namespace PhotoshopWebsite.Gui
             btnORder.Height = 30;
             btnORder.Text = "Order";
 
-            ImageButton btnPayPal = new ImageButton();
-            btnPayPal.ID = "btnPaypal";
-            btnPayPal.Click += btnPayPal_Click;
-            btnORder.CssClass = "btn btn-default";
-            btnPayPal.Height = 30;
-            btnPayPal.AlternateText = "Buy Now!";
-            btnPayPal.OnClientClick = "target='blank'";
-            btnPayPal.ImageUrl = "http://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif";
-
-
-
             pnlProduct.Controls.Add(firstcontrol);
             pnlProduct.Controls.Add(MainTable);
             pnlProduct.Controls.Add(closingcontrol);
             pnlProduct.Controls.Add(btnORder);
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
-            pnlProduct.Controls.Add(btnPayPal);
 
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
-            pnlProduct.Controls.Add(btnPayPal);
+        }
+
+        void createPaymentPanel()
+        {
+            ImageButton btnTransfer = new ImageButton();
+            btnTransfer.ID = "btnTransfer";
+            btnTransfer.Click += btnTransfer_Click;
+            btnTransfer.Height = 30;
+            btnTransfer.Width = 90;
+            btnTransfer.AlternateText = "Pay by Money Transfer";
+            btnTransfer.ImageUrl = "http://www.glerups.nl/media/wysiwyg/infortis/ultimo/custom/overboeking.jpg";
+
+            ImageButton btnPayPal = new ImageButton();
+            btnPayPal.ID = "btnPaypal";
+            btnPayPal.Click += btnPayPal_Click;
+            btnPayPal.Height = 30;
+            btnPayPal.Width = 90;
+            btnPayPal.AlternateText = "Pay with PayPal";
+            btnPayPal.ImageUrl = "http://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif";
+
+            ImageButton btniDeal = new ImageButton();
+            btniDeal.ID = "btniDeal";
+            btniDeal.Click += btniDeal_Click;
+            btniDeal.Height = 30;
+            btniDeal.Width = 90;
+            btniDeal.AlternateText = "Pay with iDeal";
+            btniDeal.ImageUrl = "http://www.dcpfilm.nl/Uitgeverij/images/images_button-ideal.jpg";
+
+            ImageButton btnGoogle = new ImageButton();
+            btnGoogle.ID = "btnGoogle";
+            btnGoogle.Click += btnGoogle_Click;
+            btnGoogle.Height = 30;
+            btnGoogle.Width = 90;
+            btnGoogle.AlternateText = "Pay with Google-Checkout";
+            btnGoogle.ImageUrl = "https://lh5.googleusercontent.com/-eES4aTLteqY/TWmvwSg2tQI/AAAAAAAAAjo/RXrOWfCy6m4/s1600/google_checkout_button.gif";
+
+            ImageButton btnOgone = new ImageButton();
+            btnOgone.ID = "btnOgone";
+            btnOgone.Click += btnOgone_Click;
+            btnOgone.Height = 30;
+            btnOgone.Width = 90;
+            btnOgone.AlternateText = "Pay with Ogone";
+            btnOgone.ImageUrl = "https://tctechcrunch2011.files.wordpress.com/2012/07/87407v3-max-250x250.jpg";
+            
+
+            pnlPayment.Controls.Add(btnTransfer);
+            pnlPayment.Controls.Add(new LiteralControl(" <br />"));
+            pnlPayment.Controls.Add(btnPayPal);
+            pnlPayment.Controls.Add(new LiteralControl(" <br />"));
+            pnlPayment.Controls.Add(btniDeal);
+            pnlPayment.Controls.Add(new LiteralControl(" <br />"));
+            pnlPayment.Controls.Add(btnGoogle);
+            pnlPayment.Controls.Add(new LiteralControl(" <br />"));
+            pnlPayment.Controls.Add(btnOgone);
+            pnlPayment.Controls.Add(new LiteralControl(" <br />"));
+        }
+
+        void btnTransfer_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Gui/Client/Payment/Transfer.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
         }
 
         void btnPayPal_Click(object sender, EventArgs e)
@@ -142,26 +189,43 @@ namespace PhotoshopWebsite.Gui
             Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + orderPrice);
         }
 
+        void btniDeal_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Gui/Client/Payment/iDeal.aspx");            
+        }
+
+        void btnGoogle_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Gui/Client/Payment/Google.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+        }
+
+        void btnOgone_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Gui/Client/Payment/Ogone.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+        }
+
         void btnORder_Click(object sender, EventArgs e)
         {
             if (shoppingCart.Count == 0)
             {
-                Response.Write("<script>alert('ShoppingCart is empty, please fill your cart first')</script>");
+                //Response.Write("<script>alert('ShoppingCart is empty, please fill your cart first')</script>");
             }
-            else
-            {
-                PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
+
+            createPaymentPanel();
+            //else
+            //{
+            //    PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
                 
-                if (shoppingCart != null)
-                {
-                    foreach (Domain.ShoppingbasketItem item in shoppingCart)
-                    {
-                        string photoIDQualtityType = item.photoID.ToString() + ";" + item.quantity.ToString() + "#" + item.filterType;
-                        socket.sendData(photoIDQualtityType);
-                    }
-                }
-                //Order NUMMERS doorsturen
-            }
+            //    if (shoppingCart != null)
+            //    {
+            //        foreach (Domain.ShoppingbasketItem item in shoppingCart)
+            //        {
+            //            string photoIDQualtityType = item.photoID.ToString() + ";" + item.quantity.ToString() + "#" + item.filterType;
+            //            socket.sendData(photoIDQualtityType);
+            //        }
+            //    }
+            //    //Order NUMMERS doorsturen
+            //}
             //not yet implemented 
         }
 

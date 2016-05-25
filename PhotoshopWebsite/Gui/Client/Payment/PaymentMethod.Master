@@ -1,0 +1,20 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Gui/Client/PhotoshopMaster.Master" AutoEventWireup="true" CodeBehind="PaymentMethod.master.cs" Inherits="PhotoshopWebsite.Gui.Client.PaymentMethod" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+         <h1>Halloo dit is gay!</h1>
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
