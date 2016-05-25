@@ -223,6 +223,7 @@ namespace PhotoshopWebsite.Gui.Client
             imgProduct.ImageUrl = x.Image;
             imgProduct.Height = 200;
             imgProduct.Width = 330;
+            imgProduct.CssClass = "img-responsive";
 
             HtmlGenericControl firstControl = new HtmlGenericControl("div");
             HtmlGenericControl secondControl = new HtmlGenericControl("div");
