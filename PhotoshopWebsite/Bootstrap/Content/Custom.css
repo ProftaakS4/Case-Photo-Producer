@@ -50,3 +50,8 @@
 .checkbox {
     margin-left: 40px;
 }
+
+#home {
+    min-height: 1000px;
+}
+

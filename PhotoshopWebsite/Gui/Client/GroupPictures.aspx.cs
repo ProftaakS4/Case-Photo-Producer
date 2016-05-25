@@ -267,7 +267,10 @@ namespace PhotoshopWebsite.Gui.Client
 
         private void BtnCrop_Click(object sender, EventArgs e)
         {
-
+            int X = Convert.ToInt32(input_X.Value);
+            int y = Convert.ToInt32(input_Y.Value);
+            int w = Convert.ToInt32(input_W.Value);
+            int h = Convert.ToInt32(input_H.Value);
         }
 
 

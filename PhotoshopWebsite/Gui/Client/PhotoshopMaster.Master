@@ -12,7 +12,7 @@
     <link href="/Bootstrap/Menu/simple-sidebar.css" rel="stylesheet" />
     <link href="/Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
 </head>
-    <body>
+    <body style="background-color: #eee">
     <form runat="server">
         <div id="wrapper">
                               
