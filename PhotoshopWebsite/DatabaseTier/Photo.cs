@@ -83,6 +83,61 @@ namespace PhotoshopWebsite.DatabaseTier
             }
             return photoIDS;
         }
+        /// <summary>
+        /// This method gets all the GroupphotoIDS from the specified userID. When there are no photo found the method returns null
+        /// </summary>
+        /// <param name="userID"></param> the user id of the account
+        /// <returns></returns>
+        public List<string> getGroupPhotos()
+        {
+            List<string> photoIDS = new List<string>(); ;
+            try
+            {
+                myCommand = new MySqlCommand("getGroupPhotos", mysqlConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+               
+                // output
+                myCommand.Parameters.Add("@p_photos", MySqlDbType.VarChar);
+                myCommand.Parameters["@p_photos"].Direction = ParameterDirection.Output;
+                //execute query
+                mysqlConnection.Open();
+                myCommand.ExecuteNonQuery();
+                //capture the out parameter form the databas into a variable
+                result = (string)myCommand.Parameters["@p_photos"].Value + " ";
+                // check if the result has some numeric values into it, meaning that there are indeed photoIDS returned
+                if (result.Any(char.IsDigit))
+                {
+                    string photoID = "";
+                    // create new string list and iterate over the result and break down the photoIDS into idividual photoIDS
+                    foreach (char c in result)
+                    {
+                        if (c != ' ')
+                        {
+                            photoID = photoID + c;
+                        }
+                        else
+                        {
+                            if (photoID != "")
+                            {
+                                // replace potential whitespace
+                                photoIDS.Add(photoID.Replace(" ", ""));
+                                photoID = "";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return photoIDS;
+        }
         public List<ProductTypes.PTypes> getTypes(string photoID)
         {
             List<ProductTypes.PTypes> types = new List<ProductTypes.PTypes>();

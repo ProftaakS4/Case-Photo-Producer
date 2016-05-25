@@ -23,6 +23,18 @@ namespace PhotoshopWebsite.Controller
             List<string> result = photoDatabase.getPhotosUser(userID);
             return result;
         }
+        /// <summary>
+        /// get all the photoID's from the USERID
+        /// </summary>
+        /// <param name="userID"></param> the userID of the account
+        /// <returns></returns>
+        public List<string> getGroupPhotos()
+        {
+            List<string> result = photoDatabase.getGroupPhotos();
+            return result;
+        }
+
+
 
         /// <summary>
         /// get the photoid from the database and create a photo object based on the stored information
