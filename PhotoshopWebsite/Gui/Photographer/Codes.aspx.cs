@@ -60,7 +60,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             foreach (LoginCode code in loginCodes)
             {
                 TableRow MainRow = new TableRow();
-                MainRow.Height = 80;
+                MainRow.Height = 60;
                 TableCell ID = new TableCell();
                 ID.Text = code.ID.ToString();
                 TableCell User = new TableCell();

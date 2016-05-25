@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PhotoshopWebsite.Controller 
+namespace PhotoshopWebsite.Domain 
 {
         [Serializable]
     public class Product 
