@@ -146,7 +146,9 @@
   <ItemGroup>
     <Compile Include="Controller\LoginCodeController.cs" />
     <Compile Include="Controller\PhotoController.cs" />
+    <Compile Include="Controller\ProductController.cs" />
     <Compile Include="Controller\PurchaseController.cs" />
+    <Compile Include="DatabaseTier\Product.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\Purchase.cs" />
     <Compile Include="Enumeration\FilterTypes.cs" />
