@@ -8,9 +8,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Photoshop</title>
-    <link href="../../Bootstrap/Content/Custom.css" rel="stylesheet" />
-    <link href="../../Bootstrap/Menu/simple-sidebar.css" rel="stylesheet" />
-    <link href="../../Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Bootstrap/Content/Custom.css" rel="stylesheet" />
+    <link href="/Bootstrap/Menu/simple-sidebar.css" rel="stylesheet" />
+    <link href="/Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
 </head>
     <body>
     <form runat="server">
