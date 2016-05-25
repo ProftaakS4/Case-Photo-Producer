@@ -138,9 +138,9 @@ namespace PhotoshopWebsite
             Button btnAddToCart = new Button();
             btnAddToCart.ID = "{" + x.Description + "}" + x.ID.ToString();
             btnAddToCart.CssClass = "btn btn-default";
-            btnAddToCart.Click += btnAddToCart_Click;
+            btnAddToCart.Click += BtnAddToCart_Click1;
             btnAddToCart.Height = 30;
-            btnAddToCart.Text = "Order";
+            btnAddToCart.Text = "Test";
 
             RadioButton btnSepia = new RadioButton();
             btnSepia.ID = "SEPIA" + x.ID;
@@ -151,7 +151,7 @@ namespace PhotoshopWebsite
             btnSepia.Text = "Sepia ";
 
             HtmlGenericControl cropButtonControll = new HtmlGenericControl("div");
-            cropButtonControll.InnerHtml = "<button type='button' id='Crop" + x.ID + "'class='btn btn-default' data-toggle='modal' data-target='#myModal" + x.ID + "' >Crop</ button >";
+            cropButtonControll.InnerHtml = "<button type='button' id='Cropbtn" + x.ID + "'class='btn btn-default' data-toggle='modal' data-target='#myModal" + x.ID + "' >Crop</ button >";
 
             RadioButton btnBlackWhite = new RadioButton();
             btnBlackWhite.ID = "BLACKWHITE" + x.ID;
@@ -170,8 +170,8 @@ namespace PhotoshopWebsite
             btnColor.Text = "Color ";
 
             Button btnCrop = new Button();
+            btnCrop.ID = "Crop" + x.ID.ToString();
             btnCrop.Click += BtnCrop_Click;
-            btnCrop.ID = x.ID.ToString();
             btnCrop.CssClass = "btn btn-default";
             btnCrop.Text = "Crop Image";
             btnCrop.Height = 30;
@@ -242,7 +242,7 @@ namespace PhotoshopWebsite
             }
 
             firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'><div class='caption'>";
-            cropControl.InnerHtml = "<div class='modal fade' id='myModal" + x.ID + "' tabindex=' - 1' role='dialog' aria-labelledby='myModalLabel'>< div class='modal-dialog' role='document'><div class='modal-content'  style='width:400px'><div class='modal-header'><button type = 'button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='myModalLabel'>Crop image</h4></div><div class='modal-body'> <img src='" + x.Image + "' class='cropbox' style='height:330px; width:200px;'></img> <H1>Image preview</h1><div style='width: 100px; height: 100px; overflow: hidden; margin - left:5px; '><img src='" + x.Image + "' class='preview'></img>'</div></div><div class='modal-footer'><button type = 'button' class='btn btn-default' data-dismiss='modal'>Close</button>";
+            cropControl.InnerHtml = "<div class='modal fade' id='myModal" + x.ID + "' tabindex=' - 1' role='dialog' aria-labelledby='mymodallabel'>< div class='modal-dialog' role='document'><div class='modal-content'  style='width:400px'><div class='modal-header'><button type = 'button' class='close' data-dismiss='modal' aria-label='close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='mymodallabel'>order image</h4></div><div class='modal-body'> <img src='" + x.Image + "' class='cropbox' style='height:330px; width:200px;'></img> <h1>image preview</h1><div style='width: 100px; height: 100px; overflow: hidden; margin - left:5px; '><img src='" + x.Image + "' class='preview'></img>'</div></div><div class='modal-footer'><button type = 'button' class='btn btn-default' data-dismiss='modal'>close</button>";
             cropControl.Controls.Add(btnCrop);
             cropControlLast.InnerHtml = "</div></div</div></div>";
 
@@ -269,12 +269,33 @@ namespace PhotoshopWebsite
         private void BtnCrop_Click(object sender, EventArgs e)
         {
 
-            int X = Convert.ToInt32(input_X.Value);
-            int y = Convert.ToInt32(input_Y.Value);
-            int w = Convert.ToInt32(input_W.Value);
-            int h = Convert.ToInt32(input_H.Value);
+        }
 
 
+        private void BtnAddToCart_Click1(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            string name = button.ID.Split('{', '}')[1];
+            int num = Int32.Parse(button.ID.Split('{', '}')[2]);
+
+            Domain.ShoppingbasketItem found = null;
+            foreach (Domain.ShoppingbasketItem item in shoppingCart)
+            {
+                if (item.photoID == num && item.filterType == filters[num])
+                {
+                    found = item;
+                    break;
+                }
+            }
+            if (found != null)
+            {
+                found.quantity++;
+            }
+            else
+            {
+                //TODO pakt ook de jaartallen niet alleen de ID's
+                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num]));
+            }
         }
 
         void ddType_SelectedIndexChanged(object sender, EventArgs e)
@@ -327,7 +348,7 @@ namespace PhotoshopWebsite
             }
         }
 
-        void btnAddToCart_Click(object sender, EventArgs e)
+        private void BtnAddToCart_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
             string name = button.ID.Split('{', '}')[1];
