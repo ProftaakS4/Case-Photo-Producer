@@ -39,11 +39,11 @@
                             ErrorMessage="Enter Your Password"
                             runat="Server">
                         </asp:RequiredFieldValidator>
-<%--                        <div class="checkbox">
+                        <div class="checkbox">
                             <label>
                                 <asp:CheckBox ID="CheckBox1" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" />Remember me
                             </label>
-                        </div>--%>
+                        </div>
                         <asp:Button CausesValidation="true" ValidationGroup="PersonalInfoGroup" ID="BtnLogin" CssClass="btn btn-lg btn-primary btn-block" runat="server" OnClick="BtnLogin_Click" Text="Sign in" />
                     </div>
                     <div class="col-lg-6">
