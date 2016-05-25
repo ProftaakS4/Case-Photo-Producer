@@ -24,50 +24,6 @@ namespace PhotoshopWebsite.DatabaseTier
         }
 
         /// <summary>
-        /// this method returns a datatable containing all the product data. when user not found, method returns null
-        /// </summary>
-        /// <param name="photographerID"></param> id of the photographer
-        /// <returns></returns>
-        public DataTable getProductData(int photographerID)
-        {
-            try
-            {
-                myCommand = new MySqlCommand("getLoginCodesFromPhotographer", mysqlConnection);
-                // input
-                myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Add("@p_photographer_ID", MySqlDbType.Int32).Value = photographerID;
-                // output
-                myCommand.Parameters.Add("@ID", MySqlDbType.Int32);
-                myCommand.Parameters["@ID"].Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add("@MAP_ID", MySqlDbType.Int32);
-                myCommand.Parameters["@MAP_ID"].Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add("@PHOTOGRAPHER_ID", MySqlDbType.Int32);
-                myCommand.Parameters["@PHOTOGRAPHER_ID"].Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add("@used", MySqlDbType.Int32);
-                myCommand.Parameters["@used"].Direction = ParameterDirection.Output;
-                // execute query
-                mysqlConnection.Open();
-
-                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
-                DataTable dt = new DataTable();
-                dt.Load(dr);
-
-                //return datatable
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                myCommand.Connection.Close();
-                mysqlConnection.Close();
-            }
-            return null;
-        }
-
-        /// <summary>
         /// this method returns a datatable containing all the product-photographer data. when user not found, method returns null
         /// </summary>
         /// <param name="photographerID"></param> id of the photographer
@@ -116,7 +72,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// </summary>
         /// <param name="accountID"></param> id of the logged on account
         /// <returns></returns>
-        public DataTable getAllProducts() // TODO
+        public DataTable getAllProducts()
         {
             try
             {
@@ -195,17 +151,20 @@ namespace PhotoshopWebsite.DatabaseTier
             }
         }
 
-        public void updateProductsPerPhotographer(int productID, int addedStock)
+        public void updateProductsPerPhotographer(int Photographer_ID, int Product_ID, int Price, int available)
         {
             try
             {
-                myCommand = new MySqlCommand("addStock", mysqlConnection);
+                myCommand = new MySqlCommand("updateProductsPerPhotographer", mysqlConnection);
                 // input
                 myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Add("@p_product_ID", MySqlDbType.Int32).Value = productID;
-
+                myCommand.Parameters.Add("@p_Photographer_ID", MySqlDbType.Int32).Value = Photographer_ID;
                 myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Add("@p_amount", MySqlDbType.VarChar).Value = addedStock;
+                myCommand.Parameters.Add("@p_Product_ID", MySqlDbType.Int32).Value = Product_ID;
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_Price", MySqlDbType.Int32).Value = Price;
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_available", MySqlDbType.Int32).Value = available;
                 // output - There is no output.
                 // execute query
                 mysqlConnection.Open();
