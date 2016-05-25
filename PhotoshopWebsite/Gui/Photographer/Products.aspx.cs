@@ -16,7 +16,7 @@ namespace PhotoshopWebsite.Gui.Photographer
     {
         private List<Product> Products = new List<Product>();
         private ProductController productController;
-        private List<int> ProductsChecked;
+        private List<ProductPerPhotographer> ProductsChecked;
         protected void Page_Load(object sender, EventArgs e)
         {
             User currentUser = (User)Session["UserData"];
@@ -24,13 +24,12 @@ namespace PhotoshopWebsite.Gui.Photographer
             Products = productController.Products;
             if (Session["products"] != null)
             {
-                ProductsChecked = Session["products"] as List<int>;
+                ProductsChecked = Session["products"] as List<ProductPerPhotographer>;
             }
             else
             {
-                ProductsChecked = new List<int>();
+                ProductsChecked = new List<ProductPerPhotographer>();
             }
-            // producten in checked zetten als ze available zijn
             Fillpage(this.Products);
         }
         private void Fillpage(List<Product> Products)
@@ -85,7 +84,16 @@ namespace PhotoshopWebsite.Gui.Photographer
                 cbAvailable.CheckedChanged += new EventHandler(this.Check_Clicked);
                 cbAvailable.Height = 30;
                 cbAvailable.AutoPostBack = true;
-                cbAvailable.Checked = ProductsChecked.Contains(product.ID);
+                ProductPerPhotographer productPerPhotographer = null;
+                foreach (ProductPerPhotographer check in ProductsChecked)
+                {
+                    if (check.Product_ID == product.ID)
+                    {
+                        productPerPhotographer = check;
+                        break;
+                    }
+                }
+                cbAvailable.Checked = productPerPhotographer.Available;
                 availableCell.Controls.Add(cbAvailable);
 
                 MainRow.Cells.Add(typeCell);
@@ -111,22 +119,13 @@ namespace PhotoshopWebsite.Gui.Photographer
         private void Check_Clicked(object sender, EventArgs e)
         {
             CheckBox cbAvailable = sender as CheckBox;
-            foreach (Product product in Products)
+            foreach (ProductPerPhotographer productPerPhotographer in ProductsChecked)
             {
-                if (product.ID.ToString() == cbAvailable.ID)
+                if (productPerPhotographer.Product_ID.ToString() == cbAvailable.ID)
                 {
-                    if (ProductsChecked.Contains(product.ID))
-                    {
-                        ProductsChecked.Remove(product.ID);
-                        Session["products"] = ProductsChecked;
-                        Response.Redirect(Request.RawUrl);
-                    }
-                    else
-                    {
-                        ProductsChecked.Add(product.ID);
-                        Session["products"] = ProductsChecked;
-                        Response.Redirect(Request.RawUrl);
-                    }
+                    productPerPhotographer.Available = !productPerPhotographer.Available;
+                    Session["products"] = ProductsChecked;
+                    Response.Redirect(Request.RawUrl);
                 }
             }
         }

@@ -24,7 +24,7 @@ namespace PhotoshopWebsite.DatabaseTier
         }
 
         /// <summary>
-        /// this method returns a dictionary containing all the product data. when user not found, method returns null
+        /// this method returns a datatable containing all the product data. when user not found, method returns null
         /// </summary>
         /// <param name="photographerID"></param> id of the photographer
         /// <returns></returns>
@@ -45,6 +45,50 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Parameters["@PHOTOGRAPHER_ID"].Direction = ParameterDirection.Output;
                 myCommand.Parameters.Add("@used", MySqlDbType.Int32);
                 myCommand.Parameters["@used"].Direction = ParameterDirection.Output;
+                // execute query
+                mysqlConnection.Open();
+
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+
+                //return datatable
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// this method returns a datatable containing all the product-photographer data. when user not found, method returns null
+        /// </summary>
+        /// <param name="photographerID"></param> id of the photographer
+        /// <returns></returns>
+        public DataTable getProductPhotographerData(int photographerID)
+        {
+            try
+            {
+                myCommand = new MySqlCommand("getProductAvailability", mysqlConnection);
+                // input
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_user_ID", MySqlDbType.Int32).Value = photographerID;
+                // output
+                myCommand.Parameters.Add("@PHOTOGRAPHER_ID", MySqlDbType.Int32);
+                myCommand.Parameters["@PHOTOGRAPHER_ID"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@PRODUCT_ID", MySqlDbType.Int32);
+                myCommand.Parameters["@PRODUCT_ID"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@Price", MySqlDbType.Int32);
+                myCommand.Parameters["@Price"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@Available", MySqlDbType.Int32);
+                myCommand.Parameters["@Available"].Direction = ParameterDirection.Output;
                 // execute query
                 mysqlConnection.Open();
 

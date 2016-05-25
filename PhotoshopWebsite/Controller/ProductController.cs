@@ -47,7 +47,7 @@ namespace PhotoshopWebsite.Controller
         public List<ProductPerPhotographer> getProductDataPerPhotographer(int photographerID)
         {
             List<ProductPerPhotographer> temp = new List<ProductPerPhotographer>();
-            DataTable dt = DB.getProductData(photographerID);
+            DataTable dt = DB.getProductPhotographerData(photographerID);
             // when userdata is found and returned
             if (dt.Rows.Count != 0)
             {

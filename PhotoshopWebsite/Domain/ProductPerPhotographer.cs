@@ -11,7 +11,7 @@ namespace PhotoshopWebsite.Domain
         public int Photographer_ID { get; set; }
         public int Product_ID { get; set; }
         public int Price { get; set; }
-        public int Available { get; set; }
+        public bool Available { get; set; }
 
 
         public ProductPerPhotographer(int photographer_ID, int product_ID, int price, int available)
@@ -19,7 +19,7 @@ namespace PhotoshopWebsite.Domain
             this.Photographer_ID = photographer_ID;
             this.Product_ID = product_ID;
             this.Price = price;
-            this.Available = available;
+            this.Available = available == 1;
         }
         public override bool Equals(System.Object obj)
         {
