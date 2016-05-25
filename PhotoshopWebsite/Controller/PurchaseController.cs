@@ -12,10 +12,16 @@ namespace PhotoshopWebsite.Controller
 
         public int ID { get; set; }
         public List<Purchase> purchases { get; set; }
+        
+        public PurchaseController()
+        {
+            this.purchases = this.getAllPurchases();
+        }
+        
         public PurchaseController(int accountID)
         {
             this.ID = accountID;
-            this.purchases = this.getPurchases(ID);
+            //this.purchases = this.getPurchases(ID);
         }
 
         /// <summary>
@@ -23,11 +29,11 @@ namespace PhotoshopWebsite.Controller
         /// </summary>
         /// <param name="photographerID"></param>
         /// <returns></returns>
-        public List<Purchase> getPurchases(int accountID)
+        public List<Purchase> getAllPurchases()
         {
             List<Purchase> temp = new List<Purchase>();
-            DataTable dt = DB.getPurchases(accountID);
-            // when userdata is found and returned
+            DataTable dt = DB.getAllPurchases();
+            // when data is found and returned
             if (dt.Rows.Count != 0)
             {
                 DataRow[] datarowcategorie = dt.Select("ID=ID");
@@ -37,6 +43,11 @@ namespace PhotoshopWebsite.Controller
                 }
             }
             return temp;
+        }
+
+        public void updatePurchaseStatus(int purchaseID, string status)
+        {
+            DB.updatePurchaseStatus(purchaseID, status);
         }
     }
 }

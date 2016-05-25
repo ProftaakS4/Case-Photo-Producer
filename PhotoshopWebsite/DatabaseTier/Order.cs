@@ -28,21 +28,19 @@ namespace PhotoshopWebsite.DatabaseTier
         /// </summary>
         /// <param name="accountID"></param> id of the logged on account
         /// <returns></returns>
-        public DataTable getPurchases(int accountID)
+        public DataTable getAllPurchases()
         {
             try
             {
-                myCommand = new MySqlCommand("getPurchases", mysqlConnection);
-                // input
-                myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Add("@p_account_ID", MySqlDbType.Int32).Value = accountID;
+                myCommand = new MySqlCommand("getAllPurchases", mysqlConnection);
+                // input - There is no input needed.
                 // output
                 myCommand.Parameters.Add("@ID", MySqlDbType.Int32);
                 myCommand.Parameters["@ID"].Direction = ParameterDirection.Output;
                 myCommand.Parameters.Add("@ACCOUNT_ID", MySqlDbType.Int32);
                 myCommand.Parameters["@ACCOUNT_ID"].Direction = ParameterDirection.Output;
-                myCommand.Parameters.Add("@Date", MySqlDbType.Date);
-                myCommand.Parameters["@Date"].Direction = ParameterDirection.Output;
+                //myCommand.Parameters.Add("@Date", MySqlDbType.DateTime);
+                //myCommand.Parameters["@Date"].Direction = ParameterDirection.Output;
                 myCommand.Parameters.Add("@Status", MySqlDbType.VarChar);
                 myCommand.Parameters["@Status"].Direction = ParameterDirection.Output;
                 // execute query
@@ -67,6 +65,41 @@ namespace PhotoshopWebsite.DatabaseTier
                 mysqlConnection.Close();
             }
             return null;
+        }
+
+        /// <summary>
+        /// this method updates the purchases' status to Paid if the status is 'Not Paid'.
+        /// </summary>
+        /// <param name="accountID"></param> id of the logged on account
+        /// <returns></returns>
+        public void updatePurchaseStatus(int purchaseID, string status)
+        {
+            try
+            {
+                myCommand = new MySqlCommand("changeOrderStatus", mysqlConnection);
+                // input
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_purchase_ID", MySqlDbType.Int32).Value = purchaseID;
+
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_newStatus", MySqlDbType.VarChar).Value = status;
+                // output - There is no output.
+                // execute query
+                mysqlConnection.Open();
+                //myCommand.ExecuteNonQuery();
+
+                //MySqlDataAdapter da = new MySqlDataAdapter(myCommand);
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
         }
     }
 }
