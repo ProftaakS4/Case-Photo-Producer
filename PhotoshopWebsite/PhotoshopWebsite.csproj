@@ -66,6 +66,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bootstrap\Content\Jcrop.gif" />
+    <Content Include="Bootstrap\Content\jquery.Jcrop.css" />
+    <Content Include="Bootstrap\Content\jquery.Jcrop.min.css" />
     <Content Include="Bootstrap\Content\simple-sidebar.css" />
     <Content Include="Bootstrap\Menu\bootstrap.css" />
     <Content Include="Bootstrap\Menu\bootstrap.min.css" />
@@ -73,6 +76,8 @@
     <Content Include="Bootstrap\Menu\JS\bootstrap.min.js" />
     <Content Include="Bootstrap\Menu\JS\jquery.js" />
     <Content Include="Bootstrap\Menu\simple-sidebar.css" />
+    <Content Include="Bootstrap\Scripts\jquery.Jcrop.js" />
+    <Content Include="Bootstrap\Scripts\jquery.Jcrop.min.js" />
     <Content Include="Gui\Admin\Account.aspx" />
     <Content Include="Gui\Admin\Clients.aspx" />
     <Content Include="Gui\Admin\Mainadmin.aspx" />
