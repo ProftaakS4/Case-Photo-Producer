@@ -19,35 +19,38 @@ namespace PhotoshopWebsite
         private Boolean rememberMe = false;
         private Boolean LoginSuccess = true;
         private String loginCode;
+        HttpCookie _userInfoCookies;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            HttpCookie _userInfoCookies = Request.Cookies["Userinfo"];
-            if (_userInfoCookies != null)
+            if (!IsPostBack)
             {
-                loginName = _userInfoCookies["loginName"];
-                passWord = _userInfoCookies["passWord"];
-                navigateThroughAuthentication(loginName, passWord);
+                _userInfoCookies = Request.Cookies["Userinfo"];
+                if (_userInfoCookies != null)
+                {
+                    loginName = _userInfoCookies["loginName"];
+                    passWord = _userInfoCookies["passWord"];
+                    tbInputEmail.Text = loginName;
+                    tbInputPassword.Text = passWord;
+                }
             }
-        }
-
+        }       
         protected void BtnLogin_Click(object sender, EventArgs e)
         {
-
-            loginName = tbInputEmail.Text;
-            passWord = tbInputPassword.Text;
-            navigateThroughAuthentication(loginName,passWord);
+            string loginname = tbInputEmail.Text;
+            string password = tbInputPassword.Text;
+            navigateThroughAuthentication(loginname, password);
         }
 
-        private void navigateThroughAuthentication(string loginName, string passWord)
+        private void navigateThroughAuthentication(string loginname, string password)
         {
-            Controller.User userWithNoData = new Controller.User(loginName);
-            Controller.User userWithData = userWithNoData.loginUser(loginName, passWord);
+            Controller.User userWithNoData = new Controller.User(loginname);
+            Controller.User userWithData = userWithNoData.loginUser(loginname, password);
             if (userWithData != null)
-            {               
+            {
                 Session["logindata"] = loginName;
                 Session["UserData"] = userWithData;
-                if (rememberMe)
+                if (rememberMe && _userInfoCookies == null)
                 {
                     createPersistentCookie(loginName, passWord);
                 }
@@ -116,8 +119,17 @@ namespace PhotoshopWebsite
         protected void BtnCreateAccount_Click(object sender, EventArgs e)
         {
             loginCode = tbInputCode.Text;
-            Session["loginCode"] = loginCode;
-            Response.Redirect("~/Gui/Client/CreateAccount.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+
+            if (loginCode == String.Empty)
+            {
+                Response.Write("<script>alert('Pease enter a login code')</script>");
+            }
+            else
+            {
+                Session["loginCode"] = loginCode;
+                Response.Redirect("~/Gui/Client/CreateAccount.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+            }
+            
         }
     }
 }
