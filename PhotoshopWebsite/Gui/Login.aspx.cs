@@ -14,8 +14,7 @@ namespace PhotoshopWebsite
     [ExcludeFromCodeCoverage]
     public partial class Login : System.Web.UI.Page
     {
-        private String loginName;
-        private String passWord;
+ 
         private Boolean rememberMe = false;
         private Boolean LoginSuccess = true;
         private String loginCode;
@@ -28,8 +27,8 @@ namespace PhotoshopWebsite
                 _userInfoCookies = Request.Cookies["Userinfo"];
                 if (_userInfoCookies != null)
                 {
-                    loginName = _userInfoCookies["loginName"];
-                    passWord = _userInfoCookies["passWord"];
+                    string loginName = _userInfoCookies["loginName"];
+                    string  passWord = _userInfoCookies["passWord"];
                     tbInputEmail.Text = loginName;
                     tbInputPassword.Text = passWord;
                 }
@@ -48,11 +47,15 @@ namespace PhotoshopWebsite
             Controller.User userWithData = userWithNoData.loginUser(loginname, password);
             if (userWithData != null)
             {
-                Session["logindata"] = loginName;
+                Session["logindata"] = loginname;
                 Session["UserData"] = userWithData;
-                if (rememberMe && _userInfoCookies == null)
+                _userInfoCookies = Request.Cookies["Userinfo"];
+                if (rememberMe && _userInfoCookies != null)
                 {
-                    createPersistentCookie(loginName, passWord);
+                    var expiredCookie = new HttpCookie(_userInfoCookies.Name) { Expires = DateTime.Now.AddDays(-1) };
+                    HttpContext.Current.Response.Cookies.Add(expiredCookie); // overwrite it
+                    HttpContext.Current.Request.Cookies.Clear();
+                    createPersistentCookie(loginname, password);
                 }
                 redirectToUserTypePage(userWithData.Type);
             }
