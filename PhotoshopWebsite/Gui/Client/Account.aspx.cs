@@ -19,6 +19,7 @@ namespace PhotoshopWebsite.Gui.Client
         private User currentUser;
         Order order1;
         Order order2;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserData"] != null)

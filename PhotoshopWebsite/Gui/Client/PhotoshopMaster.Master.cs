@@ -47,6 +47,8 @@ namespace PhotoshopWebsite
             }
             Labelklantnaam.Text = clientName;
             pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
+
+            
             if (pageName.Contains("account"))
             {
                 LabelTitle.Text = "<h1>My Account</h1>";
@@ -59,9 +61,21 @@ namespace PhotoshopWebsite
             {
                 LabelTitle.Text = "<h1>Group Pictures</h1>";
             }
-            else
+            else if (pageName.Contains("google"))
             {
-                LabelTitle.Text = "<h1>My Shoppingcart</h1>";
+                LabelTitle.Text = "<h1>Google-Checkout Payment</h1>";
+            }
+            else if (pageName.Contains("ideal"))
+            {
+                LabelTitle.Text = "<h1>iDeal Payment</h1>";
+            }
+            else if(pageName.Contains("ogone"))
+            {
+                LabelTitle.Text = "<h1>Ogone Payment</h1>";
+            }
+            else if (pageName.Contains("transfer"))
+            {
+                LabelTitle.Text = "<h1>Money Tranfer Payment</h1>";
             }
         }
 

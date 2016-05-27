@@ -13,21 +13,30 @@ namespace PhotoshopWebsite.Gui.Client.Payment {
     public partial class Google {
         
         /// <summary>
-        /// pnlProduct control.
+        /// pnlProductInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlProduct;
+        protected global::System.Web.UI.WebControls.Panel pnlProductInfo;
         
         /// <summary>
-        /// pnlPayment control.
+        /// pnlUserInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlPayment;
+        protected global::System.Web.UI.WebControls.Panel pnlUserInfo;
+        
+        /// <summary>
+        /// pnlPaymentInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPaymentInfo;
     }
 }

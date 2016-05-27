@@ -5,11 +5,11 @@
     <div id="panel-body" class="panel-bodybefore">
         <div class='container' style="margin-left: 13px;">
             <div class='row'>
-                <asp:Panel ID="pnlProduct" runat="server"></asp:Panel>
-                <asp:Panel ID="pnlPayment" runat="server"></asp:Panel>
+                <asp:Panel ID="pnlProductInfo" runat="server"></asp:Panel>
+                <asp:Panel ID="pnlUserInfo" runat="server"></asp:Panel>
+                <asp:Panel ID="pnlPaymentInfo" runat="server"></asp:Panel>
             </div>
-        </div>
-        <h1>Gay shit</h1>
+        </div>        
     </div>
     
 </asp:Content>

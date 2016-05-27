@@ -101,6 +101,7 @@
     <Content Include="Gui\Client\Account.aspx" />
     <Content Include="Gui\Client\CreateAccount.aspx" />
     <Content Include="Gui\Client\GroupPictures.aspx" />
+    <Content Include="Gui\Client\Payment\CheckPayment.aspx" />
     <Content Include="Gui\Client\Payment\Google.aspx" />
     <Content Include="Gui\Client\Payment\iDeal.aspx" />
     <Content Include="Gui\Client\Payment\Ogone.aspx" />
@@ -129,6 +130,7 @@
     <None Include="Gui\Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="Javascript\JavaScript.js" />
     <Content Include="web.config" />
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\PhotoshopS4.pubxml" />
@@ -245,6 +247,13 @@
     </Compile>
     <Compile Include="Gui\Client\GroupPictures.aspx.designer.cs">
       <DependentUpon>GroupPictures.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Client\Payment\CheckPayment.aspx.cs">
+      <DependentUpon>CheckPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Client\Payment\CheckPayment.aspx.designer.cs">
+      <DependentUpon>CheckPayment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Gui\Client\Payment\Google.aspx.cs">
       <DependentUpon>Google.aspx</DependentUpon>
