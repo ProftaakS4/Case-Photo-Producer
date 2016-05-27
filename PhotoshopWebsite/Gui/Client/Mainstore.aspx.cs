@@ -380,7 +380,7 @@ namespace PhotoshopWebsite
                 }
             }
             _current = (Bitmap)bmap.Clone();
-            _current.Save(Server.MapPath("..\\Website Filter Cache\\Sepia" + photo.ID + ".png"));
+            _current.Save(Server.MapPath("Sepia" + photo.ID + ".png"));
 
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
@@ -391,7 +391,7 @@ namespace PhotoshopWebsite
                         System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
                         if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
                         {
-                            currentImage.ImageUrl = "..\\Website Filter Cache\\Sepia" + photo.ID + ".png";
+                            currentImage.ImageUrl = "Sepia" + photo.ID + ".png";
                             break;
                         }
                     }
@@ -417,7 +417,7 @@ namespace PhotoshopWebsite
             _current = (Bitmap)bmap.Clone();
             Random rnd = new Random();
             int a = rnd.Next();
-            _current.Save(Server.MapPath("..\\Website Filter Cache\\BlackWhite" + photo.ID + ".png"));
+            _current.Save(Server.MapPath("BlackWhite" + photo.ID + ".png"));
 
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
@@ -428,7 +428,7 @@ namespace PhotoshopWebsite
                         System.Web.UI.WebControls.Image currentImage = item as System.Web.UI.WebControls.Image;
                         if (currentImage.ID.ToString() == "image" + photo.ID.ToString())
                         {
-                            currentImage.ImageUrl = "..\\Website Filter Cache\\BlackWhite" + photo.ID + ".png";
+                            currentImage.ImageUrl = "BlackWhite" + photo.ID + ".png";
                             break;
                         }
                     }

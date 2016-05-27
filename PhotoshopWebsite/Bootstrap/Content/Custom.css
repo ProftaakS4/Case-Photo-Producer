@@ -50,3 +50,8 @@
 .checkbox {
     margin-left: 40px;
 }
+
+.btnPayment {
+    padding: 10px;
+    border: double;
+}

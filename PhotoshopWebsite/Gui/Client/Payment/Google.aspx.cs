@@ -158,7 +158,26 @@ namespace PhotoshopWebsite.Gui.Client.Payment
         {
             if (rabobank.Checked || abn.Checked || ingb.Checked || sns.Checked)
             {
-                Response.Redirect("CheckPayment.aspx");
+                if (shoppingCart.Count == 0)
+                {
+                    Response.Write("<script>alert('ShoppingCart is empty, please fill your cart first')</script>");
+                }
+
+                else
+                {
+                    PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
+
+                    if (shoppingCart != null)
+                    {
+                        foreach (Domain.ShoppingbasketItem item in shoppingCart)
+                        {
+                            string photoIDQualtityType = item.photoID.ToString() + ";" + item.quantity.ToString() + "#" + item.filterType;
+                            socket.sendData(photoIDQualtityType);
+                        }
+                        Response.Redirect("CheckPayment.aspx");
+                    }
+                }
+
             }
             else
             {
