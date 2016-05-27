@@ -39,11 +39,10 @@
                             ErrorMessage="Enter Your Password"
                             runat="Server">
                         </asp:RequiredFieldValidator>
-<%--                        <div class="checkbox">
-                            <label>
-                                <asp:CheckBox ID="CheckBox1" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" />Remember me
-                            </label>
-                        </div>--%>
+                        <div class="checkbox" style="margin-left:0px;">
+                            <label style="color:white;">
+                                <asp:CheckBox ID="CheckBox1" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" />Remember me</label>
+                        </div>
                         <asp:Button CausesValidation="true" ValidationGroup="PersonalInfoGroup" ID="BtnLogin" CssClass="btn btn-lg btn-primary btn-block" runat="server" OnClick="BtnLogin_Click" Text="Sign in" />
                     </div>
                     <div class="col-lg-6">
@@ -55,7 +54,7 @@
                             ErrorMessage="Enter Your Code"
                             runat="Server">
                         </asp:RequiredFieldValidator>
-                        <asp:Button CausesValidation="true" ValidationGroup="PersonalInfoGroupCode" ID="BtnCreateAccount" CssClass="btn btn-lg btn-primary btn-block" runat="server" Text="Create Account" OnClick="BtnCreateAccount_Click" />
+                        <asp:Button CausesValidation="true" ValidationGroup="PersonalInfoGroupCode" ID="BtnCreateAccount" CssClass="btn btn-lg btn-primary btn-block" runat="server" Text="Create Account" OnClick="BtnCreateAccount_Click" style="margin-top:41px;" />
                     </div>
                 </div>
         </form>
