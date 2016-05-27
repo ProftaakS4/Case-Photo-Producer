@@ -89,6 +89,7 @@
     <Content Include="Gui\Finance\Finance.aspx" />
     <Content Include="Gui\Client\PhotoshopMaster.Master" />
     <Content Include="Gui\Client\ShoppingCart.aspx" />
+    <Content Include="Gui\Finance\OwedMoney.aspx" />
     <Content Include="Gui\Finance\Orders.aspx" />
     <Content Include="Gui\Finance\Stock.aspx" />
     <Content Include="Gui\Images\background\background1.jpg" />
@@ -158,6 +159,7 @@
     <Compile Include="Controller\ProductController.cs" />
     <Compile Include="Controller\PurchaseController.cs" />
     <Compile Include="DatabaseTier\Product.cs" />
+    <Compile Include="Domain\OwedMoney.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\ProductPerPhotographer.cs" />
     <Compile Include="Domain\Purchase.cs" />
@@ -255,6 +257,13 @@
     </Compile>
     <Compile Include="Gui\Finance\FinancialAdmin.Master.designer.cs">
       <DependentUpon>FinancialAdmin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Finance\OwedMoney.aspx.cs">
+      <DependentUpon>OwedMoney.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Gui\Finance\OwedMoney.aspx.designer.cs">
+      <DependentUpon>OwedMoney.aspx</DependentUpon>
     </Compile>
     <Compile Include="Gui\Finance\Orders.aspx.cs">
       <DependentUpon>Orders.aspx</DependentUpon>
