@@ -198,7 +198,7 @@ namespace PhotoshopWebsite.Gui
 
         private void BtnTransfer_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("Payment/iDeal.aspx");
+            Response.Redirect("Payment/Transfer.aspx");
         }
 
         private void BtnGoogle_Click(object sender, ImageClickEventArgs e)

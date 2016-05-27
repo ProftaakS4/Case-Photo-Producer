@@ -72,8 +72,7 @@ namespace PhotoshopWebsite.Gui.Client.Payment
             totalAmount.Font.Bold = true;
             totalAmount.Text = "<u>Total Amount: € 9,99</u>";
             totalAmount.Font.Size = 18;
-
-            // allign text to the righ
+            
 
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
