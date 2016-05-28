@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Gui/Finance/FinancialAdmin.Master" AutoEventWireup="true" CodeBehind="Finance.aspx.cs" Inherits="PhotoshopWebsite.Gui.Administration" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Gui/Finance/FinancialAdmin.Master" AutoEventWireup="true" CodeBehind="OwedMoney.aspx.cs" Inherits="PhotoshopWebsite.Gui.Finance.OwedMoney" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div ID="panel-body" class="panel-bodybefore">
