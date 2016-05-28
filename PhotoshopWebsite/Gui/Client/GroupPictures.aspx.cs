@@ -391,7 +391,7 @@ namespace PhotoshopWebsite.Gui.Client
             else
             {
                 //TODO pakt ook de jaartallen niet alleen de ID's
-                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num]));
+                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num],0.0));
             }
         }
 

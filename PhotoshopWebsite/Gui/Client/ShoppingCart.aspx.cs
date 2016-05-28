@@ -141,33 +141,9 @@ namespace PhotoshopWebsite.Gui
 
             MainTable.Rows.Add(FixedRow);
 
-
-            Button btnORder = new Button();
-            btnORder.ID = "btnOrder";
-            btnORder.CssClass = "btn btn-default";
-            btnORder.Click += btnORder_Click;
-            btnORder.Height = 30;
-            btnORder.Text = "Order";
-
-            ImageButton btnPayPal = new ImageButton();
-            btnPayPal.ID = "btnPaypal";
-            btnPayPal.Click += btnPayPal_Click;
-            btnORder.CssClass = "btn btn-default";
-            btnPayPal.Height = 30;
-            btnPayPal.AlternateText = "Buy Now!";
-            btnPayPal.OnClientClick = "target='blank'";
-            btnPayPal.ImageUrl = "http://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif";
-
-
-
             pnlProduct.Controls.Add(firstcontrol);
             pnlProduct.Controls.Add(MainTable);
             pnlProduct.Controls.Add(closingcontrol);
-            pnlProduct.Controls.Add(btnORder);
-            pnlProduct.Controls.Add(new LiteralControl(" <br />"));
-            pnlProduct.Controls.Add(new LiteralControl(" <br />"));
-            pnlProduct.Controls.Add(btnPayPal);
-
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
 
