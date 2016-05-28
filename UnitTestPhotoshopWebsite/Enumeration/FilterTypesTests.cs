@@ -17,13 +17,13 @@ namespace PhotoshopWebsite.Enumeration.Tests
         {
             ShoppingbasketItem item;
 
-            item = new ShoppingbasketItem(1, "test1", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.CANVAS);
+            item = new ShoppingbasketItem(1, "test1", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.CANVAS, 0.1);
             Assert.AreEqual(FilterTypes.FTypes.COLOR, item.filterType);
 
-            item = new ShoppingbasketItem(2, "test2", FilterTypes.FTypes.BLACKWHITE, ProductTypes.PTypes.CANVAS);
+            item = new ShoppingbasketItem(2, "test2", FilterTypes.FTypes.BLACKWHITE, ProductTypes.PTypes.CANVAS, 0.1);
             Assert.AreEqual(FilterTypes.FTypes.BLACKWHITE, item.filterType);
 
-            item = new ShoppingbasketItem(3, "test3", FilterTypes.FTypes.SEPIA, ProductTypes.PTypes.CANVAS);
+            item = new ShoppingbasketItem(3, "test3", FilterTypes.FTypes.SEPIA, ProductTypes.PTypes.CANVAS, 0.1);
             Assert.AreEqual(FilterTypes.FTypes.SEPIA, item.filterType);
         }
 

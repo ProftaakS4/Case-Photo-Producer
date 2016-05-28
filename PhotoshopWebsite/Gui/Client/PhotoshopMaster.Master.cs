@@ -35,7 +35,11 @@ namespace PhotoshopWebsite
             if (HttpContext.Current.Session["shoppingCart"] != null)
             {
                 List<Domain.ShoppingbasketItem> list = Session["shoppingCart"] as List<Domain.ShoppingbasketItem>;
-                Labelquantity.Text = list.Count.ToString();
+                foreach(ShoppingbasketItem item in list)
+                {
+                    size += item.quantity;
+                }
+                Labelquantity.Text = size.ToString();
             }
             if (Session["logindata"] != null)
             {

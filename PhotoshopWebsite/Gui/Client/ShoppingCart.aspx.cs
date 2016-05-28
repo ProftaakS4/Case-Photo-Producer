@@ -15,6 +15,7 @@ namespace PhotoshopWebsite.Gui
     public partial class ShoppingCart : System.Web.UI.Page
     {
         private string orderName = "Photo Shop";
+        private double totalAmount = 0;
         private string orderPrice;
         private ImageButton btnTransfer;
         private ImageButton btnPayPal;
@@ -57,24 +58,28 @@ namespace PhotoshopWebsite.Gui
             FilterHeader.Text = "Filter";
             TableHeaderCell TypeHeader = new TableHeaderCell();
             TypeHeader.Text = "Product Type";
-            TableHeaderCell Descriptionheader = new TableHeaderCell();
-            Descriptionheader.Text = "Photo Description";
-            TableHeaderCell Quantityheader = new TableHeaderCell();
-            Quantityheader.Text = "Quantity";
-            TableHeaderCell Removeheader = new TableHeaderCell();
-            Removeheader.Text = "Remove";
+            TableHeaderCell DescriptionHeader = new TableHeaderCell();
+            DescriptionHeader.Text = "Photo Description";
+            TableHeaderCell QuantityHeader = new TableHeaderCell();
+            QuantityHeader.Text = "Quantity";
+            TableHeaderCell PriceHeader = new TableHeaderCell();
+            PriceHeader.Text = "Price";
+            TableHeaderCell RemoveHeader = new TableHeaderCell();
+            RemoveHeader.Text = "Remove";
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(FilterHeader);
             MainHeaderRow.Cells.Add(TypeHeader);
-            MainHeaderRow.Cells.Add(Descriptionheader);
-            MainHeaderRow.Cells.Add(Quantityheader);
-            MainHeaderRow.Cells.Add(Removeheader);
+            MainHeaderRow.Cells.Add(DescriptionHeader);
+            MainHeaderRow.Cells.Add(QuantityHeader);
+            MainHeaderRow.Cells.Add(PriceHeader);
+            MainHeaderRow.Cells.Add(RemoveHeader);
             MainTable.Rows.Add(MainHeaderRow);
 
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
                 TableRow MainRow = new TableRow();
-                MainRow.Height = 80;
+                MainRow.Height = 60;
+
                 TableCell ID = new TableCell();
                 ID.Text = item.photoID.ToString();
                 TableCell Filter = new TableCell();
@@ -92,12 +97,9 @@ namespace PhotoshopWebsite.Gui
                 tbQuantity.MaxLength = 3;
                 Quantity.Controls.Add(tbQuantity);
 
-                MainRow.Cells.Add(ID);
-                MainRow.Cells.Add(Filter);
-                MainRow.Cells.Add(Type);
-                MainRow.Cells.Add(Description);
-                MainRow.Cells.Add(Quantity);
-
+                TableCell PriceCell = new TableCell();
+                PriceCell.Text = "€" + item.Price.ToString() + ",00";
+                totalAmount = (totalAmount + (item.Price * item.quantity));
 
                 TableCell ButtonCell = new TableCell();
                 CheckBox cbRemove = new CheckBox();
@@ -107,16 +109,65 @@ namespace PhotoshopWebsite.Gui
                 cbRemove.Height = 30;
                 cbRemove.AutoPostBack = true;
                 cbRemove.Checked = false;
-
                 ButtonCell.Controls.Add(cbRemove);
+
+                MainRow.Cells.Add(ID);
+                MainRow.Cells.Add(Filter);
+                MainRow.Cells.Add(Type);
+                MainRow.Cells.Add(Description);
+                MainRow.Cells.Add(Quantity);
+                MainRow.Cells.Add(PriceCell);
                 MainRow.Cells.Add(ButtonCell);
+
                 MainTable.Rows.Add(MainRow);
             }
+
+            // Fixed row
+            TableRow FixedRow = new TableRow();
+            FixedRow.Height = 60;
+
+            TableCell TotalTextCell = new TableCell();
+            TotalTextCell.Text = "<B>Total:</B>";
+            TableCell TotalAmountCell = new TableCell();
+            TotalAmountCell.Text = "€" + totalAmount.ToString() + ",00";
+
+            for (int i = 0; i < 4; i++)
+            {
+                FixedRow.Cells.Add(new TableCell());
+            }
+            FixedRow.Cells.Add(TotalTextCell);
+            FixedRow.Cells.Add(TotalAmountCell);
+            FixedRow.Cells.Add(new TableCell());
+
+            MainTable.Rows.Add(FixedRow);
+
+
+            Button btnORder = new Button();
+            btnORder.ID = "btnOrder";
+            btnORder.CssClass = "btn btn-default";
+            btnORder.Click += btnORder_Click;
+            btnORder.Height = 30;
+            btnORder.Text = "Order";
+
+            ImageButton btnPayPal = new ImageButton();
+            btnPayPal.ID = "btnPaypal";
+            btnPayPal.Click += btnPayPal_Click;
+            btnORder.CssClass = "btn btn-default";
+            btnPayPal.Height = 30;
+            btnPayPal.AlternateText = "Buy Now!";
+            btnPayPal.OnClientClick = "target='blank'";
+            btnPayPal.ImageUrl = "http://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif";
+
+
+
             pnlProduct.Controls.Add(firstcontrol);
             pnlProduct.Controls.Add(MainTable);
             pnlProduct.Controls.Add(closingcontrol);
+            pnlProduct.Controls.Add(btnORder);
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
+            pnlProduct.Controls.Add(btnPayPal);
+
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
 
@@ -192,33 +243,30 @@ namespace PhotoshopWebsite.Gui
             //pnlPayment.Controls.Add(new LiteralControl(" <br />"));
         }
         private void BtnOgone_Click(object sender, ImageClickEventArgs e)
-        {
+            {
             Response.Redirect("Payment/Ogone.aspx");
-        }
+            }
 
         private void BtnTransfer_Click(object sender, ImageClickEventArgs e)
-        {
+            {
             Response.Redirect("Payment/Transfer.aspx");
         }
-
+                
         private void BtnGoogle_Click(object sender, ImageClickEventArgs e)
-        {
+                    {
             Response.Redirect("Payment/Google.aspx");
-        }
+                }
 
         private void BtniDeal_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("Payment/iDeal.aspx");
-        }
+            }
 
         void btnPayPal_Click(object sender, EventArgs e)
         {
             orderPrice = "0.01";
             Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + orderPrice);
         }
-
-
-        
 
 
         private void Check_Clicked(object sender, EventArgs e)

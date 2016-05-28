@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -13,33 +14,50 @@ namespace PhotoshopWebsite
     [ExcludeFromCodeCoverage]
     public partial class Login : System.Web.UI.Page
     {
-        private String loginName;
-        private String passWord;
-        private Boolean Rememberme = false;
+ 
+        private Boolean rememberMe = false;
         private Boolean LoginSuccess = true;
         private String loginCode;
+        HttpCookie _userInfoCookies;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-        }
-
+            if (!IsPostBack)
+            {
+                _userInfoCookies = Request.Cookies["Userinfo"];
+                if (_userInfoCookies != null)
+                {
+                    string loginName = _userInfoCookies["loginName"];
+                    string  passWord = _userInfoCookies["passWord"];
+                    tbInputEmail.Text = loginName;
+                    tbInputPassword.Text = passWord;
+                }
+            }
+        }       
         protected void BtnLogin_Click(object sender, EventArgs e)
         {
+            string loginname = tbInputEmail.Text;
+            string password = tbInputPassword.Text;
+            navigateThroughAuthentication(loginname, password);
+        }
 
-            loginName = tbInputEmail.Text;
-            passWord = tbInputPassword.Text;
-            // check is emailaddress and password are legit
-            Controller.User userWithNoData = new Controller.User(loginName);
-            Controller.User userWithData = userWithNoData.loginUser(loginName, passWord);
-
+        private void navigateThroughAuthentication(string loginname, string password)
+        {
+            Controller.User userWithNoData = new Controller.User(loginname);
+            Controller.User userWithData = userWithNoData.loginUser(loginname, password);
             if (userWithData != null)
             {
-                // save user's login name into session
-                Session["logindata"] = loginName;
+                Session["logindata"] = loginname;
                 Session["UserData"] = userWithData;
+                _userInfoCookies = Request.Cookies["Userinfo"];
+                if (rememberMe && _userInfoCookies != null)
+                {
+                    var expiredCookie = new HttpCookie(_userInfoCookies.Name) { Expires = DateTime.Now.AddDays(-1) };
+                    HttpContext.Current.Response.Cookies.Add(expiredCookie); // overwrite it
+                    HttpContext.Current.Request.Cookies.Clear();
+                    createPersistentCookie(loginname, password);
+                }
                 redirectToUserTypePage(userWithData.Type);
-                //Response.Write("<script>alert('" + newUser.ID.ToString() + " " + newUser.Type + " " + newUser.Firstname + " " + newUser.Lastname + "')</script>");
             }
             else
             {
@@ -48,6 +66,17 @@ namespace PhotoshopWebsite
 
         }
 
+        private void createPersistentCookie(string loginName, string passWord)
+        {
+            HttpCookie _userInfoCookies = new HttpCookie("Userinfo");
+
+            _userInfoCookies["loginName"] = loginName;
+            _userInfoCookies["passWord"] = passWord;
+            _userInfoCookies["Expire"] = "5 Days";
+
+            _userInfoCookies.Expires = DateTime.Now.AddDays(5);
+            Response.Cookies.Add(_userInfoCookies);
+        }
         /// <summary>
         /// this method redirects the user by type to it's allowed page. When not type found the browser will give feedback
         /// </summary>
@@ -86,14 +115,24 @@ namespace PhotoshopWebsite
 
         protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
-            Rememberme = true;
+            rememberMe = !rememberMe;
+
         }
 
         protected void BtnCreateAccount_Click(object sender, EventArgs e)
         {
             loginCode = tbInputCode.Text;
-            Session["loginCode"] = loginCode;
-            Response.Redirect("~/Gui/Client/CreateAccount.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+
+            if (loginCode == String.Empty)
+            {
+                Response.Write("<script>alert('Pease enter a login code')</script>");
+            }
+            else
+            {
+                Session["loginCode"] = loginCode;
+                Response.Redirect("~/Gui/Client/CreateAccount.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+            }
+            
         }
     }
 }

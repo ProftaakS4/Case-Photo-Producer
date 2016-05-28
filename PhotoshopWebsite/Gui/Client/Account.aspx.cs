@@ -8,6 +8,7 @@ using PhotoshopWebsite.Controller;
 using System.Web.UI.HtmlControls;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
+using PhotoshopWebsite.Domain;
 
 namespace PhotoshopWebsite.Gui.Client
 {

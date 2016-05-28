@@ -13,6 +13,42 @@ namespace PhotoshopWebsite.Gui.Client {
     public partial class GroupPictures {
         
         /// <summary>
+        /// input_X control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden input_X;
+        
+        /// <summary>
+        /// input_Y control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden input_Y;
+        
+        /// <summary>
+        /// input_W control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden input_W;
+        
+        /// <summary>
+        /// input_H control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden input_H;
+        
+        /// <summary>
         /// pnlProduct control.
         /// </summary>
         /// <remarks>

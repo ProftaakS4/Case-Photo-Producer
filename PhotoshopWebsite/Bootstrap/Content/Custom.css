@@ -51,7 +51,7 @@
     margin-left: 40px;
 }
 
-.btnPayment {
-    padding: 10px;
-    border: double;
+#home {
+    min-height: 1000px;
 }
+
