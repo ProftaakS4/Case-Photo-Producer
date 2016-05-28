@@ -182,5 +182,14 @@ namespace PhotoshopWebsite.Gui.Client.Payment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlOrderInfo;
+        
+        /// <summary>
+        /// pnlPaymentInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPaymentInfo;
     }
 }

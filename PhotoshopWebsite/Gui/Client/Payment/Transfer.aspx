@@ -44,7 +44,7 @@
                     </span>  <br /> 
                 <h3>Order Info</h3>
                 <asp:Panel ID="pnlOrderInfo" runat="server"></asp:Panel>
-                <h3>Confirm order and shipping address</h3> 
+                <asp:Panel ID="pnlPaymentInfo" runat="server"></asp:Panel>
         </div>
     </div>
     

@@ -36,6 +36,7 @@ namespace PhotoshopWebsite.Gui.Client.Payment
         {
             fillUserInfo();
             fillOrderInfo();
+            fillPaymenInfo();
         }
 
 
@@ -127,6 +128,24 @@ namespace PhotoshopWebsite.Gui.Client.Payment
                 tbPhoneNumber.Text = currentUser.Phonenumber;
                 tbIBAN.Text = currentUser.IBAN;
                 tbEMail.Text = currentUser.Emailaddress;
+            }
+        }
+
+        void fillPaymenInfo()
+        {
+            Label info = new Label();
+            Label accountInfo = null;
+            info.Text = "Please transfer the total amount to <u>NL16RABO0123456789</u>";
+            if(currentUser.ID != null)
+            {
+                accountInfo = new Label();
+                accountInfo.Text = "Please refer your account ID " + currentUser.ID + " within the transaciont";
+            }
+            pnlPaymentInfo.Controls.Add(info);
+            pnlOrderInfo.Controls.Add(new LiteralControl(" <br />"));
+            if (accountInfo != null)
+            {
+                pnlPaymentInfo.Controls.Add(accountInfo);
             }
         }
     }
