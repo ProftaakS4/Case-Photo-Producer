@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Text.RegularExpressions;
 using PhotoshopWebsite.Enumeration;
 using System.Diagnostics.CodeAnalysis;
+using PhotoshopWebsite.Domain;
 
 namespace PhotoshopWebsite
 {
@@ -276,7 +277,7 @@ namespace PhotoshopWebsite
         {
             Button button = sender as Button;
             string name = button.ID.Split('{', '}')[1];
-            int num = Int32.Parse(button.ID.Split('{', '}')[2]);
+            int num = Int32.Parse(button.ID.Split('{', '}')[2]); //photo ID
 
             Domain.ShoppingbasketItem found = null;
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
@@ -294,7 +295,10 @@ namespace PhotoshopWebsite
             else
             {
                 //TODO pakt ook de jaartallen niet alleen de ID's
-                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num]));
+                PurchaseController purchaseController = new PurchaseController();
+                int product = ProductTypes.getInt(products[num].ToString());
+                int price = purchaseController.getPrice(product, num);
+                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num], price));
             }
         }
 
@@ -345,32 +349,6 @@ namespace PhotoshopWebsite
                     }
                     break;
                 }
-            }
-        }
-
-        private void BtnAddToCart_Click(object sender, EventArgs e)
-        {
-            Button button = sender as Button;
-            string name = button.ID.Split('{', '}')[1];
-            int num = Int32.Parse(button.ID.Split('{', '}')[2]);
-
-            Domain.ShoppingbasketItem found = null;
-            foreach (Domain.ShoppingbasketItem item in shoppingCart)
-            {
-                if (item.photoID == num && item.filterType == filters[num])
-                {
-                    found = item;
-                    break;
-                }
-            }
-            if (found != null)
-            {
-                found.quantity++;
-            }
-            else
-            {
-                //TODO pakt ook de jaartallen niet alleen de ID's
-                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num]));
             }
         }
 

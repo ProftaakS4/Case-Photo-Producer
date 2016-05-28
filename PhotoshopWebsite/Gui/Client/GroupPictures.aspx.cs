@@ -293,7 +293,10 @@ namespace PhotoshopWebsite.Gui.Client
             else
             {
                 //TODO pakt ook de jaartallen niet alleen de ID's
-                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num]));
+                PurchaseController purchaseController = new PurchaseController();
+                int product = ProductTypes.getInt(products[num].ToString());
+                int price = purchaseController.getPrice(product, num);
+                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num], price));
             }
         }
 
@@ -344,32 +347,6 @@ namespace PhotoshopWebsite.Gui.Client
                     }
                     break;
                 }
-            }
-        }
-
-        private void BtnAddToCart_Click(object sender, EventArgs e)
-        {
-            Button button = sender as Button;
-            string name = button.ID.Split('{', '}')[1];
-            int num = Int32.Parse(button.ID.Split('{', '}')[2]);
-
-            Domain.ShoppingbasketItem found = null;
-            foreach (Domain.ShoppingbasketItem item in shoppingCart)
-            {
-                if (item.photoID == num && item.filterType == filters[num])
-                {
-                    found = item;
-                    break;
-                }
-            }
-            if (found != null)
-            {
-                found.quantity++;
-            }
-            else
-            {
-                //TODO pakt ook de jaartallen niet alleen de ID's
-                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num]));
             }
         }
 

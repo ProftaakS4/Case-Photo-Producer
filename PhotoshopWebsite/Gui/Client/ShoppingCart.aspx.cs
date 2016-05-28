@@ -15,7 +15,7 @@ namespace PhotoshopWebsite.Gui
     public partial class ShoppingCart : System.Web.UI.Page
     {
         private string orderName = "Photo Shop";
-        private string orderPrice;
+        private double totalAmount = 0;
 
         public List<Domain.ShoppingbasketItem> shoppingCart
         {
@@ -50,32 +50,40 @@ namespace PhotoshopWebsite.Gui
             FilterHeader.Text = "Filter";
             TableHeaderCell TypeHeader = new TableHeaderCell();
             TypeHeader.Text = "Product Type";
-            TableHeaderCell Descriptionheader = new TableHeaderCell();
-            Descriptionheader.Text = "Photo Description";
-            TableHeaderCell Quantityheader = new TableHeaderCell();
-            Quantityheader.Text = "Quantity";
-            TableHeaderCell Removeheader = new TableHeaderCell();
-            Removeheader.Text = "Remove";
+            TableHeaderCell DescriptionHeader = new TableHeaderCell();
+            DescriptionHeader.Text = "Photo Description";
+            TableHeaderCell QuantityHeader = new TableHeaderCell();
+            QuantityHeader.Text = "Quantity";
+            TableHeaderCell PriceHeader = new TableHeaderCell();
+            PriceHeader.Text = "Price";
+            TableHeaderCell RemoveHeader = new TableHeaderCell();
+            RemoveHeader.Text = "Remove";
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(FilterHeader);
             MainHeaderRow.Cells.Add(TypeHeader);
-            MainHeaderRow.Cells.Add(Descriptionheader);
-            MainHeaderRow.Cells.Add(Quantityheader);
-            MainHeaderRow.Cells.Add(Removeheader);
+            MainHeaderRow.Cells.Add(DescriptionHeader);
+            MainHeaderRow.Cells.Add(QuantityHeader);
+            MainHeaderRow.Cells.Add(PriceHeader);
+            MainHeaderRow.Cells.Add(RemoveHeader);
             MainTable.Rows.Add(MainHeaderRow);
 
-            foreach (Domain.ShoppingbasketItem item in shoppingCart)
+                        foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
                 TableRow MainRow = new TableRow();
-                MainRow.Height = 80;
+                MainRow.Height = 60;
+
                 TableCell ID = new TableCell();
                 ID.Text = item.photoID.ToString();
+
                 TableCell Filter = new TableCell();
                 Filter.Text = item.filterType.ToString();
+
                 TableCell Type = new TableCell();
                 Type.Text = item.product.ToString();
+
                 TableCell Description = new TableCell();
                 Description.Text = item.description;
+
                 TableCell Quantity = new TableCell();
                 TextBox tbQuantity = new TextBox();
                 tbQuantity.ID = item.filterType.ToString() + item.photoID.ToString();
@@ -85,12 +93,9 @@ namespace PhotoshopWebsite.Gui
                 tbQuantity.MaxLength = 3;
                 Quantity.Controls.Add(tbQuantity);
 
-                MainRow.Cells.Add(ID);
-                MainRow.Cells.Add(Filter);
-                MainRow.Cells.Add(Type);
-                MainRow.Cells.Add(Description);
-                MainRow.Cells.Add(Quantity);
-
+                TableCell PriceCell = new TableCell();
+                PriceCell.Text = item.Price.ToString();
+                totalAmount = (totalAmount + (item.Price * item.quantity));
 
                 TableCell ButtonCell = new TableCell();
                 CheckBox cbRemove = new CheckBox();
@@ -100,11 +105,38 @@ namespace PhotoshopWebsite.Gui
                 cbRemove.Height = 30;
                 cbRemove.AutoPostBack = true;
                 cbRemove.Checked = false;
-
                 ButtonCell.Controls.Add(cbRemove);
+
+                MainRow.Cells.Add(ID);
+                MainRow.Cells.Add(Filter);
+                MainRow.Cells.Add(Type);
+                MainRow.Cells.Add(Description);
+                MainRow.Cells.Add(Quantity);
+                MainRow.Cells.Add(PriceCell);
                 MainRow.Cells.Add(ButtonCell);
+
                 MainTable.Rows.Add(MainRow);
             }
+
+            // Fixed row
+            TableRow FixedRow = new TableRow();
+            FixedRow.Height = 60;
+
+            TableCell TotalTextCell = new TableCell();
+            TotalTextCell.Text = "<B>Total:</B>";
+            TableCell TotalAmountCell = new TableCell();
+            TotalAmountCell.Text = totalAmount.ToString();
+
+            for (int i = 0; i < 4; i++)
+			{
+                FixedRow.Cells.Add(new TableCell());			 
+			}
+            FixedRow.Cells.Add(TotalTextCell);
+            FixedRow.Cells.Add(TotalAmountCell);
+
+            MainTable.Rows.Add(FixedRow);
+
+
             Button btnORder = new Button();
             btnORder.ID = "btnOrder";
             btnORder.CssClass = "btn btn-default";
@@ -138,8 +170,7 @@ namespace PhotoshopWebsite.Gui
 
         void btnPayPal_Click(object sender, EventArgs e)
         {
-            orderPrice = "0.01";
-            Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + orderPrice);
+            Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + totalAmount);
         }
 
         void btnORder_Click(object sender, EventArgs e)
