@@ -52,7 +52,6 @@ namespace PhotoshopWebsite
             Labelklantnaam.Text = clientName;
             pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
 
-            
             if (pageName.Contains("account"))
             {
                 LabelTitle.Text = "<h1>My Account</h1>";
@@ -80,6 +79,14 @@ namespace PhotoshopWebsite
             else if (pageName.Contains("transfer"))
             {
                 LabelTitle.Text = "<h1>Money Tranfer Payment</h1>";
+            }
+            else if (pageName.Contains("checkpayment"))
+            {
+                LabelTitle.Text = "<h1>Payment Check</h1>";
+            }
+            else if (pageName.Contains("shoppingcart"))
+            {
+                LabelTitle.Text = "<h1>Shopping Cart</h1>";
             }
         }
 

@@ -16,6 +16,7 @@ namespace PhotoshopWebsite.Gui.Client.Payment
             wait.Font.Bold = true;
             wait.Text = "<u>Please wait 3 seconds while the payment is being verified...</u>";
             pnlWait.Controls.Add(wait);
+            Session["shoppingCart"] = new List<Domain.ShoppingbasketItem>();
         }
     }
 }

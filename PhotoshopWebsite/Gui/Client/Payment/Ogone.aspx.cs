@@ -60,20 +60,22 @@ namespace PhotoshopWebsite.Gui.Client.Payment
             Descriptionheader.Text = "Photo Description";
             TableHeaderCell Quantityheader = new TableHeaderCell();
             Quantityheader.Text = "Quantity";
+            TableHeaderCell PriceHeader = new TableHeaderCell();
+            PriceHeader.Text = "Price";
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(FilterHeader);
             MainHeaderRow.Cells.Add(TypeHeader);
             MainHeaderRow.Cells.Add(Descriptionheader);
             MainHeaderRow.Cells.Add(Quantityheader);
+            MainHeaderRow.Cells.Add(PriceHeader);
             MainTable.Rows.Add(MainHeaderRow);
 
             Label totalAmount = new Label();
             totalAmount.ForeColor = Color.Green;
             totalAmount.Font.Bold = true;
-            totalAmount.Text = "<u>Total Amount: € 9,99</u>";
+            double total = (double)Session["totalAmount"];
+            totalAmount.Text = "<u>Total Amount: €" + total + ",00</u>";
             totalAmount.Font.Size = 18;
-
-            // allign text to the righ
 
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
@@ -88,22 +90,17 @@ namespace PhotoshopWebsite.Gui.Client.Payment
                 TableCell Description = new TableCell();
                 Description.Text = item.description;
                 TableCell Quantity = new TableCell();
-                TextBox tbQuantity = new TextBox();
-                tbQuantity.ID = item.filterType.ToString() + item.photoID.ToString();
-                tbQuantity.Text = item.quantity.ToString();
-                tbQuantity.AutoPostBack = true;
-                tbQuantity.MaxLength = 3;
-                tbQuantity.ReadOnly = true;
-                Quantity.Controls.Add(tbQuantity);
+                Quantity.Text = item.quantity.ToString();
+                TableCell PriceCell = new TableCell();
+                PriceCell.Text = "€" + item.Price.ToString() + ",00";
 
                 MainRow.Cells.Add(ID);
                 MainRow.Cells.Add(Filter);
                 MainRow.Cells.Add(Type);
                 MainRow.Cells.Add(Description);
                 MainRow.Cells.Add(Quantity);
+                MainRow.Cells.Add(PriceCell);
 
-                TableCell ButtonCell = new TableCell();
-                MainRow.Cells.Add(ButtonCell);
                 MainTable.Rows.Add(MainRow);
             }
 

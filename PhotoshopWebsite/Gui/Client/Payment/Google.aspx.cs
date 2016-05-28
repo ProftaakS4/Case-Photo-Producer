@@ -92,8 +92,6 @@ namespace PhotoshopWebsite.Gui.Client.Payment
                 Description.Text = item.description;
                 TableCell Quantity = new TableCell();
                 Quantity.Text = item.quantity.ToString();
-
-                
                 TableCell PriceCell = new TableCell();
                 PriceCell.Text = "€" + item.Price.ToString() + ",00";
 
