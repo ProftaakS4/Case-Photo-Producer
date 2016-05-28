@@ -67,7 +67,7 @@ namespace PhotoshopWebsite.Gui
             MainHeaderRow.Cells.Add(RemoveHeader);
             MainTable.Rows.Add(MainHeaderRow);
 
-                        foreach (Domain.ShoppingbasketItem item in shoppingCart)
+            foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
                 TableRow MainRow = new TableRow();
                 MainRow.Height = 60;
@@ -94,7 +94,7 @@ namespace PhotoshopWebsite.Gui
                 Quantity.Controls.Add(tbQuantity);
 
                 TableCell PriceCell = new TableCell();
-                PriceCell.Text = item.Price.ToString();
+                PriceCell.Text = "€" + item.Price.ToString() + ",00";
                 totalAmount = (totalAmount + (item.Price * item.quantity));
 
                 TableCell ButtonCell = new TableCell();
@@ -125,14 +125,15 @@ namespace PhotoshopWebsite.Gui
             TableCell TotalTextCell = new TableCell();
             TotalTextCell.Text = "<B>Total:</B>";
             TableCell TotalAmountCell = new TableCell();
-            TotalAmountCell.Text = totalAmount.ToString();
+            TotalAmountCell.Text = "€" + totalAmount.ToString() + ",00";
 
             for (int i = 0; i < 4; i++)
-			{
-                FixedRow.Cells.Add(new TableCell());			 
-			}
+            {
+                FixedRow.Cells.Add(new TableCell());
+            }
             FixedRow.Cells.Add(TotalTextCell);
             FixedRow.Cells.Add(TotalAmountCell);
+            FixedRow.Cells.Add(new TableCell());
 
             MainTable.Rows.Add(FixedRow);
 
@@ -182,7 +183,7 @@ namespace PhotoshopWebsite.Gui
             else
             {
                 PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
-                
+
                 if (shoppingCart != null)
                 {
                     foreach (Domain.ShoppingbasketItem item in shoppingCart)
