@@ -130,6 +130,7 @@ namespace PhotoshopWebsite.Gui
             TotalTextCell.Text = "<B>Total:</B>";
             TableCell TotalAmountCell = new TableCell();
             TotalAmountCell.Text = "€" + totalAmount.ToString() + ",00";
+            Session["totalAmount"] = totalAmount;
 
             for (int i = 0; i < 4; i++)
             {
@@ -240,8 +241,7 @@ namespace PhotoshopWebsite.Gui
 
         void btnPayPal_Click(object sender, EventArgs e)
         {
-            orderPrice = "0.01";
-            Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + orderPrice);
+            Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + totalAmount);
         }
 
 
