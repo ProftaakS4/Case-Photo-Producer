@@ -17,7 +17,6 @@ namespace PhotoshopWebsite.Controller
             this.ID = photographerID;
             this.loginCodes = this.getLoginCodeData(ID);
         }
-
         /// <summary>
         /// get loginCodedata of the photographer corresponding to photographerID
         /// </summary>

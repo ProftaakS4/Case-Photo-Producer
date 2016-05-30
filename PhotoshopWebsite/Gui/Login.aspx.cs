@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PhotoshopWebsite.Controller;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace PhotoshopWebsite
     {
  
         private Boolean rememberMe = false;
-        private Boolean LoginSuccess = true;
+        
         private String loginCode;
         HttpCookie _userInfoCookies;
 
@@ -130,6 +131,7 @@ namespace PhotoshopWebsite
             else
             {
                 Session["loginCode"] = loginCode;
+
                 Response.Redirect("~/Gui/Client/CreateAccount.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
             

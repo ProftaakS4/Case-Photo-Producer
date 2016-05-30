@@ -23,12 +23,13 @@ namespace PhotoshopWebsite.DatabaseTier
             mysqlConnection = connectionSingleton.getSqlConnection();
         }
 
-        /// <summary>
-        /// this method returns a dictionary containing all the logincode data. when user not found, method returns null
-        /// </summary>
-        /// <param name="photographerID"></param> id of the photographer
-        /// <returns></returns>
-        public DataTable getLoginCodeData(int photographerID)
+     
+    /// <summary>
+    /// this method returns a dictionary containing all the logincode data. when user not found, method returns null
+    /// </summary>
+    /// <param name="photographerID"></param> id of the photographer
+    /// <returns></returns>
+    public DataTable getLoginCodeData(int photographerID)
         {           
             try
             {

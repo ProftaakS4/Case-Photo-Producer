@@ -68,6 +68,12 @@ namespace PhotoshopWebsite
                 LabelTitle.Text = "<h1>My Shoppingcart</h1>";
             }
         }
+        protected void Btnlogout_Click(object sender, EventArgs e)
+        {
+            Session["logindata"] = null;
+            Response.Redirect(Request.RawUrl);
+        }
+
 
         protected void Btnsearch_Click(object sender, EventArgs e)
         {

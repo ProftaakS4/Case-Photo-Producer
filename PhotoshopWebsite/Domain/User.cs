@@ -55,6 +55,7 @@ namespace PhotoshopWebsite.Controller
             this.Emailaddress = emailaddress;
         }
 
+
         /// <summary>
         /// login the user, when succesfull retrieve its data from the database
         /// </summary>
@@ -76,7 +77,7 @@ namespace PhotoshopWebsite.Controller
             }
             return null;
         }
-
+        
         /// <summary>
         /// get userdata of the user corresponding to email address
         /// </summary>
