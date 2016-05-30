@@ -47,5 +47,33 @@ namespace PhotoshopWebsite.Enumeration
                     return PTypes.PHOTO1x2;
             }
         }
+
+        static public int getInt(string eType)
+        {
+            switch (eType)
+            {
+                case "PHOTO1x2":
+                    return 1;
+                case "PHOTO2x4":
+                    return 2;
+                case "PHOTO5x8":
+                    return 3;
+                case "MUISMAT":
+                    return 4;
+                case "TASSEN":
+                    return 5;
+                case "TSHIRT":
+                    return 6;
+                case "MOK":
+                    return 7;
+                case "CANVAS":
+                    return 8;
+                case "DIBOND":
+                    return 9;
+                //default to 1
+                default:
+                    return 1;
+            }
+        }
     }
 }

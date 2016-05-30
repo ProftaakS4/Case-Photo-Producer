@@ -15,23 +15,22 @@ namespace PhotoshopWebsite.Gui.Client
 {
     public partial class GroupPictures : System.Web.UI.Page
     {
-
         // create instance of the photoController for future database connections through busisness layer
         PhotoController photoController = new PhotoController();
 
         // create a list of all the current user photos
-        public List<Domain.Photo> photos
-        {
-            get
-            {
-                if (!(Session["photos"] is List<Domain.Photo>))
-                {
-                    Session["photos"] = new List<Domain.Photo>();
-                }
+        public List<Domain.Photo> photos;
+        //{
+        //    get
+        //    {
+        //        if (!(Session["photos"] is List<Domain.Photo>))
+        //        {
+        //            Session["photos"] = new List<Domain.Photo>();
+        //        }
 
-                return Session["photos"] as List<Domain.Photo>;
-            }
-        }
+        //        return Session["photos"] as List<Domain.Photo>;
+        //    }
+        //}
 
         public List<Domain.Photo> searchedPhotos
         {
@@ -91,6 +90,11 @@ namespace PhotoshopWebsite.Gui.Client
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                Session["photos"] = null;
+            }
+
             // cast the session into the current user
             User currenUser = (User)Session["UserData"];
 
@@ -99,6 +103,14 @@ namespace PhotoshopWebsite.Gui.Client
 
             // get all the photoID's of the current user
             List<string> photoIDS = photoController.getGroupPhotos();
+
+            if (Session["photos"] != null)
+            {
+                photos = (List<Domain.Photo>)Session["photos"];
+            }
+            else
+            {
+                photos = new List<Domain.Photo>();
             // get all the photos of the current user and add them to a list
             if (photoIDS != null)
             {
@@ -107,6 +119,8 @@ namespace PhotoshopWebsite.Gui.Client
                 {
                     // store all the photos in the session
                     photos.Add(photoController.getPhoto(s));
+                }
+                    Session["photos"] = photos;
                 }
             }
 
@@ -129,8 +143,6 @@ namespace PhotoshopWebsite.Gui.Client
                 }
             }
         }
-
-
         private void Fillpage(Domain.Photo x)
         {
             //create buttons
@@ -174,6 +186,7 @@ namespace PhotoshopWebsite.Gui.Client
             btnCrop.CssClass = "btn btn-default";
             btnCrop.Text = "Order image";
             btnCrop.Height = 30;
+            
 
             if (!filters.ContainsKey(x.ID))
             {
@@ -241,11 +254,13 @@ namespace PhotoshopWebsite.Gui.Client
                 div = "<div class='col-sm-6'>";
             }
 
+            //firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'> <img src=" + x.Image + " " + "alt=" + x.Description + ">  <div class='caption'>";
             firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'><div class='caption'>";
             cropControl.InnerHtml = "<div class='modal fade' id='myModal" + x.ID + "' tabindex=' - 1' role='dialog' aria-labelledby='mymodallabel'>< div class='modal-dialog' role='document'><div class='modal-content'  style='width:400px'><div class='modal-header'><button type = 'button' class='close' data-dismiss='modal' aria-label='close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='mymodallabel'>order image</h4></div><div class='modal-body'> <img src='" + x.Image + "' class='cropbox' style='height:330px; width:200px;'></img> <h1>image preview</h1><div style='width: 100px; height: 100px; overflow: hidden; margin - left:5px; '><img src='" + x.Image + "' class='preview'></img>'</div></div><div class='modal-footer'><button type = 'button' class='btn btn-default' data-dismiss='modal'>close</button>";
             cropControl.Controls.Add(btnCrop);
             cropControlLast.InnerHtml = "</div></div</div></div>";
 
+            //add buttons
             secondControl.InnerHtml = "<p>" + x.Description + "</p>";
             firstControl.Controls.Add(imgProduct);
             firstControl.Controls.Add(secondControl);
@@ -297,7 +312,10 @@ namespace PhotoshopWebsite.Gui.Client
             else
             {
                 //TODO pakt ook de jaartallen niet alleen de ID's
-                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num]));
+                PurchaseController purchaseController = new PurchaseController();
+                int product = ProductTypes.getInt(products[num].ToString());
+                int price = purchaseController.getPrice(product, num);
+                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num], price));
             }
         }
 
@@ -351,7 +369,7 @@ namespace PhotoshopWebsite.Gui.Client
             }
         }
 
-        private void BtnAddToCart_Click(object sender, EventArgs e)
+        void btnAddToCart_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
             string name = button.ID.Split('{', '}')[1];
@@ -373,7 +391,7 @@ namespace PhotoshopWebsite.Gui.Client
             else
             {
                 //TODO pakt ook de jaartallen niet alleen de ID's
-                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num]));
+                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num],0.0));
             }
         }
 

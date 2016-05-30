@@ -36,8 +36,7 @@ namespace PhotoshopWebsite.Controller
             // when data is found and returned
             if (dt.Rows.Count != 0)
             {
-                DataRow[] datarowcategorie = dt.Select("ID=ID");
-                foreach (DataRow data in datarowcategorie)
+                foreach (DataRow data in dt.Rows)
                 {
                     temp.Add(new Purchase(int.Parse(data[0].ToString()), int.Parse(data[1].ToString()), DateTime.Parse(data[2].ToString()), data[3].ToString()));
                 }
@@ -48,6 +47,11 @@ namespace PhotoshopWebsite.Controller
         public void updatePurchaseStatus(int purchaseID, string status)
         {
             DB.updatePurchaseStatus(purchaseID, status);
+        }
+
+        public int getPrice(int product_ID, int photo_ID)
+        {
+            return DB.getPrice(product_ID, photo_ID);
         }
     }
 }

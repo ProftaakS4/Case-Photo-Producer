@@ -101,5 +101,43 @@ namespace PhotoshopWebsite.DatabaseTier
                 mysqlConnection.Close();
             }
         }
+
+
+        public int getPrice(int product_ID, int photo_ID)
+        {
+            try
+            {
+                myCommand = new MySqlCommand("getPrice", mysqlConnection);
+                // input
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_Product_ID", MySqlDbType.Int32).Value = product_ID;
+
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_Photo_ID", MySqlDbType.Int32).Value = photo_ID;
+
+                myCommand.Parameters.Add("@Price", MySqlDbType.Int32);
+                myCommand.Parameters["@Price"].Direction = ParameterDirection.Output;
+                // execute query
+                // execute query
+                mysqlConnection.Open();
+
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+
+                //return price int
+                return int.Parse(dt.Rows[0][0].ToString());
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return 0;
+        }
     }
 }

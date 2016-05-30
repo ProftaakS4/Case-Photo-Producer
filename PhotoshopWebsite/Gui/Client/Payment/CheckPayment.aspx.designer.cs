@@ -7,18 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PhotoshopWebsite.Gui {
+namespace PhotoshopWebsite.Gui.Client.Payment {
     
     
-    public partial class Administration {
+    public partial class CheckPayment {
         
         /// <summary>
-        /// pnlCodes control.
+        /// pnlWait control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlCodes;
+        protected global::System.Web.UI.WebControls.Panel pnlWait;
     }
 }

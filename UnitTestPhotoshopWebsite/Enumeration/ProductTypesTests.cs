@@ -17,31 +17,31 @@ namespace PhotoshopWebsite.Enumeration.Tests
         {
             ShoppingbasketItem item;
 
-            item = new ShoppingbasketItem(1, "test1", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.PHOTO1x2);
+            item = new ShoppingbasketItem(1, "test1", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.PHOTO1x2, 0.1);
             Assert.AreEqual(ProductTypes.PTypes.PHOTO1x2, item.product);
 
-            item = new ShoppingbasketItem(2, "test2", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.PHOTO2x4);
+            item = new ShoppingbasketItem(2, "test2", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.PHOTO2x4, 0.1);
             Assert.AreEqual(ProductTypes.PTypes.PHOTO2x4, item.product);
 
-            item = new ShoppingbasketItem(3, "test3", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.PHOTO5x8);
+            item = new ShoppingbasketItem(3, "test3", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.PHOTO5x8, 0.1);
             Assert.AreEqual(ProductTypes.PTypes.PHOTO5x8, item.product);
 
-            item = new ShoppingbasketItem(4, "test4", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.MUISMAT);
+            item = new ShoppingbasketItem(4, "test4", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.MUISMAT, 0.1);
             Assert.AreEqual(ProductTypes.PTypes.MUISMAT, item.product);
 
-            item = new ShoppingbasketItem(5, "test5", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.TASSEN);
+            item = new ShoppingbasketItem(5, "test5", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.TASSEN, 0.1);
             Assert.AreEqual(ProductTypes.PTypes.TASSEN, item.product);
 
-            item = new ShoppingbasketItem(6, "test6", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.TSHIRT);
+            item = new ShoppingbasketItem(6, "test6", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.TSHIRT, 0.1);
             Assert.AreEqual(ProductTypes.PTypes.TSHIRT, item.product);
 
-            item = new ShoppingbasketItem(7, "test7", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.MOK);
+            item = new ShoppingbasketItem(7, "test7", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.MOK, 0.1);
             Assert.AreEqual(ProductTypes.PTypes.MOK, item.product);
 
-            item = new ShoppingbasketItem(8, "test", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.CANVAS);
+            item = new ShoppingbasketItem(8, "test", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.CANVAS, 0.1);
             Assert.AreEqual(ProductTypes.PTypes.CANVAS, item.product);
 
-            item = new ShoppingbasketItem(9, "test9", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.DIBOND);
+            item = new ShoppingbasketItem(9, "test9", FilterTypes.FTypes.COLOR, ProductTypes.PTypes.DIBOND, 0.1);
             Assert.AreEqual(ProductTypes.PTypes.DIBOND, item.product);
         }
 
