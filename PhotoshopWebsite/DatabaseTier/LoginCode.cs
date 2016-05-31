@@ -23,7 +23,41 @@ namespace PhotoshopWebsite.DatabaseTier
             mysqlConnection = connectionSingleton.getSqlConnection();
         }
 
-     
+        public String LoginCodeValidation(int loginCode)
+        {
+            try
+            {
+                myCommand = new MySqlCommand("checkLoginCode", mysqlConnection);
+                // input
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_logincode", MySqlDbType.Int32).Value = loginCode;
+              
+                myCommand.Parameters.Add("@p_passed", MySqlDbType.VarChar);
+                myCommand.Parameters["@p_passed"].Direction = ParameterDirection.Output;
+                // execute query
+                mysqlConnection.Open();
+                myCommand.ExecuteNonQuery();
+                String value = myCommand.Parameters["@p_passed"].Value.ToString();
+                //MySqlDataAdapter da = new MySqlDataAdapter(myCommand);
+                //MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                //DataTable dt = new DataTable();
+                //dt.Load(dr);
+
+                return value;
+                //return datatable
+                //return dt;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return null;
+        }
     /// <summary>
     /// this method returns a dictionary containing all the logincode data. when user not found, method returns null
     /// </summary>
