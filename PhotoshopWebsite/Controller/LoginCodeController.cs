@@ -12,10 +12,33 @@ namespace PhotoshopWebsite.Controller
 
         public int ID { get; set; }
         public List<LoginCode> loginCodes { get; set; }
+        public Boolean validated { get; set; }
+
+        public LoginCodeController(int photographerID, Boolean singleLogincode)
+        {
+            if (singleLogincode == true)
+            {
+                this.ID = photographerID;
+                if (loginCodeValidation(photographerID) == "true")
+                {
+                    this.validated = true;
+                }
+                else
+                {
+                    this.validated = false;
+                }
+            }
+            }
         public LoginCodeController(int photographerID)
         {
-            this.ID = photographerID;
-            this.loginCodes = this.getLoginCodeData(ID);
+                this.ID = photographerID;
+                this.loginCodes = this.getLoginCodeData(ID);
+            }
+
+        public String loginCodeValidation(int loginCode)
+        {
+            string value = DB.LoginCodeValidation(loginCode);
+            return value;
         }
         /// <summary>
         /// get loginCodedata of the photographer corresponding to photographerID

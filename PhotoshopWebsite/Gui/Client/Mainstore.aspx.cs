@@ -350,6 +350,7 @@ namespace PhotoshopWebsite
                         default:
                             break;
                     }
+
                     break;
                 }
             }

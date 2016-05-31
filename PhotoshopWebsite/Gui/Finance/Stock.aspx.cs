@@ -55,7 +55,7 @@ namespace PhotoshopWebsite.Gui
             TableHeaderCell stockHeader = new TableHeaderCell();
             stockHeader.Text = "Stock";
             TableHeaderCell amountHeader = new TableHeaderCell();
-            amountHeader.Text = "Add Amount";
+            amountHeader.Text = "Alter Amount";
 
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(imageHeader);
@@ -111,7 +111,7 @@ namespace PhotoshopWebsite.Gui
 
             Button btPay = new Button();
             btPay.ID = "bt1";
-            btPay.Text = "Add Amount";
+            btPay.Text = "Alter Amount";
             btPay.Click += new EventHandler(this.AddAmount_Clicked);
             btPay.Height = 30;
 

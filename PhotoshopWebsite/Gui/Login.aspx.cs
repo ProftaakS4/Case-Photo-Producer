@@ -17,6 +17,7 @@ namespace PhotoshopWebsite
     {
  
         private Boolean rememberMe = false;
+        LoginCodeController lcc;
         
         private String loginCode;
         HttpCookie _userInfoCookies;
@@ -131,8 +132,14 @@ namespace PhotoshopWebsite
             else
             {
                 Session["loginCode"] = loginCode;
-
-                Response.Redirect("~/Gui/Client/CreateAccount.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                lcc = new LoginCodeController(Convert.ToInt32(loginCode), true);
+                if (lcc.validated) {
+                    Response.Redirect("~/Gui/Client/CreateAccount.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                }
+                else
+                {
+                    Response.Write("<script>alert('Invalid Code')</script>");
+                }
             }
             
         }
