@@ -43,7 +43,16 @@ namespace PhotoshopWebsite.Gui.Client
                 tbIBAN.Text,
                 tbEMail.Text,
                 tbPassword.Text);
-            DataTable dt = acc.createAccountandgetinformation("Customer", newUser.Firstname,newUser.Lastname, newUser.Streetname,newUser.Housenumber, newUser.Zipcode, newUser.City,newUser.Phonenumber,newUser.IBAN, newUser.Emailaddress, newUser.Password);
+            if (tbEMail.Text.Contains("@"))
+            {
+                DataTable dt = acc.createAccountandgetinformation("Customer", newUser.Firstname, newUser.Lastname, newUser.Streetname, newUser.Housenumber, newUser.Zipcode, newUser.City, newUser.Phonenumber, newUser.IBAN, newUser.Emailaddress, newUser.Password);
+                Response.Redirect("../Login.aspx");
+            }
+            else
+            {
+                Response.Write("<script>alert('Please enter a valid Email adress')</script>");
+            }
+            
         }
     }
 }
