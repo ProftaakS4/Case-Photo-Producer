@@ -122,7 +122,6 @@ namespace PhotoshopWebsite.DatabaseTier
         public List<ProductTypes.PTypes> getTypes(string photoID)
         {
             List<ProductTypes.PTypes> types = new List<ProductTypes.PTypes>();
-            string output;
             try
             {
                 myCommand = new MySqlCommand("getAccountIdperPhoto", mysqlConnection);
@@ -145,43 +144,45 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Parameters.Add("@p_types", MySqlDbType.VarChar);
                 myCommand.Parameters["@p_types"].Direction = ParameterDirection.Output;
                 //execute query
-                myCommand.ExecuteNonQuery();
-                output = myCommand.Parameters["@p_types"].Value.ToString();
-                string[] id = output.Split(null);
-                // loop over output string and get types for the picture
-                for (int i = 0; i < id.Length; i++)
-                {
-                    switch (id[i])
-                    {
-                        case "1":
-                            types.Add(ProductTypes.PTypes.PHOTO1x2);
-                            break;
-                        case "2":
-                            types.Add(ProductTypes.PTypes.PHOTO2x4);
-                            break;
-                        case "3":
-                            types.Add(ProductTypes.PTypes.PHOTO5x8);
-                            break;
-                        case "4":
-                            types.Add(ProductTypes.PTypes.MUISMAT);
-                            break;
-                        case "5":
-                            types.Add(ProductTypes.PTypes.TASSEN);
-                            break;
-                        case "6":
-                            types.Add(ProductTypes.PTypes.TSHIRT);
-                            break;
-                        case "7":
-                            types.Add(ProductTypes.PTypes.MOK);
-                            break;
-                        case "8":
-                            types.Add(ProductTypes.PTypes.CANVAS);
-                            break;
-                        case "9":
-                            types.Add(ProductTypes.PTypes.DIBOND);
-                            break;
-                    }
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                DataTable dt = new DataTable();
+                dt.Load(dr);
 
+                if (dt.Rows.Count != 0)
+                {
+                    foreach (DataRow data in dt.Rows)
+                    {
+                        switch (data[0].ToString())
+                        {
+                            case "1":
+                                types.Add(ProductTypes.PTypes.PHOTO1x2);
+                                break;
+                            case "2":
+                                types.Add(ProductTypes.PTypes.PHOTO2x4);
+                                break;
+                            case "3":
+                                types.Add(ProductTypes.PTypes.PHOTO5x8);
+                                break;
+                            case "4":
+                                types.Add(ProductTypes.PTypes.MUISMAT);
+                                break;
+                            case "5":
+                                types.Add(ProductTypes.PTypes.TASSEN);
+                                break;
+                            case "6":
+                                types.Add(ProductTypes.PTypes.TSHIRT);
+                                break;
+                            case "7":
+                                types.Add(ProductTypes.PTypes.MOK);
+                                break;
+                            case "8":
+                                types.Add(ProductTypes.PTypes.CANVAS);
+                                break;
+                            case "9":
+                                types.Add(ProductTypes.PTypes.DIBOND);
+                                break;
+                        }
+                    }
                 }
                 return types;
             }
