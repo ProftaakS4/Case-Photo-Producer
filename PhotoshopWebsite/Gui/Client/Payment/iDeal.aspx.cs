@@ -14,7 +14,7 @@ namespace PhotoshopWebsite.Gui.Client.Payment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Write("Loaded");
+            
         }
     }
 }
