@@ -88,7 +88,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// </summary>
         /// <param name="userID"></param> the user id of the account
         /// <returns></returns>
-        public List<string> getGroupPhotos()
+        public DataTable getGroupPhotos()
         {
             List<string> photoIDS = new List<string>(); ;
             try
@@ -101,31 +101,12 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Parameters["@p_photos"].Direction = ParameterDirection.Output;
                 //execute query
                 mysqlConnection.Open();
-                myCommand.ExecuteNonQuery();
-                //capture the out parameter form the databas into a variable
-                result = (string)myCommand.Parameters["@p_photos"].Value + " ";
-                // check if the result has some numeric values into it, meaning that there are indeed photoIDS returned
-                if (result.Any(char.IsDigit))
-                {
-                    string photoID = "";
-                    // create new string list and iterate over the result and break down the photoIDS into idividual photoIDS
-                    foreach (char c in result)
-                    {
-                        if (c != ' ')
-                        {
-                            photoID = photoID + c;
-                        }
-                        else
-                        {
-                            if (photoID != "")
-                            {
-                                // replace potential whitespace
-                                photoIDS.Add(photoID.Replace(" ", ""));
-                                photoID = "";
-                            }
-                        }
-                    }
-                }
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+
+                //return datatable
+                return dt;
             }
             catch (Exception ex)
             {
@@ -136,7 +117,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Connection.Close();
                 mysqlConnection.Close();
             }
-            return photoIDS;
+            return null;
         }
         public List<ProductTypes.PTypes> getTypes(string photoID)
         {
