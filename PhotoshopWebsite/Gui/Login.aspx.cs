@@ -87,15 +87,15 @@ namespace PhotoshopWebsite
         {
             if (type == "School photographer")
             {
-                Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                Response.Redirect("~/Gui/Photographer/Pictures.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
             else if (type == "Portrait photographer")
             {
-                Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                Response.Redirect("~/Gui/Photographer/Pictures.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
             else if (type == "School- Portraitphotographer")
             {
-                Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                Response.Redirect("~/Gui/Photographer/Pictures.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
             else if (type == "Customer")
             {
@@ -103,7 +103,7 @@ namespace PhotoshopWebsite
             }
             else if (type == "Financial Administration")
             {
-                Response.Redirect("~/Gui/Finance/Finance.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                Response.Redirect("~/Gui/Finance/Orders.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
             else if (type == "Admin")
             {

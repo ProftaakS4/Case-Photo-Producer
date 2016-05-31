@@ -95,7 +95,7 @@ namespace PhotoshopWebsite.DatabaseTier
             {
                 myCommand = new MySqlCommand("getGroupPhotos", mysqlConnection);
                 myCommand.CommandType = CommandType.StoredProcedure;
-               
+
                 // output
                 myCommand.Parameters.Add("@p_photos", MySqlDbType.VarChar);
                 myCommand.Parameters["@p_photos"].Direction = ParameterDirection.Output;
@@ -240,6 +240,35 @@ namespace PhotoshopWebsite.DatabaseTier
                 //System.Windows.Forms.MessageBox.Show("Succes");
                 return photoElements;
 
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return null;
+        }
+
+        public DataTable getPhotosPhotographer(string userID)
+        {
+            List<string> photoIDS = new List<string>(); ;
+            try
+            {
+                myCommand = new MySqlCommand("getPhotosPhotographer", mysqlConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+                // input
+                myCommand.Parameters.Add("@p_id", MySqlDbType.Int32).Value = Convert.ToInt32(userID);
+                //execute query
+                mysqlConnection.Open();
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+
+                return dt;
             }
             catch (Exception ex)
             {
