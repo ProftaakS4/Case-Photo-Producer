@@ -22,15 +22,6 @@ namespace PhotoshopWebsite.Gui.Client.Payment {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder nestedHeadContent;
         
         /// <summary>
-        /// nestedContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder nestedContent;
-        
-        /// <summary>
         /// Firstname control.
         /// </summary>
         /// <remarks>
@@ -209,5 +200,14 @@ namespace PhotoshopWebsite.Gui.Client.Payment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlPaymentInfo;
+        
+        /// <summary>
+        /// nestedContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder nestedContent;
     }
 }
