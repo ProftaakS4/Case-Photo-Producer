@@ -16,7 +16,6 @@
 <body style="background-color: #eee">
     <form runat="server">
         <div id="wrapper">
-
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
                 <li class="sidebar-brand">

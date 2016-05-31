@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Gui/Website.Master" AutoEventWireup="true" CodeBehind="NestedMasterPageClient.master.cs" Inherits="PhotoshopWebsite.Gui.Client.NestedMasterPageClient" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="NavigationPlaceHolder" runat="server">
+    <li>
+        <a href="Mainstore.aspx">Pictures</a>
+    </li>
+    <li>
+        <a href="GroupPictures.aspx">Group pictures</a>
+    </li>
+    <li>
+        <a href="Account.aspx">My Account</a>
+    </li>
+    <li>
+        <a href="ShoppingCart.aspx">Shopping Cart
+                        <img src="../Images/Shoppingcart.png" style="height: 20px; width: 20px; margin-left: 10px;" />
+            <asp:Label ID="Labelquantity" runat="server" Text="" Style="color: white;"></asp:Label></a>
+    </li>
+    <div runat="server" class="col-lg-6">
+        <div class="input-group" runat="server">
+            <asp:TextBox ID="tbSearch" class="form-control" runat="server" placeholder="Search for..." Style="width: 150px;"></asp:TextBox>
+            <span class="input-group-btn">
+                <asp:Button ID="Btnsearch" class="btn btn-default" runat="server" type="button" Text="Go!" OnClick="Btnsearch_Click" Style="height: 34px"></asp:Button>
+            </span>
+        </div>
+        <div class="input-group-btn">
+            <asp:Button ID="Btnlogout" class="btn btn-default" runat="server" type="button" Text="logout" OnClick="Btnlogout_Click" Style="height: 34px; width: 201px; margin-top: 10px; border-radius: 3px; border-color: white; background-color: azure"></asp:Button>
+        </div>
+    </div>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+</asp:Content>
