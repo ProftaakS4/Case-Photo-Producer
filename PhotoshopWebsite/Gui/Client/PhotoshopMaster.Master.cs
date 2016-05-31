@@ -35,7 +35,7 @@ namespace PhotoshopWebsite
             if (HttpContext.Current.Session["shoppingCart"] != null)
             {
                 List<Domain.ShoppingbasketItem> list = Session["shoppingCart"] as List<Domain.ShoppingbasketItem>;
-                foreach(ShoppingbasketItem item in list)
+                foreach (ShoppingbasketItem item in list)
                 {
                     size += item.quantity;
                 }
@@ -72,7 +72,7 @@ namespace PhotoshopWebsite
             {
                 LabelTitle.Text = "<h1>iDeal Payment</h1>";
             }
-            else if(pageName.Contains("ogone"))
+            else if (pageName.Contains("ogone"))
             {
                 LabelTitle.Text = "<h1>Ogone Payment</h1>";
             }
