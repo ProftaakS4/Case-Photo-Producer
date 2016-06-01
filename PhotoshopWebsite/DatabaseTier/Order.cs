@@ -42,6 +42,8 @@ namespace PhotoshopWebsite.DatabaseTier
                 //myCommand.Parameters["@Date"].Direction = ParameterDirection.Output;
                 myCommand.Parameters.Add("@Status", MySqlDbType.VarChar);
                 myCommand.Parameters["@Status"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@Shipping", MySqlDbType.VarChar);
+                myCommand.Parameters["@Shipping"].Direction = ParameterDirection.Output;
                 // execute query
                 mysqlConnection.Open();
                 //myCommand.ExecuteNonQuery();
@@ -71,7 +73,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// </summary>
         /// <param name="accountID"></param> id of the logged on account
         /// <returns></returns>
-        public void updatePurchaseStatus(int purchaseID, string status)
+        public void updatePurchaseStatus(int purchaseID, string paidStatus, string shippingStatus)
         {
             try
             {
@@ -81,7 +83,9 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Parameters.Add("@p_purchase_ID", MySqlDbType.Int32).Value = purchaseID;
 
                 myCommand.CommandType = CommandType.StoredProcedure;
-                myCommand.Parameters.Add("@p_newStatus", MySqlDbType.VarChar).Value = status;
+                myCommand.Parameters.Add("@p_newPaidStatus", MySqlDbType.VarChar).Value = paidStatus;
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_newShippingStatus", MySqlDbType.VarChar).Value = shippingStatus;
                 // output - There is no output.
                 // execute query
                 mysqlConnection.Open();

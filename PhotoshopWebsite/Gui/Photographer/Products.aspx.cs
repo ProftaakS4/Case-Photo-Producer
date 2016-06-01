@@ -45,11 +45,11 @@ namespace PhotoshopWebsite.Gui.Photographer
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
 
             TableHeaderCell typeHeader = new TableHeaderCell();
-            typeHeader.Text = "Product type";
+            typeHeader.Text = "Type";
             TableHeaderCell descriptionHeader = new TableHeaderCell();
             descriptionHeader.Text = "Description";
             TableHeaderCell priceHeader = new TableHeaderCell();
-            descriptionHeader.Text = "Price";
+            priceHeader.Text = "Price";
             TableHeaderCell availableHeader = new TableHeaderCell();
             availableHeader.Text = "Available";
 
@@ -70,6 +70,8 @@ namespace PhotoshopWebsite.Gui.Photographer
                 descriptionCell.Text = product.Description;
                 TableCell priceCell = new TableCell();
                 //textbox
+                Label priceLabel = new Label();
+                priceLabel.Text = "€ ";
                 TextBox tbPrice = new TextBox();
                 tbPrice.ID = "tbPrice" + product.ID.ToString();
                 ProductPerPhotographer productPerPhotographer = null;
@@ -85,6 +87,8 @@ namespace PhotoshopWebsite.Gui.Photographer
                 tbPrice.TextChanged += new EventHandler(this.PriceChange);
                 tbPrice.AutoPostBack = true;
                 tbPrice.MaxLength = 3;
+                tbPrice.Width = 127;
+                priceCell.Controls.Add(priceLabel);
                 priceCell.Controls.Add(tbPrice);
 
                 TableCell availableCell = new TableCell();

@@ -37,12 +37,12 @@
                         <a href="Account.aspx">Account</a>
                     </li>
                     <div runat="server" class="col-lg-6">
-                        <div class="input-group" runat="server">
+                        <%--<div class="input-group" runat="server">
                             <input type="text" class="form-control" placeholder="Search for..." style="width: 150px;">
                             <span class="input-group-btn">
                                 <button id="Btntoggle" class="btn btn-default" runat="server" type="button">Go!</button>
                             </span>
-                        </div>
+                        </div>--%>
                         <div class="input-group-btn">
                             <asp:Button ID="Btnlogout" class="btn btn-default" runat="server" type="button" Text="logout" OnClick="Btnlogout_Click" Style="height: 34px; width: 201px; margin-top: 10px; border-radius: 3px; border-color: white; background-color: azure"></asp:Button>
                         </div>

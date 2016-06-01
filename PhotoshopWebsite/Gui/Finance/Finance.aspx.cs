@@ -69,12 +69,12 @@ namespace PhotoshopWebsite.Gui
                 ID.Text = fin.ID.ToString();
                 TableCell firstName = new TableCell();
                 firstName.Text = fin.FirstName.ToString();
-                
+
                 TableCell lastName = new TableCell();
                 lastName.Text = fin.LastName.ToString();
 
                 TableCell moneyOwed = new TableCell();
-                moneyOwed.Text = fin.Money.ToString();
+                moneyOwed.Text = "€ " + fin.Money.ToString() + ",00";
 
                 MainRow.Cells.Add(ID);
                 MainRow.Cells.Add(firstName);

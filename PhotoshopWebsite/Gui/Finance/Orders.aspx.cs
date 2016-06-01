@@ -73,14 +73,14 @@ namespace PhotoshopWebsite.Gui.Finance
                 TableCell ButtonCell = new TableCell();
                 //ButtonCell.Text = pur.Status.ToString();
                 Label buttonCellText = new Label();
-                buttonCellText.Text = pur.Status.ToString();
+                buttonCellText.Text = pur.ShippingStatus.ToString();
                 ButtonCell.Controls.Add(buttonCellText);
 
                 Literal ltbr = new Literal();
                 ltbr.Text = "<BR>";
                 ButtonCell.Controls.Add(ltbr);
 
-                if(buttonCellText.Text == "Not paid")
+                if(buttonCellText.Text == "Not Ready")
                 {
                     CheckBox cbAdd = new CheckBox();
                     cbAdd.ID = pur.ID.ToString();
@@ -102,7 +102,7 @@ namespace PhotoshopWebsite.Gui.Finance
 
             Button btPay = new Button();
             btPay.ID = "bt1";
-            btPay.Text = "Pay orders";
+            btPay.Text = "Ship orders";
             btPay.Click += new EventHandler(this.PayOrder_Clicked);
             btPay.Height = 30;
 
@@ -142,7 +142,7 @@ namespace PhotoshopWebsite.Gui.Finance
 
             foreach (int pur in purchasesChecked)
             {
-                pc.updatePurchaseStatus(pur, "Paid");
+                pc.updatePurchaseStatus(pur, "Paid", "Ready");
             }
             Response.Redirect(Request.RawUrl);
         }

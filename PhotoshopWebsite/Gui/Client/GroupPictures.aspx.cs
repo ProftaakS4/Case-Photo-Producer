@@ -151,7 +151,7 @@ namespace PhotoshopWebsite.Gui.Client
             btnAddToCart.CssClass = "btn btn-default";
             btnAddToCart.Click += BtnAddToCart_Click1;
             btnAddToCart.Height = 30;
-            btnAddToCart.Text = "Test";
+            btnAddToCart.Text = "Order";
 
             RadioButton btnSepia = new RadioButton();
             btnSepia.ID = "SEPIA" + x.ID;
