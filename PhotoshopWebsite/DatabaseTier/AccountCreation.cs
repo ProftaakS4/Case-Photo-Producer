@@ -23,6 +23,69 @@ namespace PhotoshopWebsite.DatabaseTier
             mysqlConnection = connectionSingleton.getSqlConnection();
         }
 
+        public Boolean insertAccountLoginCode(int accountId, int loginCode)
+        {
+            try
+            {
+                myCommand = new MySqlCommand("insertAccountLoginCode", mysqlConnection);
+
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+
+                myCommand.Parameters.Add("@p_account_ID", MySqlDbType.Int32).Value = accountId;
+                myCommand.Parameters["@p_account_ID"].Direction = ParameterDirection.Input;
+
+                myCommand.Parameters.Add("@p_logincode", MySqlDbType.Int32).Value = loginCode;
+                myCommand.Parameters["@p_logincode"].Direction = ParameterDirection.Input;
+
+                //execute query
+                mysqlConnection.Open();
+                myCommand.ExecuteNonQuery();
+
+                return true;
+            }catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public int getIdByEmail(string email)
+        {
+            try
+            {
+                myCommand = new MySqlCommand("getAccountWithEmail", mysqlConnection);
+                // input - There is no input needed.
+                // output
+
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+                myCommand.Parameters.Add("@p_email", MySqlDbType.VarChar).Value = email;
+                myCommand.Parameters["@p_email"].Direction = ParameterDirection.Input;
+
+                myCommand.Parameters.Add("@p_account_ID", MySqlDbType.Int32);
+                myCommand.Parameters["@p_account_ID"].Direction = ParameterDirection.Output;
+
+                //execute query
+                mysqlConnection.Open();
+                myCommand.ExecuteNonQuery();
+
+                // add all the outputs to the list
+                int id = (int)myCommand.Parameters["@p_account_ID"].Value;
+
+                return id;
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return 0;
+        }
+
         public DataTable createAccount(String type,String firstName, String lastName, String streetName, String Housenumber, String Zipcode, String City, String Phonenumber, String IBAN, String Emailaddress, String Password)
         {
             try
