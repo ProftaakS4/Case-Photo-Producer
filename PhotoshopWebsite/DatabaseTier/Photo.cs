@@ -88,44 +88,25 @@ namespace PhotoshopWebsite.DatabaseTier
         /// </summary>
         /// <param name="userID"></param> the user id of the account
         /// <returns></returns>
-        public List<string> getGroupPhotos()
+        public DataTable getGroupPhotos()
         {
             List<string> photoIDS = new List<string>(); ;
             try
             {
                 myCommand = new MySqlCommand("getGroupPhotos", mysqlConnection);
                 myCommand.CommandType = CommandType.StoredProcedure;
-               
+
                 // output
                 myCommand.Parameters.Add("@p_photos", MySqlDbType.VarChar);
                 myCommand.Parameters["@p_photos"].Direction = ParameterDirection.Output;
                 //execute query
                 mysqlConnection.Open();
-                myCommand.ExecuteNonQuery();
-                //capture the out parameter form the databas into a variable
-                result = (string)myCommand.Parameters["@p_photos"].Value + " ";
-                // check if the result has some numeric values into it, meaning that there are indeed photoIDS returned
-                if (result.Any(char.IsDigit))
-                {
-                    string photoID = "";
-                    // create new string list and iterate over the result and break down the photoIDS into idividual photoIDS
-                    foreach (char c in result)
-                    {
-                        if (c != ' ')
-                        {
-                            photoID = photoID + c;
-                        }
-                        else
-                        {
-                            if (photoID != "")
-                            {
-                                // replace potential whitespace
-                                photoIDS.Add(photoID.Replace(" ", ""));
-                                photoID = "";
-                            }
-                        }
-                    }
-                }
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+
+                //return datatable
+                return dt;
             }
             catch (Exception ex)
             {
@@ -136,12 +117,11 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Connection.Close();
                 mysqlConnection.Close();
             }
-            return photoIDS;
+            return null;
         }
         public List<ProductTypes.PTypes> getTypes(string photoID)
         {
             List<ProductTypes.PTypes> types = new List<ProductTypes.PTypes>();
-            string output;
             try
             {
                 myCommand = new MySqlCommand("getAccountIdperPhoto", mysqlConnection);
@@ -164,43 +144,45 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Parameters.Add("@p_types", MySqlDbType.VarChar);
                 myCommand.Parameters["@p_types"].Direction = ParameterDirection.Output;
                 //execute query
-                myCommand.ExecuteNonQuery();
-                output = myCommand.Parameters["@p_types"].Value.ToString();
-                string[] id = output.Split(null);
-                // loop over output string and get types for the picture
-                for (int i = 0; i < id.Length; i++)
-                {
-                    switch (id[i])
-                    {
-                        case "1":
-                            types.Add(ProductTypes.PTypes.PHOTO1x2);
-                            break;
-                        case "2":
-                            types.Add(ProductTypes.PTypes.PHOTO2x4);
-                            break;
-                        case "3":
-                            types.Add(ProductTypes.PTypes.PHOTO5x8);
-                            break;
-                        case "4":
-                            types.Add(ProductTypes.PTypes.MUISMAT);
-                            break;
-                        case "5":
-                            types.Add(ProductTypes.PTypes.TASSEN);
-                            break;
-                        case "6":
-                            types.Add(ProductTypes.PTypes.TSHIRT);
-                            break;
-                        case "7":
-                            types.Add(ProductTypes.PTypes.MOK);
-                            break;
-                        case "8":
-                            types.Add(ProductTypes.PTypes.CANVAS);
-                            break;
-                        case "9":
-                            types.Add(ProductTypes.PTypes.DIBOND);
-                            break;
-                    }
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                DataTable dt = new DataTable();
+                dt.Load(dr);
 
+                if (dt.Rows.Count != 0)
+                {
+                    foreach (DataRow data in dt.Rows)
+                    {
+                        switch (data[0].ToString())
+                        {
+                            case "1":
+                                types.Add(ProductTypes.PTypes.PHOTO1x2);
+                                break;
+                            case "2":
+                                types.Add(ProductTypes.PTypes.PHOTO2x4);
+                                break;
+                            case "3":
+                                types.Add(ProductTypes.PTypes.PHOTO5x8);
+                                break;
+                            case "4":
+                                types.Add(ProductTypes.PTypes.MUISMAT);
+                                break;
+                            case "5":
+                                types.Add(ProductTypes.PTypes.TASSEN);
+                                break;
+                            case "6":
+                                types.Add(ProductTypes.PTypes.TSHIRT);
+                                break;
+                            case "7":
+                                types.Add(ProductTypes.PTypes.MOK);
+                                break;
+                            case "8":
+                                types.Add(ProductTypes.PTypes.CANVAS);
+                                break;
+                            case "9":
+                                types.Add(ProductTypes.PTypes.DIBOND);
+                                break;
+                        }
+                    }
                 }
                 return types;
             }
@@ -258,6 +240,35 @@ namespace PhotoshopWebsite.DatabaseTier
                 //System.Windows.Forms.MessageBox.Show("Succes");
                 return photoElements;
 
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return null;
+        }
+
+        public DataTable getPhotosPhotographer(string userID)
+        {
+            List<string> photoIDS = new List<string>(); ;
+            try
+            {
+                myCommand = new MySqlCommand("getPhotosPhotographer", mysqlConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+                // input
+                myCommand.Parameters.Add("@p_id", MySqlDbType.Int32).Value = Convert.ToInt32(userID);
+                //execute query
+                mysqlConnection.Open();
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+
+                return dt;
             }
             catch (Exception ex)
             {

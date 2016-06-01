@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
 using System.Diagnostics.CodeAnalysis;
+using System.Data;
 
 namespace PhotoshopWebsite.Gui.Client
 {
@@ -13,6 +14,8 @@ namespace PhotoshopWebsite.Gui.Client
     public partial class CreateAccount : System.Web.UI.Page
     {
         private String loginCode;
+
+        AccountCreationController acc = new AccountCreationController();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["loginCode"] != null)
@@ -40,6 +43,16 @@ namespace PhotoshopWebsite.Gui.Client
                 tbIBAN.Text,
                 tbEMail.Text,
                 tbPassword.Text);
+            if (tbEMail.Text.Contains("@"))
+            {
+                DataTable dt = acc.createAccountandgetinformation("Customer", newUser.Firstname, newUser.Lastname, newUser.Streetname, newUser.Housenumber, newUser.Zipcode, newUser.City, newUser.Phonenumber, newUser.IBAN, newUser.Emailaddress, newUser.Password);
+                Response.Redirect("../Login.aspx");
+            }
+            else
+            {
+                Response.Write("<script>alert('Please enter a valid Email adress')</script>");
+            }
+            
         }
     }
 }

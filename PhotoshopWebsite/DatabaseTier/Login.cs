@@ -14,7 +14,6 @@ namespace PhotoshopWebsite.DatabaseTier
         // Create a new MySQL connections
         private MySqlConnection mysqlConnection;
         private MySqlCommand myCommand = null;
-        private string result = "";
 
         /// <summary>
         /// constructor of the class

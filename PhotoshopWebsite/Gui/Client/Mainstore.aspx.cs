@@ -82,8 +82,8 @@ namespace PhotoshopWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-             if (!IsPostBack)
-             {
+            if (!IsPostBack)
+            {
                 Session["photos"] = null;
             }
             // cast the session into the current user
@@ -103,14 +103,14 @@ namespace PhotoshopWebsite
             {
                 photos = new List<Domain.Photo>();
 
-            // get all the photos of the current user and add them to a list
+                // get all the photos of the current user and add them to a list
                 if (photoIDS != null)
-            {
-                foreach (string s in photoIDS)
                 {
-                    // store all the photos in the session
-                    photos.Add(photoController.getPhoto(s));
-                }
+                    foreach (string s in photoIDS)
+                    {
+                        // store all the photos in the session
+                        photos.Add(photoController.getPhoto(s));
+                    }
                     Session["photos"] = photos;
                 }
             }
@@ -179,7 +179,7 @@ namespace PhotoshopWebsite
             btnCrop.CssClass = "btn btn-default";
             btnCrop.Text = "Crop Image";
             btnCrop.Height = 30;
-            
+
             if (!filters.ContainsKey(x.ID))
             {
                 filters.Add(x.ID, FilterTypes.FTypes.COLOR);

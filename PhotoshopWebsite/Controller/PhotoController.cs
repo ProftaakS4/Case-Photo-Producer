@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -30,7 +31,16 @@ namespace PhotoshopWebsite.Controller
         /// <returns></returns>
         public List<string> getGroupPhotos()
         {
-            List<string> result = photoDatabase.getGroupPhotos();
+            List<string> result = new List<string>();
+            DataTable dt = photoDatabase.getGroupPhotos();
+            // when data is found and returned
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow data in dt.Rows)
+                {
+                    result.Add(data[0].ToString());
+                }
+            }
             return result;
         }
 
@@ -50,6 +60,21 @@ namespace PhotoshopWebsite.Controller
                 return photo;
             }
             return null;
+        }
+
+        public List<string> getPhotoGrapherPhotoIDs(string userID)
+        {
+            List<string> result = new List<string>();
+            DataTable dt = photoDatabase.getPhotosPhotographer(userID);
+            // when data is found and returned
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow data in dt.Rows)
+                {
+                    result.Add(data[0].ToString());
+                }
+            }
+            return result;
         }
     }
 }

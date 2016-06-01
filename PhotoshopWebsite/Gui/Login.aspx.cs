@@ -17,6 +17,7 @@ namespace PhotoshopWebsite
     {
  
         private Boolean rememberMe = false;
+        LoginCodeController lcc;
         
         private String loginCode;
         HttpCookie _userInfoCookies;
@@ -86,15 +87,15 @@ namespace PhotoshopWebsite
         {
             if (type == "School photographer")
             {
-                Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                Response.Redirect("~/Gui/Photographer/Pictures.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
             else if (type == "Portrait photographer")
             {
-                Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                Response.Redirect("~/Gui/Photographer/Pictures.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
             else if (type == "School- Portraitphotographer")
             {
-                Response.Redirect("~/Gui/Photographer/Account.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                Response.Redirect("~/Gui/Photographer/Pictures.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
             else if (type == "Customer")
             {
@@ -102,7 +103,7 @@ namespace PhotoshopWebsite
             }
             else if (type == "Financial Administration")
             {
-                Response.Redirect("~/Gui/Finance/Finance.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                Response.Redirect("~/Gui/Finance/Orders.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
             else if (type == "Admin")
             {
@@ -131,8 +132,14 @@ namespace PhotoshopWebsite
             else
             {
                 Session["loginCode"] = loginCode;
-
-                Response.Redirect("~/Gui/Client/CreateAccount.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                lcc = new LoginCodeController(Convert.ToInt32(loginCode), true);
+                if (lcc.validated) {
+                    Response.Redirect("~/Gui/Client/CreateAccount.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
+                }
+                else
+                {
+                    Response.Write("<script>alert('Invalid Code')</script>");
+                }
             }
             
         }

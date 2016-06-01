@@ -1,27 +1,25 @@
-﻿using System;
+﻿using PhotoshopWebsite.Controller;
+using PhotoshopWebsite.DatabaseTier;
+using PhotoshopWebsite.Domain;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using PhotoshopWebsite.Controller;
-using PhotoshopWebsite.DatabaseTier;
-using PhotoshopWebsite.Domain;
-using System.Data;
-using System.Diagnostics.CodeAnalysis;
 
-namespace PhotoshopWebsite
+namespace PhotoshopWebsite.Gui.Client
 {
     [ExcludeFromCodeCoverage]
-    public partial class PhotoshopMaster : System.Web.UI.MasterPage
+    public partial class NestedMasterPageClient : System.Web.UI.MasterPage
     {
         private Search s = new Search();
-        private String clientName;
         private String pageName;
         private User curUser;
         private List<PhotoshopWebsite.Domain.Photo> searchedPhotos;
         private int size = 0;
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -40,53 +38,47 @@ namespace PhotoshopWebsite
                     size += item.quantity;
                 }
                 Labelquantity.Text = size.ToString();
-            }
-            if (Session["logindata"] != null)
-            {
-                clientName = Session["logindata"] as String;
-            }
-            else
-            {
-                Response.Redirect("../Login.aspx");
-            }
-            Labelklantnaam.Text = clientName;
-            pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
 
-            if (pageName.Contains("account"))
-            {
-                LabelTitle.Text = "<h1>My Account</h1>";
-            }
-            else if (pageName.Contains("mainstore"))
-            {
-                LabelTitle.Text = "<h1>My Pictures</h1>";
-            }
-            else if (pageName.Contains("group"))
-            {
-                LabelTitle.Text = "<h1>Group Pictures</h1>";
-            }
-            else if (pageName.Contains("google"))
-            {
-                LabelTitle.Text = "<h1>Google-Checkout Payment</h1>";
-            }
-            else if (pageName.Contains("ideal"))
-            {
-                LabelTitle.Text = "<h1>iDeal Payment</h1>";
-            }
-            else if (pageName.Contains("ogone"))
-            {
-                LabelTitle.Text = "<h1>Ogone Payment</h1>";
-            }
-            else if (pageName.Contains("transfer"))
-            {
-                LabelTitle.Text = "<h1>Money Tranfer Payment</h1>";
-            }
-            else if (pageName.Contains("checkpayment"))
-            {
-                LabelTitle.Text = "<h1>Payment Check</h1>";
-            }
-            else if (pageName.Contains("shoppingcart"))
-            {
-                LabelTitle.Text = "<h1>Shopping Cart</h1>";
+                //pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
+                pageName = "";
+                Label LabelTitle = (Label)Master.FindControl("LabelTitle");
+                if (pageName.Contains("account"))
+                {
+
+                    LabelTitle.Text = "<h1>My Account</h1>";
+                }
+                else if (pageName.Contains("mainstore"))
+                {
+                    LabelTitle.Text = "<h1>My Pictures</h1>";
+                }
+                else if (pageName.Contains("group"))
+                {
+                    LabelTitle.Text = "<h1>Group Pictures</h1>";
+                }
+                else if (pageName.Contains("google"))
+                {
+                    LabelTitle.Text = "<h1>Google-Checkout Payment</h1>";
+                }
+                else if (pageName.Contains("ideal"))
+                {
+                    LabelTitle.Text = "<h1>iDeal Payment</h1>";
+                }
+                else if (pageName.Contains("ogone"))
+                {
+                    LabelTitle.Text = "<h1>Ogone Payment</h1>";
+                }
+                else if (pageName.Contains("transfer"))
+                {
+                    LabelTitle.Text = "<h1>Money Tranfer Payment</h1>";
+                }
+                else if (pageName.Contains("checkpayment"))
+                {
+                    LabelTitle.Text = "<h1>Payment Check</h1>";
+                }
+                else if (pageName.Contains("shoppingcart"))
+                {
+                    LabelTitle.Text = "<h1>Shopping Cart</h1>";
+                }
             }
         }
         protected void Btnlogout_Click(object sender, EventArgs e)

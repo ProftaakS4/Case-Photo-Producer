@@ -15,15 +15,15 @@ namespace PhotoshopWebsite.Gui.Photographer
         private String pageName;
         protected void Page_Load(object sender, EventArgs e)
         {
-        //    if (Session["logindata"] != null)
-        //    {
-        //        clientName = Session["logindata"] as String;
-        //    }
-        //    else
-        //    {
-        //        Response.Redirect("../Login.aspx");
-        //    }
-            Labelklantnaam.Text = "Welcome! " + " " + clientName;
+            if (Session["logindata"] != null)
+            {
+                clientName = Session["logindata"] as String;
+            }
+            else
+            {
+                Response.Redirect("../Login.aspx");
+            }
+            Labelklantnaam.Text = clientName;
             pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
             if (pageName.Contains("account"))
             {
@@ -41,6 +41,11 @@ namespace PhotoshopWebsite.Gui.Photographer
             {
                 LabelTitle.Text = "<h1>My Pictures</h1>";
             }
+        }
+        protected void Btnlogout_Click(object sender, EventArgs e)
+        {
+            Session["logindata"] = null;
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

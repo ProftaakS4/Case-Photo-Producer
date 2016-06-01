@@ -15,8 +15,7 @@ namespace PhotoshopWebsite.DatabaseTier
         // Create a new MySQL connections
         private MySqlConnection mysqlConnection;
         private MySqlCommand myCommand = null;
-        private string result = "";
-        
+       
         public Finance()
         {
             // get the mysqlconnection singleton
