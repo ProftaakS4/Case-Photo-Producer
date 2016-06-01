@@ -16,7 +16,6 @@ namespace PhotoshopWebsite.Gui
     {
         private string orderName = "Photo Shop";
         private double totalAmount = 0;
-        private string orderPrice;
         private ImageButton btnTransfer;
         private ImageButton btnPayPal;
         private ImageButton btniDeal;
