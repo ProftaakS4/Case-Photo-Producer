@@ -24,7 +24,7 @@ namespace PhotoshopWebsite.Gui
             {
                 Response.Redirect("../Login.aspx");
             }
-            Labelklantnaam.Text = "Welcome! " + " " + clientName;
+            Labelklantnaam.Text = clientName;
             pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
             if (pageName.Contains("account"))
             {
@@ -43,6 +43,10 @@ namespace PhotoshopWebsite.Gui
                 LabelTitle.Text = "<h1>Finance</h1>";
             }
         }
-        
+        protected void Btnlogout_Click(object sender, EventArgs e)
+        {
+            Session["logindata"] = null;
+            Response.Redirect(Request.RawUrl);
         }
     }
+}

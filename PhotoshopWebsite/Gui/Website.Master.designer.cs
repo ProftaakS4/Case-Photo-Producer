@@ -10,7 +10,16 @@
 namespace PhotoshopWebsite.Gui {
     
     
-    public partial class FinancialAdmin {
+    public partial class Website {
+        
+        /// <summary>
+        /// mainForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm mainForm;
         
         /// <summary>
         /// Label1 control.
@@ -31,22 +40,13 @@ namespace PhotoshopWebsite.Gui {
         protected global::System.Web.UI.WebControls.Label Labelklantnaam;
         
         /// <summary>
-        /// Btntoggle control.
+        /// NavigationPlaceHolder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton Btntoggle;
-        
-        /// <summary>
-        /// Btnlogout control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Btnlogout;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder NavigationPlaceHolder;
         
         /// <summary>
         /// LabelTitle control.

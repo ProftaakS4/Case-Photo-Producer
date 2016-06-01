@@ -12,6 +12,7 @@ namespace PhotoshopWebsite.Gui.Client.Payment
 {
     public partial class PaymentMasterNested : System.Web.UI.MasterPage
     {
+        
         private User currentUser;
         private RadioButton rabobank = new RadioButton();
         private RadioButton abn = new RadioButton();
@@ -115,9 +116,8 @@ namespace PhotoshopWebsite.Gui.Client.Payment
         {
             if (Session["UserData"] != null)
             {
-
                 currentUser = Session["UserData"] as User;
-                //((PhotoshopMaster)PaymentMasterNested).tbFirstname.Text = currentUser.Firstname;
+                tbFirstname.Text = currentUser.Firstname;
                 tbLastname.Text = currentUser.Lastname;
                 tbStreetname.Text = currentUser.Streetname;
                 tbHousenumber.Text = currentUser.Housenumber;

@@ -61,5 +61,20 @@ namespace PhotoshopWebsite.Controller
             }
             return null;
         }
+
+        public List<string> getPhotoGrapherPhotoIDs(string userID)
+        {
+            List<string> result = new List<string>();
+            DataTable dt = photoDatabase.getPhotosPhotographer(userID);
+            // when data is found and returned
+            if (dt.Rows.Count != 0)
+            {
+                foreach (DataRow data in dt.Rows)
+                {
+                    result.Add(data[0].ToString());
+                }
+            }
+            return result;
+        }
     }
 }

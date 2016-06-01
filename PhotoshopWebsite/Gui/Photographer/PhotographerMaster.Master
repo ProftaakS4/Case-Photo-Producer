@@ -1,25 +1,29 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PhotographerMaster.master.cs" Inherits="PhotoshopWebsite.Gui.Photographer.PhotographerMaster" %>
 
 <!DOCTYPE html>
+<script src="/Bootstrap/Scripts/jquery-1.9.1.min.js"></script>
+<link href="/Bootstrap/Content/bootstrap.css" rel="stylesheet" />
+<script src="/Bootstrap/Scripts/bootstrap.js"></script>
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Photoshop</title>
-    <link href="../../Bootstrap/Content/Custom.css" rel="stylesheet" />
-    <link href="../../Bootstrap/Menu/simple-sidebar.css" rel="stylesheet" />
-    <link href="../../Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Bootstrap/Content/Custom.css" rel="stylesheet" />
+    <link href="/Bootstrap/Menu/simple-sidebar.css" rel="stylesheet" />
+    <link href="/Bootstrap/Menu/bootstrap.min.css" rel="stylesheet" />
 </head>
-<form runat="server">
-    <body>
+<body style="background-color: #eee">
+    <form runat="server">
         <div id="wrapper">
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <a href="#">
-                            <asp:Label runat="server" ID="Labelklantnaam"></asp:Label>
-                        </a>
-                    </li>
+                <li class="sidebar-brand">
+                    <asp:Label runat="server" ID="Label1" Text="Welcome!" Style="color: grey"></asp:Label>
+                    <asp:Label runat="server" ID="Labelklantnaam" Style="color: grey; margin-bottom: 100px;"></asp:Label>
+                </li>
+                <ul class="sidebar-nav" style="margin-top: 30px;">
+
                     <li>
                         <a href="Pictures.aspx">View Pictures</a>
                     </li>
@@ -39,6 +43,9 @@
                                 <button id="Btntoggle" class="btn btn-default" runat="server" type="button">Go!</button>
                             </span>
                         </div>
+                        <div class="input-group-btn">
+                            <asp:Button ID="Btnlogout" class="btn btn-default" runat="server" type="button" Text="logout" OnClick="Btnlogout_Click" Style="height: 34px; width: 201px; margin-top: 10px; border-radius: 3px; border-color: white; background-color: azure"></asp:Button>
+                        </div>
                         <!-- /input-group -->
                     </div>
                     <!-- /.col-lg-6 -->
@@ -54,7 +61,8 @@
                             <asp:Label ID="LabelTitle" runat="server" Text="Label"></asp:Label>
                             <p>Click to Toggle button for the Menu to appear or dissapear</p>
                             <a href="#menu-toggle" class="
-                                " id="menu-toggle">Toggle Menu</a>
+                                "
+                                id="menu-toggle">Toggle Menu</a>
                         </div>
                     </div>
                 </div>
@@ -81,12 +89,10 @@
         </script>
         <asp:ContentPlaceHolder ID="head" runat="server">
         </asp:ContentPlaceHolder>
-        </head>
-    <body>
-
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
         </div>
-    </body>
-</form>
+    </form>
+</body>
 </html>
