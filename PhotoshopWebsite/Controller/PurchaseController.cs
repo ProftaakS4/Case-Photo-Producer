@@ -38,15 +38,15 @@ namespace PhotoshopWebsite.Controller
             {
                 foreach (DataRow data in dt.Rows)
                 {
-                    temp.Add(new Purchase(int.Parse(data[0].ToString()), int.Parse(data[1].ToString()), DateTime.Parse(data[2].ToString()), data[3].ToString()));
+                    temp.Add(new Purchase(int.Parse(data[0].ToString()), int.Parse(data[1].ToString()), DateTime.Parse(data[2].ToString()), data[3].ToString(), data[4].ToString()));
                 }
             }
             return temp;
         }
 
-        public void updatePurchaseStatus(int purchaseID, string status)
+        public void updatePurchaseStatus(int purchaseID, string paidStatus, string shippingStatus)
         {
-            DB.updatePurchaseStatus(purchaseID, status);
+            DB.updatePurchaseStatus(purchaseID, paidStatus, shippingStatus);
         }
 
         public int getPrice(int product_ID, int photo_ID)

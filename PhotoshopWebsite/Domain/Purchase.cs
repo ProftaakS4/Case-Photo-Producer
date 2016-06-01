@@ -10,14 +10,16 @@ namespace PhotoshopWebsite.Controller
         public int ID { get; set; }
         public int accountID { get; set; }
         public DateTime Date { get; set; }
-        public String Status { get; set; }
+        public String PaidStatus { get; set; }
+        public String ShippingStatus { get; set; }
 
-        public Purchase(int id, int accountID, DateTime date, string status)
+        public Purchase(int id, int accountID, DateTime date, string paidStatus, string shippingStatus)
         {
             this.ID = id;
             this.accountID = accountID;
             this.Date = date;
-            this.Status = status;
+            this.PaidStatus = paidStatus;
+            this.ShippingStatus = shippingStatus;
         }
     }
 }
