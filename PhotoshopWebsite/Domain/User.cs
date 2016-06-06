@@ -5,9 +5,12 @@ using System.Web;
 
 namespace PhotoshopWebsite.Controller
 {
+    /// <summary>
+    /// User class is the person that has signed in on the website.
+    /// </summary>
     public class User
     {
-        private DatabaseTier.Login login = new DatabaseTier.Login();
+        private DatabaseTier.Login DB_Login = new DatabaseTier.Login();
 
         public int ID { get; set; }
         public string Type { get; set; }
@@ -22,34 +25,68 @@ namespace PhotoshopWebsite.Controller
         public string Emailaddress { get; set; }
         public string Password { get; set; }
 
-        public User(int ID, String Type, String Firstname, String Lastname, String Streetname, String Housenumber, String Zipcode, String City, String Phonenumber, String IBAN, String Emailaddress)
+        /// <summary>
+        /// create a user without the password
+        /// </summary>
+        /// <param name="id">id from the user</param>
+        /// <param name="type">type of the user</param>
+        /// <param name="firstname">firstname of the user</param>
+        /// <param name="lastname">lastname of the user</param>
+        /// <param name="streetname">streetname of the user</param>
+        /// <param name="housenumber">housenumber of the user</param>
+        /// <param name="zipcode">zipcode of the user</param>
+        /// <param name="city">city of the user</param>
+        /// <param name="phonenumber">phonenumber of the user</param>
+        /// <param name="iban">iban form the user</param>
+        /// <param name="emailaddress">emailaddress of the user</param>
+        public User(int id, string type, string firstname, string lastname, string streetname, string housenumber, string zipcode, string city, string phonenumber, string iban, string emailaddress)
         {
-            this.ID = ID;
-            this.Type = Type;
-            this.Firstname = Firstname;
-            this.Lastname = Lastname;
-            this.Streetname = Streetname;
-            this.Housenumber = Housenumber;
-            this.Zipcode = Zipcode;
-            this.City = City;
-            this.Phonenumber = Phonenumber;
-            this.IBAN = IBAN;
-            this.Emailaddress = Emailaddress;
+            this.ID = id;
+            this.Type = type;
+            this.Firstname = firstname;
+            this.Lastname = lastname;
+            this.Streetname = streetname;
+            this.Housenumber = housenumber;
+            this.Zipcode = zipcode;
+            this.City = city;
+            this.Phonenumber = phonenumber;
+            this.IBAN = iban;
+            this.Emailaddress = emailaddress;
         }
-        public User(String Firstname, String Lastname, String Streetname, String Housenumber, String Zipcode, String City, String Phonenumber, String IBAN, String Emailaddress, String password)
+
+        /// <summary>
+        /// create a user with all possible variables
+        /// </summary>
+        /// <param name="id">id from the user</param>
+        /// <param name="type">type of the user</param>
+        /// <param name="firstname">firstname of the user</param>
+        /// <param name="lastname">lastname of the user</param>
+        /// <param name="streetname">streetname of the user</param>
+        /// <param name="housenumber">housenumber of the user</param>
+        /// <param name="zipcode">zipcode of the user</param>
+        /// <param name="city">city of the user</param>
+        /// <param name="phonenumber">phonenumber of the user</param>
+        /// <param name="iban">iban form the user</param>
+        /// <param name="emailaddress">emailaddress of the user</param>
+        /// <param name="password">password of the user</param>
+        public User(int id, string type, string firstname, string lastname, string streetname, string housenumber, string zipcode, string city, string phonenumber, string iban, string emailaddress, string password)
         {
-            this.Firstname = Firstname;
-            this.Lastname = Lastname;
-            this.Streetname = Streetname;
-            this.Housenumber = Housenumber;
-            this.Zipcode = Zipcode;
-            this.City = City;
-            this.Phonenumber = Phonenumber;
-            this.IBAN = IBAN;
-            this.Emailaddress = Emailaddress;
+            this.Firstname = firstname;
+            this.Lastname = lastname;
+            this.Streetname = streetname;
+            this.Housenumber = housenumber;
+            this.Zipcode = zipcode;
+            this.City = city;
+            this.Phonenumber = phonenumber;
+            this.IBAN = iban;
+            this.Emailaddress = emailaddress;
             this.Password = password;
         }
 
+        /// <summary>
+        /// create a user using the emailaddress to search for the user's data
+        /// </summary>
+        /// <param name="emailaddress">emailaddress of the user</param>
         public User(string emailaddress)
         {
             this.Emailaddress = emailaddress;
@@ -59,55 +96,49 @@ namespace PhotoshopWebsite.Controller
         /// <summary>
         /// login the user, when succesfull retrieve its data from the database
         /// </summary>
-        /// <param name="emailaddress"></param> emailaddress of the user
-        /// <param name="password"></param> password of the user
-        /// <returns></returns>
+        /// <param name="emailaddress">emailaddress of the user</param>
+        /// <param name="password">password of the user</param>
+        /// <returns>the logged in user</returns>
         public User loginUser(string emailaddress, string password)
         {
+            User returnUser = null;
             // when login credentials are verified
-           if(login.loginUser(emailaddress, password))
+            if (DB_Login.loginUser(emailaddress, password))
             {
-                User returnUser = getUserData(emailaddress);
-                // when user data is found
-                if(returnUser != null)
-                {
-                    return returnUser;
-                }
-                return null;
+                returnUser = getUserData(emailaddress);
             }
-            return null;
+            return returnUser;
         }
-        
+
         /// <summary>
         /// get userdata of the user corresponding to email address
         /// </summary>
-        /// <param name="emailaddress"></param>
-        /// <returns></returns>
+        /// <param name="emailaddress">emailaddress from the user</param>
+        /// <returns>user from the corresponding email address</returns>
         public User getUserData(string emailaddress)
         {
-            int userID = login.getUserID(emailaddress);
+            int userID = DB_Login.getUserID(emailaddress);
             // when user id is validated
-            if (userID != -1)
+            if (userID != DatabaseTier.Login.NO_USER_FOUND)
             {
                 this.ID = userID;
-                Dictionary<string, string> userData = login.getUserData(userID);
+                Dictionary<string, string> userData = DB_Login.getUserData(userID);
                 // when userdata is found and returned
                 if (userData != null)
                 {
                     // set the data for the current user
-                    if (userData.ContainsKey("type")) { this.Type = userData["type"]; }
-                    if (userData.ContainsKey("firstname")) { this.Firstname = userData["firstname"]; }
-                    if (userData.ContainsKey("lastname")) { this.Lastname = userData["lastname"]; }
-                    if (userData.ContainsKey("streetname")) { this.Streetname = userData["streetname"]; }
-                    if (userData.ContainsKey("housenumber")) { this.Housenumber = userData["housenumber"]; }
-                    if (userData.ContainsKey("zipcode")) { this.Zipcode = userData["zipcode"]; }
-                    if (userData.ContainsKey("city")) { this.City = userData["city"]; }
-                    if (userData.ContainsKey("phonenumber")) { this.Phonenumber = userData["phonenumber"]; }
-                    if (userData.ContainsKey("iban")) { this.IBAN = userData["iban"]; }
+                    this.Type = userData["type"];
+                    this.Firstname = userData["firstname"];
+                    this.Lastname = userData["lastname"];
+                    this.Streetname = userData["streetname"];
+                    this.Housenumber = userData["housenumber"];
+                    this.Zipcode = userData["zipcode"];
+                    this.City = userData["city"];
+                    this.Phonenumber = userData["phonenumber"];
+                    this.IBAN = userData["iban"];
                     // return the user with its data
                     return this;
                 }
-                //System.Windows.Forms.MessageBox.Show(Firstname + Lastname + Streetname + Housenumber + Zipcode + City + Phonenumber + IBAN);
             }
             return null;
         }

@@ -15,6 +15,8 @@ namespace PhotoshopWebsite.DatabaseTier
         private MySqlConnection mysqlConnection;
         private MySqlCommand myCommand = null;
 
+        public static const int NO_USER_FOUND = -1;
+
         /// <summary>
         /// constructor of the class
         /// </summary>
@@ -73,7 +75,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// <returns></returns>
         public int getUserID(string emailaddress)
         {
-            int id = -1;
+            int id = NO_USER_FOUND;
             try
             {
                 myCommand = new MySqlCommand(null, mysqlConnection);
@@ -92,7 +94,6 @@ namespace PhotoshopWebsite.DatabaseTier
                 {
                     id = Int32.Parse(myCommand.Parameters["@p_ID"].Value.ToString());
                 }
-                return id;
             }
             catch (Exception ex)
             {
@@ -103,7 +104,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Connection.Close();
                 mysqlConnection.Close();
             }
-            return -1;
+            return id;
         }
 
         /// <summary>
