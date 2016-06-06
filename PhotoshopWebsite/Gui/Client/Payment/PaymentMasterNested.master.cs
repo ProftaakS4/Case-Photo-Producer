@@ -83,15 +83,15 @@ namespace PhotoshopWebsite.Gui.Client.Payment
                 TableRow MainRow = new TableRow();
                 MainRow.Height = 40;
                 TableCell ID = new TableCell();
-                ID.Text = item.photoID.ToString();
+                ID.Text = item.PhotoID.ToString();
                 TableCell Filter = new TableCell();
-                Filter.Text = item.filterType.ToString();
+                Filter.Text = item.Filter.ToString();
                 TableCell Type = new TableCell();
-                Type.Text = item.product.ToString();
+                Type.Text = item.Product.ToString();
                 TableCell Description = new TableCell();
-                Description.Text = item.description;
+                Description.Text = item.Description;
                 TableCell Quantity = new TableCell();
-                Quantity.Text = item.quantity.ToString();
+                Quantity.Text = item.Quantity.ToString();
                 TableCell PriceCell = new TableCell();
                 PriceCell.Text = "€" + item.Price.ToString() + ",00";
 
@@ -169,7 +169,7 @@ namespace PhotoshopWebsite.Gui.Client.Payment
                     {
                         foreach (Domain.ShoppingbasketItem item in shoppingCart)
                         {
-                            string photoIDQualtityType = item.photoID.ToString() + ";" + item.quantity.ToString() + "#" + item.filterType;
+                            string photoIDQualtityType = item.PhotoID.ToString() + ";" + item.Quantity.ToString() + "#" + item.Filter;
                             socket.sendData(photoIDQualtityType);
                         }
                         Response.Redirect("CheckPayment.aspx");

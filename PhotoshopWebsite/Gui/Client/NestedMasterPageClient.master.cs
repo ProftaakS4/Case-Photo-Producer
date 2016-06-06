@@ -35,7 +35,7 @@ namespace PhotoshopWebsite.Gui.Client
                 List<Domain.ShoppingbasketItem> list = Session["shoppingCart"] as List<Domain.ShoppingbasketItem>;
                 foreach (ShoppingbasketItem item in list)
                 {
-                    size += item.quantity;
+                    size += item.Quantity;
                 }
                 Labelquantity.Text = size.ToString();
 
