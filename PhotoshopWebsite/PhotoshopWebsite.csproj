@@ -204,7 +204,7 @@
     <Compile Include="Domain\LoginCode.cs" />
     <Compile Include="Domain\Map.cs" />
     <Compile Include="Domain\Order.cs" />
-    <Compile Include="Domain\PaymentType.cs" />
+    <Compile Include="Enumeration\PaymentType.cs" />
     <Compile Include="Domain\Printorder.cs" />
     <Compile Include="Domain\ShoppingbasketItem.cs" />
     <Compile Include="Domain\Transaction.cs" />
