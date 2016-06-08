@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PhotoshopWebsite.Controller
+namespace PhotoshopWebsite.Domain
 {
     /// <summary>
     /// User class is the person that has signed in on the website.

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PhotoshopWebsite.Controller
+namespace PhotoshopWebsite.Domain
 {
     /// <summary>
     /// Order class is created to place orders

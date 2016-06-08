@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
+using PhotoshopWebsite.Domain;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using PhotoshopWebsite.Enumeration;
@@ -19,7 +20,7 @@ namespace PhotoshopWebsite.Gui.Client
         PhotoController photoController = new PhotoController();
 
         // create a list of all the current user photos
-        public List<Domain.Photo> photos;
+        public List<Photo> photos;
         //{
         //    get
         //    {
