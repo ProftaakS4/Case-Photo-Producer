@@ -111,6 +111,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             Button btnDownload = new Button();
             btnDownload.ID = "download" + x.ID;
             btnDownload.Text = "Download";
+            btnDownload.CssClass = "btn btn-default";
             btnDownload.Click += btnDownload_Click;
 
 
@@ -158,6 +159,8 @@ namespace PhotoshopWebsite.Gui.Photographer
             firstControl.Controls.Add(btnColor);
             firstControl.Controls.Add(btnBlackWhite);
             firstControl.Controls.Add(btnSepia);
+            firstControl.Controls.Add(new LiteralControl("&nbsp&nbsp&nbsp&nbsp"));
+            firstControl.Controls.Add(btnDownload);
             firstControl.Controls.Add(new LiteralControl("<br />"));
             pnlProduct.Controls.Add(firstControl);
 
@@ -174,8 +177,8 @@ namespace PhotoshopWebsite.Gui.Photographer
 
             Response.Clear();
             Response.ContentType = "image/jpg";
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + photoController.getPhoto(num).Image);
-            Response.TransmitFile(Server.MapPath("/images/image.jpg"));
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + photoController.getPhoto(num).ID+ ".jpeg");
+            Response.TransmitFile(Server.MapPath(photoController.getPhoto(num).Image));
             Response.End();
         }
 
