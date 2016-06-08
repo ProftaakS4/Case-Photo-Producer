@@ -15,7 +15,7 @@ namespace PhotoshopWebsite.DatabaseTier
         private MySqlConnection mysqlConnection;
         private MySqlCommand myCommand = null;
 
-        public static const int NO_USER_FOUND = -1;
+        public const int NO_USER_FOUND = -1;
 
         /// <summary>
         /// constructor of the class

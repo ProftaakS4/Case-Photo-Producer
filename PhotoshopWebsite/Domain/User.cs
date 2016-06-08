@@ -69,7 +69,7 @@ namespace PhotoshopWebsite.Controller
         /// <param name="iban">iban form the user</param>
         /// <param name="emailaddress">emailaddress of the user</param>
         /// <param name="password">password of the user</param>
-        public User(int id, string type, string firstname, string lastname, string streetname, string housenumber, string zipcode, string city, string phonenumber, string iban, string emailaddress, string password)
+        public User(string firstname, string lastname, string streetname, string housenumber, string zipcode, string city, string phonenumber, string iban, string emailaddress, string password)
         {
             this.Firstname = firstname;
             this.Lastname = lastname;
