@@ -10,15 +10,16 @@ namespace PhotoshopWebsite.DatabaseTier
     public class Order
     {
         //Get the MySQL connection Singleton Instance
-        private ConnectionSingleton connectionSingleton = ConnectionSingleton.GetSingleton();
+        private ConnectionSingleton connectionSingleton;
 
         // Create a new MySQL connections
         private MySqlConnection mysqlConnection;
         private MySqlCommand myCommand = null;
-        
+
         public Order()
         {
             // get the mysqlconnection singleton
+            connectionSingleton = ConnectionSingleton.GetSingleton();
             mysqlConnection = connectionSingleton.getSqlConnection();
         }
 
@@ -158,7 +159,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// <param name="price">the product price</param>
         /// <param name="quantity">the product quantity</param>
         /// <returns> the order ID</returns>
-        public int inserOrder(int accountID, DateTime date, string status, int productID, int photoID, string filterType, string paymentType, string productType, string iban, double price, int quantity)
+        public int inserOrder(int accountID, string date, string status, int productID, int photoID, string filterType, string paymentType, string productType, string iban, double price, int quantity)
         {
             // insert purchase
             int purchaseID = insertPurchase(accountID, date, status);
@@ -187,7 +188,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// <param name="date"> the date of the order</param>
         /// <param name="status"> the status of the order eg paid , not paid</param>
         /// <returns> the id of the purchase</returns>
-        public int insertPurchase(int accountID, DateTime date, string status)
+        public int insertPurchase(int accountID, string date, string status)
         {
             try
             {
@@ -195,9 +196,8 @@ namespace PhotoshopWebsite.DatabaseTier
                 // input
                 myCommand.CommandType = CommandType.StoredProcedure;
                 myCommand.Parameters.Add("@p_account_ID", MySqlDbType.Int32).Value = accountID;               
-                myCommand.Parameters.Add("@p_date", MySqlDbType.Date).Value = date.ToString("yyyyMMdd");
-                myCommand.Parameters.Add("@p_status", MySqlDbType.VarChar).Value = status;
-                
+                myCommand.Parameters.Add("@p_date", MySqlDbType.Date).Value = date;
+                myCommand.Parameters.Add("@p_status", MySqlDbType.VarChar).Value = status;                
 
                 // execute query
                 mysqlConnection.Open();
@@ -266,7 +266,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// <param name="iban">the iban number</param>
         /// <param name="price">the price</param>
         /// <returns>return the payment id</returns>
-        public int insertPayment(int purchaseID, DateTime date, string paymentType, string iban, double price)
+        public int insertPayment(int purchaseID, string date, string paymentType, string iban, double price)
         {
             try
             {
@@ -274,7 +274,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 // input
                 myCommand.CommandType = CommandType.StoredProcedure;
                 myCommand.Parameters.Add("@p_purchase_ID", MySqlDbType.Int32).Value = purchaseID;
-                myCommand.Parameters.Add("@p_date", MySqlDbType.Date).Value = date.ToString("yyyyMMdd");
+                myCommand.Parameters.Add("@p_date", MySqlDbType.Date).Value = date;
                 myCommand.Parameters.Add("@p_type", MySqlDbType.VarChar).Value = paymentType;
                 myCommand.Parameters.Add("@p_iban", MySqlDbType.VarChar).Value = iban;
                 myCommand.Parameters.Add("@p_price", MySqlDbType.Decimal).Value = price;
@@ -308,7 +308,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// <param name="paymentID"> the payment id</param>
         /// <param name="date"> the date</param>
         /// <returns>return the order id</returns>
-        public int insertPrintOrder(int paymentID, DateTime date)
+        public int insertPrintOrder(int paymentID, string date)
         {
             try
             {
@@ -316,7 +316,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 // input
                 myCommand.CommandType = CommandType.StoredProcedure;
                 myCommand.Parameters.Add("@p_payment_ID", MySqlDbType.Int32).Value = paymentID;
-                myCommand.Parameters.Add("@p_date", MySqlDbType.Date).Value = date.ToString("yyyyMMdd");
+                myCommand.Parameters.Add("@p_date", MySqlDbType.Date).Value = date;
 
                 // execute query
                 mysqlConnection.Open();
