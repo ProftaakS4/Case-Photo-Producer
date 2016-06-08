@@ -9,6 +9,7 @@ namespace PhotoshopWebsite.Controller
 {
     public class Order
     {
+        private DatabaseTier.Order DB_Login = new DatabaseTier.Order();
 
         private int ID { get; set; }
         private Dictionary<Product, int> Products { get; set; }
@@ -25,6 +26,11 @@ namespace PhotoshopWebsite.Controller
             this.Type = type;
             this.IBAN = iban;
             this.Price = price;
+        }
+
+        public Order()
+        {
+
         }
 
         public int getID()
@@ -50,6 +56,11 @@ namespace PhotoshopWebsite.Controller
         public Double getPrice()
         {
             return this.Price;
+        }
+
+        public int insertPrintOrder(int accountID, DateTime date, string status, int productID, int photoID, string filterType, string paymentType, string productType, string iban, double price, int quantity)
+        {
+            return DB_Login.inserOrder(accountID, date, status, productID, photoID, filterType, paymentType, productType, iban, price, quantity);
         }
     }
 }
