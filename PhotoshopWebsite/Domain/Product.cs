@@ -3,19 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PhotoshopWebsite.Domain 
+namespace PhotoshopWebsite.Domain
 {
-        [Serializable]
-    public class Product 
+    /// <summary>
+    /// Product class is created so that products can be used in the application
+    /// </summary>
+    [Serializable]
+    public class Product
     {
         public int ID { get; set; }
-        public String Type { get; set; }
-        public String Material { get; set; }
-        public String Description { get; set; }
-        public String  Image { get; set; }
+        public string Type { get; set; }
+        public string Material { get; set; }
+        public string Description { get; set; }
+        public string Image { get; set; }
         public int Stock { get; set; }
 
-        public Product(int ID, String Type, String Material, String Description, String Image, int Stock)
+        /// <summary>
+        /// create a Product with all possible variables
+        /// </summary>
+        /// <param name="ID">id of the product</param>
+        /// <param name="Type">the product type</param>
+        /// <param name="Material">product material it's made</param>
+        /// <param name="Description">a description of the product</param>
+        /// <param name="Image">the imagepath of the product</param>
+        /// <param name="Stock">the amount of items are left in stock for this product</param>
+        public Product(int ID, string Type, string Material, string Description, string Image, int Stock)
         {
             this.ID = ID;
             this.Type = Type;

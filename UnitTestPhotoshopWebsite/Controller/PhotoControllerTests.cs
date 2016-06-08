@@ -11,11 +11,11 @@ namespace UnitTestPhotoshopWebsite.Controller
         [TestMethod]
         public void TestgetUserPhotoIDs()
         {
-            var result = instance.getUserPhotoIDs("4");
+            var result = instance.getUserPhotoIDs(4);
             var expresult = 1;
             Assert.AreEqual(expresult.ToString(), result[0].ToString());
 
-            result = instance.getUserPhotoIDs("200000");
+            result = instance.getUserPhotoIDs(200000);
             expresult = 0;
             Assert.AreEqual(expresult, result.Count);
         }
@@ -23,11 +23,11 @@ namespace UnitTestPhotoshopWebsite.Controller
         [TestMethod]
         public void TestgetPhoto()
         {
-            var result = instance.getPhoto("1");
+            var result = instance.getPhoto(1);
             var expresult = 1;
             Assert.AreEqual(expresult, result.MapID);
 
-            result = instance.getPhoto("200000");
+            result = instance.getPhoto(200000);
             Assert.IsNull(result);
         }
     }

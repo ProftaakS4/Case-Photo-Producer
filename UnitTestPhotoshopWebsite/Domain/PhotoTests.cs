@@ -31,7 +31,7 @@ namespace PhotoshopWebsite.Domain.Tests
             types.Add(ProductTypes.PTypes.PHOTO1x2);
             types.Add(ProductTypes.PTypes.PHOTO2x4);
             types.Add(ProductTypes.PTypes.PHOTO5x8);
-            CollectionAssert.AreEqual(testPhoto.getTypes(testPhoto.ID.ToString()),types);
+            CollectionAssert.AreEqual(testPhoto.getTypes(testPhoto.ID),types);
         }
         [TestMethod()]
         public void PhotoConstructortest()

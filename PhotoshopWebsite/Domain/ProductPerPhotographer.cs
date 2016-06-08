@@ -5,6 +5,9 @@ using System.Web;
 
 namespace PhotoshopWebsite.Domain
 {
+    /// <summary>
+    /// ProductPerPhotographer class is create to keep track of which products a photographer sells.
+    /// </summary>
     [Serializable]
     public class ProductPerPhotographer
     {
@@ -13,7 +16,13 @@ namespace PhotoshopWebsite.Domain
         public int Price { get; set; }
         public bool Available { get; set; }
 
-
+        /// <summary>
+        /// create a ProductPerPhotographer with all possible variables
+        /// </summary>
+        /// <param name="photographer_ID">id of the photographer</param>
+        /// <param name="product_ID">id of the product</param>
+        /// <param name="price">the price of the product set by the photographer</param>
+        /// <param name="available">availabilitie of the product</param>
         public ProductPerPhotographer(int photographer_ID, int product_ID, int price, int available)
         {
             this.Photographer_ID = photographer_ID;

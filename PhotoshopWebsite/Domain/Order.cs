@@ -7,18 +7,29 @@ using System.Web;
 
 namespace PhotoshopWebsite.Controller
 {
+    /// <summary>
+    /// Order class is created to place orders
+    /// </summary>
     public class Order
     {
-        private DatabaseTier.Order DB_Login = new DatabaseTier.Order();
+        private DatabaseTier.Order DB_Order = new DatabaseTier.Order();
+        public int ID { get; set; }
+        public Dictionary<Product, int> Products { get; set; }
+        public DateTime Date { get; set; }
+        public PaymentType Type { get; set; }
+        public string IBAN { get; set; }
+        public double Price { get; set; }
 
-        private int ID { get; set; }
-        private Dictionary<Product, int> Products { get; set; }
-        private DateTime Date { get; set; }
-        private PaymentType Type { get; set; }
-        private String IBAN { get; set; }
-        private Double Price { get; set; }       
-
-        public Order(int id, Dictionary<Product, int> products,DateTime date, PaymentType type, string iban, Double price)
+        /// <summary>
+        /// create a Order with all possible variables
+        /// </summary>
+        /// <param name="id">id of the order</param>
+        /// <param name="products">a dictionary of products and how many times they are added</param>
+        /// <param name="date">the time and date of the order</param>
+        /// <param name="type">the paymenttype that is used to place the order</param>
+        /// <param name="iban">the iban of the user that places the order</param>
+        /// <param name="price">the total price of the order</param>
+        public Order(int id, Dictionary<Product, int> products, DateTime date, PaymentType type, string iban, double price)
         {
             this.ID = id;
             this.Products = products;
@@ -33,34 +44,9 @@ namespace PhotoshopWebsite.Controller
 
         }
 
-        public int getID()
-        {
-            return this.ID;
-        }
-        public Dictionary<Product, int> getProducts()
-        {
-            return this.Products;
-        }
-        public DateTime getDate()
-        {
-            return this.Date;
-        }
-        public PaymentType getType()
-        {
-            return this.Type;
-        }
-        public String getIBAN()
-        {
-            return this.IBAN;
-        }
-        public Double getPrice()
-        {
-            return this.Price;
-        }
-
         public int insertPrintOrder(int accountID, DateTime date, string status, int productID, int photoID, string filterType, string paymentType, string productType, string iban, double price, int quantity)
         {
-            return DB_Login.inserOrder(accountID, date, status, productID, photoID, filterType, paymentType, productType, iban, price, quantity);
+            return DB_Order.inserOrder(accountID, date, status, productID, photoID, filterType, paymentType, productType, iban, price, quantity);
         }
     }
 }
