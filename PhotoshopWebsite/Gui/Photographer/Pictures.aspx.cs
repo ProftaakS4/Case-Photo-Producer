@@ -51,7 +51,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             string userID = Convert.ToString(currenUser.ID);
 
             // get all the photoID's of the current user
-            List<string> photoIDS = photoController.getPhotoGrapherPhotoIDs(userID);
+            List<int> photoIDS = photoController.getPhotoGrapherPhotoIDs(userID);
 
             if (Session["photos"] != null)
             {
@@ -64,7 +64,7 @@ namespace PhotoshopWebsite.Gui.Photographer
                 // get all the photos of the current user and add them to a list
                 if (photoIDS != null)
                 {
-                    foreach (string s in photoIDS)
+                    foreach (int s in photoIDS)
                     {
                         // store all the photos in the session
                         photos.Add(photoController.getPhoto(s));
@@ -107,6 +107,11 @@ namespace PhotoshopWebsite.Gui.Photographer
             btnColor.GroupName = x.ID.ToString();
             btnColor.Height = 30;
             btnColor.Text = "Color ";
+
+            Button btnDownload = new Button();
+            btnDownload.ID = "download" + x.ID;
+            btnDownload.Text = "Download";
+            btnDownload.Click += btnDownload_Click;
 
 
             if (!filters.ContainsKey(x.ID))
@@ -160,6 +165,20 @@ namespace PhotoshopWebsite.Gui.Photographer
             pnlProduct.Controls.Add(lastControl);
         }
 
+        void btnDownload_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
+            Match match = regex.Match(button.ID);
+            int num = Int32.Parse(match.Groups["Numeric"].Value);
+
+            Response.Clear();
+            Response.ContentType = "image/jpg";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + photoController.getPhoto(num).Image);
+            Response.TransmitFile(Server.MapPath("/images/image.jpg"));
+            Response.End();
+        }
+
         void filterChange(object sender, EventArgs e)
         {
             RadioButton button = sender as RadioButton;
@@ -194,7 +213,6 @@ namespace PhotoshopWebsite.Gui.Photographer
                         default:
                             break;
                     }
-
                     break;
                 }
             }

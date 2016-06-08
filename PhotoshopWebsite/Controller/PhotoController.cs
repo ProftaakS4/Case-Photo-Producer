@@ -19,9 +19,14 @@ namespace PhotoshopWebsite.Controller
         /// </summary>
         /// <param name="userID"></param> the userID of the account
         /// <returns></returns>
-        public List<string> getUserPhotoIDs(string userID)
+        public List<int> getUserPhotoIDs(int userID)
         {
-            List<string> result = photoDatabase.getPhotosUser(userID);
+            List<int> result = new List<int>();
+            DataTable dt = photoDatabase.getPhotosUser(userID);
+            foreach (DataRow data in dt.Rows)
+            {
+                result.Add(int.Parse(data[0].ToString()));
+            }
             return result;
         }
         /// <summary>
@@ -29,17 +34,14 @@ namespace PhotoshopWebsite.Controller
         /// </summary>
         /// <param name="userID"></param> the userID of the account
         /// <returns></returns>
-        public List<string> getGroupPhotos()
+        public List<int> getGroupPhotos()
         {
-            List<string> result = new List<string>();
+            List<int> result = new List<int>();
             DataTable dt = photoDatabase.getGroupPhotos();
             // when data is found and returned
-            if (dt.Rows.Count != 0)
+            foreach (DataRow data in dt.Rows)
             {
-                foreach (DataRow data in dt.Rows)
-                {
-                    result.Add(data[0].ToString());
-                }
+                result.Add(int.Parse(data[0].ToString()));
             }
             return result;
         }
@@ -51,27 +53,28 @@ namespace PhotoshopWebsite.Controller
         /// </summary>
         /// <param name="photoID"></param>
         /// <returns></returns>
-        public Domain.Photo getPhoto(string photoID)
+        public Domain.Photo getPhoto(int photoID)
         {
-            List<string> photoElements = photoDatabase.getPhoto(photoID);
-            if (photoElements.ElementAt(1) != "")
+            DataTable dt = photoDatabase.getPhoto(photoID);
+            DataRow row = dt.Rows[0];
+            if (row != null)
             {
-                Domain.Photo photo = new Domain.Photo(Convert.ToInt32(photoElements.ElementAt(0)), Convert.ToInt32(photoElements.ElementAt(1)), Convert.ToInt32(photoElements.ElementAt(2)), photoElements.ElementAt(3), photoElements.ElementAt(4), photoElements.ElementAt(5));
+                Domain.Photo photo = new Domain.Photo(int.Parse(row[0].ToString()), int.Parse(row[1].ToString()), int.Parse(row[2].ToString()),row[3].ToString(),row[4].ToString(),row[5].ToString());
                 return photo;
             }
             return null;
         }
 
-        public List<string> getPhotoGrapherPhotoIDs(string userID)
+        public List<int> getPhotoGrapherPhotoIDs(string userID)
         {
-            List<string> result = new List<string>();
+            List<int> result = new List<int>();
             DataTable dt = photoDatabase.getPhotosPhotographer(userID);
             // when data is found and returned
             if (dt.Rows.Count != 0)
             {
                 foreach (DataRow data in dt.Rows)
                 {
-                    result.Add(data[0].ToString());
+                    result.Add(int.Parse(data[0].ToString()));
                 }
             }
             return result;

@@ -102,7 +102,7 @@ namespace PhotoshopWebsite.Gui.Client
             string userID = Convert.ToString(currenUser.ID);
 
             // get all the photoID's of the current user
-            List<string> photoIDS = photoController.getGroupPhotos();
+            List<int> photoIDS = photoController.getGroupPhotos();
 
             if (Session["photos"] != null)
             {
@@ -115,7 +115,7 @@ namespace PhotoshopWebsite.Gui.Client
             if (photoIDS != null)
             {
                 photos.Clear();
-                foreach (string s in photoIDS)
+                foreach (int s in photoIDS)
                 {
                     // store all the photos in the session
                     photos.Add(photoController.getPhoto(s));
@@ -221,7 +221,7 @@ namespace PhotoshopWebsite.Gui.Client
             ddType.Height = 30;
             ddType.SelectedIndexChanged += ddType_SelectedIndexChanged;
             //Gets the product types offered by the photographer per photo
-            List<ProductTypes.PTypes> types = x.getTypes(x.ID.ToString());
+            List<ProductTypes.PTypes> types = x.getTypes(x.ID);
             foreach (ProductTypes.PTypes type in types)
             {
                 ListItem Li = new ListItem();

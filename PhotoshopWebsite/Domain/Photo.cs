@@ -45,7 +45,7 @@ namespace PhotoshopWebsite.Domain
         /// </summary>
         /// <param name="photoID">the id of the photo</param>
         /// <returns></returns>
-        public List<ProductTypes.PTypes> getTypes(string photoID)
+        public List<ProductTypes.PTypes> getTypes(int photoID)
         {
             return photo.getTypes(photoID);
         }
