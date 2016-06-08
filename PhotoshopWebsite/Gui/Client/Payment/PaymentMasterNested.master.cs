@@ -1,4 +1,5 @@
 ﻿using PhotoshopWebsite.Controller;
+using PhotoshopWebsite.Enumeration;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,7 +13,7 @@ namespace PhotoshopWebsite.Gui.Client.Payment
 {
     public partial class PaymentMasterNested : System.Web.UI.MasterPage
     {
-        
+
         private User currentUser;
         private RadioButton rabobank = new RadioButton();
         private RadioButton abn = new RadioButton();
@@ -163,24 +164,35 @@ namespace PhotoshopWebsite.Gui.Client.Payment
 
                 else
                 {
-                    PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
-
-                    if (shoppingCart != null)
+                    if (shoppingCart != null && currentUser != null)
                     {
+                        PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
+                        Order newOrder = new Order();
+
                         foreach (Domain.ShoppingbasketItem item in shoppingCart)
                         {
+                            // create socket string
                             string photoIDQualtityType = item.PhotoID.ToString() + ";" + item.Quantity.ToString() + "#" + item.Filter;
-                            socket.sendData(photoIDQualtityType);
+                            // send socket string to fileserver and check if string is correctly send
+                            if (socket.sendData(photoIDQualtityType))
+                            {
+                                // insert order into database
+                                newOrder.insertPrintOrder(currentUser.ID, DateTime.Now, "Paid", ProductTypes.getInt(item.Product.ToString()), item.PhotoID, item.Filter.ToString(), "iDeal", item.Product.ToString(), currentUser.IBAN, item.Price, item.Quantity);                                
+                            }
+                            Response.Redirect("CheckPayment.aspx");
                         }
-                        Response.Redirect("CheckPayment.aspx");
+                    } else
+                    {
+                        Response.Write("<script>alert('Unknown User, order not placed.')</script>");
                     }
-                }
 
+                }
             }
             else
             {
                 Response.Write("<script>alert('Select your bank')</script>");
             }
+            }
         }
     }
-}
+

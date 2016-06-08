@@ -39,7 +39,7 @@ namespace PhotoshopWebsite.WebSocket
         /// 
         /// </summary>
         /// <param name="photoID"></param> contains the photoID and the quantity
-        public void sendData(string photoID)
+        public bool sendData(string photoID)
         {
             IPEndPoint serverAddress = new IPEndPoint(IPAddress.Parse("192.168.27.123"), 4343);
 
@@ -55,6 +55,7 @@ namespace PhotoshopWebsite.WebSocket
                 byte[] toSendLenBytes = System.BitConverter.GetBytes(toSendLen);
                 clientSocket.Send(toSendLenBytes);
                 clientSocket.Send(toSendBytes);
+                return true;
             }
             catch (Exception e)
             {
@@ -64,6 +65,7 @@ namespace PhotoshopWebsite.WebSocket
             {
                 clientSocket.Close();
             }
+            return false;
         }
         /// <summary>
         /// 

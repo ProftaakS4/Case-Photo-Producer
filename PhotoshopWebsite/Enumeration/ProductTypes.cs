@@ -42,7 +42,7 @@ namespace PhotoshopWebsite.Enumeration
                     return PTypes.CANVAS;
                 case "DIBOND":
                     return PTypes.DIBOND;
-                    //default to photo1x2
+                //default to photo1x2
                 default:
                     return PTypes.PHOTO1x2;
             }
@@ -75,5 +75,7 @@ namespace PhotoshopWebsite.Enumeration
                     return 1;
             }
         }
+
+
     }
 }
