@@ -105,10 +105,6 @@ namespace PhotoshopWebsite
             {
                 Response.Redirect("~/Gui/Finance/Orders.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
-            else if (type == "Admin")
-            {
-                Response.Redirect("~/Gui/Admin/Mainadmin.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
-            }
             else
             {
                 Response.Write("<script>alert('Unknown user type')</script>");
