@@ -76,28 +76,28 @@ namespace PhotoshopWebsite.Gui.Client
                 TableRow MainRow = new TableRow();
                 MainRow.Height = 80;
                 TableCell ID = new TableCell();
-                ID.Text = order.getID().ToString();
+                ID.Text = order.ID.ToString();
                 TableCell products = new TableCell();
                 ListBox Products = new ListBox();
                 if (order != null)
                 {
-                    foreach (Product product in order.getProducts().Keys)
+                    foreach (Product product in order.Products.Keys)
                     {
                         Products.Items.Add(product.Description);
                     }
                 }
                 products.Controls.Add(Products);
                 TableCell Date = new TableCell();
-                Date.Text = order.getDate().ToString();
+                Date.Text = order.Date.ToString();
                 TableCell Type = new TableCell();
-                Type.Text = order.getType().ToString();
+                Type.Text = order.Type.ToString();
                 TableCell iban = new TableCell();
-                iban.Text = order.getIBAN().ToString();
+                iban.Text = order.IBAN.ToString();
                 TableCell price = new TableCell();
-                price.Text = order.getPrice().ToString();
+                price.Text = order.Price.ToString();
                 TableCell BtnOrdercell = new TableCell();
                 Button btnOrder = new Button();
-                btnOrder.ID = order.getID().ToString();
+                btnOrder.ID = order.ID.ToString();
                 btnOrder.CssClass = "btn btn-default";
                 btnOrder.Click += btnOrder_Click;
                 btnOrder.Height = 30;
@@ -121,7 +121,7 @@ namespace PhotoshopWebsite.Gui.Client
             string id = x.ID;
             foreach (Order order in orders)
             {
-                if (order.getID().ToString() == id)
+                if (order.ID.ToString() == id)
                 {
                     Reorders.Add(order);
                 }

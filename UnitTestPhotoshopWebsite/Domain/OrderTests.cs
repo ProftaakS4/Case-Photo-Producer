@@ -21,12 +21,11 @@ namespace PhotoshopWebsite.Controller.Tests
             DateTime datum = new DateTime();
             PaymentType pt = new PaymentType();
             order = new Order(1,test,datum,pt,"NL16RABO1234567890",9.99);
-            int id = order.getID();
-            Assert.AreEqual(1, id);
-            Assert.IsNotNull(order.getDate());
-            Assert.IsNotNull(order.getType());
-            Assert.AreEqual("NL16RABO1234567890", order.getIBAN());
-            Assert.AreEqual(9.99, order.getPrice());
+            Assert.AreEqual(1, order.ID);
+            Assert.IsNotNull(order.Date);
+            Assert.IsNotNull(order.Type);
+            Assert.AreEqual("NL16RABO1234567890", order.IBAN);
+            Assert.AreEqual(9.99, order.Price);
         }
     }
 }
