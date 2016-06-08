@@ -14,7 +14,17 @@ namespace PhotoshopWebsite.Controller
         {
 
         }
+        public int getAccountId(string email)
+        {
+            int id = DB.getIdByEmail(email);
+            return id;
+        }
 
+        public Boolean insertAccountLoginCode(int accountId, int loginCode)
+        {
+            bool value = DB.insertAccountLoginCode(accountId, loginCode);
+            return value;
+        }
 
         public DataTable createAccountandgetinformation(string customer, string firstname, string lastname, string streetname, string housenumber, string zipcode, string city, string phonenumber, string iban, string emailadress, string password)
         {

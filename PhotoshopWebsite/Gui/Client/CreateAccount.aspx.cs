@@ -45,7 +45,10 @@ namespace PhotoshopWebsite.Gui.Client
                 tbPassword.Text);
             if (tbEMail.Text.Contains("@"))
             {
-                DataTable dt = acc.createAccountandgetinformation("Customer", newUser.Firstname, newUser.Lastname, newUser.Streetname, newUser.Housenumber, newUser.Zipcode, newUser.City, newUser.Phonenumber, newUser.IBAN, newUser.Emailaddress, newUser.Password);
+                string customer = "Customer";
+                DataTable dt = acc.createAccountandgetinformation(customer, newUser.Firstname, newUser.Lastname, newUser.Streetname, newUser.Housenumber, newUser.Zipcode, newUser.City, newUser.Phonenumber, newUser.IBAN, newUser.Emailaddress, newUser.Password);
+                int id = acc.getAccountId(newUser.Emailaddress);
+                acc.insertAccountLoginCode(id, Convert.ToInt32(loginCode));
                 Response.Redirect("../Login.aspx");
             }
             else

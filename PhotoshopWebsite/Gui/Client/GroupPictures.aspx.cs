@@ -151,7 +151,7 @@ namespace PhotoshopWebsite.Gui.Client
             btnAddToCart.CssClass = "btn btn-default";
             btnAddToCart.Click += BtnAddToCart_Click1;
             btnAddToCart.Height = 30;
-            btnAddToCart.Text = "Test";
+            btnAddToCart.Text = "Order";
 
             RadioButton btnSepia = new RadioButton();
             btnSepia.ID = "SEPIA" + x.ID;
@@ -299,7 +299,7 @@ namespace PhotoshopWebsite.Gui.Client
             Domain.ShoppingbasketItem found = null;
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
-                if (item.photoID == num && item.filterType == filters[num])
+                if (item.PhotoID == num && item.Filter == filters[num])
                 {
                     found = item;
                     break;
@@ -307,7 +307,7 @@ namespace PhotoshopWebsite.Gui.Client
             }
             if (found != null)
             {
-                found.quantity++;
+                found.Quantity++;
             }
             else
             {
@@ -378,7 +378,7 @@ namespace PhotoshopWebsite.Gui.Client
             Domain.ShoppingbasketItem found = null;
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
-                if (item.photoID == num && item.filterType == filters[num])
+                if (item.PhotoID == num && item.Filter == filters[num])
                 {
                     found = item;
                     break;
@@ -386,7 +386,7 @@ namespace PhotoshopWebsite.Gui.Client
             }
             if (found != null)
             {
-                found.quantity++;
+                found.Quantity++;
             }
             else
             {

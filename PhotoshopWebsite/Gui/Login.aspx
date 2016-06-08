@@ -47,7 +47,7 @@
                     </div>
                     <div class="col-lg-6">
                         <h2 class="form-signin-heading" style="margin-bottom: 30px; color: white;">Or insert your order code</h2>
-                        <asp:TextBox ID="tbInputCode" Style="margin-bottom: 0px;" type="password" runat="server" class="form-control" placeholder="Code"></asp:TextBox>
+                        <asp:TextBox ID="tbInputCode" Style="margin-bottom: 0px;" type="text" runat="server" class="form-control" placeholder="Code"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3"
                             ControlToValidate="tbInputCode"
                             ValidationGroup="PersonalInfoGroupCode"

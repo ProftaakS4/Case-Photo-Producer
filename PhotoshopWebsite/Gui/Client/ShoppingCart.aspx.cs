@@ -80,17 +80,17 @@ namespace PhotoshopWebsite.Gui
                 MainRow.Height = 60;
 
                 TableCell ID = new TableCell();
-                ID.Text = item.photoID.ToString();
+                ID.Text = item.PhotoID.ToString();
                 TableCell Filter = new TableCell();
-                Filter.Text = item.filterType.ToString();
+                Filter.Text = item.Filter.ToString();
                 TableCell Type = new TableCell();
-                Type.Text = item.product.ToString();
+                Type.Text = item.Product.ToString();
                 TableCell Description = new TableCell();
-                Description.Text = item.description;
+                Description.Text = item.Description;
                 TableCell Quantity = new TableCell();
                 TextBox tbQuantity = new TextBox();
-                tbQuantity.ID = item.filterType.ToString() + item.photoID.ToString();
-                tbQuantity.Text = item.quantity.ToString();
+                tbQuantity.ID = item.Filter.ToString() + item.PhotoID.ToString();
+                tbQuantity.Text = item.Quantity.ToString();
                 tbQuantity.TextChanged += Quantity_Change;
                 tbQuantity.AutoPostBack = true;
                 tbQuantity.MaxLength = 3;
@@ -98,7 +98,7 @@ namespace PhotoshopWebsite.Gui
 
                 TableCell PriceCell = new TableCell();
                 PriceCell.Text = "€" + item.Price.ToString() + ",00";
-                totalAmount = (totalAmount + (item.Price * item.quantity));
+                totalAmount = (totalAmount + (item.Price * item.Quantity));
 
                 TableCell ButtonCell = new TableCell();
                 CheckBox cbRemove = new CheckBox();
@@ -268,11 +268,11 @@ namespace PhotoshopWebsite.Gui
 
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
-                if (item.photoID == num && item.filterType.ToString() == name)
+                if (item.PhotoID == num && item.Filter.ToString() == name)
                 {
                     if (int.Parse(tbQuantity.Text) > 0)
                     {
-                        item.quantity = int.Parse(tbQuantity.Text);
+                        item.Quantity = int.Parse(tbQuantity.Text);
                     }
                     else
                     {

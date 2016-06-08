@@ -6,9 +6,14 @@ using PhotoshopWebsite.Enumeration;
 
 namespace PhotoshopWebsite.Domain
 {
+    /// <summary>
+    /// Photo class is create to create images that can be ordered
+    /// </summary>
     [Serializable]
     public class Photo
     {
+        DatabaseTier.Photo photo = new DatabaseTier.Photo();
+
         public int ID { get; set; }
         public int PhotographerID { get; set; }
         public int MapID { get; set; }
@@ -16,7 +21,16 @@ namespace PhotoshopWebsite.Domain
         public string Resolution { get; set; }
         public string Description { get; set; }
 
-        public Photo(int id, int photographerID, int map_ID , string image, string resolution, string description)
+        /// <summary>
+        /// create a user with all possible variables
+        /// </summary>
+        /// <param name="id">the id of the photo</param>
+        /// <param name="photographerID">the id of the photographer to whom the photo belongs to</param>
+        /// <param name="map_ID">the map id of the photo</param>
+        /// <param name="image">the image path of the photo</param>
+        /// <param name="resolution">the resolution of the photo</param>
+        /// <param name="description">the description of the photo</param>
+        public Photo(int id, int photographerID, int map_ID, string image, string resolution, string description)
         {
             this.ID = id;
             this.PhotographerID = photographerID;
@@ -25,9 +39,14 @@ namespace PhotoshopWebsite.Domain
             this.Resolution = resolution;
             this.Description = description;
         }
+
+        /// <summary>
+        /// returns the type of a photo searched for by ID
+        /// </summary>
+        /// <param name="photoID">the id of the photo</param>
+        /// <returns></returns>
         public List<ProductTypes.PTypes> getTypes(string photoID)
         {
-            DatabaseTier.Photo photo = new DatabaseTier.Photo();
             return photo.getTypes(photoID);
         }
         public override bool Equals(System.Object obj)
