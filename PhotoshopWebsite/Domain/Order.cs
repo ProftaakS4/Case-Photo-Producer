@@ -5,14 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PhotoshopWebsite.Controller
+namespace PhotoshopWebsite.Domain
 {
     /// <summary>
     /// Order class is created to place orders
     /// </summary>
     public class Order
     {
-        private DatabaseTier.Order DB_Order = new DatabaseTier.Order();
+        private DatabaseTier.Order DB_Order;
+
         public int ID { get; set; }
         public Dictionary<Product, int> Products { get; set; }
         public DateTime Date { get; set; }
@@ -46,7 +47,8 @@ namespace PhotoshopWebsite.Controller
 
         public int insertPrintOrder(int accountID, DateTime date, string status, int productID, int photoID, string filterType, string paymentType, string productType, string iban, double price, int quantity)
         {
-            return DB_Order.inserOrder(accountID, date, status, productID, photoID, filterType, paymentType, productType, iban, price, quantity);
+            DB_Order = new DatabaseTier.Order();
+            return DB_Order.inserOrder(accountID, date.ToString("yyyy-MM-dd"), status, productID, photoID, filterType, paymentType, productType, iban, price, quantity);
         }
     }
 }

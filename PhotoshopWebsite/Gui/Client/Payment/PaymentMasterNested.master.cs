@@ -167,7 +167,7 @@ namespace PhotoshopWebsite.Gui.Client.Payment
                     if (shoppingCart != null && currentUser != null)
                     {
                         PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
-                        Order newOrder = new Order();
+                        Domain.Order newOrder = new Domain.Order();
 
                         foreach (Domain.ShoppingbasketItem item in shoppingCart)
                         {
@@ -177,22 +177,22 @@ namespace PhotoshopWebsite.Gui.Client.Payment
                             if (socket.sendData(photoIDQualtityType))
                             {
                                 // insert order into database
-                                newOrder.insertPrintOrder(currentUser.ID, DateTime.Now, "Paid", ProductTypes.getInt(item.Product.ToString()), item.PhotoID, item.Filter.ToString(), "iDeal", item.Product.ToString(), currentUser.IBAN, item.Price, item.Quantity);                                
+                                newOrder.insertPrintOrder(currentUser.ID, DateTime.Now, "Paid", ProductTypes.getInt(item.Product.ToString()), item.PhotoID, item.Filter.ToString(), "iDeal", item.Product.ToString(), currentUser.IBAN, item.Price, item.Quantity);
                             }
-                            Response.Redirect("CheckPayment.aspx");
                         }
-                    } else
+                        Response.Redirect("CheckPayment.aspx");
+                    }
+                    else
                     {
                         Response.Write("<script>alert('Unknown User, order not placed.')</script>");
                     }
-
                 }
             }
             else
             {
                 Response.Write("<script>alert('Select your bank')</script>");
             }
-            }
         }
     }
+}
 
