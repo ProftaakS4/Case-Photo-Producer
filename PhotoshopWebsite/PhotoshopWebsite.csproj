@@ -121,6 +121,10 @@
     <Content Include="Gui\Images\background\background2.jpg" />
     <Content Include="Gui\Images\background\background3.jpg" />
     <Content Include="Gui\Images\background\background4.jpg" />
+    <Content Include="Gui\Images\Payment\google_checkout.png" />
+    <Content Include="Gui\Images\Payment\Ideal.jpg" />
+    <Content Include="Gui\Images\Payment\overboeking.jpg" />
+    <Content Include="Gui\Images\Payment\Paypal.jpg" />
     <Content Include="Gui\Images\Shoppingcart.png" />
     <Content Include="Gui\Images\LOW RESOLUTION\Prive\userid4-1.jpeg" />
     <Content Include="Gui\Images\LOW RESOLUTION\Prive\userid4-2.jpeg" />

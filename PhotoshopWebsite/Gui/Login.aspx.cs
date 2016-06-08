@@ -59,6 +59,10 @@ namespace PhotoshopWebsite
                     HttpContext.Current.Request.Cookies.Clear();
                     createPersistentCookie(loginname, password);
                 }
+                else if(rememberMe)
+                {
+                    createPersistentCookie(loginname, password);
+                }
                 redirectToUserTypePage(userWithData.Type);
             }
             else
@@ -118,7 +122,6 @@ namespace PhotoshopWebsite
         protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             rememberMe = !rememberMe;
-
         }
 
         protected void BtnCreateAccount_Click(object sender, EventArgs e)

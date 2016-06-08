@@ -18,6 +18,9 @@
             });
 
             var $preview = $('.preview');
+            var $tracker = document.getElementsByClassName("jcrop-tracker");
+            var height = window.getComputedStyle($tracker, null).getPropertyValue("height");
+            var width = window.getComputedStyle($tracker, null).getPropertyValue("width");
 
             function showPreview(coords) {
                 if (parseInt(coords.w) > 0) {
@@ -25,8 +28,8 @@
                     var ry = 100 / coords.h;
 
                     $preview.css({
-                        width: Math.round(rx * 200) + 'px',
-                        height: Math.round(ry * 300) + 'px',
+                        width: Math.round(rx * width) + 'px',
+                        height: Math.round(ry * height) + 'px',
                         marginLeft: '-' + Math.round(rx * coords.x) + 'px',
                         marginTop: '-' + Math.round(ry * coords.y) + 'px'
                     }).show();

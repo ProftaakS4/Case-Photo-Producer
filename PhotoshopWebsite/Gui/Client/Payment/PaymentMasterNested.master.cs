@@ -74,8 +74,8 @@ namespace PhotoshopWebsite.Gui.Client.Payment
             Label totalAmount = new Label();
             totalAmount.ForeColor = Color.Green;
             totalAmount.Font.Bold = true;
-            double total = (double)Session["totalAmount"];
-            totalAmount.Text = "<u>Total Amount: €" + total + ",00</u>";
+          //  double total = (double)Session["totalAmount"];
+       //     totalAmount.Text = "<u>Total Amount: €" + total + ",00</u>";
             totalAmount.Font.Size = 18;
 
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
