@@ -1,4 +1,5 @@
 ﻿using PhotoshopWebsite.Controller;
+using PhotoshopWebsite.Domain;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -45,8 +46,8 @@ namespace PhotoshopWebsite
 
         private void navigateThroughAuthentication(string loginname, string password)
         {
-            Controller.User userWithNoData = new Controller.User(loginname);
-            Controller.User userWithData = userWithNoData.loginUser(loginname, password);
+            User userWithNoData = new User(loginname);
+            User userWithData = userWithNoData.loginUser(loginname, password);
             if (userWithData != null)
             {
                 Session["logindata"] = loginname;
@@ -108,10 +109,6 @@ namespace PhotoshopWebsite
             else if (type == "Financial Administration")
             {
                 Response.Redirect("~/Gui/Finance/Orders.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
-            }
-            else if (type == "Admin")
-            {
-                Response.Redirect("~/Gui/Admin/Mainadmin.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
             else
             {

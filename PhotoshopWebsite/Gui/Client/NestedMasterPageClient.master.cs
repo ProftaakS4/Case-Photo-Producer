@@ -35,7 +35,7 @@ namespace PhotoshopWebsite.Gui.Client
                 List<Domain.ShoppingbasketItem> list = Session["shoppingCart"] as List<Domain.ShoppingbasketItem>;
                 foreach (ShoppingbasketItem item in list)
                 {
-                    size += item.quantity;
+                    size += item.Quantity;
                 }
                 Labelquantity.Text = size.ToString();
 
@@ -95,12 +95,11 @@ namespace PhotoshopWebsite.Gui.Client
                 searchedPhotos = new List<Domain.Photo>();
                 if (tbSearch.Text != "")
                 {
-                    DataTable output = s.searchGroupPhoto(tbSearch.Text);
-                    PhotoshopWebsite.DatabaseTier.Photo photo = new PhotoshopWebsite.DatabaseTier.Photo();
+                    DataTable output = s.searchPhoto(tbSearch.Text, curUser.ID);
+                    PhotoController photo = new PhotoController();
                     foreach (DataRow row in output.Rows)
                     {
-                        List<String> data = photo.getPhoto(row[0].ToString());
-                        Domain.Photo newphoto = new Domain.Photo(Convert.ToInt32(data.ElementAt(0)), Convert.ToInt32(data.ElementAt(1)), Convert.ToInt32(data.ElementAt(2)), data.ElementAt(3), data.ElementAt(4), data.ElementAt(5));
+                        Domain.Photo newphoto = photo.getPhoto(int.Parse(row[0].ToString()));
                         searchedPhotos.Add(newphoto);
                     }
                     Session["SearchedPhotos"] = searchedPhotos;
@@ -117,11 +116,10 @@ namespace PhotoshopWebsite.Gui.Client
                 if (tbSearch.Text != "")
                 {
                     DataTable output = s.searchPhoto(tbSearch.Text, curUser.ID);
-                    PhotoshopWebsite.DatabaseTier.Photo photo = new PhotoshopWebsite.DatabaseTier.Photo();
+                    PhotoController photo = new PhotoController();
                     foreach (DataRow row in output.Rows)
                     {
-                        List<String> data = photo.getPhoto(row[0].ToString());
-                        Domain.Photo newphoto = new Domain.Photo(Convert.ToInt32(data.ElementAt(0)), Convert.ToInt32(data.ElementAt(1)), Convert.ToInt32(data.ElementAt(2)), data.ElementAt(3), data.ElementAt(4), data.ElementAt(5));
+                        Domain.Photo newphoto = photo.getPhoto(int.Parse(row[0].ToString()));
                         searchedPhotos.Add(newphoto);
                     }
                     Session["SearchedPhotos"] = searchedPhotos;

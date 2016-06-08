@@ -1,4 +1,5 @@
 ﻿using PhotoshopWebsite.Controller;
+using PhotoshopWebsite.Domain;
 using PhotoshopWebsite.Enumeration;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             string userID = Convert.ToString(currenUser.ID);
 
             // get all the photoID's of the current user
-            List<string> photoIDS = photoController.getPhotoGrapherPhotoIDs(userID);
+            List<int> photoIDS = photoController.getPhotoGrapherPhotoIDs(userID);
 
             if (Session["photos"] != null)
             {
@@ -64,7 +65,7 @@ namespace PhotoshopWebsite.Gui.Photographer
                 // get all the photos of the current user and add them to a list
                 if (photoIDS != null)
                 {
-                    foreach (string s in photoIDS)
+                    foreach (int s in photoIDS)
                     {
                         // store all the photos in the session
                         photos.Add(photoController.getPhoto(s));
@@ -107,6 +108,12 @@ namespace PhotoshopWebsite.Gui.Photographer
             btnColor.GroupName = x.ID.ToString();
             btnColor.Height = 30;
             btnColor.Text = "Color ";
+
+            Button btnDownload = new Button();
+            btnDownload.ID = "download" + x.ID;
+            btnDownload.Text = "Download";
+            btnDownload.CssClass = "btn btn-default";
+            btnDownload.Click += btnDownload_Click;
 
 
             if (!filters.ContainsKey(x.ID))
@@ -153,11 +160,27 @@ namespace PhotoshopWebsite.Gui.Photographer
             firstControl.Controls.Add(btnColor);
             firstControl.Controls.Add(btnBlackWhite);
             firstControl.Controls.Add(btnSepia);
+            firstControl.Controls.Add(new LiteralControl("&nbsp&nbsp&nbsp&nbsp"));
+            firstControl.Controls.Add(btnDownload);
             firstControl.Controls.Add(new LiteralControl("<br />"));
             pnlProduct.Controls.Add(firstControl);
 
             lastControl.InnerHtml = "</div></div></div>";
             pnlProduct.Controls.Add(lastControl);
+        }
+
+        void btnDownload_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
+            Match match = regex.Match(button.ID);
+            int num = Int32.Parse(match.Groups["Numeric"].Value);
+
+            Response.Clear();
+            Response.ContentType = "image/jpg";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + photoController.getPhoto(num).ID+ ".jpeg");
+            Response.TransmitFile(Server.MapPath(photoController.getPhoto(num).Image));
+            Response.End();
         }
 
         void filterChange(object sender, EventArgs e)
@@ -194,7 +217,6 @@ namespace PhotoshopWebsite.Gui.Photographer
                         default:
                             break;
                     }
-
                     break;
                 }
             }

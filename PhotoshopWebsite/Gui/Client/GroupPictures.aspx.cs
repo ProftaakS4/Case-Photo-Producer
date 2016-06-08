@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using PhotoshopWebsite.Controller;
+using PhotoshopWebsite.Domain;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using PhotoshopWebsite.Enumeration;
@@ -19,7 +20,7 @@ namespace PhotoshopWebsite.Gui.Client
         PhotoController photoController = new PhotoController();
 
         // create a list of all the current user photos
-        public List<Domain.Photo> photos;
+        public List<Photo> photos;
         //{
         //    get
         //    {
@@ -102,7 +103,7 @@ namespace PhotoshopWebsite.Gui.Client
             string userID = Convert.ToString(currenUser.ID);
 
             // get all the photoID's of the current user
-            List<string> photoIDS = photoController.getGroupPhotos();
+            List<int> photoIDS = photoController.getGroupPhotos();
 
             if (Session["photos"] != null)
             {
@@ -115,7 +116,7 @@ namespace PhotoshopWebsite.Gui.Client
             if (photoIDS != null)
             {
                 photos.Clear();
-                foreach (string s in photoIDS)
+                foreach (int s in photoIDS)
                 {
                     // store all the photos in the session
                     photos.Add(photoController.getPhoto(s));
@@ -221,7 +222,7 @@ namespace PhotoshopWebsite.Gui.Client
             ddType.Height = 30;
             ddType.SelectedIndexChanged += ddType_SelectedIndexChanged;
             //Gets the product types offered by the photographer per photo
-            List<ProductTypes.PTypes> types = x.getTypes(x.ID.ToString());
+            List<ProductTypes.PTypes> types = x.getTypes(x.ID);
             foreach (ProductTypes.PTypes type in types)
             {
                 ListItem Li = new ListItem();
@@ -299,7 +300,7 @@ namespace PhotoshopWebsite.Gui.Client
             Domain.ShoppingbasketItem found = null;
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
-                if (item.photoID == num && item.filterType == filters[num])
+                if (item.PhotoID == num && item.Filter == filters[num])
                 {
                     found = item;
                     break;
@@ -307,7 +308,7 @@ namespace PhotoshopWebsite.Gui.Client
             }
             if (found != null)
             {
-                found.quantity++;
+                found.Quantity++;
             }
             else
             {
@@ -378,7 +379,7 @@ namespace PhotoshopWebsite.Gui.Client
             Domain.ShoppingbasketItem found = null;
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
-                if (item.photoID == num && item.filterType == filters[num])
+                if (item.PhotoID == num && item.Filter == filters[num])
                 {
                     found = item;
                     break;
@@ -386,7 +387,7 @@ namespace PhotoshopWebsite.Gui.Client
             }
             if (found != null)
             {
-                found.quantity++;
+                found.Quantity++;
             }
             else
             {

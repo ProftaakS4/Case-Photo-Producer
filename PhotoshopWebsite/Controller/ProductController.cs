@@ -29,12 +29,9 @@ namespace PhotoshopWebsite.Controller
             List<Product> temp = new List<Product>();
             DataTable dt = DB.getAllProducts();
             // when data is found and returned
-            if (dt.Rows.Count != 0)
+            foreach (DataRow data in dt.Rows)
             {
-                foreach (DataRow data in dt.Rows)
-                {
-                    temp.Add(new Product(int.Parse(data[0].ToString()), data[1].ToString(), data[2].ToString(), data[3].ToString(), data[4].ToString(), int.Parse(data[5].ToString())));
-                }
+                temp.Add(new Product(int.Parse(data[0].ToString()), data[1].ToString(), data[2].ToString(), data[3].ToString(), data[4].ToString(), int.Parse(data[5].ToString())));
             }
             return temp;
         }
@@ -69,10 +66,11 @@ namespace PhotoshopWebsite.Controller
             foreach (ProductPerPhotographer p in productPerPhotographer)
             {
                 int available = 0;
-                if (p.Available){
+                if (p.Available)
+                {
                     available = 1;
                 }
-               DB.updateProductsPerPhotographer(p.Photographer_ID,p.Product_ID,p.Price,available);
+                DB.updateProductsPerPhotographer(p.Photographer_ID, p.Product_ID, p.Price, available);
             }
         }
     }

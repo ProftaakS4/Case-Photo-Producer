@@ -99,10 +99,6 @@
     <Content Include="Bootstrap\Menu\simple-sidebar.css" />
     <Content Include="Bootstrap\Scripts\jquery.Jcrop.js" />
     <Content Include="Bootstrap\Scripts\jquery.Jcrop.min.js" />
-    <Content Include="Gui\Admin\Account.aspx" />
-    <Content Include="Gui\Admin\Clients.aspx" />
-    <Content Include="Gui\Admin\Mainadmin.aspx" />
-    <Content Include="Gui\Admin\Stock.aspx" />
     <Content Include="Gui\Client\Account.aspx" />
     <Content Include="Gui\Client\CreateAccount.aspx" />
     <Content Include="Gui\Client\GroupPictures.aspx" />
@@ -133,7 +129,6 @@
     <Content Include="Gui\Images\LOW RESOLUTION\Prive\userid6-2.jpeg" />
     <Content Include="Bootstrap\Content\Custom.css" />
     <Content Include="Gui\Finance\FinancialAdmin.Master" />
-    <Content Include="Gui\Admin\AdminMaster.Master" />
     <Content Include="Gui\Photographer\Account.aspx" />
     <Content Include="Gui\Photographer\Codes.aspx" />
     <Content Include="Gui\Photographer\PhotographerMaster.Master" />
@@ -208,7 +203,7 @@
     <Compile Include="Domain\LoginCode.cs" />
     <Compile Include="Domain\Map.cs" />
     <Compile Include="Domain\Order.cs" />
-    <Compile Include="Domain\PaymentType.cs" />
+    <Compile Include="Enumeration\PaymentType.cs" />
     <Compile Include="Domain\Printorder.cs" />
     <Compile Include="Domain\ShoppingbasketItem.cs" />
     <Compile Include="Domain\Transaction.cs" />
@@ -218,41 +213,6 @@
     <Compile Include="DatabaseTier\Login.cs" />
     <Compile Include="DatabaseTier\Order.cs" />
     <Compile Include="DatabaseTier\Photo.cs" />
-    <Compile Include="Gui\Admin\Account.aspx.cs">
-      <DependentUpon>Account.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gui\Admin\Account.aspx.designer.cs">
-      <DependentUpon>Account.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Gui\Admin\AdminMaster.Master.cs">
-      <DependentUpon>AdminMaster.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gui\Admin\AdminMaster.Master.designer.cs">
-      <DependentUpon>AdminMaster.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Gui\Admin\Clients.aspx.cs">
-      <DependentUpon>Clients.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gui\Admin\Clients.aspx.designer.cs">
-      <DependentUpon>Clients.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Gui\Admin\Mainadmin.aspx.cs">
-      <DependentUpon>Mainadmin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gui\Admin\Mainadmin.aspx.designer.cs">
-      <DependentUpon>Mainadmin.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Gui\Admin\Stock.aspx.cs">
-      <DependentUpon>Stock.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gui\Admin\Stock.aspx.designer.cs">
-      <DependentUpon>Stock.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Gui\Client\Account.aspx.cs">
       <DependentUpon>Account.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
