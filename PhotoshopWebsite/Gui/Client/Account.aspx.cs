@@ -52,6 +52,7 @@ namespace PhotoshopWebsite.Gui.Client
         }
         private void FillPage(List<Order> Orders)
         {
+            MainTable.CssClass = "table table-striped table-hover table-bordered";
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
             TableHeaderCell IDHeader = new TableHeaderCell();
             IDHeader.Text = Resources.LocalizedText.order_id;
