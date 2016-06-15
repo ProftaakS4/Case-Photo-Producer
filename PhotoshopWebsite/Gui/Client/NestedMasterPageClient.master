@@ -2,22 +2,22 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="NavigationPlaceHolder" runat="server">
     <li>
-        <a href="Mainstore.aspx">Pictures</a>
+        <a href="Mainstore.aspx"><asp:Literal runat="server" Text="<%$ Resources:LocalizedText, pictures%>" /></a>
     </li>
     <li>
-        <a href="GroupPictures.aspx">Group pictures</a>
+        <a href="GroupPictures.aspx"><asp:Literal runat="server" Text="<%$ Resources:LocalizedText, group_pictures%>" /></a>
     </li>
     <li>
-        <a href="Account.aspx">My Account</a>
+        <a href="Account.aspx"><asp:Literal runat="server" Text="<%$ Resources:LocalizedText, my_account%>" /></a>
     </li>
     <li>
-        <a href="ShoppingCart.aspx">Shopping Cart
+        <a href="ShoppingCart.aspx"><asp:Literal runat="server" Text="<%$ Resources:LocalizedText, shopping_cart%>" />
                         <img src="../Images/Shoppingcart.png" style="height: 20px; width: 20px; margin-left: 10px;" />
             <asp:Label ID="Labelquantity" runat="server" Text="" Style="color: white;"></asp:Label></a>
     </li>
     <div runat="server" class="col-lg-6">
         <div class="input-group" runat="server">
-            <asp:TextBox ID="tbSearch" class="form-control" runat="server" placeholder="Search for..." Style="width: 150px;"></asp:TextBox>
+            <asp:TextBox ID="tbSearch" class="form-control" runat="server" placeholder="<%$ Resources:LocalizedText, search_for%>" Style="width: 150px;"></asp:TextBox>
             <span class="input-group-btn">
                 <asp:Button ID="Btnsearch" class="btn btn-default" runat="server" type="button" Text="Go!" OnClick="Btnsearch_Click" Style="height: 34px"></asp:Button>
             </span>
