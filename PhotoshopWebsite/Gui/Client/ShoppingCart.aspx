@@ -54,7 +54,7 @@
                         <div class="col-md-12" style='background-color: white; border-radius: 7px; height: 100px; padding: 10px; margin-bottom: 15px;'>
                             <input type="radio" id="rbIdeal" name="rate" value="ideal"> 
                             <asp:Image ID="imgPaymentIdeal" ImageUrl="../Images/Payment/ideal.jpg" runat="server" CssClass="img-responsive" Style="width: 42px; height: 35px; margin-left: 20px; display: inline" />
-                            <asp:Label ID="lblIdeal" runat="server" Text="- <%$ Resources:LocalizedText, ideal%>" Font-Bold="true" Style="display: inline"></asp:Label>
+                            <asp:Label ID="lblIdeal" runat="server" Text="<%$ Resources:LocalizedText, ideal%>" Font-Bold="true" Style="display: inline"></asp:Label>
                             <asp:Label ID="Label1" runat="server" Text="<%$ Resources:LocalizedText, ideal_description%>" Font-Bold="false" Style="display: inline; color: darkseagreen"></asp:Label>
                                  <div class="dropdown">
                                     <button id="dropdown" class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown"><asp:Literal runat="server" Text="<%$ Resources:LocalizedText, choose_bank_prompt%>" />
