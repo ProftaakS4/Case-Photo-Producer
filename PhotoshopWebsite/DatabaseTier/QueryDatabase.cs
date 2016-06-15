@@ -23,25 +23,35 @@ namespace PhotoshopWebsite.DatabaseTier
             mysqlConnection = connectionSingleton.getSqlConnection();
         }
 
-        public DataTable CallProcedure(string procedure, string[] parameters)
+        public DataTable CallProcedure(string procedure, Dictionary<string, string[]> parameters)
         {
+            DataTable dt = new DataTable();
             try
             {
                 myCommand = new MySqlCommand(procedure, mysqlConnection);
                 myCommand.CommandType = CommandType.StoredProcedure;
 
-                foreach (string parameter in parameters)
+                foreach (KeyValuePair<string,string[]> parameter in parameters)
                 {
-                    myCommand.Parameters.Add("@p_" + parameter, MySqlDbType.Int32).Value = parameter;
-                    myCommand.Parameters["@p_" + parameter].Direction = ParameterDirection.Input;
+                    switch (parameter.Value[0])
+                    {
+                        case "int":
+                            myCommand.Parameters.Add("@" + parameter.Key, MySqlDbType.Int32).Value = int.Parse(parameter.Value[1]);
+                            break;
+                        case "string":
+                            myCommand.Parameters.Add("@" + parameter.Key, MySqlDbType.VarChar).Value = parameter.Value[1];
+                            break;
+                        default:
+                            break;
+                    }                    
+                    myCommand.Parameters["@" + parameter.Key].Direction = ParameterDirection.Input;                                   
                 }
 
                 //execute query
                 mysqlConnection.Open();
                 MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
-                DataTable dt = new DataTable();
+                
                 dt.Load(dr);
-
                 //return datatable
                 return dt;
             }
@@ -54,7 +64,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand.Connection.Close();
                 mysqlConnection.Close();
             }
-            return null;
+            return dt;
         }
     }
 }
