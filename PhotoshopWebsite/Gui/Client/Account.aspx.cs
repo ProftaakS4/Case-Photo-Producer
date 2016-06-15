@@ -16,9 +16,11 @@ namespace PhotoshopWebsite.Gui.Client
     public partial class Account : System.Web.UI.Page
     {
         private List<Order> orders;
+        private List<OrderInfo> orderInfos;
         private List<Order> Reorders;
         private User currentUser;
         private OrderController oc;
+        private OrderController ocInfo;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,7 +33,6 @@ namespace PhotoshopWebsite.Gui.Client
                 oc = new OrderController(currentUser.ID);
                 orders = oc.orders;
             }
-            
 
             FillPage(orders);
 
@@ -82,16 +83,17 @@ namespace PhotoshopWebsite.Gui.Client
                 TableCell ID = new TableCell();
                 ID.Text = order.ID.ToString();
                 TableCell products = new TableCell();
-                //ListBox Products = new ListBox();
-                //if (order != null)
-                //{
-                //    foreach (Product product in order.Products.Keys)
-                //    {
-                //        Products.Items.Add(product.Description);
-                //    }
-                //}
-                //products.Controls.Add(Products);
-                products.Text = "View products";
+                Button btnShowProducts = new Button();
+                btnShowProducts.ID = "btn" + order.ID.ToString();
+                btnShowProducts.CssClass = "btn btn-default";
+                btnShowProducts.Click += btnShowProducts_Click;
+                btnShowProducts.Height = 30;
+                btnShowProducts.Text = "View";
+                btnShowProducts.Attributes.Add("onClientClick", "return false;");
+                btnShowProducts.Attributes.Add("onClick", "btnShowProducts_Click;");
+                products.Controls.Add(btnShowProducts);
+
+                products.ID = order.ID.ToString();
                 TableCell Date = new TableCell();
                 Date.Text = order.Date.ToString();
                 TableCell Type = new TableCell();
@@ -130,6 +132,59 @@ namespace PhotoshopWebsite.Gui.Client
                 {
                     Reorders.Add(order);
                 }
+            }
+        }
+
+        void btnShowProducts_Click(object sender, EventArgs e)
+        {
+            Button x = sender as Button;
+            string id = x.ID;
+            int orderID = Convert.ToInt32(id);
+            ocInfo = new OrderController(currentUser.ID, orderID);
+            orderInfos = ocInfo.orderInfos;
+            FillProducts(orderInfos);
+            
+        }
+
+        private void FillProducts(List<OrderInfo> orderInfos)
+        {
+            TableHeaderRow MainHeaderRow = new TableHeaderRow();
+            TableHeaderCell IDHeader = new TableHeaderCell();
+            IDHeader.Text = "Foto ID";
+            IDHeader.ID = "fotoIDheader";
+            TableHeaderCell FilterHeader = new TableHeaderCell();
+            FilterHeader.Text = "Filter";
+            FilterHeader.Text = "filterHeader";
+            TableHeaderCell ProductTypeHeader = new TableHeaderCell();
+            ProductTypeHeader.Text = "Product Type";
+            ProductTypeHeader.ID = "productTypeHeader";
+            TableHeaderCell AmountHeader = new TableHeaderCell();
+            AmountHeader.Text = "Amount";
+            AmountHeader.ID = "AmountHeader";
+            MainHeaderRow.Cells.Add(IDHeader);
+            MainHeaderRow.Cells.Add(FilterHeader);
+            MainHeaderRow.Cells.Add(ProductTypeHeader);
+            MainHeaderRow.Cells.Add(AmountHeader);
+            MainTable.Rows.Add(MainHeaderRow);
+
+            foreach (OrderInfo orderInfo in orderInfos)
+            {
+                TableRow MainRow = new TableRow();
+                MainRow.Height = 80;
+                TableCell ID = new TableCell();
+                ID.Text = orderInfo.ID.ToString();
+                TableCell Filter = new TableCell();
+                Filter.Text = orderInfo.Filter.ToString();
+                TableCell Type = new TableCell();
+                Type.Text = orderInfo.Type.ToString();
+                TableCell Amount = new TableCell();
+                Amount.Text = orderInfo.Amount.ToString();
+
+                MainRow.Cells.Add(ID);
+                MainRow.Cells.Add(Filter);
+                MainRow.Cells.Add(Type);
+                MainRow.Cells.Add(Amount);
+                MainTable.Rows.Add(MainRow);
             }
         }
     }
