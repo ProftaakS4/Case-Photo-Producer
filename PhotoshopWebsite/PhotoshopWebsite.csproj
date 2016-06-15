@@ -187,6 +187,7 @@
     <Compile Include="DatabaseTier\AccountCreation.cs" />
     <Compile Include="DatabaseTier\Finance.cs" />
     <Compile Include="DatabaseTier\Product.cs" />
+    <Compile Include="DatabaseTier\QueryDatabase.cs" />
     <Compile Include="Domain\Finance.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\ProductPerPhotographer.cs" />
