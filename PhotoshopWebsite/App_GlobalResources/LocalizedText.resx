@@ -270,6 +270,9 @@
   <data name="alter_amount" xml:space="preserve">
     <value>Alter amount</value>
   </data>
+  <data name="amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
   <data name="available" xml:space="preserve">
     <value>Available</value>
   </data>
@@ -404,6 +407,9 @@
   </data>
   <data name="total" xml:space="preserve">
     <value>Total</value>
+  </data>
+  <data name="view" xml:space="preserve">
+    <value>View</value>
   </data>
   <data name="view_products" xml:space="preserve">
     <value>View Products</value>

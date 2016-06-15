@@ -102,7 +102,6 @@
     <Content Include="Gui\Client\Account.aspx" />
     <Content Include="Gui\Client\CreateAccount.aspx" />
     <Content Include="Gui\Client\GroupPictures.aspx" />
-    <Content Include="Gui\Client\WebService.asmx" />
     <Content Include="Gui\Finance\Account.aspx" />
     <Content Include="Gui\Finance\Finance.aspx" />
     <Content Include="Gui\Client\PhotoshopMaster.Master" />
@@ -133,7 +132,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="Javascript\JavaScript.js" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Gui\Website.Master" />
     <None Include="Properties\PublishProfiles\PhotoshopS4.pubxml" />
@@ -247,10 +248,6 @@
     </Compile>
     <Compile Include="Gui\Client\Payment\PaymentMasterNested.master.designer.cs">
       <DependentUpon>PaymentMasterNested.master</DependentUpon>
-    </Compile>
-    <Compile Include="Gui\Client\WebService.asmx.cs">
-      <DependentUpon>WebService.asmx</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Gui\Finance\Account.aspx.cs">
       <DependentUpon>Account.aspx</DependentUpon>

@@ -152,7 +152,7 @@ namespace PhotoshopWebsite.Gui.Client
             btnAddToCart.CssClass = "btn btn-default";
             btnAddToCart.Click += BtnAddToCart_Click1;
             btnAddToCart.Height = 30;
-            btnAddToCart.Text = "Order";
+            btnAddToCart.Text = Resources.LocalizedText.order_image;
 
             RadioButton btnSepia = new RadioButton();
             btnSepia.ID = "SEPIA" + x.ID;
@@ -160,7 +160,7 @@ namespace PhotoshopWebsite.Gui.Client
             btnSepia.AutoPostBack = true;
             btnSepia.GroupName = x.ID.ToString();
             btnSepia.Height = 30;
-            btnSepia.Text = "Sepia ";
+            btnSepia.Text = Resources.LocalizedText.sepia;
 
             HtmlGenericControl cropButtonControll = new HtmlGenericControl("div");
             cropButtonControll.InnerHtml = "<button type='button' id='Cropbtn" + x.ID + "'class='btn btn-default' data-toggle='modal' data-target='#myModal" + x.ID + "' >"+Resources.LocalizedText.crop+"</ button >";
