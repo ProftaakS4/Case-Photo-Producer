@@ -187,11 +187,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LocalizedText.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\LocalizedText.en.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LocalizedText.en.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_GlobalResources\LocalizedText.nl.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -205,7 +200,6 @@
     <Compile Include="Controller\ProductController.cs" />
     <Compile Include="Controller\PurchaseController.cs" />
     <Compile Include="DatabaseTier\AccountCreation.cs" />
-    <Compile Include="DatabaseTier\Finance.cs" />
     <Compile Include="DatabaseTier\Product.cs" />
     <Compile Include="DatabaseTier\QueryDatabase.cs" />
     <Compile Include="Domain\Finance.cs" />
@@ -421,10 +415,6 @@
     <Content Include="App_GlobalResources\LocalizedText.nl.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>LocalizedText.nl.designer.cs</LastGenOutput>
-    </Content>
-    <Content Include="App_GlobalResources\LocalizedText.en.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>LocalizedText.en.designer.cs</LastGenOutput>
     </Content>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
