@@ -7,7 +7,6 @@
     <script type="text/javascript">
 
         $(function () {
-
             $('.cropbox').Jcrop({
                 onChange: showPreview,
                 onChange: getCoords,

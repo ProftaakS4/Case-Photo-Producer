@@ -20,10 +20,9 @@ namespace PhotoshopWebsite.Controller
         }
 
         /// <summary>
-        /// get loginCodedata of the photographer corresponding to photographerID
+        /// Get all the products in the database.
         /// </summary>
-        /// <param name="photographerID"></param>
-        /// <returns></returns>
+        /// <returns>List with products</returns>
         public List<Product> getAllProducts()
         {
             List<Product> temp = new List<Product>();

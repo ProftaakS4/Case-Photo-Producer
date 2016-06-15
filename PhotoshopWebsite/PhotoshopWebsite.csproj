@@ -117,10 +117,6 @@
     <Content Include="Gui\Images\background\background2.jpg" />
     <Content Include="Gui\Images\background\background3.jpg" />
     <Content Include="Gui\Images\background\background4.jpg" />
-    <Content Include="Gui\Images\Payment\google_checkout.png" />
-    <Content Include="Gui\Images\Payment\Ideal.jpg" />
-    <Content Include="Gui\Images\Payment\overboeking.jpg" />
-    <Content Include="Gui\Images\Payment\Paypal.jpg" />
     <Content Include="Gui\Images\Shoppingcart.png" />
     <Content Include="Gui\Images\LOW RESOLUTION\Prive\userid4-1.jpeg" />
     <Content Include="Gui\Images\LOW RESOLUTION\Prive\userid4-2.jpeg" />
@@ -182,15 +178,27 @@
     <Content Include="Bootstrap\Scripts\jquery-1.9.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\LocalizedText.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalizedText.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\LocalizedText.nl.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalizedText.nl.resx</DependentUpon>
+    </Compile>
     <Compile Include="Controller\AccountCreationController.cs" />
     <Compile Include="Controller\FinanceController.cs" />
     <Compile Include="Controller\LoginCodeController.cs" />
+    <Compile Include="Controller\OrderController.cs" />
     <Compile Include="Controller\PhotoController.cs" />
     <Compile Include="Controller\ProductController.cs" />
     <Compile Include="Controller\PurchaseController.cs" />
     <Compile Include="DatabaseTier\AccountCreation.cs" />
     <Compile Include="DatabaseTier\Finance.cs" />
     <Compile Include="DatabaseTier\Product.cs" />
+    <Compile Include="DatabaseTier\QueryDatabase.cs" />
     <Compile Include="Domain\Finance.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\ProductPerPhotographer.cs" />
@@ -397,6 +405,14 @@
     <Compile Include="WebSocket\WebSocketSingleton.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_GlobalResources\LocalizedText.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>LocalizedText.Designer.cs</LastGenOutput>
+    </Content>
+    <Content Include="App_GlobalResources\LocalizedText.nl.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>LocalizedText.nl.designer.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
