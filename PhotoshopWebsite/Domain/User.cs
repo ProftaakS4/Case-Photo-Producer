@@ -11,7 +11,6 @@ namespace PhotoshopWebsite.Domain
     /// </summary>
     public class User
     {
-        private DatabaseTier.Login DB_Login = new DatabaseTier.Login();
         private DatabaseTier.QueryDatabase database = new DatabaseTier.QueryDatabase();
 
         public int ID { get; set; }
@@ -105,7 +104,12 @@ namespace PhotoshopWebsite.Domain
         {
             User returnUser = null;
             // when login credentials are verified
-            if (DB_Login.loginUser(emailaddress, password))
+            Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
+            parameters.Add("p_account_Email", new string[] { "string", emailaddress });
+            parameters.Add("p_password", new string[] { "string", password });
+            DataTable dt = database.CallProcedure("getUserPassword", parameters);
+
+            if (dt.Rows.Count != 0)
             {
                 returnUser = getUserData(emailaddress);
             }
@@ -124,7 +128,7 @@ namespace PhotoshopWebsite.Domain
             DataTable dt = database.CallProcedure("getUserID", parameters);
             int userID = int.Parse(dt.Rows[0][0].ToString());
             // when user id is validated
-            if (userID != DatabaseTier.Login.NO_USER_FOUND)
+            if (userID != -1)
             {
                 this.ID = userID;
                 List<ProductPerPhotographer> temp = new List<ProductPerPhotographer>();
