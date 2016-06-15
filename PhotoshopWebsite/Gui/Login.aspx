@@ -32,7 +32,7 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1"
                             ControlToValidate="tbInputEmail"
                             ValidationGroup="PersonalInfoGroup"
-                            ErrorMessage="Enter Your Email"
+                            ErrorMessage="<%$ Resources:LocalizedText, error_enter_email%>"
                             runat="Server">
                         </asp:RequiredFieldValidator>
                         <label for="inputPassword" class="sr-only">
