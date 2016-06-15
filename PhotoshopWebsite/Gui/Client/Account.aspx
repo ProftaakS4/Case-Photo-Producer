@@ -49,6 +49,7 @@
                 </div>
                  <div class='col-md-6';>
                       <h3><asp:Literal runat="server" Text="<%$ Resources:LocalizedText, order_history%>" /></h3>
+                     <asp:Table id="SecondTable" runat="server" CssClass="table table-bordered table-responsive table-hover"></asp:Table>
                      <asp:Table id="MainTable" runat="server" CssClass="table table-bordered table-responsive table-hover"></asp:Table>
                      </div>
             </div>

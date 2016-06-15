@@ -150,6 +150,7 @@ namespace PhotoshopWebsite.Gui.Client
 
         private void FillProducts(List<OrderInfo> orderInfos)
         {
+            SecondTable.CssClass = "table table-striped table-hover table-bordered";
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
             TableHeaderCell IDHeader = new TableHeaderCell();
             IDHeader.Text = Resources.LocalizedText.photo_id;
@@ -167,7 +168,7 @@ namespace PhotoshopWebsite.Gui.Client
             MainHeaderRow.Cells.Add(FilterHeader);
             MainHeaderRow.Cells.Add(ProductTypeHeader);
             MainHeaderRow.Cells.Add(AmountHeader);
-            MainTable.Rows.Add(MainHeaderRow);
+            SecondTable.Rows.Add(MainHeaderRow);
 
             foreach (OrderInfo orderInfo in orderInfos)
             {
@@ -186,7 +187,7 @@ namespace PhotoshopWebsite.Gui.Client
                 MainRow.Cells.Add(Filter);
                 MainRow.Cells.Add(Type);
                 MainRow.Cells.Add(Amount);
-                MainTable.Rows.Add(MainRow);
+                SecondTable.Rows.Add(MainRow);
             }
         }
     }
