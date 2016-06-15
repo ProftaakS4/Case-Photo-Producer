@@ -191,7 +191,6 @@
     <Compile Include="Controller\PhotoController.cs" />
     <Compile Include="Controller\ProductController.cs" />
     <Compile Include="Controller\PurchaseController.cs" />
-    <Compile Include="DatabaseTier\AccountCreation.cs" />
     <Compile Include="DatabaseTier\QueryDatabase.cs" />
     <Compile Include="Domain\Finance.cs" />
     <Compile Include="Domain\OrderInfo.cs" />
