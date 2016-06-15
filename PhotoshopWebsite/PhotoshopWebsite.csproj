@@ -203,7 +203,6 @@
     <Compile Include="Domain\Purchase.cs" />
     <Compile Include="Enumeration\FilterTypes.cs" />
     <Compile Include="Enumeration\ProductTypes.cs" />
-    <Compile Include="DatabaseTier\LoginCode.cs" />
     <Compile Include="Domain\Dvd.cs" />
     <Compile Include="Domain\LoginCode.cs" />
     <Compile Include="Domain\Map.cs" />

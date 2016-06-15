@@ -8,7 +8,7 @@ namespace PhotoshopWebsite.Controller
 {
     public class LoginCodeController
     {
-        private DatabaseTier.LoginCode DB = new DatabaseTier.LoginCode();
+        private DatabaseTier.QueryDatabase database = new DatabaseTier.QueryDatabase();
 
         public int ID { get; set; }
         public List<LoginCode> loginCodes { get; set; }
@@ -19,26 +19,21 @@ namespace PhotoshopWebsite.Controller
             if (singleLogincode == true)
             {
                 this.ID = photographerID;
-                if (loginCodeValidation(photographerID) == "true")
-                {
-                    this.validated = true;
-                }
-                else
-                {
-                    this.validated = false;
-                }
+                this.validated = loginCodeValidation(photographerID);
             }
-            }
+        }
         public LoginCodeController(int photographerID)
         {
-                this.ID = photographerID;
-                this.loginCodes = this.getLoginCodeData(ID);
-            }
+            this.ID = photographerID;
+            this.loginCodes = this.getLoginCodeData(ID);
+        }
 
-        public String loginCodeValidation(int loginCode)
+        public bool loginCodeValidation(int loginCode)
         {
-            string value = DB.LoginCodeValidation(loginCode);
-            return value;
+            Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
+            parameters.Add("p_logincode", new string[] { "int", loginCode.ToString() });
+            DataTable dt = database.CallProcedure("checkLoginCode", parameters);
+            return dt.Rows.Count != 0;
         }
         /// <summary>
         /// get loginCodedata of the photographer corresponding to photographerID
@@ -48,14 +43,13 @@ namespace PhotoshopWebsite.Controller
         public List<LoginCode> getLoginCodeData(int photographerID)
         {
             List<LoginCode> temp = new List<LoginCode>();
-            DataTable dt = DB.getLoginCodeData(photographerID);
+            Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
+            parameters.Add("p_photographer_ID", new string[] { "int", photographerID.ToString() });
+            DataTable dt = database.CallProcedure("getLoginCodesFromPhotographer", parameters);
             // when userdata is found and returned
-            if (dt.Rows.Count != 0)
+            foreach (DataRow data in dt.Rows)
             {
-                foreach (DataRow data in dt.Rows)
-                {
-                    temp.Add(new LoginCode(int.Parse(data[0].ToString()), int.Parse(data[1].ToString()), int.Parse(data[2].ToString()), int.Parse(data[3].ToString()), new DateTime()));
-                }
+                temp.Add(new LoginCode(int.Parse(data[0].ToString()), int.Parse(data[1].ToString()), int.Parse(data[2].ToString()), int.Parse(data[3].ToString()), new DateTime()));
             }
             return temp;
         }

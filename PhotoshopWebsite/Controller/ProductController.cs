@@ -9,7 +9,6 @@ namespace PhotoshopWebsite.Controller
 {
     public class ProductController
     {
-        private DatabaseTier.Product DB = new DatabaseTier.Product();
         private DatabaseTier.QueryDatabase database = new DatabaseTier.QueryDatabase();
 
         public int ID { get; set; }
