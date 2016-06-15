@@ -45,13 +45,13 @@ namespace PhotoshopWebsite.Gui.Photographer
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
 
             TableHeaderCell typeHeader = new TableHeaderCell();
-            typeHeader.Text = "Type";
+            typeHeader.Text = Resources.LocalizedText.product_type;
             TableHeaderCell descriptionHeader = new TableHeaderCell();
-            descriptionHeader.Text = "Description";
+            descriptionHeader.Text = Resources.LocalizedText.product_description;
             TableHeaderCell priceHeader = new TableHeaderCell();
-            priceHeader.Text = "Price";
+            priceHeader.Text = Resources.LocalizedText.price;
             TableHeaderCell availableHeader = new TableHeaderCell();
-            availableHeader.Text = "Available";
+            availableHeader.Text = Resources.LocalizedText.available;
 
             MainHeaderRow.Cells.Add(typeHeader);
             MainHeaderRow.Cells.Add(descriptionHeader);
@@ -111,7 +111,7 @@ namespace PhotoshopWebsite.Gui.Photographer
 
             Button btSave = new Button();
             btSave.ID = "btSave";
-            btSave.Text = "Save";
+            btSave.Text = Resources.LocalizedText.save_changes;
             btSave.Click += new EventHandler(this.Save_Clicked);
             btSave.Height = 30;
 

@@ -47,15 +47,15 @@ namespace PhotoshopWebsite.Gui
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
 
             TableHeaderCell IDHeader = new TableHeaderCell();
-            IDHeader.Text = "Product ID";
+            IDHeader.Text = Resources.LocalizedText.product_id;
             TableHeaderCell imageHeader = new TableHeaderCell();
-            imageHeader.Text = "Image";
+            imageHeader.Text = Resources.LocalizedText.image;
             TableHeaderCell descriptionHeader = new TableHeaderCell();
-            descriptionHeader.Text = "Description";
+            descriptionHeader.Text = Resources.LocalizedText.product_description;
             TableHeaderCell stockHeader = new TableHeaderCell();
-            stockHeader.Text = "Stock";
+            stockHeader.Text = Resources.LocalizedText.stock;
             TableHeaderCell amountHeader = new TableHeaderCell();
-            amountHeader.Text = "Alter Amount";
+            amountHeader.Text = Resources.LocalizedText.alter_amount;
 
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(imageHeader);
