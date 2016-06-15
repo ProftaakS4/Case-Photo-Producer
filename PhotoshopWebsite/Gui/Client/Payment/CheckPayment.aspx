@@ -1,6 +1,14 @@
 ﻿<%@ Page Language="C#" MasterPageFile="../PhotoshopMaster.Master" AutoEventWireup="true" CodeBehind="CheckPayment.aspx.cs" Inherits="PhotoshopWebsite.Gui.Client.Payment.CheckPayment" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="../../../Javascript/JavaScript.js"></script>
+    
+    <script type="text/javascript">  
+        //hier kamil
+        //window.onload = startTimer();
+
+    </script>
+</asp:Content>
 <asp:Content  ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">   
  <div id="panel-body" class="panel-bodybefore">
         <div class='container' style="margin-left: 13px;">

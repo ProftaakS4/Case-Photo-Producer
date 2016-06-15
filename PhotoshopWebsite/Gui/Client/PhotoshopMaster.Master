@@ -12,6 +12,8 @@
     <link href="/Bootstrap/Content/Custom.css" rel="stylesheet"/>
     <link href="/Bootstrap/Menu/simple-sidebar.css" rel="stylesheet"/>
     <link href="/Bootstrap/Menu/bootstrap.min.css" rel="stylesheet"/>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="../../Bootstrap/Scripts/bootstrap.min.js"></script>
 </head>
 <body style="background-color: #eee">
     <form runat="server">

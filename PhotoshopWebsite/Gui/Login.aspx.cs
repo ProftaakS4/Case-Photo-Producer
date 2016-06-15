@@ -53,11 +53,16 @@ namespace PhotoshopWebsite
                 Session["logindata"] = loginname;
                 Session["UserData"] = userWithData;
                 _userInfoCookies = Request.Cookies["Userinfo"];
+                
                 if (rememberMe && _userInfoCookies != null)
                 {
                     var expiredCookie = new HttpCookie(_userInfoCookies.Name) { Expires = DateTime.Now.AddDays(-1) };
                     HttpContext.Current.Response.Cookies.Add(expiredCookie); // overwrite it
                     HttpContext.Current.Request.Cookies.Clear();
+                    createPersistentCookie(loginname, password);
+                }
+                else if(rememberMe)
+                {
                     createPersistentCookie(loginname, password);
                 }
                 redirectToUserTypePage(userWithData.Type);
@@ -115,7 +120,6 @@ namespace PhotoshopWebsite
         protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             rememberMe = !rememberMe;
-
         }
 
         protected void BtnCreateAccount_Click(object sender, EventArgs e)

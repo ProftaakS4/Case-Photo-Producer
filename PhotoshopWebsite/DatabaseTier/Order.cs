@@ -372,5 +372,48 @@ namespace PhotoshopWebsite.DatabaseTier
             }
         }
 
+        public DataTable getAllOrders(int accountID)
+        {
+            try
+            {
+                myCommand = new MySqlCommand("getAllPaymentsByAccount", mysqlConnection);
+                // input - There is no input needed.
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_account_ID", MySqlDbType.Int32).Value = accountID;
+                // output
+                myCommand.Parameters.Add("@ID", MySqlDbType.Int32);
+                myCommand.Parameters["@ID"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@Date", MySqlDbType.DateTime);
+                myCommand.Parameters["@Date"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@Type", MySqlDbType.VarChar);
+                myCommand.Parameters["@Type"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@IBAN", MySqlDbType.VarChar);
+                myCommand.Parameters["@IBAN"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@PRICE", MySqlDbType.Double);
+                myCommand.Parameters["@PRICE"].Direction = ParameterDirection.Output;
+                // execute query
+                mysqlConnection.Open();
+                //myCommand.ExecuteNonQuery();
+
+                //MySqlDataAdapter da = new MySqlDataAdapter(myCommand);
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+
+                //return datatable
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return null;
+        }
+
     }
 }
