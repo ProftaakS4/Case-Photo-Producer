@@ -20,6 +20,7 @@ namespace PhotoshopWebsite
 
         // create instance of the photoController for future database connections through busisness layer
         PhotoController photoController = new PhotoController();
+        int[] cropValues = new int[4];
 
         // create a list of all the current user photos
         public List<Domain.Photo> photos;
@@ -113,6 +114,12 @@ namespace PhotoshopWebsite
                     }
                     Session["photos"] = photos;
                 }
+            }
+            if(Session["cropValues"] != null)
+            {
+                cropValues = (int[])Session["cropValues"];
+                Response.Write(cropValues[0] + " " + cropValues[1] + " " + cropValues[2] + " " + cropValues[3]);
+
             }
 
             // check if a search has taken place
@@ -269,10 +276,11 @@ namespace PhotoshopWebsite
 
         private void BtnCrop_Click(object sender, EventArgs e)
         {
-            int X = Convert.ToInt32(input_X.Value);
-            int y = Convert.ToInt32(input_Y.Value);
-            int w = Convert.ToInt32(input_W.Value);
-            int h = Convert.ToInt32(input_H.Value);
+            cropValues[0] = Convert.ToInt32(input_X.Value);
+            cropValues[1] = Convert.ToInt32(input_Y.Value);
+            cropValues[2] = Convert.ToInt32(input_W.Value);
+            cropValues[3] = Convert.ToInt32(input_H.Value);            
+            Session["cropValues"] = cropValues;
         }
 
 
