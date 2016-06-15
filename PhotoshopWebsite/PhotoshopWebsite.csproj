@@ -185,6 +185,7 @@
     <Compile Include="Controller\AccountCreationController.cs" />
     <Compile Include="Controller\FinanceController.cs" />
     <Compile Include="Controller\LoginCodeController.cs" />
+    <Compile Include="Controller\OrderController.cs" />
     <Compile Include="Controller\PhotoController.cs" />
     <Compile Include="Controller\ProductController.cs" />
     <Compile Include="Controller\PurchaseController.cs" />

@@ -18,16 +18,20 @@ namespace PhotoshopWebsite.Gui.Client
         private List<Order> orders;
         private List<Order> Reorders;
         private User currentUser;
+        private OrderController oc;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            Reorders = new List<Order>();
             if (Session["UserData"] != null)
             {
                 currentUser = Session["UserData"] as User;
                 FillAccountData(currentUser);
+                oc = new OrderController(currentUser.ID);
+                orders = oc.orders;
             }
-            Reorders = new List<Order>();
-            orders = new List<Order>();
+            
 
             FillPage(orders);
 
@@ -78,15 +82,16 @@ namespace PhotoshopWebsite.Gui.Client
                 TableCell ID = new TableCell();
                 ID.Text = order.ID.ToString();
                 TableCell products = new TableCell();
-                ListBox Products = new ListBox();
-                if (order != null)
-                {
-                    foreach (Product product in order.Products.Keys)
-                    {
-                        Products.Items.Add(product.Description);
-                    }
-                }
-                products.Controls.Add(Products);
+                //ListBox Products = new ListBox();
+                //if (order != null)
+                //{
+                //    foreach (Product product in order.Products.Keys)
+                //    {
+                //        Products.Items.Add(product.Description);
+                //    }
+                //}
+                //products.Controls.Add(Products);
+                products.Text = "View products";
                 TableCell Date = new TableCell();
                 Date.Text = order.Date.ToString();
                 TableCell Type = new TableCell();
