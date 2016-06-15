@@ -346,7 +346,7 @@
     <value>Order ID</value>
   </data>
   <data name="order_image" xml:space="preserve">
-    <value>Order image</value>
+    <value>Order</value>
   </data>
   <data name="payment_check" xml:space="preserve">
     <value>Payment Check</value>
