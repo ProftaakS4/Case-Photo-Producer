@@ -15,7 +15,7 @@ namespace PhotoshopWebsite.Domain
         private DatabaseTier.Order DB_Order;
 
         public int ID { get; set; }
-        public Dictionary<Product, int> Products { get; set; }
+        //public Dictionary<Product, int> Products { get; set; }
         public DateTime Date { get; set; }
         public PaymentType Type { get; set; }
         public string IBAN { get; set; }
@@ -30,10 +30,10 @@ namespace PhotoshopWebsite.Domain
         /// <param name="type">the paymenttype that is used to place the order</param>
         /// <param name="iban">the iban of the user that places the order</param>
         /// <param name="price">the total price of the order</param>
-        public Order(int id, Dictionary<Product, int> products, DateTime date, PaymentType type, string iban, double price)
+        public Order(int id, DateTime date, PaymentType type, string iban, double price)
         {
             this.ID = id;
-            this.Products = products;
+            //this.Products = products;
             this.Date = date;
             this.Type = type;
             this.IBAN = iban;
