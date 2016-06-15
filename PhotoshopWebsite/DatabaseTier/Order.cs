@@ -427,6 +427,8 @@ namespace PhotoshopWebsite.DatabaseTier
                 // output
                 myCommand.Parameters.Add("@ID", MySqlDbType.Int32);
                 myCommand.Parameters["@ID"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@Description", MySqlDbType.Int32);
+                myCommand.Parameters["@Description"].Direction = ParameterDirection.Output;
                 myCommand.Parameters.Add("@FilterType", MySqlDbType.DateTime);
                 myCommand.Parameters["@FilterType"].Direction = ParameterDirection.Output;
                 myCommand.Parameters.Add("@Type", MySqlDbType.VarChar);

@@ -51,7 +51,7 @@ namespace PhotoshopWebsite.Controller
             {
                 foreach (DataRow data in dt.Rows)
                 {
-                    temp.Add(new OrderInfo(int.Parse(data[0].ToString()), data[1].ToString(), data[2].ToString(), int.Parse(data[3].ToString())));
+                    temp.Add(new OrderInfo(int.Parse(data[0].ToString()), data[1].ToString(), data[2].ToString(), data[3].ToString(), int.Parse(data[4].ToString())));
                 }
             }
             return temp;
