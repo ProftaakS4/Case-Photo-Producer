@@ -119,15 +119,18 @@ namespace PhotoshopWebsite.Domain
         /// <returns>user from the corresponding email address</returns>
         public User getUserData(string emailaddress)
         {
-            int userID = DB_Login.getUserID(emailaddress);
+            Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
+            parameters.Add("p_emailaddress", new string[] { "string", emailaddress });
+            DataTable dt = database.CallProcedure("getUserID", parameters);
+            int userID = int.Parse(dt.Rows[0][0].ToString());
             // when user id is validated
             if (userID != DatabaseTier.Login.NO_USER_FOUND)
             {
                 this.ID = userID;
                 List<ProductPerPhotographer> temp = new List<ProductPerPhotographer>();
-                Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
+                parameters = new Dictionary<string, string[]>();
                 parameters.Add("p_id", new string[] { "int", userID.ToString() });
-                DataTable dt = database.CallProcedure("getUserInformation", parameters);
+                dt = database.CallProcedure("getUserInformation", parameters);
                 // when userdata is found and returned
                 if (dt.Rows.Count != 0)
                 { 
