@@ -1,17 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="PhotoshopMaster.Master" AutoEventWireup="true" CodeBehind="ShoppingCart.aspx.cs" Inherits="PhotoshopWebsite.Gui.ShoppingCart" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script src="../../Bootstrap/Scripts/jquery.dynatable.js"></script>
+    <link href="../../Bootstrap/Content/jquery.dynatable.css" rel="stylesheet" />
     <script type="text/javascript">
-        //global variables
         var userresult;
-        var orderresult;
         var orderName = "Photo Shop Order";
         var totalAmount;
+        var table;
 
         //Onload function getting client and shipping data from the Webservice
         window.onload = function (e) {
             e.preventDefault();
-
             sendRequest("WebService.asmx/getUserData", "OnSuccessUser", "POST");
             sendRequest("WebService.asmx/getOrderData", "OnSuccessOrder", "POST");
         };
@@ -43,8 +43,35 @@
             }
             //Different fucntions setting the global variables
             function OnSuccessOrder(response) {
-                window.orderresult = JSON.parse(response.d);
-                console.log(response.d);
+                var response = JSON.parse(response.d);
+
+                var firstToLower = function (str) {
+                    return str.charAt(0).toLowerCase() + str.slice(1);
+                };
+
+                var mapToJsObject = function (o) {
+                    var r = {};
+                    $.map(o, function (item, index) {
+                        r[firstToLower(index)] = o[index];
+                    });
+                    return r;
+                };
+                          
+
+                var mappedResults = [];
+
+                $.map(response, function (item) {
+                    var m = mapToJsObject(item);
+                    mappedResults.push(m);
+                });
+
+
+                $('#orderTable').dynatable({
+                    dataset: {
+                        records: mappedResults
+                    }
+                });
+
             }
 
             function OnErrorCall(response) { console.log(response.error); }
@@ -55,6 +82,7 @@
         //Function generating the modal content based upon the radiobutton checked. 
         function generateModal(method, orderName, totalAmount) {
 
+        
             document.getElementById("myModalLabel").innerHTML = method;
             document.getElementById("Amountlabel").innerHTML = "Price: €" + totalAmount;
             document.getElementById("IBAN").setAttribute("value", userresult["IBAN"]);
@@ -66,8 +94,6 @@
             document.getElementById("Phonenumber").setAttribute("value", userresult["Phonenumber"]);
             document.getElementById("IBAN").setAttribute("value", userresult["IBAN"]);
             document.getElementById("Emailaddress").setAttribute("value", userresult["Emailaddress"]);
-
-
         }
 
         //Function triggered by the  "Place order" button, checking which button is checked and launching the modal
@@ -156,27 +182,14 @@
                     <%-- Modal --%>
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                         <div class="modal-dialog" role="document">
-                            <div class="modal-content">
+                            <div class="modal-content" style="width:1100px!important">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel"></h4>
+                                    <h1 class="modal-title" id="myModalLabel"></h1>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <div class="dropdown">
-                                                <button id="dropdown" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                                                    Kies uw Bank
-                                    <span class="caret"></span>
-                                                </button>
-                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Rabobank</a></li>
-                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">SnsBank</a></li>
-                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ABNamro</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
                                             <h3>Personal information</h3>
                                             <input type="text" class="input-group" id="Firstname" readonly />
                                             <input type="text" class="input-group" id="Lastname" readonly />
@@ -188,8 +201,19 @@
                                             <input type="text" class="input-group" id="Emailaddress" readonly />
 
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-12">
+
                                             <h3>Order information</h3>
+                                            <table id="orderTable">
+                                                <thead>
+                                                    <th>description</th>
+                                                    <th>price</th>
+                                                    <th>product</th>
+                                                    <th>quantity</th>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
                                         </div>
 
                                     </div>
