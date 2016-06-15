@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PhotoshopWebsite.Enumeration;
+using System.Data;
 
 namespace PhotoshopWebsite.DatabaseTier.Tests
 {
@@ -17,21 +18,21 @@ namespace PhotoshopWebsite.DatabaseTier.Tests
         [TestMethod()]
         public void getPhotosUserTest()
         {
-            List<string> getPhotosUser = photo.getPhotosUser("4");
+            DataTable getPhotosUser = photo.getPhotosUser(4);
             Assert.IsNotNull(getPhotosUser);
         }
 
         [TestMethod()]
         public void getTypesTest()
         {
-            List<ProductTypes.PTypes> getTypes = photo.getTypes("1");
+            List<ProductTypes.PTypes> getTypes = photo.getTypes(1);
             Assert.IsNotNull(getTypes);
         }
 
         [TestMethod()]
         public void getPhotoTest()
         {
-            List<string> getPhoto = photo.getPhoto("4");
+            DataTable getPhoto = photo.getPhoto(4);
             Assert.IsNotNull(getPhoto);
         }
     }

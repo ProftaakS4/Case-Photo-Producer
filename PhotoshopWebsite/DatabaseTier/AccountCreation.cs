@@ -47,6 +47,11 @@ namespace PhotoshopWebsite.DatabaseTier
             {
                 return false;
             }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
         }
 
         public int getIdByEmail(string email)

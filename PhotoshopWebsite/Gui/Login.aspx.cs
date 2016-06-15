@@ -1,4 +1,5 @@
 ﻿using PhotoshopWebsite.Controller;
+using PhotoshopWebsite.Domain;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -45,8 +46,8 @@ namespace PhotoshopWebsite
 
         private void navigateThroughAuthentication(string loginname, string password)
         {
-            Controller.User userWithNoData = new Controller.User(loginname);
-            Controller.User userWithData = userWithNoData.loginUser(loginname, password);
+            User userWithNoData = new User(loginname);
+            User userWithData = userWithNoData.loginUser(loginname, password);
             if (userWithData != null)
             {
                 Session["logindata"] = loginname;
@@ -58,6 +59,10 @@ namespace PhotoshopWebsite
                     var expiredCookie = new HttpCookie(_userInfoCookies.Name) { Expires = DateTime.Now.AddDays(-1) };
                     HttpContext.Current.Response.Cookies.Add(expiredCookie); // overwrite it
                     HttpContext.Current.Request.Cookies.Clear();
+                    createPersistentCookie(loginname, password);
+                }
+                else if(rememberMe)
+                {
                     createPersistentCookie(loginname, password);
                 }
                 redirectToUserTypePage(userWithData.Type);
@@ -106,10 +111,6 @@ namespace PhotoshopWebsite
             {
                 Response.Redirect("~/Gui/Finance/Orders.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
             }
-            else if (type == "Admin")
-            {
-                Response.Redirect("~/Gui/Admin/Mainadmin.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
-            }
             else
             {
                 Response.Write("<script>alert('Unknown user type')</script>");
@@ -119,7 +120,6 @@ namespace PhotoshopWebsite
         protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             rememberMe = !rememberMe;
-
         }
 
         protected void BtnCreateAccount_Click(object sender, EventArgs e)

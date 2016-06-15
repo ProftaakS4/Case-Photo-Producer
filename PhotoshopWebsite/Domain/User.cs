@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PhotoshopWebsite.Controller
+namespace PhotoshopWebsite.Domain
 {
     /// <summary>
     /// User class is the person that has signed in on the website.
@@ -26,7 +26,7 @@ namespace PhotoshopWebsite.Controller
         public string Password { get; set; }
 
         /// <summary>
-        /// create a user without the password
+        /// create an user without the password
         /// </summary>
         /// <param name="id">id from the user</param>
         /// <param name="type">type of the user</param>
@@ -55,7 +55,7 @@ namespace PhotoshopWebsite.Controller
         }
 
         /// <summary>
-        /// create a user with all possible variables
+        /// create an user with all possible variables
         /// </summary>
         /// <param name="id">id from the user</param>
         /// <param name="type">type of the user</param>
