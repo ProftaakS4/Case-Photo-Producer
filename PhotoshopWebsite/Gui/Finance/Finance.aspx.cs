@@ -45,13 +45,13 @@ namespace PhotoshopWebsite.Gui
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
 
             TableHeaderCell IDHeader = new TableHeaderCell();
-            IDHeader.Text = "Photographer ID";
+            IDHeader.Text = Resources.LocalizedText.photographer_id;
             TableHeaderCell firstNameHeader = new TableHeaderCell();
-            firstNameHeader.Text = "First name";
+            firstNameHeader.Text = Resources.LocalizedText.first_name;
             TableHeaderCell lastNameHeader = new TableHeaderCell();
-            lastNameHeader.Text = "Last name";
+            lastNameHeader.Text = Resources.LocalizedText.last_name;
             TableHeaderCell moneyHeader = new TableHeaderCell();
-            moneyHeader.Text = "Money owed";
+            moneyHeader.Text = Resources.LocalizedText.money_owed;
 
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(firstNameHeader);

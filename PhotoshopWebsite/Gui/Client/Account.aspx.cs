@@ -53,19 +53,19 @@ namespace PhotoshopWebsite.Gui.Client
         {
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
             TableHeaderCell IDHeader = new TableHeaderCell();
-            IDHeader.Text = "Order ID";
+            IDHeader.Text = Resources.LocalizedText.order_id;
             TableHeaderCell TypeHeader = new TableHeaderCell();
-            TypeHeader.Text = "Products";
+            TypeHeader.Text = Resources.LocalizedText.products;
             TableHeaderCell Dateheader = new TableHeaderCell();
-            Dateheader.Text = "Order date";
+            Dateheader.Text = Resources.LocalizedText.date;
             TableHeaderCell Typeheader = new TableHeaderCell();
-            Typeheader.Text = "Payment Type";
+            Typeheader.Text = Resources.LocalizedText.payment_type;
             TableHeaderCell Ibanheader = new TableHeaderCell();
-            Ibanheader.Text = "IBAN";
+            Ibanheader.Text = Resources.LocalizedText.IBAN;
             TableHeaderCell Priceheader = new TableHeaderCell();
-            Priceheader.Text = "Price";
+            Priceheader.Text = Resources.LocalizedText.price;
             TableHeaderCell ReOrderheader = new TableHeaderCell();
-            ReOrderheader.Text = "Reorder";
+            ReOrderheader.Text = Resources.LocalizedText.reorder;
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(TypeHeader);
             MainHeaderRow.Cells.Add(Dateheader);
@@ -91,7 +91,7 @@ namespace PhotoshopWebsite.Gui.Client
                 //    }
                 //}
                 //products.Controls.Add(Products);
-                products.Text = "View products";
+                products.Text = Resources.LocalizedText.view_products;
                 TableCell Date = new TableCell();
                 Date.Text = order.Date.ToString();
                 TableCell Type = new TableCell();
@@ -106,7 +106,7 @@ namespace PhotoshopWebsite.Gui.Client
                 btnOrder.CssClass = "btn btn-default";
                 btnOrder.Click += btnOrder_Click;
                 btnOrder.Height = 30;
-                btnOrder.Text = "Reorder";
+                btnOrder.Text = Resources.LocalizedText.reorder;
                 BtnOrdercell.Controls.Add(btnOrder);
 
                 MainRow.Cells.Add(ID);

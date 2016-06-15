@@ -264,7 +264,157 @@
   <data name="stock_overview" xml:space="preserve">
     <value>Stock overview</value>
   </data>
+  <data name="account_id" xml:space="preserve">
+    <value>Account ID</value>
+  </data>
+  <data name="alter_amount" xml:space="preserve">
+    <value>Alter amount</value>
+  </data>
+  <data name="available" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="black_white" xml:space="preserve">
+    <value>Black &amp; White</value>
+  </data>
+  <data name="color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="crop" xml:space="preserve">
+    <value>Crop</value>
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="error_cant_send_mail" xml:space="preserve">
+    <value>Could not send mail to</value>
+  </data>
+  <data name="error_enter_search_term" xml:space="preserve">
+    <value>Enter a search term</value>
+  </data>
+  <data name="error_login" xml:space="preserve">
+    <value>Wrong e-mail address or password</value>
+  </data>
+  <data name="error_no_image_found" xml:space="preserve">
+    <value>No Image found, please the contact administrator</value>
+  </data>
+  <data name="error_user_type" xml:space="preserve">
+    <value>Unknown user type</value>
+  </data>
+  <data name="error_wrong_code" xml:space="preserve">
+    <value>The code you entered is not valid</value>
+  </data>
+  <data name="error_wrong_email" xml:space="preserve">
+    <value>Please enter a valid email address</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="google_checkout_payment" xml:space="preserve">
+    <value>Google-checkout payment</value>
+  </data>
+  <data name="ideal_payment" xml:space="preserve">
+    <value />
+  </data>
+  <data name="image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="image_preview" xml:space="preserve">
+    <value>Image preview</value>
+  </data>
+  <data name="mail_sent" xml:space="preserve">
+    <value>Your mail has been sent to</value>
+  </data>
+  <data name="money_owed" xml:space="preserve">
+    <value>Money owed</value>
+  </data>
   <data name="my_codes" xml:space="preserve">
     <value>My Codes</value>
+  </data>
+  <data name="my_products" xml:space="preserve">
+    <value>My Products</value>
+  </data>
+  <data name="ogone_payment" xml:space="preserve">
+    <value />
+  </data>
+  <data name="order_id" xml:space="preserve">
+    <value>Order ID</value>
+  </data>
+  <data name="order_image" xml:space="preserve">
+    <value>Order image</value>
+  </data>
+  <data name="payment_check" xml:space="preserve">
+    <value>Payment Check</value>
+  </data>
+  <data name="payment_type" xml:space="preserve">
+    <value>Payment type</value>
+  </data>
+  <data name="photographer_id" xml:space="preserve">
+    <value>Photographer ID</value>
+  </data>
+  <data name="photo_id" xml:space="preserve">
+    <value>Photo ID</value>
+  </data>
+  <data name="price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="product_description" xml:space="preserve">
+    <value>Product Description</value>
+  </data>
+  <data name="product_id" xml:space="preserve">
+    <value>Product ID</value>
+  </data>
+  <data name="product_type" xml:space="preserve">
+    <value>Product Type</value>
+  </data>
+  <data name="purchase_id" xml:space="preserve">
+    <value>Purchase ID</value>
+  </data>
+  <data name="quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="reorder" xml:space="preserve">
+    <value>Re-order</value>
+  </data>
+  <data name="send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="sepia" xml:space="preserve">
+    <value>Sepia</value>
+  </data>
+  <data name="ship_orders" xml:space="preserve">
+    <value>Ship orders</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="stock" xml:space="preserve">
+    <value>Stock</value>
+  </data>
+  <data name="times_used" xml:space="preserve">
+    <value>Times used</value>
+  </data>
+  <data name="total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="view_products" xml:space="preserve">
+    <value>View Products</value>
+  </data>
+  <data name="your_codes_are" xml:space="preserve">
+    <value>Your codes are:</value>
+  </data>
+  <data name="your_codes_description" xml:space="preserve">
+    <value>You can use these codes on thephotoshop.nl when creating an account.</value>
+  </data>
+  <data name="your_order_codes" xml:space="preserve">
+    <value>Your codes from The Photoshop</value>
   </data>
 </root>

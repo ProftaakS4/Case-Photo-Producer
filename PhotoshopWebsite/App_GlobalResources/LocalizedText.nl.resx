@@ -120,8 +120,14 @@
   <data name="bank_transfer" xml:space="preserve">
     <value>Regel uw betaling via bankoverschrijving.</value>
   </data>
+  <data name="change_account_data" xml:space="preserve">
+    <value>Accountgegevens bijwerken</value>
+  </data>
   <data name="choose_bank_prompt" xml:space="preserve">
     <value>Kies uw bank</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>Stad</value>
   </data>
   <data name="create_account" xml:space="preserve">
     <value>Account aanmaken</value>
@@ -138,8 +144,50 @@
   <data name="error_enter_password" xml:space="preserve">
     <value>Voer je wachtwoord in</value>
   </data>
+  <data name="error_no_image_found" xml:space="preserve">
+    <value>No Image found, please the contact administrator</value>
+  </data>
+  <data name="finance" xml:space="preserve">
+    <value>Financien</value>
+  </data>
+  <data name="first_name" xml:space="preserve">
+    <value>Voornaam</value>
+  </data>
+  <data name="go" xml:space="preserve">
+    <value>Go!</value>
+  </data>
+  <data name="group_pictures" xml:space="preserve">
+    <value>Groepsfoto's</value>
+  </data>
+  <data name="house_number" xml:space="preserve">
+    <value>Huisnummer</value>
+  </data>
+  <data name="IBAN" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="ideal" xml:space="preserve">
+    <value>IDeal</value>
+  </data>
   <data name="ideal_description" xml:space="preserve">
     <value>De Meest gebruikte betaal methode van Nederland</value>
+  </data>
+  <data name="last_name" xml:space="preserve">
+    <value>Achternaam</value>
+  </data>
+  <data name="logout" xml:space="preserve">
+    <value>Uitloggen</value>
+  </data>
+  <data name="my_account" xml:space="preserve">
+    <value>Mijn account</value>
+  </data>
+  <data name="my_codes" xml:space="preserve">
+    <value>Mijn inlogcodes</value>
+  </data>
+  <data name="my_products" xml:space="preserve">
+    <value>Mijn producten</value>
+  </data>
+  <data name="orders" xml:space="preserve">
+    <value>Bestellingen</value>
   </data>
   <data name="order_code" xml:space="preserve">
     <value>Inlogcode</value>
@@ -147,8 +195,20 @@
   <data name="order_code_title" xml:space="preserve">
     <value>Of gebruik je inlogcode</value>
   </data>
+  <data name="order_history" xml:space="preserve">
+    <value>Eerdere bestellingen</value>
+  </data>
+  <data name="order_info" xml:space="preserve">
+    <value>Bestellingsinfo</value>
+  </data>
   <data name="password" xml:space="preserve">
     <value>Wachtwoord</value>
+  </data>
+  <data name="phone_number" xml:space="preserve">
+    <value>Telefoonnummer</value>
+  </data>
+  <data name="pictures" xml:space="preserve">
+    <value>Foto's</value>
   </data>
   <data name="place_order" xml:space="preserve">
     <value>Bestelling plaatsen</value>
@@ -156,10 +216,37 @@
   <data name="remember_me" xml:space="preserve">
     <value>Onthouden</value>
   </data>
+  <data name="save_changes" xml:space="preserve">
+    <value>Wijzigingen opslaan</value>
+  </data>
+  <data name="search_for" xml:space="preserve">
+    <value>Zoeken naar...</value>
+  </data>
+  <data name="select_bank_prompt" xml:space="preserve">
+    <value>Selecteer uw bank</value>
+  </data>
+  <data name="shopping_cart" xml:space="preserve">
+    <value>Winkelmandje</value>
+  </data>
   <data name="sign_in" xml:space="preserve">
     <value>Aanmelden</value>
   </data>
   <data name="sign_in_title" xml:space="preserve">
     <value>Meld je aan</value>
+  </data>
+  <data name="stock_overview" xml:space="preserve">
+    <value>Voorraadoverzicht</value>
+  </data>
+  <data name="street_name" xml:space="preserve">
+    <value>Straatnaam</value>
+  </data>
+  <data name="toggle_menu" xml:space="preserve">
+    <value>Menu in/uitklappen</value>
+  </data>
+  <data name="toggle_menu_description" xml:space="preserve">
+    <value>Klik op de in/uitklapknop om het menu te laten verschijnen of verdwijnen</value>
+  </data>
+  <data name="zipcode" xml:space="preserve">
+    <value>Postcode</value>
   </data>
 </root>

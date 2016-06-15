@@ -54,7 +54,7 @@ namespace PhotoshopWebsite.Gui.Client
             }
             else
             {
-                Response.Write("<script>alert('Please enter a valid Email adress')</script>");
+                Response.Write("<script>alert('"+Resources.LocalizedText.error_wrong_email+"')</script>");
             }
             
         }

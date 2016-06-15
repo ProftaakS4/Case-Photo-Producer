@@ -45,39 +45,39 @@ namespace PhotoshopWebsite.Gui.Client
                 if (pageName.Contains("account"))
                 {
 
-                    LabelTitle.Text = "<h1>My Account</h1>";
+                    LabelTitle.Text = "<h1>"+Resources.LocalizedText.my_account+"</h1>";
                 }
                 else if (pageName.Contains("mainstore"))
                 {
-                    LabelTitle.Text = "<h1>My Pictures</h1>";
+                    LabelTitle.Text = "<h1>"+Resources.LocalizedText.pictures+"</h1>";
                 }
                 else if (pageName.Contains("group"))
                 {
-                    LabelTitle.Text = "<h1>Group Pictures</h1>";
+                    LabelTitle.Text = "<h1>"+Resources.LocalizedText.group_pictures+"</h1>";
                 }
                 else if (pageName.Contains("google"))
                 {
-                    LabelTitle.Text = "<h1>Google-Checkout Payment</h1>";
+                    LabelTitle.Text = "<h1>"+Resources.LocalizedText.google_checkout_payment+"</h1>";
                 }
                 else if (pageName.Contains("ideal"))
                 {
-                    LabelTitle.Text = "<h1>iDeal Payment</h1>";
+                    LabelTitle.Text = "<h1>"+Resources.LocalizedText.ideal_payment+"</h1>";
                 }
                 else if (pageName.Contains("ogone"))
                 {
-                    LabelTitle.Text = "<h1>Ogone Payment</h1>";
+                    LabelTitle.Text = "<h1>"+Resources.LocalizedText.ogone_payment+"</h1>";
                 }
                 else if (pageName.Contains("transfer"))
                 {
-                    LabelTitle.Text = "<h1>Money Tranfer Payment</h1>";
+                    LabelTitle.Text = "<h1>"+Resources.LocalizedText.bank_transfer+"</h1>";
                 }
                 else if (pageName.Contains("checkpayment"))
                 {
-                    LabelTitle.Text = "<h1>Payment Check</h1>";
+                    LabelTitle.Text = "<h1>"+Resources.LocalizedText.payment_check+"</h1>";
                 }
                 else if (pageName.Contains("shoppingcart"))
                 {
-                    LabelTitle.Text = "<h1>Shopping Cart</h1>";
+                    LabelTitle.Text = "<h1>"+Resources.LocalizedText.shopping_cart+"</h1>";
                 }
             }
         }
@@ -107,7 +107,7 @@ namespace PhotoshopWebsite.Gui.Client
                 }
                 else
                 {
-                    Response.Write("<script>alert('Voer zoekcriteria in')</script>");
+                    Response.Write("<script>alert('"+Resources.LocalizedText.error_enter_search_term+"')</script>");
                 }
             }
             else
@@ -127,7 +127,7 @@ namespace PhotoshopWebsite.Gui.Client
                 }
                 else
                 {
-                    Response.Write("<script>alert('Voer zoekcriteria in')</script>");
+                    Response.Write("<script>alert('"+Resources.LocalizedText.error_enter_search_term+"')</script>");
                 }
             }
         }

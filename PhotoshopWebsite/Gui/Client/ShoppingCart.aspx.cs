@@ -54,19 +54,19 @@ namespace PhotoshopWebsite.Gui
             MainTable.Width = 600;
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
             TableHeaderCell IDHeader = new TableHeaderCell();
-            IDHeader.Text = "Photo ID";
+            IDHeader.Text = Resources.LocalizedText.photo_id;
             TableHeaderCell FilterHeader = new TableHeaderCell();
-            FilterHeader.Text = "Filter";
+            FilterHeader.Text = Resources.LocalizedText.filter;
             TableHeaderCell TypeHeader = new TableHeaderCell();
-            TypeHeader.Text = "Product Type";
+            TypeHeader.Text = Resources.LocalizedText.product_type;
             TableHeaderCell DescriptionHeader = new TableHeaderCell();
-            DescriptionHeader.Text = "Photo Description";
+            DescriptionHeader.Text = Resources.LocalizedText.product_description;
             TableHeaderCell QuantityHeader = new TableHeaderCell();
-            QuantityHeader.Text = "Quantity";
+            QuantityHeader.Text = Resources.LocalizedText.quantity;
             TableHeaderCell PriceHeader = new TableHeaderCell();
-            PriceHeader.Text = "Price";
+            PriceHeader.Text = Resources.LocalizedText.price;
             TableHeaderCell RemoveHeader = new TableHeaderCell();
-            RemoveHeader.Text = "Remove";
+            RemoveHeader.Text = Resources.LocalizedText.remove;
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(FilterHeader);
             MainHeaderRow.Cells.Add(TypeHeader);
@@ -128,7 +128,7 @@ namespace PhotoshopWebsite.Gui
             FixedRow.Height = 60;
 
             TableCell TotalTextCell = new TableCell();
-            TotalTextCell.Text = "<B>Total:</B>";
+            TotalTextCell.Text = "<B>"+Resources.LocalizedText.total+":</B>";
             TableCell TotalAmountCell = new TableCell();
             TotalAmountCell.Text = "€" + totalAmount.ToString() + ",00";
             Session["totalAmount"] = totalAmount;

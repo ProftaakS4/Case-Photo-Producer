@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account ID.
+        /// </summary>
+        internal static string account_id {
+            get {
+                return ResourceManager.GetString("account_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account info.
         /// </summary>
         internal static string account_info {
@@ -79,11 +88,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alter amount.
+        /// </summary>
+        internal static string alter_amount {
+            get {
+                return ResourceManager.GetString("alter_amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available.
+        /// </summary>
+        internal static string available {
+            get {
+                return ResourceManager.GetString("available", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pay by bank transfer..
         /// </summary>
         internal static string bank_transfer {
             get {
                 return ResourceManager.GetString("bank_transfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Black &amp; White.
+        /// </summary>
+        internal static string black_white {
+            get {
+                return ResourceManager.GetString("black_white", resourceCulture);
             }
         }
         
@@ -142,6 +178,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Color.
+        /// </summary>
+        internal static string color {
+            get {
+                return ResourceManager.GetString("color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm your order and shipping address.
         /// </summary>
         internal static string confirm_order_address {
@@ -178,11 +223,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Crop.
+        /// </summary>
+        internal static string crop {
+            get {
+                return ResourceManager.GetString("crop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        internal static string date {
+            get {
+                return ResourceManager.GetString("date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        internal static string download {
+            get {
+                return ResourceManager.GetString("download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E-mail address.
         /// </summary>
         internal static string email {
             get {
                 return ResourceManager.GetString("email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not send mail to.
+        /// </summary>
+        internal static string error_cant_send_mail {
+            get {
+                return ResourceManager.GetString("error_cant_send_mail", resourceCulture);
             }
         }
         
@@ -214,6 +295,69 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter a search term.
+        /// </summary>
+        internal static string error_enter_search_term {
+            get {
+                return ResourceManager.GetString("error_enter_search_term", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong e-mail address or password.
+        /// </summary>
+        internal static string error_login {
+            get {
+                return ResourceManager.GetString("error_login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Image found, please the contact administrator.
+        /// </summary>
+        internal static string error_no_image_found {
+            get {
+                return ResourceManager.GetString("error_no_image_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown user type.
+        /// </summary>
+        internal static string error_user_type {
+            get {
+                return ResourceManager.GetString("error_user_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The code you entered is not valid.
+        /// </summary>
+        internal static string error_wrong_code {
+            get {
+                return ResourceManager.GetString("error_wrong_code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid email address.
+        /// </summary>
+        internal static string error_wrong_email {
+            get {
+                return ResourceManager.GetString("error_wrong_email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        internal static string filter {
+            get {
+                return ResourceManager.GetString("filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Finance.
         /// </summary>
         internal static string finance {
@@ -237,6 +381,15 @@ namespace Resources {
         internal static string go {
             get {
                 return ResourceManager.GetString("go", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Google-checkout payment.
+        /// </summary>
+        internal static string google_checkout_payment {
+            get {
+                return ResourceManager.GetString("google_checkout_payment", resourceCulture);
             }
         }
         
@@ -286,6 +439,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ideal_payment {
+            get {
+                return ResourceManager.GetString("ideal_payment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image.
+        /// </summary>
+        internal static string image {
+            get {
+                return ResourceManager.GetString("image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image preview.
+        /// </summary>
+        internal static string image_preview {
+            get {
+                return ResourceManager.GetString("image_preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last name.
         /// </summary>
         internal static string last_name {
@@ -300,6 +480,24 @@ namespace Resources {
         internal static string logout {
             get {
                 return ResourceManager.GetString("logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your mail has been sent to.
+        /// </summary>
+        internal static string mail_sent {
+            get {
+                return ResourceManager.GetString("mail_sent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Money owed.
+        /// </summary>
+        internal static string money_owed {
+            get {
+                return ResourceManager.GetString("money_owed", resourceCulture);
             }
         }
         
@@ -327,6 +525,15 @@ namespace Resources {
         internal static string my_products {
             get {
                 return ResourceManager.GetString("my_products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ogone_payment {
+            get {
+                return ResourceManager.GetString("ogone_payment", resourceCulture);
             }
         }
         
@@ -367,6 +574,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order ID.
+        /// </summary>
+        internal static string order_id {
+            get {
+                return ResourceManager.GetString("order_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order image.
+        /// </summary>
+        internal static string order_image {
+            get {
+                return ResourceManager.GetString("order_image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Order info.
         /// </summary>
         internal static string order_info {
@@ -385,11 +610,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment Check.
+        /// </summary>
+        internal static string payment_check {
+            get {
+                return ResourceManager.GetString("payment_check", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment type.
+        /// </summary>
+        internal static string payment_type {
+            get {
+                return ResourceManager.GetString("payment_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phone number.
         /// </summary>
         internal static string phone_number {
             get {
                 return ResourceManager.GetString("phone_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Photographer ID.
+        /// </summary>
+        internal static string photographer_id {
+            get {
+                return ResourceManager.GetString("photographer_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Photo ID.
+        /// </summary>
+        internal static string photo_id {
+            get {
+                return ResourceManager.GetString("photo_id", resourceCulture);
             }
         }
         
@@ -412,11 +673,92 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        internal static string price {
+            get {
+                return ResourceManager.GetString("price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Products.
+        /// </summary>
+        internal static string products {
+            get {
+                return ResourceManager.GetString("products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Description.
+        /// </summary>
+        internal static string product_description {
+            get {
+                return ResourceManager.GetString("product_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product ID.
+        /// </summary>
+        internal static string product_id {
+            get {
+                return ResourceManager.GetString("product_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Type.
+        /// </summary>
+        internal static string product_type {
+            get {
+                return ResourceManager.GetString("product_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Purchase ID.
+        /// </summary>
+        internal static string purchase_id {
+            get {
+                return ResourceManager.GetString("purchase_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity.
+        /// </summary>
+        internal static string quantity {
+            get {
+                return ResourceManager.GetString("quantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remember me.
         /// </summary>
         internal static string remember_me {
             get {
                 return ResourceManager.GetString("remember_me", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string remove {
+            get {
+                return ResourceManager.GetString("remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Re-order.
+        /// </summary>
+        internal static string reorder {
+            get {
+                return ResourceManager.GetString("reorder", resourceCulture);
             }
         }
         
@@ -448,6 +790,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        internal static string send {
+            get {
+                return ResourceManager.GetString("send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sepia.
+        /// </summary>
+        internal static string sepia {
+            get {
+                return ResourceManager.GetString("sepia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ship orders.
+        /// </summary>
+        internal static string ship_orders {
+            get {
+                return ResourceManager.GetString("ship_orders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shopping cart.
         /// </summary>
         internal static string shopping_cart {
@@ -475,6 +844,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string status {
+            get {
+                return ResourceManager.GetString("status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stock.
+        /// </summary>
+        internal static string stock {
+            get {
+                return ResourceManager.GetString("stock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stock overview.
         /// </summary>
         internal static string stock_overview {
@@ -493,6 +880,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Times used.
+        /// </summary>
+        internal static string times_used {
+            get {
+                return ResourceManager.GetString("times_used", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle Menu.
         /// </summary>
         internal static string toggle_menu {
@@ -507,6 +903,51 @@ namespace Resources {
         internal static string toggle_menu_description {
             get {
                 return ResourceManager.GetString("toggle_menu_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        internal static string total {
+            get {
+                return ResourceManager.GetString("total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Products.
+        /// </summary>
+        internal static string view_products {
+            get {
+                return ResourceManager.GetString("view_products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your codes are:.
+        /// </summary>
+        internal static string your_codes_are {
+            get {
+                return ResourceManager.GetString("your_codes_are", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can use these codes on thephotoshop.nl when creating an account..
+        /// </summary>
+        internal static string your_codes_description {
+            get {
+                return ResourceManager.GetString("your_codes_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your codes from The Photoshop.
+        /// </summary>
+        internal static string your_order_codes {
+            get {
+                return ResourceManager.GetString("your_order_codes", resourceCulture);
             }
         }
         
