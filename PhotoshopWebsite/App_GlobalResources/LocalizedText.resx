@@ -252,4 +252,16 @@
   <data name="zipcode" xml:space="preserve">
     <value>Zipcode</value>
   </data>
+  <data name="account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="finance" xml:space="preserve">
+    <value>Finance</value>
+  </data>
+  <data name="orders" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="stock_overview" xml:space="preserve">
+    <value>Stock overview</value>
+  </data>
 </root>
