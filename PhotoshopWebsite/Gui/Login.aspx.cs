@@ -52,6 +52,7 @@ namespace PhotoshopWebsite
                 Session["logindata"] = loginname;
                 Session["UserData"] = userWithData;
                 _userInfoCookies = Request.Cookies["Userinfo"];
+                
                 if (rememberMe && _userInfoCookies != null)
                 {
                     var expiredCookie = new HttpCookie(_userInfoCookies.Name) { Expires = DateTime.Now.AddDays(-1) };
