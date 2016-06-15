@@ -21,10 +21,18 @@ namespace PhotoshopWebsite.DatabaseTier.Tests
         [TestMethod()]
         public void loginUserTest()
         {
-            bool result;
-            result = login.loginUser("c.kleijnen@fontys.nl", "carlikleijnen");
+            Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
+            parameters.Add("p_account_Email", new string[] { "string", "c.kleijnen@fontys.nl" });
+            parameters.Add("p_password", new string[] { "string", "carlikleijnen" });
+            DataTable dt = database.CallProcedure("getUserPassword", parameters);
+            bool result = dt.Rows.Count != 0;
             Assert.IsTrue(result);
-            result = login.loginUser("c.kleijnen@fontys.nl", "nopassword");
+
+            parameters = new Dictionary<string, string[]>();
+            parameters.Add("p_account_Email", new string[] { "string", "c.kleijnen@fontys.nl" });
+            parameters.Add("p_password", new string[] { "string", "nopassword" });
+            dt = database.CallProcedure("getUserPassword", parameters);
+            result = dt.Rows.Count != 0;
             Assert.IsFalse(result);
         }
 
