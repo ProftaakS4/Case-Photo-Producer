@@ -1,4 +1,4 @@
-﻿using PhotoshopWebsite.Domain;
+﻿ using PhotoshopWebsite.Domain;
 using PhotoshopWebsite.Enumeration;
 using System;
 using System.Collections.Generic;
@@ -172,7 +172,7 @@ namespace PhotoshopWebsite.Gui.Client.Payment
                         foreach (Domain.ShoppingbasketItem item in shoppingCart)
                         {
                             // create socket string
-                            string photoIDQualtityType = item.PhotoID.ToString() + ";" + item.Quantity.ToString() + "#" + item.Filter;
+                            string photoIDQualtityType = item.PhotoID.ToString() + ";" + item.Quantity.ToString() + "#" + item.Filter + "& 55 73 187 187";
                             // send socket string to fileserver and check if string is correctly send
                             if (socket.sendData(photoIDQualtityType))
                             {

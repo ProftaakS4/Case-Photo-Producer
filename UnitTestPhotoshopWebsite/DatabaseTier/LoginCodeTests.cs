@@ -12,13 +12,15 @@ namespace PhotoshopWebsite.DatabaseTier.Tests
     [TestClass()]
     public class LoginCodeTests
     {
-        private LoginCode login = new LoginCode();
+        private DatabaseTier.QueryDatabase database = new DatabaseTier.QueryDatabase();
 
         [TestMethod()]
         public void getLoginCodeDataTest()
         {
-            DataTable getLoginCodeData = login.getLoginCodeData(1);
-            Assert.IsNotNull(getLoginCodeData);
+            Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
+            parameters.Add("p_photographer_ID", new string[] { "int", 1.ToString() });
+            DataTable dt = database.CallProcedure("getLoginCodesFromPhotographer", parameters);
+            Assert.IsNotNull(dt);
         }
     }
 }
