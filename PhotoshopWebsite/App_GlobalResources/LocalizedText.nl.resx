@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="bank_transfer" xml:space="preserve">
+  <data name="bank_transfer_description" xml:space="preserve">
     <value>Regel uw betaling via bankoverschrijving.</value>
   </data>
   <data name="change_account_data" xml:space="preserve">
@@ -425,5 +425,38 @@
   </data>
   <data name="your_order_codes" xml:space="preserve">
     <value>Je inlogcodes van The Photoshop</value>
+  </data>
+  <data name="bank_transfer" xml:space="preserve">
+    <value>Bankoverschrijving</value>
+  </data>
+  <data name="choose_bank" xml:space="preserve">
+    <value>Kies uw bank</value>
+  </data>
+  <data name="google_checkout" xml:space="preserve">
+    <value>Google Checkout</value>
+  </data>
+  <data name="google_checkout_description" xml:space="preserve">
+    <value>Snel betalen met Google</value>
+  </data>
+  <data name="go_back" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+  <data name="ogone" xml:space="preserve">
+    <value>Ogone</value>
+  </data>
+  <data name="ogone_description" xml:space="preserve">
+    <value>Een ingenico-bedrijf</value>
+  </data>
+  <data name="paypal" xml:space="preserve">
+    <value>PayPal</value>
+  </data>
+  <data name="paypal_description" xml:space="preserve">
+    <value>Veilig online betalen of betaald worden</value>
+  </data>
+  <data name="personal_info" xml:space="preserve">
+    <value>Persoonlijke gegevens</value>
+  </data>
+  <data name="welcome" xml:space="preserve">
+    <value>Welkom, </value>
   </data>
 </root>

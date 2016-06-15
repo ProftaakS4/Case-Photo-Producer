@@ -213,7 +213,6 @@
     <Compile Include="Domain\Photo.cs" />
     <Compile Include="DatabaseTier\ConnectionSingleton.cs" />
     <Compile Include="DatabaseTier\Order.cs" />
-    <Compile Include="DatabaseTier\Photo.cs" />
     <Compile Include="Gui\Client\Account.aspx.cs">
       <DependentUpon>Account.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

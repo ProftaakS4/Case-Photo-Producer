@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PhotoshopWebsite.Enumeration;
+using System.Data;
 
 namespace PhotoshopWebsite.Domain
 {
@@ -12,7 +13,7 @@ namespace PhotoshopWebsite.Domain
     [Serializable]
     public class Photo
     {
-        DatabaseTier.Photo photo = new DatabaseTier.Photo();
+        private DatabaseTier.QueryDatabase database = new DatabaseTier.QueryDatabase();
 
         public int ID { get; set; }
         public int PhotographerID { get; set; }
@@ -47,7 +48,53 @@ namespace PhotoshopWebsite.Domain
         /// <returns></returns>
         public List<ProductTypes.PTypes> getTypes(int photoID)
         {
-            return photo.getTypes(photoID);
+            List<ProductTypes.PTypes> types = new List<ProductTypes.PTypes>();
+
+            Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
+            parameters.Add("p_id", new string[] { "string", photoID.ToString() });
+            DataTable dt = database.CallProcedure("getAccountIdperPhoto", parameters);
+            if (dt.Rows.Count == 0)
+            {
+                return types;
+            }
+            parameters = new Dictionary<string, string[]>();
+            parameters.Add("a_id", new string[] { "string", dt.Rows[0][0].ToString() });
+            dt = database.CallProcedure("getProductTypesByAccountId", parameters);
+
+            foreach (DataRow data in dt.Rows)
+            {
+                switch (data[0].ToString())
+                {
+                    case "1":
+                        types.Add(ProductTypes.PTypes.PHOTO1x2);
+                        break;
+                    case "2":
+                        types.Add(ProductTypes.PTypes.PHOTO2x4);
+                        break;
+                    case "3":
+                        types.Add(ProductTypes.PTypes.PHOTO5x8);
+                        break;
+                    case "4":
+                        types.Add(ProductTypes.PTypes.MUISMAT);
+                        break;
+                    case "5":
+                        types.Add(ProductTypes.PTypes.TASSEN);
+                        break;
+                    case "6":
+                        types.Add(ProductTypes.PTypes.TSHIRT);
+                        break;
+                    case "7":
+                        types.Add(ProductTypes.PTypes.MOK);
+                        break;
+                    case "8":
+                        types.Add(ProductTypes.PTypes.CANVAS);
+                        break;
+                    case "9":
+                        types.Add(ProductTypes.PTypes.DIBOND);
+                        break;
+                }
+            }
+            return types;
         }
         public override bool Equals(System.Object obj)
         {

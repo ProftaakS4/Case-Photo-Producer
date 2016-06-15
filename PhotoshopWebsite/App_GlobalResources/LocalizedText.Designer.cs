@@ -115,11 +115,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pay by bank transfer..
+        ///   Looks up a localized string similar to Bank transfer.
         /// </summary>
         internal static string bank_transfer {
             get {
                 return ResourceManager.GetString("bank_transfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pay by bank transfer..
+        /// </summary>
+        internal static string bank_transfer_description {
+            get {
+                return ResourceManager.GetString("bank_transfer_description", resourceCulture);
             }
         }
         
@@ -147,6 +156,15 @@ namespace Resources {
         internal static string change_account_data {
             get {
                 return ResourceManager.GetString("change_account_data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose your bank.
+        /// </summary>
+        internal static string choose_bank {
+            get {
+                return ResourceManager.GetString("choose_bank", resourceCulture);
             }
         }
         
@@ -394,11 +412,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Google Checkout.
+        /// </summary>
+        internal static string google_checkout {
+            get {
+                return ResourceManager.GetString("google_checkout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fast checkout through Google.
+        /// </summary>
+        internal static string google_checkout_description {
+            get {
+                return ResourceManager.GetString("google_checkout_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Google-checkout payment.
         /// </summary>
         internal static string google_checkout_payment {
             get {
                 return ResourceManager.GetString("google_checkout_payment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go back.
+        /// </summary>
+        internal static string go_back {
+            get {
+                return ResourceManager.GetString("go_back", resourceCulture);
             }
         }
         
@@ -538,6 +583,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ogone.
+        /// </summary>
+        internal static string ogone {
+            get {
+                return ResourceManager.GetString("ogone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An ingenico company.
+        /// </summary>
+        internal static string ogone_description {
+            get {
+                return ResourceManager.GetString("ogone_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         internal static string ogone_payment {
@@ -592,7 +655,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Order image.
+        ///   Looks up a localized string similar to Order.
         /// </summary>
         internal static string order_image {
             get {
@@ -633,6 +696,33 @@ namespace Resources {
         internal static string payment_type {
             get {
                 return ResourceManager.GetString("payment_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PayPal.
+        /// </summary>
+        internal static string paypal {
+            get {
+                return ResourceManager.GetString("paypal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A faster, safer way to pay.
+        /// </summary>
+        internal static string paypal_description {
+            get {
+                return ResourceManager.GetString("paypal_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Personal info.
+        /// </summary>
+        internal static string personal_info {
+            get {
+                return ResourceManager.GetString("personal_info", resourceCulture);
             }
         }
         
@@ -939,6 +1029,15 @@ namespace Resources {
         internal static string view_products {
             get {
                 return ResourceManager.GetString("view_products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome, .
+        /// </summary>
+        internal static string welcome {
+            get {
+                return ResourceManager.GetString("welcome", resourceCulture);
             }
         }
         

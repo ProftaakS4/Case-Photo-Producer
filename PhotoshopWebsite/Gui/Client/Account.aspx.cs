@@ -9,6 +9,7 @@ using System.Web.UI.HtmlControls;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using PhotoshopWebsite.Domain;
+using PhotoshopWebsite.Enumeration;
 
 namespace PhotoshopWebsite.Gui.Client
 {
@@ -21,6 +22,45 @@ namespace PhotoshopWebsite.Gui.Client
         private User currentUser;
         private OrderController oc;
         private OrderController ocInfo;
+
+        public List<Domain.ShoppingbasketItem> shoppingCart
+        {
+            get
+            {
+                if (!(Session["shoppingCart"] is List<Domain.ShoppingbasketItem>))
+                {
+                    Session["shoppingCart"] = new List<Domain.ShoppingbasketItem>();
+                }
+
+                return Session["shoppingCart"] as List<Domain.ShoppingbasketItem>;
+            }
+        }
+
+        public Dictionary<int, FilterTypes.FTypes> filters
+        {
+            get
+            {
+                if (!(Session["filters"] is Dictionary<int, FilterTypes.FTypes>))
+                {
+                    Session["filters"] = new Dictionary<int, FilterTypes.FTypes>();
+                }
+
+                return Session["filters"] as Dictionary<int, FilterTypes.FTypes>;
+            }
+        }
+
+        public Dictionary<int, ProductTypes.PTypes> products
+        {
+            get
+            {
+                if (!(Session["products"] is Dictionary<int, ProductTypes.PTypes>))
+                {
+                    Session["products"] = new Dictionary<int, ProductTypes.PTypes>();
+                }
+
+                return Session["products"] as Dictionary<int, ProductTypes.PTypes>;
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -126,13 +166,37 @@ namespace PhotoshopWebsite.Gui.Client
 
         void btnOrder_Click(object sender, EventArgs e)
         {
-            Button x = sender as Button;
-            string id = x.ID;
-            foreach (Order order in orders)
+            Button button = sender as Button;
+            string id = button.ID;
+            int orderID = int.Parse(id);
+            ocInfo = new OrderController(currentUser.ID, orderID);
+            orderInfos = ocInfo.orderInfos;
+
+            foreach (OrderInfo oi in orderInfos)
             {
-                if (order.ID.ToString() == id)
+                string name = oi.Description;
+                int num = oi.ID;
+
+                Domain.ShoppingbasketItem found = null;
+                foreach (Domain.ShoppingbasketItem item in shoppingCart)
                 {
-                    Reorders.Add(order);
+                    if (item.PhotoID == num && item.Filter == filters[num])
+                    {
+                        found = item;
+                        break;
+                    }
+                }
+                if (found != null)
+            {
+                    found.Quantity++;
+                }
+                else
+                {
+                    //TODO pakt ook de jaartallen niet alleen de ID's
+                    PurchaseController purchaseController = new PurchaseController();
+                    int product = ProductTypes.getInt(products[num].ToString());
+                    int price = purchaseController.getPrice(product, num);
+                    shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num], price));
                 }
             }
         }
