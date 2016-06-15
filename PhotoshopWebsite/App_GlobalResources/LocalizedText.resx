@@ -117,6 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="account_info" xml:space="preserve">
+    <value>Account info</value>
+  </data>
+  <data name="bank_transfer" xml:space="preserve">
+    <value>Pay by bank transfer.</value>
+  </data>
+  <data name="change" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="change_account_data" xml:space="preserve">
+    <value>Change account data</value>
+  </data>
+  <data name="choose_bank_prompt" xml:space="preserve">
+    <value>Kies uw bank</value>
+  </data>
+  <data name="choose_payment_method" xml:space="preserve">
+    <value>Choose your payment method:</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="confirm_order_address" xml:space="preserve">
+    <value>Confirm your order and shipping address</value>
+  </data>
+  <data name="create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="createaccount_welcome" xml:space="preserve">
+    <value>Welcome to the account creation page! Please fill in the fields below</value>
+  </data>
   <data name="create_account" xml:space="preserve">
     <value>Create account</value>
   </data>
@@ -132,22 +165,103 @@
   <data name="error_enter_password" xml:space="preserve">
     <value>Enter your password</value>
   </data>
+  <data name="first_name" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="go" xml:space="preserve">
+    <value>Go!</value>
+  </data>
+  <data name="group_pictures" xml:space="preserve">
+    <value>Group pictures</value>
+  </data>
+  <data name="house_number" xml:space="preserve">
+    <value>House number</value>
+  </data>
+  <data name="IBAN" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="ideal" xml:space="preserve">
+    <value>IDeal</value>
+  </data>
+  <data name="ideal_description" xml:space="preserve">
+    <value>The most used payment method in the Netherlands</value>
+  </data>
+  <data name="last_name" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="my_account" xml:space="preserve">
+    <value>My account</value>
+  </data>
   <data name="order_code" xml:space="preserve">
     <value>Code</value>
   </data>
   <data name="order_code_title" xml:space="preserve">
     <value>Or insert your order code</value>
   </data>
+  <data name="order_history" xml:space="preserve">
+    <value>Order history</value>
+  </data>
+  <data name="order_info" xml:space="preserve">
+    <value>Order info</value>
+  </data>
   <data name="password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="phone_number" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="pictures" xml:space="preserve">
+    <value>Pictures</value>
+  </data>
+  <data name="place_order" xml:space="preserve">
+    <value>Place order</value>
+  </data>
   <data name="remember_me" xml:space="preserve">
     <value>Remember me</value>
+  </data>
+  <data name="save_changes" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="search_for" xml:space="preserve">
+    <value>Search for...</value>
+  </data>
+  <data name="select_bank_prompt" xml:space="preserve">
+    <value>Select your bank</value>
+  </data>
+  <data name="shopping_cart" xml:space="preserve">
+    <value>Shopping cart</value>
   </data>
   <data name="sign_in" xml:space="preserve">
     <value>Sign in</value>
   </data>
   <data name="sign_in_title" xml:space="preserve">
     <value>Please sign in-</value>
+  </data>
+  <data name="street_name" xml:space="preserve">
+    <value>Street name</value>
+  </data>
+  <data name="toggle_menu" xml:space="preserve">
+    <value>Toggle Menu</value>
+  </data>
+  <data name="toggle_menu_description" xml:space="preserve">
+    <value>Click to Toggle button for the Menu to appear or dissapear</value>
+  </data>
+  <data name="zipcode" xml:space="preserve">
+    <value>Zipcode</value>
+  </data>
+  <data name="account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="finance" xml:space="preserve">
+    <value>Finance</value>
+  </data>
+  <data name="orders" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="stock_overview" xml:space="preserve">
+    <value>Stock overview</value>
   </data>
 </root>

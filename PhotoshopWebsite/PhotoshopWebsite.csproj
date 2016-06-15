@@ -117,10 +117,6 @@
     <Content Include="Gui\Images\background\background2.jpg" />
     <Content Include="Gui\Images\background\background3.jpg" />
     <Content Include="Gui\Images\background\background4.jpg" />
-    <Content Include="Gui\Images\Payment\google_checkout.png" />
-    <Content Include="Gui\Images\Payment\Ideal.jpg" />
-    <Content Include="Gui\Images\Payment\overboeking.jpg" />
-    <Content Include="Gui\Images\Payment\Paypal.jpg" />
     <Content Include="Gui\Images\Shoppingcart.png" />
     <Content Include="Gui\Images\LOW RESOLUTION\Prive\userid4-1.jpeg" />
     <Content Include="Gui\Images\LOW RESOLUTION\Prive\userid4-2.jpeg" />
@@ -200,8 +196,7 @@
     <Compile Include="Controller\ProductController.cs" />
     <Compile Include="Controller\PurchaseController.cs" />
     <Compile Include="DatabaseTier\AccountCreation.cs" />
-    <Compile Include="DatabaseTier\Finance.cs" />
-    <Compile Include="DatabaseTier\Product.cs" />
+    <Compile Include="DatabaseTier\QueryDatabase.cs" />
     <Compile Include="Domain\Finance.cs" />
     <Compile Include="Domain\OrderInfo.cs" />
     <Compile Include="Domain\Product.cs" />
@@ -209,8 +204,6 @@
     <Compile Include="Domain\Purchase.cs" />
     <Compile Include="Enumeration\FilterTypes.cs" />
     <Compile Include="Enumeration\ProductTypes.cs" />
-    <Compile Include="DatabaseTier\LoginCode.cs" />
-    <Compile Include="DatabaseTier\Search.cs" />
     <Compile Include="Domain\Dvd.cs" />
     <Compile Include="Domain\LoginCode.cs" />
     <Compile Include="Domain\Map.cs" />

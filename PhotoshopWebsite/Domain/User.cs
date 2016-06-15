@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +12,7 @@ namespace PhotoshopWebsite.Domain
     public class User
     {
         private DatabaseTier.Login DB_Login = new DatabaseTier.Login();
+        private DatabaseTier.QueryDatabase database = new DatabaseTier.QueryDatabase();
 
         public int ID { get; set; }
         public string Type { get; set; }
@@ -122,20 +124,23 @@ namespace PhotoshopWebsite.Domain
             if (userID != DatabaseTier.Login.NO_USER_FOUND)
             {
                 this.ID = userID;
-                Dictionary<string, string> userData = DB_Login.getUserData(userID);
+                List<ProductPerPhotographer> temp = new List<ProductPerPhotographer>();
+                Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
+                parameters.Add("p_id", new string[] { "int", userID.ToString() });
+                DataTable dt = database.CallProcedure("getUserInformation", parameters);
                 // when userdata is found and returned
-                if (userData != null)
-                {
+                if (dt.Rows.Count != 0)
+                { 
                     // set the data for the current user
-                    this.Type = userData["type"];
-                    this.Firstname = userData["firstname"];
-                    this.Lastname = userData["lastname"];
-                    this.Streetname = userData["streetname"];
-                    this.Housenumber = userData["housenumber"];
-                    this.Zipcode = userData["zipcode"];
-                    this.City = userData["city"];
-                    this.Phonenumber = userData["phonenumber"];
-                    this.IBAN = userData["iban"];
+                    this.Type = dt.Rows[0][0].ToString();
+                    this.Firstname = dt.Rows[0][1].ToString();
+                    this.Lastname = dt.Rows[0][2].ToString();
+                    this.Streetname = dt.Rows[0][3].ToString();
+                    this.Housenumber = dt.Rows[0][4].ToString();
+                    this.Zipcode = dt.Rows[0][5].ToString();
+                    this.City =dt.Rows[0][6].ToString();
+                    this.Phonenumber =dt.Rows[0][7].ToString();
+                    this.IBAN = dt.Rows[0][8].ToString();
                     // return the user with its data
                     return this;
                 }

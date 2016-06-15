@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="bank_transfer" xml:space="preserve">
+    <value>Regel uw betaling via bankoverschrijving.</value>
+  </data>
+  <data name="choose_bank_prompt" xml:space="preserve">
+    <value>Kies uw bank</value>
+  </data>
   <data name="create_account" xml:space="preserve">
     <value>Account aanmaken</value>
   </data>
@@ -132,14 +138,20 @@
   <data name="error_enter_password" xml:space="preserve">
     <value>Voer je wachtwoord in</value>
   </data>
+  <data name="ideal_description" xml:space="preserve">
+    <value>De Meest gebruikte betaal methode van Nederland</value>
+  </data>
   <data name="order_code" xml:space="preserve">
     <value>Inlogcode</value>
   </data>
   <data name="order_code_title" xml:space="preserve">
-    <value>Of voer je inlogcode in</value>
+    <value>Of gebruik je inlogcode</value>
   </data>
   <data name="password" xml:space="preserve">
     <value>Wachtwoord</value>
+  </data>
+  <data name="place_order" xml:space="preserve">
+    <value>Bestelling plaatsen</value>
   </data>
   <data name="remember_me" xml:space="preserve">
     <value>Onthouden</value>
