@@ -28,19 +28,19 @@ namespace PhotoshopWebsite.Gui
             pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
             if (pageName.Contains("account"))
             {
-                LabelTitle.Text = "<h1>My Account</h1>";
+                LabelTitle.Text = "<h1>"+Resources.LocalizedText.my_account+"</h1>";
             }
             else if (pageName.Contains("orders"))
             {
-                LabelTitle.Text = "<h1>Orders</h1>";
+                LabelTitle.Text = "<h1>"+Resources.LocalizedText.orders+"</h1>";
             }
             else if (pageName.Contains("stock"))
             {
-                LabelTitle.Text = "<h1>Stock</h1>";
+                LabelTitle.Text = "<h1>"+Resources.LocalizedText.stock_overview+"</h1>";
             }
             else if (pageName.Contains("finance"))
             {
-                LabelTitle.Text = "<h1>Finance</h1>";
+                LabelTitle.Text = "<h1>"+Resources.LocalizedText.finance+"</h1>";
             }
         }
         protected void Btnlogout_Click(object sender, EventArgs e)

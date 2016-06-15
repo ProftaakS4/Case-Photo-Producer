@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="bank_transfer" xml:space="preserve">
+  <data name="bank_transfer_description" xml:space="preserve">
     <value>Regel uw betaling via bankoverschrijving.</value>
+  </data>
+  <data name="change_account_data" xml:space="preserve">
+    <value>Accountgegevens bijwerken</value>
   </data>
   <data name="choose_bank_prompt" xml:space="preserve">
     <value>Kies uw bank</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>Stad</value>
   </data>
   <data name="create_account" xml:space="preserve">
     <value>Account aanmaken</value>
@@ -138,8 +144,47 @@
   <data name="error_enter_password" xml:space="preserve">
     <value>Voer je wachtwoord in</value>
   </data>
+  <data name="finance" xml:space="preserve">
+    <value>Financien</value>
+  </data>
+  <data name="first_name" xml:space="preserve">
+    <value>Voornaam</value>
+  </data>
+  <data name="go" xml:space="preserve">
+    <value>Go!</value>
+  </data>
+  <data name="group_pictures" xml:space="preserve">
+    <value>Groepsfoto's</value>
+  </data>
+  <data name="house_number" xml:space="preserve">
+    <value>Huisnummer</value>
+  </data>
+  <data name="IBAN" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="ideal" xml:space="preserve">
+    <value>IDeal</value>
+  </data>
   <data name="ideal_description" xml:space="preserve">
     <value>De Meest gebruikte betaal methode van Nederland</value>
+  </data>
+  <data name="last_name" xml:space="preserve">
+    <value>Achternaam</value>
+  </data>
+  <data name="logout" xml:space="preserve">
+    <value>Uitloggen</value>
+  </data>
+  <data name="my_account" xml:space="preserve">
+    <value>Mijn account</value>
+  </data>
+  <data name="my_codes" xml:space="preserve">
+    <value>Mijn inlogcodes</value>
+  </data>
+  <data name="my_products" xml:space="preserve">
+    <value>Mijn producten</value>
+  </data>
+  <data name="orders" xml:space="preserve">
+    <value>Bestellingen</value>
   </data>
   <data name="order_code" xml:space="preserve">
     <value>Inlogcode</value>
@@ -147,8 +192,20 @@
   <data name="order_code_title" xml:space="preserve">
     <value>Of gebruik je inlogcode</value>
   </data>
+  <data name="order_history" xml:space="preserve">
+    <value>Eerdere bestellingen</value>
+  </data>
+  <data name="order_info" xml:space="preserve">
+    <value>Bestellingsinfo</value>
+  </data>
   <data name="password" xml:space="preserve">
     <value>Wachtwoord</value>
+  </data>
+  <data name="phone_number" xml:space="preserve">
+    <value>Telefoonnummer</value>
+  </data>
+  <data name="pictures" xml:space="preserve">
+    <value>Foto's</value>
   </data>
   <data name="place_order" xml:space="preserve">
     <value>Bestelling plaatsen</value>
@@ -156,10 +213,250 @@
   <data name="remember_me" xml:space="preserve">
     <value>Onthouden</value>
   </data>
+  <data name="save_changes" xml:space="preserve">
+    <value>Wijzigingen opslaan</value>
+  </data>
+  <data name="search_for" xml:space="preserve">
+    <value>Zoeken naar...</value>
+  </data>
+  <data name="select_bank_prompt" xml:space="preserve">
+    <value>Selecteer uw bank</value>
+  </data>
+  <data name="shopping_cart" xml:space="preserve">
+    <value>Winkelmandje</value>
+  </data>
   <data name="sign_in" xml:space="preserve">
     <value>Aanmelden</value>
   </data>
   <data name="sign_in_title" xml:space="preserve">
     <value>Meld je aan</value>
+  </data>
+  <data name="stock_overview" xml:space="preserve">
+    <value>Voorraadoverzicht</value>
+  </data>
+  <data name="street_name" xml:space="preserve">
+    <value>Straatnaam</value>
+  </data>
+  <data name="toggle_menu" xml:space="preserve">
+    <value>Menu in/uitklappen</value>
+  </data>
+  <data name="toggle_menu_description" xml:space="preserve">
+    <value>Klik op de in/uitklapknop om het menu te laten verschijnen of verdwijnen</value>
+  </data>
+  <data name="zipcode" xml:space="preserve">
+    <value>Postcode</value>
+  </data>
+  <data name="account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="account_id" xml:space="preserve">
+    <value>Account ID</value>
+  </data>
+  <data name="account_info" xml:space="preserve">
+    <value>Account info</value>
+  </data>
+  <data name="alter_amount" xml:space="preserve">
+    <value>Aantal bijwerken</value>
+  </data>
+  <data name="amount" xml:space="preserve">
+    <value>Aantal</value>
+  </data>
+  <data name="available" xml:space="preserve">
+    <value>Beschikbaar</value>
+  </data>
+  <data name="black_white" xml:space="preserve">
+    <value>Zwart/wit</value>
+  </data>
+  <data name="change" xml:space="preserve">
+    <value>Aanpassen</value>
+  </data>
+  <data name="choose_payment_method" xml:space="preserve">
+    <value>Kies je betaalmethode:</value>
+  </data>
+  <data name="close" xml:space="preserve">
+    <value>Sluit</value>
+  </data>
+  <data name="color" xml:space="preserve">
+    <value>Kleur</value>
+  </data>
+  <data name="confirm_order_address" xml:space="preserve">
+    <value>Bevestig je factuur- en afleveradres</value>
+  </data>
+  <data name="create" xml:space="preserve">
+    <value>Aanmaken</value>
+  </data>
+  <data name="createaccount_welcome" xml:space="preserve">
+    <value>Welkom op de registratiepagina! Vul alstublieft de onderstaande velden in:</value>
+  </data>
+  <data name="crop" xml:space="preserve">
+    <value>Bijsnijden</value>
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="download" xml:space="preserve">
+    <value>Downloaden</value>
+  </data>
+  <data name="error_cant_send_mail" xml:space="preserve">
+    <value>Kan geen mail versturen naar</value>
+  </data>
+  <data name="error_enter_search_term" xml:space="preserve">
+    <value>Voer een zoekwoord in</value>
+  </data>
+  <data name="error_login" xml:space="preserve">
+    <value>Verdeerde e-mailadres of wachtwoord</value>
+  </data>
+  <data name="error_no_image_found" xml:space="preserve">
+    <value>Geen afbeelding gevonden, neem contact op met de beheerder</value>
+  </data>
+  <data name="error_user_type" xml:space="preserve">
+    <value>Onbekend gebruikerstype</value>
+  </data>
+  <data name="error_wrong_code" xml:space="preserve">
+    <value>De code die je hebt ingevoerd is niet geldig</value>
+  </data>
+  <data name="error_wrong_email" xml:space="preserve">
+    <value>Voer een geldig e-mailadres in</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="go1" xml:space="preserve">
+    <value>Go!</value>
+  </data>
+  <data name="google_checkout_payment" xml:space="preserve">
+    <value>Google-checkoutbetaling</value>
+  </data>
+  <data name="ideal_payment" xml:space="preserve">
+    <value>iDealbetaling</value>
+  </data>
+  <data name="image" xml:space="preserve">
+    <value>Afbeelding</value>
+  </data>
+  <data name="image_preview" xml:space="preserve">
+    <value>Voorbeeld</value>
+  </data>
+  <data name="mail_sent" xml:space="preserve">
+    <value>Je mail is verzonden aan</value>
+  </data>
+  <data name="money_owed" xml:space="preserve">
+    <value>Geld verschuldigd</value>
+  </data>
+  <data name="ogone_payment" xml:space="preserve">
+    <value>Ogonebetaling</value>
+  </data>
+  <data name="order_id" xml:space="preserve">
+    <value>Bestelling ID</value>
+  </data>
+  <data name="order_image" xml:space="preserve">
+    <value>Bestellen</value>
+  </data>
+  <data name="payment_check" xml:space="preserve">
+    <value>Checkbetaling</value>
+  </data>
+  <data name="payment_type" xml:space="preserve">
+    <value>Betaalwijze</value>
+  </data>
+  <data name="photographer_id" xml:space="preserve">
+    <value>Fotograafnummer</value>
+  </data>
+  <data name="photo_id" xml:space="preserve">
+    <value>Fotonummer</value>
+  </data>
+  <data name="price" xml:space="preserve">
+    <value>Prijs</value>
+  </data>
+  <data name="products" xml:space="preserve">
+    <value>Producten</value>
+  </data>
+  <data name="product_description" xml:space="preserve">
+    <value>Productomschrijving</value>
+  </data>
+  <data name="product_id" xml:space="preserve">
+    <value>Productnummer</value>
+  </data>
+  <data name="product_type" xml:space="preserve">
+    <value>Product Type</value>
+  </data>
+  <data name="purchase_id" xml:space="preserve">
+    <value>Aankoopnummer</value>
+  </data>
+  <data name="quantity" xml:space="preserve">
+    <value>Hoeveelheid</value>
+  </data>
+  <data name="remove" xml:space="preserve">
+    <value>Verwijder</value>
+  </data>
+  <data name="reorder" xml:space="preserve">
+    <value>Nabestellen</value>
+  </data>
+  <data name="send" xml:space="preserve">
+    <value>Verzenden</value>
+  </data>
+  <data name="sepia" xml:space="preserve">
+    <value>Sepia</value>
+  </data>
+  <data name="ship_orders" xml:space="preserve">
+    <value>Verzend bestellingen</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="stock" xml:space="preserve">
+    <value>Voorraad</value>
+  </data>
+  <data name="times_used" xml:space="preserve">
+    <value>Aantal keer gebruikt</value>
+  </data>
+  <data name="total" xml:space="preserve">
+    <value>Totaal</value>
+  </data>
+  <data name="view" xml:space="preserve">
+    <value>Bekijken</value>
+  </data>
+  <data name="view_products" xml:space="preserve">
+    <value>Bekijk producten</value>
+  </data>
+  <data name="your_codes_are" xml:space="preserve">
+    <value>Je codes zijn:</value>
+  </data>
+  <data name="your_codes_description" xml:space="preserve">
+    <value>Je kunt deze codes gebruiken op thephotoshop.nl wanneer je een nieuw account aanmaakt</value>
+  </data>
+  <data name="your_order_codes" xml:space="preserve">
+    <value>Je inlogcodes van The Photoshop</value>
+  </data>
+  <data name="bank_transfer" xml:space="preserve">
+    <value>Bankoverschrijving</value>
+  </data>
+  <data name="choose_bank" xml:space="preserve">
+    <value>Kies uw bank</value>
+  </data>
+  <data name="google_checkout" xml:space="preserve">
+    <value>Google Checkout</value>
+  </data>
+  <data name="google_checkout_description" xml:space="preserve">
+    <value>Snel betalen met Google</value>
+  </data>
+  <data name="go_back" xml:space="preserve">
+    <value>Terug</value>
+  </data>
+  <data name="ogone" xml:space="preserve">
+    <value>Ogone</value>
+  </data>
+  <data name="ogone_description" xml:space="preserve">
+    <value>Een ingenico-bedrijf</value>
+  </data>
+  <data name="paypal" xml:space="preserve">
+    <value>PayPal</value>
+  </data>
+  <data name="paypal_description" xml:space="preserve">
+    <value>Veilig online betalen of betaald worden</value>
+  </data>
+  <data name="personal_info" xml:space="preserve">
+    <value>Persoonlijke gegevens</value>
+  </data>
+  <data name="welcome" xml:space="preserve">
+    <value>Welkom, </value>
   </data>
 </root>

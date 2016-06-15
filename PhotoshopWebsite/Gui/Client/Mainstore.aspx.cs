@@ -151,7 +151,7 @@ namespace PhotoshopWebsite
             btnAddToCart.CssClass = "btn btn-default";
             btnAddToCart.Click += BtnAddToCart_Click1;
             btnAddToCart.Height = 30;
-            btnAddToCart.Text = "Order";
+            btnAddToCart.Text = Resources.LocalizedText.order_image;
 
             RadioButton btnSepia = new RadioButton();
             btnSepia.ID = "SEPIA" + x.ID;
@@ -159,10 +159,10 @@ namespace PhotoshopWebsite
             btnSepia.AutoPostBack = true;
             btnSepia.GroupName = x.ID.ToString();
             btnSepia.Height = 30;
-            btnSepia.Text = "Sepia ";
+            btnSepia.Text = Resources.LocalizedText.sepia;
 
             HtmlGenericControl cropButtonControll = new HtmlGenericControl("div");
-            cropButtonControll.InnerHtml = "<button type='button' id='Cropbtn" + x.ID + "'class='btn btn-default' data-toggle='modal' data-target='#myModal" + x.ID + "' >Crop</ button >";
+            cropButtonControll.InnerHtml = "<button type='button' id='Cropbtn" + x.ID + "'class='btn btn-default' data-toggle='modal' data-target='#myModal" + x.ID + "' >"+Resources.LocalizedText.crop+"</ button >";
 
             RadioButton btnBlackWhite = new RadioButton();
             btnBlackWhite.ID = "BLACKWHITE" + x.ID;
@@ -170,7 +170,7 @@ namespace PhotoshopWebsite
             btnBlackWhite.AutoPostBack = true;
             btnBlackWhite.GroupName = x.ID.ToString();
             btnBlackWhite.Height = 30;
-            btnBlackWhite.Text = "Black & White ";
+            btnBlackWhite.Text = Resources.LocalizedText.black_white;
 
             RadioButton btnColor = new RadioButton();
             btnColor.ID = "COLOR" + x.ID;
@@ -178,13 +178,13 @@ namespace PhotoshopWebsite
             btnColor.AutoPostBack = true;
             btnColor.GroupName = x.ID.ToString();
             btnColor.Height = 30;
-            btnColor.Text = "Color ";
+            btnColor.Text = Resources.LocalizedText.color;
 
             Button btnCrop = new Button();
             btnCrop.ID = "Crop" + x.ID.ToString();
             btnCrop.Click += BtnCrop_Click;
             btnCrop.CssClass = "btn btn-default";
-            btnCrop.Text = "Crop Image";
+            btnCrop.Text = Resources.LocalizedText.crop;
             btnCrop.Height = 30;
 
             if (!filters.ContainsKey(x.ID))
@@ -231,7 +231,7 @@ namespace PhotoshopWebsite
 
             System.Web.UI.WebControls.Image imgProduct = new System.Web.UI.WebControls.Image();
             imgProduct.ID = "image" + x.ID.ToString();
-            imgProduct.AlternateText = "No Image found, please the contact administrator";
+            imgProduct.AlternateText = Resources.LocalizedText.error_no_image_found;
             imgProduct.ImageUrl = x.Image;
             imgProduct.Height = 200;
             imgProduct.Width = 330;
@@ -249,7 +249,7 @@ namespace PhotoshopWebsite
 
             //firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'> <img src=" + x.Image + " " + "alt=" + x.Description + ">  <div class='caption'>";
             firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'><div class='caption'>";
-            cropControl.InnerHtml = "<div class='modal fade' id='myModal" + x.ID + "' tabindex=' - 1' role='dialog' aria-labelledby='mymodallabel'>< div class='modal-dialog' role='document'><div class='modal-content'  style='width:400px'><div class='modal-header'><button type = 'button' class='close' data-dismiss='modal' aria-label='close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='mymodallabel'>order image</h4></div><div class='modal-body'> <img src='" + x.Image + "' class='cropbox' style='height:330px; width:200px;'></img> <h1>image preview</h1><div style='width: 100px; height: 100px; overflow: hidden; margin - left:5px; '><img src='" + x.Image + "' class='preview'></img>'</div></div><div class='modal-footer'><button type = 'button' class='btn btn-default' data-dismiss='modal'>close</button>";
+            cropControl.InnerHtml = "<div class='modal fade' id='myModal" + x.ID + "' tabindex=' - 1' role='dialog' aria-labelledby='mymodallabel'>< div class='modal-dialog' role='document'><div class='modal-content'  style='width:400px'><div class='modal-header'><button type = 'button' class='close' data-dismiss='modal' aria-label='close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='mymodallabel'>"+Resources.LocalizedText.order_image+"</h4></div><div class='modal-body'> <img src='" + x.Image + "' class='cropbox' style='height:330px; width:200px;'></img> <h1>"+Resources.LocalizedText.image_preview+"</h1><div style='width: 100px; height: 100px; overflow: hidden; margin - left:5px; '><img src='" + x.Image + "' class='preview'></img>'</div></div><div class='modal-footer'><button type = 'button' class='btn btn-default' data-dismiss='modal'>"+Resources.LocalizedText.close+"</button>";
             cropControl.Controls.Add(btnCrop);
             cropControlLast.InnerHtml = "</div></div</div></div>";
 

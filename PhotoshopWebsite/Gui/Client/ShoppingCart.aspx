@@ -109,47 +109,51 @@
         <div class='container' style="margin-left: 13px;">
             <div class='row'>
                 <asp:Panel ID="pnlProduct" runat="server"></asp:Panel>
-                <h4 style="font-weight: bold">Kies uw betaalmethode:</h4>
+                <h4 style="font-weight: bold">
+                    <asp:Literal runat="server" Text="<%$ Resources:LocalizedText, choose_payment_method%>" />
+                </h4>
                 <div class="well" style="background-color: #96C8FA; width: 600px; height: 100%; padding-right: 30px; padding-left: 30px;">
                     <div class="row">
                         <div class="col-md-12" style='background-color: white; border-radius: 7px; height: 50px; padding: 10px; margin-bottom: 15px;'>
                             <input type="radio" id="rboverboeking" name="rate" value="overboeking">
 
                             <asp:Image ID="imgPaymentTransfer" ImageUrl="http://www.glerups.nl/media/wysiwyg/infortis/ultimo/custom/overboeking.jpg" runat="server" Class="img-responsive" Style="width: 86px; height: 35px; margin-left: 30px; display: inline" />
-                            <asp:Label ID="Label8" runat="server" Text="- Over boeking" Font-Bold="true" Style="display: inline"></asp:Label>
-                            <asp:Label ID="Label9" runat="server" Text="Regel uw betaling via bankoverschrijving." Font-Bold="false" Style="display: inline; float: right; color: darkseagreen"></asp:Label>
+                            <asp:Label ID="Label8" runat="server" Text="<%$ Resources:LocalizedText, bank_transfer%>" Font-Bold="true" Style="display: inline"></asp:Label>
+                            <asp:Label ID="Label9" runat="server" Text="<%$ Resources:LocalizedText, bank_transfer_description%>" Font-Bold="false" Style="display: inline; float: right; color: darkseagreen"></asp:Label>
 
                         </div>
                         <div class="col-md-12" style='background-color: white; border-radius: 7px; height: 50px; padding: 10px; margin-bottom: 15px;'>
                             <input type="radio" id="rbPaypal" name="rate" value="payPal">
                             <asp:ImageButton OnClick="btnPaypal_Click1" ID="btnPaypal" src="../Images/Payment/Paypal.jpg" runat="server" CssClass="img-responsive" Style="width: 53px; height: 35px; margin-left: 20px; display: inline" />
-                            <asp:Label ID="Label6" runat="server" Text="- Paypal Nederland" Font-Bold="true" Style="display: inline"></asp:Label>
-                            <asp:Label ID="Label7" runat="server" Text="Veilig online betalen of betaald worden" Font-Bold="false" Style="display: inline; float: right; color: darkseagreen"></asp:Label>
+                            <asp:Label ID="Label6" runat="server" Text="<%$ Resources:LocalizedText, paypal%>" Font-Bold="true" Style="display: inline"></asp:Label>
+                            <asp:Label ID="Label7" runat="server" Text="<%$ Resources:LocalizedText, paypal_description%>" Font-Bold="false" Style="display: inline; float: right; color: darkseagreen"></asp:Label>
                         </div>
                         <div class="col-md-12" style='background-color: white; border-radius: 7px; height: 50px; padding: 10px; margin-bottom: 15px;'>
                             <input type="radio" id="rbIdeal" name="rate" value="ideal">
                             <asp:Image ID="imgPaymentIdeal" ImageUrl="../Images/Payment/ideal.jpg" runat="server" CssClass="img-responsive" Style="width: 42px; height: 35px; margin-left: 20px; display: inline" />
-                            <asp:Label ID="lblIdeal" runat="server" Text="- Ideal" Font-Bold="true" Style="display: inline"></asp:Label>
-                            <asp:Label ID="Label1" runat="server" Text="De Meest gebruikte betaal methode van Nederland" Font-Bold="false" Style="display: inline; float: right; color: darkseagreen"></asp:Label>
+                            <asp:Label ID="lblIdeal" runat="server" Text="<%$ Resources:LocalizedText, ideal%>" Font-Bold="true" Style="display: inline"></asp:Label>
+                            <asp:Label ID="Label1" runat="server" Text="<%$ Resources:LocalizedText, ideal_description%>" Font-Bold="false" Style="display: inline; float: right; color: darkseagreen"></asp:Label>
 
                         </div>
                         <div class="col-md-12" style='background-color: white; border-radius: 7px; height: 50px; padding: 10px; margin-bottom: 15px;'>
                             <input type="radio" id="rbPaymentGoogle" name="rate" value="google">
                             <asp:Image ID="imgPaymentGoogle" src="../Images/Payment/google_checkout.png" runat="server" CssClass="img-responsive" Style="width: 97px; height: 32px; margin-left: 20px; display: inline" />
-                            <asp:Label ID="Label2" runat="server" Text="- Google Checkout" Font-Bold="true" Style="display: inline"></asp:Label>
-                            <asp:Label ID="Label3" runat="server" Text="Fast checkout through google" Font-Bold="false" Style="display: inline; float: right; color: darkseagreen"></asp:Label>
+                            <asp:Label ID="Label2" runat="server" Text="<%$ Resources:LocalizedText, google_checkout%>" Font-Bold="true" Style="display: inline"></asp:Label>
+                            <asp:Label ID="Label3" runat="server" Text="<%$ Resources:LocalizedText, google_checkout_description%>" Font-Bold="false" Style="display: inline; float: right; color: darkseagreen"></asp:Label>
                         </div>
                         <div class="col-md-12" style='background-color: white; border-radius: 7px; height: 50px; padding: 10px; margin-bottom: 15px;'>
                             <input type="radio" id="rbPaymentOgone" name="rate" value="ogone">
                             <asp:Image ID="imgPaymentOgone" ImageUrl="https://tctechcrunch2011.files.wordpress.com/2012/07/87407v3-max-250x250.jpg" runat="server" CssClass="img-responsive" Style="width: 74px; height: 35px; margin-left: 20px; display: inline" />
-                            <asp:Label ID="Label4" runat="server" Text="- Ogone" Font-Bold="true" Style="display: inline"></asp:Label>
-                            <asp:Label ID="Label5" runat="server" Text="An ingenico company" Font-Bold="false" Style="display: inline; float: right; color: darkseagreen"></asp:Label>
+                            <asp:Label ID="Label4" runat="server" Text="<%$ Resources:LocalizedText, ogone%>" Font-Bold="true" Style="display: inline"></asp:Label>
+                            <asp:Label ID="Label5" runat="server" Text="<%$ Resources:LocalizedText, ogone_description%>" Font-Bold="false" Style="display: inline; float: right; color: darkseagreen"></asp:Label>
                         </div>
                     </div>
                 </div>
                 <div class="row" style="background-color: #3B9BC4; width: 600px; padding-left: 5px; margin-left: 1px; border-radius: 7px;">
                     <div class="col-md-12" style="border-radius: 7px; height: 50px; padding: 10px;">
-                        <button type='button' id='btnOrder' class='btn btn-primary' style="background-color: #1E8C1B" data-toggle='modal' onclick="isReferenceNumberAvailable();" data-target='#myModal'>Place order</button>
+                        <button type='button' id='btnOrder' class='btn btn-primary' style="background-color: #1E8C1B" data-toggle='modal' onclick="isReferenceNumberAvailable();" data-target='#myModal'>
+                            <asp:Literal runat="server" Text="<%$ Resources:LocalizedText, order_image%>" />
+                        </button>
                     </div>
 
 
@@ -166,7 +170,7 @@
                                         <div class="col-lg-12">
                                             <div class="dropdown">
                                                 <button id="dropdown" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                                                    Kies uw Bank
+                                                    <asp:Literal runat="server" Text="<%$ Resources:LocalizedText, choose_bank%>" />
                                     <span class="caret"></span>
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
@@ -177,7 +181,7 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
-                                            <h3>Personal information</h3>
+                                            <h3><asp:Literal runat="server" Text="<%$ Resources:LocalizedText, personal_info%>" /></h3>
                                             <input type="text" class="input-group" id="Firstname" readonly />
                                             <input type="text" class="input-group" id="Lastname" readonly />
                                             <input type="text" class="input-group" id="Streetname" readonly />
@@ -195,8 +199,8 @@
                                     </div>
                                     <div class="modal-footer">
                                         <label class="x" id="Amountlabel" style="float: left"></label>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Go back</button>
-                                        <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" class="btn btn-success" Text="Submit" />
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"><asp:Literal runat="server" Text="<%$ Resources:LocalizedText, go_back%>" /></button>
+                                        <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" class="btn btn-success" Text="<%$ Resources:LocalizedText, send%>" />
                                     </div>
                                 </div>
                             </div>

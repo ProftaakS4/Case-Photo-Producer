@@ -69,7 +69,7 @@ namespace PhotoshopWebsite
             }
             else
             {
-                Response.Write("<script>alert('Wrong emailaddress or password')</script>");
+                Response.Write("<script>alert('"+Resources.LocalizedText.error_login+"')</script>");
             }
 
         }
@@ -113,7 +113,7 @@ namespace PhotoshopWebsite
             }
             else
             {
-                Response.Write("<script>alert('Unknown user type')</script>");
+                Response.Write("<script>alert('"+Resources.LocalizedText.error_user_type+"')</script>");
             }
         }
 
@@ -128,7 +128,7 @@ namespace PhotoshopWebsite
 
             if (loginCode == String.Empty)
             {
-                Response.Write("<script>alert('Pease enter a login code')</script>");
+                Response.Write("<script>alert('"+Resources.LocalizedText.error_enter_code+"')</script>");
             }
             else
             {
@@ -139,7 +139,7 @@ namespace PhotoshopWebsite
                 }
                 else
                 {
-                    Response.Write("<script>alert('Invalid Code')</script>");
+                    Response.Write("<script>alert('"+Resources.LocalizedText.error_wrong_code+"')</script>");
                 }
             }
             
