@@ -14,7 +14,7 @@
            <div class="jumbotron" style="border: initial; border-color:white; max-height:150px;">
   <h1 style="color:white;">Account creation page</h1>      
   <p style="opacity:0.8; color:white;">
-      <%$ Resources:LocalizedText, account_page_welcome%>
+      <asp:Literal runat="server" Text="<%$ Resources:LocalizedText, account_page_welcome%> " />
       </p>
 </div>
     <div id="panel-body" class="panel-body">

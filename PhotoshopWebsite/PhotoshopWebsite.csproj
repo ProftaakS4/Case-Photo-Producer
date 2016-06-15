@@ -102,11 +102,6 @@
     <Content Include="Gui\Client\Account.aspx" />
     <Content Include="Gui\Client\CreateAccount.aspx" />
     <Content Include="Gui\Client\GroupPictures.aspx" />
-    <Content Include="Gui\Client\Payment\CheckPayment.aspx" />
-    <Content Include="Gui\Client\Payment\Google.aspx" />
-    <Content Include="Gui\Client\Payment\iDeal.aspx" />
-    <Content Include="Gui\Client\Payment\Ogone.aspx" />
-    <Content Include="Gui\Client\Payment\Transfer.aspx" />
     <Content Include="Gui\Finance\Account.aspx" />
     <Content Include="Gui\Finance\Finance.aspx" />
     <Content Include="Gui\Client\PhotoshopMaster.Master" />
@@ -137,7 +132,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="Javascript\JavaScript.js" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Gui\Website.Master" />
     <None Include="Properties\PublishProfiles\PhotoshopS4.pubxml" />
@@ -195,18 +192,14 @@
     <Compile Include="Controller\PhotoController.cs" />
     <Compile Include="Controller\ProductController.cs" />
     <Compile Include="Controller\PurchaseController.cs" />
-    <Compile Include="DatabaseTier\AccountCreation.cs" />
-    <Compile Include="DatabaseTier\Finance.cs" />
-    <Compile Include="DatabaseTier\Product.cs" />
     <Compile Include="DatabaseTier\QueryDatabase.cs" />
     <Compile Include="Domain\Finance.cs" />
+    <Compile Include="Domain\OrderInfo.cs" />
     <Compile Include="Domain\Product.cs" />
     <Compile Include="Domain\ProductPerPhotographer.cs" />
     <Compile Include="Domain\Purchase.cs" />
     <Compile Include="Enumeration\FilterTypes.cs" />
     <Compile Include="Enumeration\ProductTypes.cs" />
-    <Compile Include="DatabaseTier\LoginCode.cs" />
-    <Compile Include="DatabaseTier\Search.cs" />
     <Compile Include="Domain\Dvd.cs" />
     <Compile Include="Domain\LoginCode.cs" />
     <Compile Include="Domain\Map.cs" />
@@ -218,9 +211,7 @@
     <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\Photo.cs" />
     <Compile Include="DatabaseTier\ConnectionSingleton.cs" />
-    <Compile Include="DatabaseTier\Login.cs" />
     <Compile Include="DatabaseTier\Order.cs" />
-    <Compile Include="DatabaseTier\Photo.cs" />
     <Compile Include="Gui\Client\Account.aspx.cs">
       <DependentUpon>Account.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -249,47 +240,12 @@
     <Compile Include="Gui\Client\NestedMasterPageClient.master.designer.cs">
       <DependentUpon>NestedMasterPageClient.master</DependentUpon>
     </Compile>
-    <Compile Include="Gui\Client\Payment\CheckPayment.aspx.cs">
-      <DependentUpon>CheckPayment.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gui\Client\Payment\CheckPayment.aspx.designer.cs">
-      <DependentUpon>CheckPayment.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Gui\Client\Payment\Google.aspx.cs">
-      <DependentUpon>Google.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gui\Client\Payment\Google.aspx.designer.cs">
-      <DependentUpon>Google.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Gui\Client\Payment\iDeal.aspx.cs">
-      <DependentUpon>iDeal.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gui\Client\Payment\iDeal.aspx.designer.cs">
-      <DependentUpon>iDeal.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Gui\Client\Payment\Ogone.aspx.cs">
-      <DependentUpon>Ogone.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gui\Client\Payment\Ogone.aspx.designer.cs">
-      <DependentUpon>Ogone.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Gui\Client\Payment\PaymentMasterNested.master.cs">
       <DependentUpon>PaymentMasterNested.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Gui\Client\Payment\PaymentMasterNested.master.designer.cs">
       <DependentUpon>PaymentMasterNested.master</DependentUpon>
-    </Compile>
-    <Compile Include="Gui\Client\Payment\Transfer.aspx.cs">
-      <DependentUpon>Transfer.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Gui\Client\Payment\Transfer.aspx.designer.cs">
-      <DependentUpon>Transfer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Gui\Finance\Account.aspx.cs">
       <DependentUpon>Account.aspx</DependentUpon>

@@ -44,13 +44,13 @@ namespace PhotoshopWebsite.Gui.Finance
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
         
             TableHeaderCell IDHeader = new TableHeaderCell();
-            IDHeader.Text = "Purchase ID";
+            IDHeader.Text = Resources.LocalizedText.purchase_id; // "Purchase ID";
             TableHeaderCell userHeader = new TableHeaderCell();
-            userHeader.Text = "Account ID";
+            userHeader.Text = Resources.LocalizedText.account_id;// "Account ID";
             TableHeaderCell dateHeader = new TableHeaderCell();
-            dateHeader.Text = "Date";
+            dateHeader.Text = Resources.LocalizedText.date; // "Date";
             TableHeaderCell checkheader = new TableHeaderCell();
-            checkheader.Text = "Status";
+            checkheader.Text = Resources.LocalizedText.status; // "Status";
         
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(userHeader);
@@ -102,7 +102,7 @@ namespace PhotoshopWebsite.Gui.Finance
 
             Button btPay = new Button();
             btPay.ID = "bt1";
-            btPay.Text = "Ship orders";
+            btPay.Text = Resources.LocalizedText.ship_orders;
             btPay.Click += new EventHandler(this.PayOrder_Clicked);
             btPay.Height = 30;
 

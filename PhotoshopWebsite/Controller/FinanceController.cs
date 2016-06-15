@@ -9,11 +9,11 @@ namespace PhotoshopWebsite.Controller
 {
     public class FinanceController
     {
-        private DatabaseTier.Finance DB = new DatabaseTier.Finance();
+        private DatabaseTier.QueryDatabase database = new DatabaseTier.QueryDatabase();
 
         public int ID { get; set; }
         public List<Finance> finances { get; set; }
-        
+
         public FinanceController()
         {
             this.finances = this.getAllFinances();
@@ -27,15 +27,12 @@ namespace PhotoshopWebsite.Controller
         public List<Finance> getAllFinances()
         {
             List<Finance> temp = new List<Finance>();
-            DataTable dt = DB.getAllFinances();
+            Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
+            DataTable dt = database.CallProcedure("getPricePerPhotographer", parameters);
             // when data is found and returned
-            if (dt.Rows.Count != 0)
+            foreach (DataRow data in dt.Rows)
             {
-                DataRow[] datarowcategorie = dt.Select("ID=ID");
-                foreach (DataRow data in datarowcategorie)
-                {
-                    temp.Add(new Finance(int.Parse(data[0].ToString()), data[1].ToString(), data[2].ToString(), int.Parse(data[3].ToString())));
-                }
+                temp.Add(new Finance(int.Parse(data[0].ToString()), data[1].ToString(), data[2].ToString(), int.Parse(data[3].ToString())));
             }
             return temp;
         }

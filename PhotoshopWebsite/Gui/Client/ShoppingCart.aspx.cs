@@ -8,6 +8,8 @@ using PhotoshopWebsite.Controller;
 using System.Web.UI.HtmlControls;
 using System.Text.RegularExpressions;
 using System.Diagnostics.CodeAnalysis;
+using PhotoshopWebsite.Domain;
+using PhotoshopWebsite.Enumeration;
 
 namespace PhotoshopWebsite.Gui
 {
@@ -16,13 +18,8 @@ namespace PhotoshopWebsite.Gui
     {
         private string orderName = "Photo Shop";
         private double totalAmount = 0;
-        private Image btnTransfer;
-        private Image btnPayPal;
-        private Image btniDeal;
-        private Image btnGoogle;
-        private Image btnOgone;
-        private Label lblPaymentMethod;
-        private RadioButtonList rblPayment;
+        private User currentUser;
+       
 
         public List<Domain.ShoppingbasketItem> shoppingCart
         {
@@ -37,14 +34,19 @@ namespace PhotoshopWebsite.Gui
             }
         }
 
+      
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserData"] != null)
+            {
+                currentUser = Session["UserData"] as User;
+            }
             Fillpage();
-            setupEventhandlersPaymentMethod();
-            createPaymentPanel();
         }
         private void Fillpage()
         {
+
             HtmlGenericControl firstcontrol = new HtmlGenericControl();
             firstcontrol.InnerHtml = "<div class='table-responsive'>";
             HtmlGenericControl closingcontrol = new HtmlGenericControl();
@@ -54,19 +56,19 @@ namespace PhotoshopWebsite.Gui
             MainTable.Width = 600;
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
             TableHeaderCell IDHeader = new TableHeaderCell();
-            IDHeader.Text = "Photo ID";
+            IDHeader.Text = Resources.LocalizedText.photo_id;
             TableHeaderCell FilterHeader = new TableHeaderCell();
-            FilterHeader.Text = "Filter";
+            FilterHeader.Text = Resources.LocalizedText.filter;
             TableHeaderCell TypeHeader = new TableHeaderCell();
-            TypeHeader.Text = "Product Type";
+            TypeHeader.Text = Resources.LocalizedText.product_type;
             TableHeaderCell DescriptionHeader = new TableHeaderCell();
-            DescriptionHeader.Text = "Photo Description";
+            DescriptionHeader.Text = Resources.LocalizedText.product_description;
             TableHeaderCell QuantityHeader = new TableHeaderCell();
-            QuantityHeader.Text = "Quantity";
+            QuantityHeader.Text = Resources.LocalizedText.quantity;
             TableHeaderCell PriceHeader = new TableHeaderCell();
-            PriceHeader.Text = "Price";
+            PriceHeader.Text = Resources.LocalizedText.price;
             TableHeaderCell RemoveHeader = new TableHeaderCell();
-            RemoveHeader.Text = "Remove";
+            RemoveHeader.Text = Resources.LocalizedText.remove;
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(FilterHeader);
             MainHeaderRow.Cells.Add(TypeHeader);
@@ -102,6 +104,7 @@ namespace PhotoshopWebsite.Gui
                 PriceCell.Text = "€" + item.Price.ToString() + ",00";
                 totalAmount = (totalAmount + (item.Price * item.Quantity));
 
+
                 TableCell ButtonCell = new TableCell();
                 CheckBox cbRemove = new CheckBox();
                 cbRemove.ID = item.GetHashCode().ToString();
@@ -123,14 +126,16 @@ namespace PhotoshopWebsite.Gui
                 MainTable.Rows.Add(MainRow);
             }
 
+            
             // Fixed row
             TableRow FixedRow = new TableRow();
             FixedRow.Height = 60;
 
             TableCell TotalTextCell = new TableCell();
-            TotalTextCell.Text = "<B>Total:</B>";
+            TotalTextCell.Text = "<B>"+Resources.LocalizedText.total+":</B>";
             TableCell TotalAmountCell = new TableCell();
             TotalAmountCell.Text = "€" + totalAmount.ToString() + ",00";
+            TotalAmountCell.ID = "tdTotalAmount";
             Session["totalAmount"] = totalAmount;
 
             for (int i = 0; i < 4; i++)
@@ -150,176 +155,7 @@ namespace PhotoshopWebsite.Gui
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
         }
 
-        void setupEventhandlersPaymentMethod()
-        {
-            btnPayPal = new Image();
-        }
-        void createPaymentPanel()
-        {
-            //HtmlGenericControl container = new HtmlGenericControl();
-            //HtmlGenericControl wrapper = new HtmlGenericControl();
-            //HtmlGenericControl columnbtnTransfer = new HtmlGenericControl();
-            //HtmlGenericControl closerbtnTransfer = new HtmlGenericControl();
-            //HtmlGenericControl columnbtnPayPal = new HtmlGenericControl();
-            //HtmlGenericControl closerbtnPayPal = new HtmlGenericControl();
-            //HtmlGenericControl columnbtniDeal = new HtmlGenericControl();
-            //HtmlGenericControl closerbtniDeal = new HtmlGenericControl();
-            //HtmlGenericControl columnbtnGoogle = new HtmlGenericControl();
-            //HtmlGenericControl closerbtnGoogle = new HtmlGenericControl();
-            //HtmlGenericControl columnbtnOgone = new HtmlGenericControl();
-            //HtmlGenericControl closerbtnOgone = new HtmlGenericControl();
-            //HtmlGenericControl orderButtonRow = new HtmlGenericControl();
-            //HtmlGenericControl wrapperCloser = new HtmlGenericControl();
-
-            //container.InnerHtml = "<div class='container'>";
-            //wrapper.InnerHtml = "<div class='row' background-color:red>";
-            //columnbtnTransfer.InnerHtml = "<div class='col-md-6'>";
-            //closerbtnTransfer.InnerHtml = "</div>";
-            //columnbtnPayPal.InnerHtml = "<div class='col-md-6'> ";
-            //closerbtnPayPal.InnerHtml = "</div>";
-            //columnbtniDeal.InnerHtml = "<div class='col-md-6'> ";
-            //closerbtniDeal.InnerHtml = "</div>";
-            //columnbtnGoogle.InnerHtml = "<div class='col-md-6'> ";
-            //closerbtnGoogle.InnerHtml = "</div>";
-            //columnbtnOgone.InnerHtml = "<div class='col-md-6'> ";
-            //closerbtnOgone.InnerHtml = "</div>";
-            //wrapperCloser.InnerHtml = "</div>"; 
-
-            //btnTransfer.ID = "btnTransfer";
-            //btnTransfer.Height = 30;
-            //btnTransfer.Width = 90;
-            //btnTransfer.AlternateText = "Pay by Money Transfer";
-            //btnTransfer.ImageUrl = "http://www.glerups.nl/media/wysiwyg/infortis/ultimo/custom/overboeking.jpg";
-            //btnTransfer.CssClass = "btnPayment";
-
-            //btnPayPal.ID = "btnPaypal";
-            //btnPayPal.Height = 30;
-            //btnPayPal.Width = 90;
-            //btnPayPal.AlternateText = "Pay with PayPal";
-            //btnPayPal.ImageUrl = "http://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif";
-            //btnPayPal.CssClass = "btnPayment";
-
-            //btniDeal.ID = "btniDeal";
-            //btniDeal.Height = 30;
-            //btniDeal.Width = 90;
-            //btniDeal.AlternateText = "Pay with iDeal";
-            //btniDeal.ImageUrl = "http://www.dcpfilm.nl/Uitgeverij/images/images_button-ideal.jpg";
-            //btniDeal.CssClass = "btnPayment";
-
-            //btnGoogle.ID = "btnGoogle";
-            //btnGoogle.Height = 30;
-            //btnGoogle.Width = 90;
-            //btnGoogle.AlternateText = "Pay with Google-Checkout";
-            //btnGoogle.ImageUrl = "https://lh5.googleusercontent.com/-eES4aTLteqY/TWmvwSg2tQI/AAAAAAAAAjo/RXrOWfCy6m4/s1600/google_checkout_button.gif";
-            //btnGoogle.CssClass = "btnPayment";
-
-            //btnOgone.ID = "btnOgone";
-            //btnOgone.Height = 30;
-            //btnOgone.Width = 90;
-            //btnOgone.AlternateText = "Pay with Ogone";
-            //btnOgone.ImageUrl = "https://tctechcrunch2011.files.wordpress.com/2012/07/87407v3-max-250x250.jpg";
-            //btnOgone.CssClass = "btnPayment";
-
-            //Button btnOrder = new Button();
-            //btnOrder.CssClass = "btn btn-default";
-            //btnOrder.Click += BtnOrder_Click;
-            //btnOrder.Text = "Bestelling Plaatsen";
-
-            //RadioButton rbPaymentTransfer = new RadioButton();
-            //RadioButton rbPaymentPaypal = new RadioButton();
-            //RadioButton rbPaymentiDeal = new RadioButton();
-            //RadioButton rbPaymentGoogle = new RadioButton();
-            //RadioButton rbPaymentOgone = new RadioButton();
-
-            //rbPaymentTransfer.GroupName = "Payment";
-            //rbPaymentPaypal.GroupName = "Payment";
-            //rbPaymentiDeal.GroupName = "Payment";
-            //rbPaymentGoogle.GroupName = "Payment";
-            //rbPaymentOgone.GroupName = "Payment";
-
-            //lblPaymentMethod = new Label();
-            //lblPaymentMethod.Text = "<b> Kies een betaal methode: </b>";
-            //lblPaymentMethod.Style.Add("margin-bot", "30px;");
-            //String innerhtml = "<div class='col-md-12 paymentrow' style='background-color:white; border-radius:7px; height:100px; padding:10px; margin-bottom:20px;'>";
-            //columnbtnTransfer.InnerHtml = innerhtml;
-            //closerbtnTransfer.InnerHtml = "</div>";
-            //columnbtnPayPal.InnerHtml = innerhtml;
-            //closerbtnPayPal.InnerHtml = "</div>";
-            //columnbtniDeal.InnerHtml = innerhtml;
-            //closerbtniDeal.InnerHtml = "</div>";
-            //columnbtnGoogle.InnerHtml = innerhtml;
-            //closerbtnGoogle.InnerHtml = "</div>";
-            //columnbtnOgone.InnerHtml = innerhtml;
-            //closerbtnOgone.InnerHtml = "</div>";
-
-            //paymentPanel.Controls.Add(lblPaymentMethod);
-            //paymentPanel.Controls.Add(wrapper);
-            //paymentPanel.Controls.Add(columnbtnTransfer);
-            //paymentPanel.Controls.Add(rbPaymentTransfer);
-            //paymentPanel.Controls.Add(btnTransfer);
-            //paymentPanel.Controls.Add(closerbtnTransfer);
-            //paymentPanel.Controls.Add(columnbtnPayPal);
-            //paymentPanel.Controls.Add(rbPaymentPaypal);
-            //paymentPanel.Controls.Add(btnPayPal);
-            //paymentPanel.Controls.Add(closerbtnPayPal);
-            //paymentPanel.Controls.Add(columnbtniDeal);
-            //paymentPanel.Controls.Add(rbPaymentiDeal);
-            //paymentPanel.Controls.Add(btniDeal);
-            //paymentPanel.Controls.Add(closerbtniDeal);
-            //paymentPanel.Controls.Add(columnbtnGoogle);
-            //paymentPanel.Controls.Add(rbPaymentGoogle);
-            //paymentPanel.Controls.Add(btnGoogle);
-            //paymentPanel.Controls.Add(closerbtnGoogle);
-            //paymentPanel.Controls.Add(columnbtnOgone);
-            //paymentPanel.Controls.Add(rbPaymentOgone);
-            //paymentPanel.Controls.Add(btnOgone);
-            //paymentPanel.Controls.Add(closerbtnOgone);
-
-            //innerhtml = "<div class='row'> <div class='col-md-12 paymentrow' style='background-color:blue; border-radius:7px; height:100px; padding:10px; margin-bottom:20px;'>";
-            //orderButtonRow.InnerHtml = innerhtml;
-            //paymentPanel.Controls.Add(wrapperCloser);
-
-            //paymentPanel.Controls.Add(orderButtonRow);
-            //paymentPanel.Controls.Add(btnOrder);
-            //ListItem raboBank = new ListItem("Rabobank", "rabobank", true); raboBank.Selected = true;
-            //ListItem ing = new ListItem("Ing", "ing", true); 
-            //ListItem snsBank = new ListItem("SnsBank", "snsBank", true);
-            //paymentMenu.Items.Add(raboBank);
-            //paymentMenu.Items.Add(ing);
-            //paymentMenu.Items.Add(snsBank);
-
-        }
-
-        private void BtnOrder_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void BtnOgone_Click(object sender, ImageClickEventArgs e)
-            {
-            Response.Redirect("Payment/Ogone.aspx");
-            }
-
-        private void BtnTransfer_Click(object sender, ImageClickEventArgs e)
-            {
-            Response.Redirect("Payment/Transfer.aspx");
-        }
-                
-        private void BtnGoogle_Click(object sender, ImageClickEventArgs e)
-                    {
-            Response.Redirect("Payment/Google.aspx");
-                }
-
-        private void BtniDeal_Click(object sender, ImageClickEventArgs e)
-        {
-            Response.Redirect("Payment/iDeal.aspx");
-            }
-
-        private void btnPayPal_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + totalAmount);
-        }
-
+  
         private void Check_Clicked(object sender, EventArgs e)
         {
             CheckBox cbremove = sender as CheckBox;
@@ -333,7 +169,8 @@ namespace PhotoshopWebsite.Gui
                 }
             }
         }
-       
+
+
         private void Quantity_Change(object sender, EventArgs e)
         {
             TextBox tbQuantity = sender as TextBox;
@@ -364,6 +201,39 @@ namespace PhotoshopWebsite.Gui
         protected void btnPaypal_Click1(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + totalAmount);
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            if (shoppingCart.Count == 0)
+            {
+                Response.Write("<script>alert('ShoppingCart is empty, please fill your cart first')</script>");
+            }
+
+            else
+            {
+                if (shoppingCart != null && currentUser != null)
+                {
+                    PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
+                    Domain.Order newOrder = new Domain.Order();
+
+                    foreach (Domain.ShoppingbasketItem item in shoppingCart)
+                    {
+                        // create socket string
+                        string photoIDQualtityType = item.PhotoID.ToString() + ";" + item.Quantity.ToString() + "#" + item.Filter;
+                        // send socket string to fileserver and check if string is correctly send
+                        if (socket.sendData(photoIDQualtityType))
+                        {
+                            // insert order into database
+                            newOrder.insertPrintOrder(currentUser.ID, DateTime.Now, "Paid", ProductTypes.getInt(item.Product.ToString()), item.PhotoID, item.Filter.ToString(), "iDeal", item.Product.ToString(), currentUser.IBAN, item.Price, item.Quantity);
+                        }
+                    }
+                }
+                else
+                {
+                    Response.Write("<script>alert('Unknown User, order not placed.')</script>");
+                }
+            }
         }
     }
 }

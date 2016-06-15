@@ -415,5 +415,49 @@ namespace PhotoshopWebsite.DatabaseTier
             return null;
         }
 
+        public DataTable getAllOrderInfos(int accountID, int orderID)
+        {
+            try
+            {
+                myCommand = new MySqlCommand("getAllOrderInfos", mysqlConnection);
+                // input - There is no input needed.
+                myCommand.CommandType = CommandType.StoredProcedure;
+                myCommand.Parameters.Add("@p_account_ID", MySqlDbType.Int32).Value = accountID;
+                myCommand.Parameters.Add("@p_order_ID", MySqlDbType.Int32).Value = orderID;
+                // output
+                myCommand.Parameters.Add("@ID", MySqlDbType.Int32);
+                myCommand.Parameters["@ID"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@Description", MySqlDbType.Int32);
+                myCommand.Parameters["@Description"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@FilterType", MySqlDbType.DateTime);
+                myCommand.Parameters["@FilterType"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@Type", MySqlDbType.VarChar);
+                myCommand.Parameters["@Type"].Direction = ParameterDirection.Output;
+                myCommand.Parameters.Add("@Amount", MySqlDbType.Int32);
+                myCommand.Parameters["@Amount"].Direction = ParameterDirection.Output;
+                // execute query
+                mysqlConnection.Open();
+                //myCommand.ExecuteNonQuery();
+
+                //MySqlDataAdapter da = new MySqlDataAdapter(myCommand);
+                MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+                DataTable dt = new DataTable();
+                dt.Load(dr);
+
+                //return datatable
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                myCommand.Connection.Close();
+                mysqlConnection.Close();
+            }
+            return null;
+        }
+
     }
 }

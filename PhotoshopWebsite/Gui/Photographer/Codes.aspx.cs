@@ -46,11 +46,11 @@ namespace PhotoshopWebsite.Gui.Photographer
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
 
             TableHeaderCell IDHeader = new TableHeaderCell();
-            IDHeader.Text = "Code ID";
+            IDHeader.Text = Resources.LocalizedText.order_code;
             TableHeaderCell userHeader = new TableHeaderCell();
-            userHeader.Text = "Times used";
+            userHeader.Text = Resources.LocalizedText.times_used;
             TableHeaderCell checkheader = new TableHeaderCell();
-            checkheader.Text = "Send";
+            checkheader.Text = Resources.LocalizedText.send;
 
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(userHeader);
@@ -84,7 +84,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             }
             TextBox tbMailTo = new TextBox();
             tbMailTo.ID = "TextBoxRow_mailto1";
-            tbMailTo.Text = "mailadress";
+            tbMailTo.Text = Resources.LocalizedText.email;
             if (Session["mailTO"] as String != null)
             {
                 tbMailTo.Text = Session["mailTO"] as String;
@@ -97,7 +97,7 @@ namespace PhotoshopWebsite.Gui.Photographer
 
             Button btSend = new Button();
             btSend.ID = "bt1";
-            btSend.Text = "Send Mail";
+            btSend.Text = Resources.LocalizedText.send;
             btSend.Click += new EventHandler(this.Mail_Clicked);
             btSend.Height = 30;
 
@@ -117,26 +117,26 @@ namespace PhotoshopWebsite.Gui.Photographer
                 // Mail Header
                 mail.From = new MailAddress("photoshopPTS4@gmail.com");
                 mail.To.Add(Session["mailTO"] as String);
-                mail.Subject = "Your codes from The Photoshop";
+                mail.Subject = Resources.LocalizedText.your_order_codes;
                 // Mail Body
                 StringBuilder sb = new StringBuilder();
-                sb.Append("Your codes are:"+ Environment.NewLine);
+                sb.Append(Resources.LocalizedText.your_codes_are + Environment.NewLine);
                 foreach (int code in loginCodesChecked)
                 {
                     sb.Append(code + Environment.NewLine);
                 }
-                sb.Append("You can use these codes on thephotoshop.nl when creating an account.");
+                sb.Append(Resources.LocalizedText.your_codes_description);
                 mail.Body = sb.ToString();
                 // Mail Config
                 SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("photoshopPTS4@gmail.com", "proftaak4");
                 SmtpServer.EnableSsl = true;
                 SmtpServer.Send(mail);
-                Response.Write("<script>alert('Mail has been send to " + Session["mailTO"] as String + "')</script>");
+                Response.Write("<script>alert('"+Resources.LocalizedText.mail_sent+" " + Session["mailTO"] as String + "')</script>");
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('couldn't send mail to " + Session["mailTO"] as String + "')</script>");
+                Response.Write("<script>alert('"+Resources.LocalizedText.error_cant_send_mail+" " + Session["mailTO"] as String + "')</script>");
             }
 
         }

@@ -91,7 +91,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             btnSepia.AutoPostBack = true;
             btnSepia.GroupName = x.ID.ToString();
             btnSepia.Height = 30;
-            btnSepia.Text = "Sepia ";
+            btnSepia.Text = Resources.LocalizedText.sepia;
 
             RadioButton btnBlackWhite = new RadioButton();
             btnBlackWhite.ID = "BLACKWHITE" + x.ID;
@@ -99,7 +99,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             btnBlackWhite.AutoPostBack = true;
             btnBlackWhite.GroupName = x.ID.ToString();
             btnBlackWhite.Height = 30;
-            btnBlackWhite.Text = "Black & White ";
+            btnBlackWhite.Text = Resources.LocalizedText.black_white;
 
             RadioButton btnColor = new RadioButton();
             btnColor.ID = "COLOR" + x.ID;
@@ -107,11 +107,11 @@ namespace PhotoshopWebsite.Gui.Photographer
             btnColor.AutoPostBack = true;
             btnColor.GroupName = x.ID.ToString();
             btnColor.Height = 30;
-            btnColor.Text = "Color ";
+            btnColor.Text = Resources.LocalizedText.color;
 
             Button btnDownload = new Button();
             btnDownload.ID = "download" + x.ID;
-            btnDownload.Text = "Download";
+            btnDownload.Text = Resources.LocalizedText.download;
             btnDownload.CssClass = "btn btn-default";
             btnDownload.Click += btnDownload_Click;
 
