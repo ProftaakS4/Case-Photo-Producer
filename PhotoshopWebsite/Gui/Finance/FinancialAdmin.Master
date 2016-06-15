@@ -19,7 +19,7 @@
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
                 <li class="sidebar-brand">
-                    <asp:Label runat="server" ID="Label1" Text="Welcome!" Style="color: grey"></asp:Label>
+                    <asp:Label runat="server" ID="Label1" Text="<%$ Resources:LocalizedText, welcome%>" Style="color: grey"></asp:Label>
                     <asp:Label runat="server" ID="Labelklantnaam" Style="color: grey; margin-bottom: 100px;"></asp:Label>
                 </li>
                 <ul class="sidebar-nav" style="margin-top: 30px;">
