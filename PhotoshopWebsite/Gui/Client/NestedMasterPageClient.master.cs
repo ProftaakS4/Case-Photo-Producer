@@ -15,7 +15,7 @@ namespace PhotoshopWebsite.Gui.Client
     [ExcludeFromCodeCoverage]
     public partial class NestedMasterPageClient : System.Web.UI.MasterPage
     {
-        private Search s = new Search();
+        private QueryDatabase database = new QueryDatabase();
         private String pageName;
         private User curUser;
         private List<PhotoshopWebsite.Domain.Photo> searchedPhotos;
@@ -95,9 +95,11 @@ namespace PhotoshopWebsite.Gui.Client
                 searchedPhotos = new List<Domain.Photo>();
                 if (tbSearch.Text != "")
                 {
-                    DataTable output = s.searchPhoto(tbSearch.Text, curUser.ID);
+                    Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
+                    parameters.Add("p_searchedText", new string[] { "string", tbSearch.Text });
+                    DataTable dt = database.CallProcedure("searchGroupPhoto", parameters);
                     PhotoController photo = new PhotoController();
-                    foreach (DataRow row in output.Rows)
+                    foreach (DataRow row in dt.Rows)
                     {
                         Domain.Photo newphoto = photo.getPhoto(int.Parse(row[0].ToString()));
                         searchedPhotos.Add(newphoto);
@@ -115,9 +117,12 @@ namespace PhotoshopWebsite.Gui.Client
                 searchedPhotos = new List<Domain.Photo>();
                 if (tbSearch.Text != "")
                 {
-                    DataTable output = s.searchPhoto(tbSearch.Text, curUser.ID);
+                    Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
+                    parameters.Add("p_user_ID", new string[] { "int", curUser.ID.ToString() });
+                    parameters.Add("p_searchedText", new string[] { "string", tbSearch.Text });
+                    DataTable dt = database.CallProcedure("searchPhoto", parameters);
                     PhotoController photo = new PhotoController();
-                    foreach (DataRow row in output.Rows)
+                    foreach (DataRow row in dt.Rows)
                     {
                         Domain.Photo newphoto = photo.getPhoto(int.Parse(row[0].ToString()));
                         searchedPhotos.Add(newphoto);
