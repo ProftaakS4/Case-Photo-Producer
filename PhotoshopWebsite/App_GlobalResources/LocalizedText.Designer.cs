@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account.
+        /// </summary>
+        internal static string account {
+            get {
+                return ResourceManager.GetString("account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account info.
         /// </summary>
         internal static string account_info {
@@ -205,6 +214,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finance.
+        /// </summary>
+        internal static string finance {
+            get {
+                return ResourceManager.GetString("finance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First name.
         /// </summary>
         internal static string first_name {
@@ -291,6 +309,15 @@ namespace Resources {
         internal static string my_account {
             get {
                 return ResourceManager.GetString("my_account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Orders.
+        /// </summary>
+        internal static string orders {
+            get {
+                return ResourceManager.GetString("orders", resourceCulture);
             }
         }
         
@@ -426,6 +453,15 @@ namespace Resources {
         internal static string sign_in_title {
             get {
                 return ResourceManager.GetString("sign_in_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stock overview.
+        /// </summary>
+        internal static string stock_overview {
+            get {
+                return ResourceManager.GetString("stock_overview", resourceCulture);
             }
         }
         
