@@ -264,4 +264,7 @@
   <data name="stock_overview" xml:space="preserve">
     <value>Stock overview</value>
   </data>
+  <data name="my_codes" xml:space="preserve">
+    <value>My Codes</value>
+  </data>
 </root>

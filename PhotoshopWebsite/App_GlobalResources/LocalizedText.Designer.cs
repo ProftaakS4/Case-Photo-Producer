@@ -313,6 +313,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My Codes.
+        /// </summary>
+        internal static string my_codes {
+            get {
+                return ResourceManager.GetString("my_codes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Products.
+        /// </summary>
+        internal static string my_products {
+            get {
+                return ResourceManager.GetString("my_products", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Orders.
         /// </summary>
         internal static string orders {

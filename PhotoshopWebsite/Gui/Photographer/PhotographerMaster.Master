@@ -25,16 +25,27 @@
                 <ul class="sidebar-nav" style="margin-top: 30px;">
 
                     <li>
-                        <a href="Pictures.aspx">View Pictures</a>
+                        <a href="Pictures.aspx">
+                            <asp:Literal runat="server" Text="<%$ Resources:LocalizedText, pictures%>" />
+                                </a>
                     </li>
                     <li>
-                        <a href="Codes.aspx">My Codes</a>
+                        <a href="Codes.aspx">
+                            <asp:Literal runat="server" Text="<%$ Resources:LocalizedText, my_codes%>" />
+
+                        </a>
                     </li>
                     <li>
-                        <a href="Products.aspx">My Products</a>
+                        <a href="Products.aspx">
+                            <asp:Literal runat="server" Text="<%$ Resources:LocalizedText, my_products%> "/>
+
+                        </a>
                     </li>
                     <li>
-                        <a href="Account.aspx">My Account</a>
+                        <a href="Account.aspx">
+                            <asp:Literal runat="server" Text="<%$ Resources:LocalizedText, my_account%>" />
+
+                        </a>
                     </li>
                     <div runat="server" class="col-lg-6">
                         <%--<div class="input-group" runat="server">
@@ -44,7 +55,7 @@
                             </span>
                         </div>--%>
                         <div class="input-group-btn">
-                            <asp:Button ID="Btnlogout" class="btn btn-default" runat="server" type="button" Text="logout" OnClick="Btnlogout_Click" Style="height: 34px; width: 201px; margin-top: 10px; border-radius: 3px; border-color: white; background-color: azure"></asp:Button>
+                            <asp:Button ID="Btnlogout" class="btn btn-default" runat="server" type="button" Text="<%$ Resources:LocalizedText, logout%>" OnClick="Btnlogout_Click" Style="height: 34px; width: 201px; margin-top: 10px; border-radius: 3px; border-color: white; background-color: azure"></asp:Button>
                         </div>
                         <!-- /input-group -->
                     </div>

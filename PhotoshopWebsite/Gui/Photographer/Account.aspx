@@ -8,7 +8,7 @@
                 <div class='col-md-6';>
                     <h3><asp:Literal runat="server" Text="<%$ Resources:LocalizedText, change_account_data%>" /></h3>
                     <span>
-                        <asp:Label class="label label-default" ID="Firstname" runat="server" Text="<%$ Resources:LocalizedText, first_name%> :"></asp:Label>
+                        <asp:Label class="label label-default" ID="Firstname" runat="server" Text="<%$ Resources:LocalizedText, first_name%>"></asp:Label>
                         <asp:TextBox class="form-control" ID="tbFirstname" runat="server"></asp:TextBox>                           
                     </span><br />
                     <span>
