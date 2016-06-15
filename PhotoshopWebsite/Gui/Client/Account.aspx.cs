@@ -89,11 +89,12 @@ namespace PhotoshopWebsite.Gui.Client
                 btnShowProducts.Click += btnShowProducts_Click;
                 btnShowProducts.Height = 30;
                 btnShowProducts.Text = "View";
-                btnShowProducts.Attributes.Add("onClientClick", "return false;");
-                btnShowProducts.Attributes.Add("onClick", "btnShowProducts_Click;");
+                //btnShowProducts.Attributes.Add("onClientClick", "return false;");
+                //btnShowProducts.Attributes.Add("onClick", "btnShowProducts_Click;");
+                btnShowProducts.CausesValidation = false;
                 products.Controls.Add(btnShowProducts);
 
-                products.ID = order.ID.ToString();
+                products.ID = "ID: " + order.ID.ToString();
                 TableCell Date = new TableCell();
                 Date.Text = order.Date.ToString();
                 TableCell Type = new TableCell();
@@ -139,7 +140,7 @@ namespace PhotoshopWebsite.Gui.Client
         {
             Button x = sender as Button;
             string id = x.ID;
-            int orderID = Convert.ToInt32(id);
+            int orderID = int.Parse(id.Substring(3));
             ocInfo = new OrderController(currentUser.ID, orderID);
             orderInfos = ocInfo.orderInfos;
             FillProducts(orderInfos);
