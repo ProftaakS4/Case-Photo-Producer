@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bootstrap\Content\Jcrop.gif" />
+    <Content Include="Bootstrap\Content\jquery.dynatable.css" />
     <Content Include="Bootstrap\Content\jquery.Jcrop.css" />
     <Content Include="Bootstrap\Content\jquery.Jcrop.min.css" />
     <Content Include="Bootstrap\Content\simple-sidebar.css" />
@@ -97,11 +98,13 @@
     <Content Include="Bootstrap\Menu\JS\bootstrap.min.js" />
     <Content Include="Bootstrap\Menu\JS\jquery.js" />
     <Content Include="Bootstrap\Menu\simple-sidebar.css" />
+    <Content Include="Bootstrap\Scripts\jquery.dynatable.js" />
     <Content Include="Bootstrap\Scripts\jquery.Jcrop.js" />
     <Content Include="Bootstrap\Scripts\jquery.Jcrop.min.js" />
     <Content Include="Gui\Client\Account.aspx" />
     <Content Include="Gui\Client\CreateAccount.aspx" />
     <Content Include="Gui\Client\GroupPictures.aspx" />
+    <Content Include="Gui\Client\WebService.asmx" />
     <Content Include="Gui\Finance\Account.aspx" />
     <Content Include="Gui\Finance\Finance.aspx" />
     <Content Include="Gui\Client\PhotoshopMaster.Master" />
@@ -112,6 +115,7 @@
     <Content Include="Gui\Images\background\background2.jpg" />
     <Content Include="Gui\Images\background\background3.jpg" />
     <Content Include="Gui\Images\background\background4.jpg" />
+    <Content Include="Gui\Images\Logo.png" />
     <Content Include="Gui\Images\Shoppingcart.png" />
     <Content Include="Gui\Images\LOW RESOLUTION\Prive\userid4-1.jpeg" />
     <Content Include="Gui\Images\LOW RESOLUTION\Prive\userid4-2.jpeg" />
@@ -132,9 +136,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="Javascript\JavaScript.js" />
-    <Content Include="web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="web.config" />
     <Content Include="packages.config" />
     <Content Include="Gui\Website.Master" />
     <None Include="Properties\PublishProfiles\PhotoshopS4.pubxml" />
@@ -246,6 +248,10 @@
     </Compile>
     <Compile Include="Gui\Client\Payment\PaymentMasterNested.master.designer.cs">
       <DependentUpon>PaymentMasterNested.master</DependentUpon>
+    </Compile>
+    <Compile Include="Gui\Client\WebService.asmx.cs">
+      <DependentUpon>WebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Gui\Finance\Account.aspx.cs">
       <DependentUpon>Account.aspx</DependentUpon>
@@ -406,7 +412,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
