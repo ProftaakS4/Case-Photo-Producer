@@ -119,6 +119,16 @@ namespace PhotoshopWebsite.Gui.Photographer
             pnlProducts.Controls.Add(MainTable);
             pnlProducts.Controls.Add(closingcontrol);
             pnlProducts.Controls.Add(btSave);
+
+            if (Session["NumericPrice"] != null)
+            {
+                bool NumericStock = (bool)Session["NumericPrice"];
+                if (!NumericStock)
+                {
+                    Response.Write("<script>alert('Vul alleen een numerieke waarde in.')</script>");
+                    Session["NumericPrice"] = true;
+                }
+            }
         }
 
         private void Check_Clicked(object sender, EventArgs e)
@@ -159,10 +169,19 @@ namespace PhotoshopWebsite.Gui.Photographer
             {
                 if (productPerPhotographer.Product_ID == num)
                 {
-                    productPerPhotographer.Price = int.Parse(cbPrice.Text);
-                    Session["products"] = ProductsChecked;
-                    Response.Redirect(Request.RawUrl);
-                    break;
+                    Regex regex2 = new Regex("([0-9]+)");
+                    Match match2 = regex2.Match(cbPrice.Text);
+                    if (match2.Success)
+                    {
+                        productPerPhotographer.Price = int.Parse(cbPrice.Text);
+                        Session["products"] = ProductsChecked;
+                        Response.Redirect(Request.RawUrl);
+                        break;
+                    }
+                    else
+                    {
+                        Session["NumericPrice"] = false;
+                    }
                 }
             }
         }

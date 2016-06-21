@@ -20,7 +20,6 @@ namespace PhotoshopWebsite.Gui
         private ProductController pc;
         private Dictionary<int, int> productAmount;
         private Dictionary<int, int> productStock;
-        private bool notNumeric = false;
 
 
         protected void Page_Load(object sender, EventArgs e)
