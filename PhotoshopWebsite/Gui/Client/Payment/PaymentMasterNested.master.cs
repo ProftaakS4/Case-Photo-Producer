@@ -1,4 +1,4 @@
-﻿ using PhotoshopWebsite.Domain;
+﻿using PhotoshopWebsite.Domain;
 using PhotoshopWebsite.Enumeration;
 using System;
 using System.Collections.Generic;
@@ -36,12 +36,12 @@ namespace PhotoshopWebsite.Gui.Client.Payment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            fillUserInfo();
-            fillOrderInfo();
+            FillUserInfo();
+            FillOrderInfo();
             paymentInfo();
         }
 
-        void fillOrderInfo()
+        void FillOrderInfo()
         {
             HtmlGenericControl firstcontrol = new HtmlGenericControl();
             firstcontrol.InnerHtml = "<div class='table-responsive'>";
@@ -75,8 +75,6 @@ namespace PhotoshopWebsite.Gui.Client.Payment
             Label totalAmount = new Label();
             totalAmount.ForeColor = Color.Green;
             totalAmount.Font.Bold = true;
-          //  double total = (double)Session["totalAmount"];
-       //     totalAmount.Text = "<u>Total Amount: €" + total + ",00</u>";
             totalAmount.Font.Size = 18;
 
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
@@ -113,7 +111,7 @@ namespace PhotoshopWebsite.Gui.Client.Payment
             pnlOrderInfo.Controls.Add(totalAmount);
         }
 
-        void fillUserInfo()
+        void FillUserInfo()
         {
             if (Session["UserData"] != null)
             {
@@ -132,30 +130,30 @@ namespace PhotoshopWebsite.Gui.Client.Payment
 
         void paymentInfo()
         {
-            rabobank.Text = "Rabobank  ";
-            rabobank.GroupName = "bank";
-            abn.Text = "ABN Amro  ";
-            abn.GroupName = "bank";
-            ingb.Text = "ING Bank  ";
-            ingb.GroupName = "bank";
-            sns.Text = "SNS Bank  ";
-            sns.GroupName = "bank";
+            this.rabobank.Text = "Rabobank  ";
+            this.rabobank.GroupName = "bank";
+            this.abn.Text = "ABN Amro  ";
+            this.abn.GroupName = "bank";
+            this.ingb.Text = "ING Bank  ";
+            this.ingb.GroupName = "bank";
+            this.sns.Text = "SNS Bank  ";
+            this.sns.GroupName = "bank";
 
             Button confirmButton = new Button();
             confirmButton.Text = "Confirm";
             confirmButton.Click += ConfirmButton_Click;
 
-            pnlPaymentInfo.Controls.Add(rabobank);
-            pnlPaymentInfo.Controls.Add(abn);
-            pnlPaymentInfo.Controls.Add(ingb);
-            pnlPaymentInfo.Controls.Add(sns);
+            pnlPaymentInfo.Controls.Add(this.rabobank);
+            pnlPaymentInfo.Controls.Add(this.abn);
+            pnlPaymentInfo.Controls.Add(this.ingb);
+            pnlPaymentInfo.Controls.Add(this.sns);
             pnlOrderInfo.Controls.Add(new LiteralControl(" <br />"));
             pnlPaymentInfo.Controls.Add(confirmButton);
         }
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
-            if (rabobank.Checked || abn.Checked || ingb.Checked || sns.Checked)
+            if (this.rabobank.Checked || this.abn.Checked || this.ingb.Checked || this.sns.Checked)
             {
                 if (shoppingCart.Count == 0)
                 {

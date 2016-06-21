@@ -36,8 +36,8 @@ namespace PhotoshopWebsite.Domain
             this.Filter = filter;
             this.Product = product;
             this.Price = price;
-            this.Boundaries = "";
-            this.cropValues = "";
+            this.Boundaries = string.Empty;
+            this.cropValues = string.Empty;
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace PhotoshopWebsite.Domain
         /// get the cropvalues
         /// </summary>
         /// <returns>the cropvalues</returns>
-        public string getCropValues()
+        public string GetCropValues()
         {
             return this.cropValues;
         }
@@ -70,7 +70,7 @@ namespace PhotoshopWebsite.Domain
 
         public override string ToString()
         {
-            return "PhotoID: " + PhotoID + ", " + Description + ", quantity: " + Quantity + ", filter: " + Filter.ToString() + ", product: " + Product.ToString() + ", price per item: " + Price;
+            return "PhotoID: " + this.PhotoID + ", " + this.Description + ", quantity: " + this.Quantity + ", filter: " + this.Filter.ToString() + ", product: " + this.Product.ToString() + ", price per item: " + this.Price;
         }
     }
 }

@@ -64,17 +64,17 @@ namespace PhotoshopWebsite.Gui.Client
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             Reorders = new List<Order>();
             if (Session["UserData"] != null)
             {
-                currentUser = Session["UserData"] as User;
-                FillAccountData(currentUser);
-                oc = new OrderController(currentUser.ID);
-                orders = oc.orders;
+                this.currentUser = Session["UserData"] as User;
+                this.FillAccountData(this.currentUser);
+                this.oc = new OrderController(this.currentUser.ID);
+                this.orders = this.oc.orders;
             }
 
-            FillPage(orders);
+            this.FillPage(this.orders);
 
         }
 
@@ -92,7 +92,7 @@ namespace PhotoshopWebsite.Gui.Client
         }
         private void FillPage(List<Order> Orders)
         {
-            MainTable.CssClass = "table table-striped table-hover table-bordered";
+            this.MainTable.CssClass = "table table-striped table-hover table-bordered";
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
             TableHeaderCell IDHeader = new TableHeaderCell();
             IDHeader.Text = Resources.LocalizedText.order_id;
@@ -115,7 +115,7 @@ namespace PhotoshopWebsite.Gui.Client
             MainHeaderRow.Cells.Add(Ibanheader);
             MainHeaderRow.Cells.Add(Priceheader);
             MainHeaderRow.Cells.Add(ReOrderheader);
-            MainTable.Rows.Add(MainHeaderRow);
+            this.MainTable.Rows.Add(MainHeaderRow);
 
             foreach (Order order in Orders)
             {
@@ -127,11 +127,11 @@ namespace PhotoshopWebsite.Gui.Client
                 Button btnShowProducts = new Button();
                 btnShowProducts.ID = "btn" + order.ID.ToString();
                 btnShowProducts.CssClass = "btn btn-default";
-                btnShowProducts.Click += btnShowProducts_Click;
+                btnShowProducts.Click += this.BtnShowProducts_Click;
                 btnShowProducts.Height = 30;
                 btnShowProducts.Text = Resources.LocalizedText.view;
-                //btnShowProducts.Attributes.Add("onClientClick", "return false;");
-                //btnShowProducts.Attributes.Add("onClick", "btnShowProducts_Click;");
+                // btnShowProducts.Attributes.Add("onClientClick", "return false;");
+                // btnShowProducts.Attributes.Add("onClick", "btnShowProducts_Click;");
                 btnShowProducts.CausesValidation = false;
                 products.Controls.Add(btnShowProducts);
 
@@ -148,7 +148,7 @@ namespace PhotoshopWebsite.Gui.Client
                 Button btnOrder = new Button();
                 btnOrder.ID = order.ID.ToString();
                 btnOrder.CssClass = "btn btn-default";
-                btnOrder.Click += btnOrder_Click;
+                btnOrder.Click += this.BtnOrder_Click;
                 btnOrder.Height = 30;
                 btnOrder.Text = Resources.LocalizedText.reorder;
                 BtnOrdercell.Controls.Add(btnOrder);
@@ -160,19 +160,19 @@ namespace PhotoshopWebsite.Gui.Client
                 MainRow.Cells.Add(iban);
                 MainRow.Cells.Add(price);
                 MainRow.Cells.Add(BtnOrdercell);
-                MainTable.Rows.Add(MainRow);
+                this.MainTable.Rows.Add(MainRow);
             }
         }
 
-        void btnOrder_Click(object sender, EventArgs e)
+        void BtnOrder_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
             string id = button.ID;
             int orderID = int.Parse(id);
-            ocInfo = new OrderController(currentUser.ID, orderID);
-            orderInfos = ocInfo.orderInfos;
+            this.ocInfo = new OrderController(this.currentUser.ID, orderID);
+            this.orderInfos = this.ocInfo.orderInfos;
 
-            foreach (OrderInfo oi in orderInfos)
+            foreach (OrderInfo oi in this.orderInfos)
             {
                 string name = oi.Description;
                 int num = oi.ID;
@@ -180,36 +180,34 @@ namespace PhotoshopWebsite.Gui.Client
                 Domain.ShoppingbasketItem found = null;
                 foreach (Domain.ShoppingbasketItem item in shoppingCart)
                 {
-                    if (item.PhotoID == num && item.Filter == filters[num])
+                    if (item.PhotoID == num && item.Filter == this.filters[num])
                     {
                         found = item;
                         break;
                     }
                 }
                 if (found != null)
-            {
+                {
                     found.Quantity++;
                 }
                 else
                 {
-                    //TODO pakt ook de jaartallen niet alleen de ID's
                     PurchaseController purchaseController = new PurchaseController();
                     int product = ProductTypes.getInt(products[num].ToString());
                     int price = purchaseController.getPrice(product, num);
-                    shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num], price));
+                    shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, this.filters[num], products[num], price));
                 }
             }
         }
 
-        void btnShowProducts_Click(object sender, EventArgs e)
+        void BtnShowProducts_Click(object sender, EventArgs e)
         {
             Button x = sender as Button;
             string id = x.ID;
             int orderID = int.Parse(id.Substring(3));
-            ocInfo = new OrderController(currentUser.ID, orderID);
-            orderInfos = ocInfo.orderInfos;
-            FillProducts(orderInfos);
-            
+            this.ocInfo = new OrderController(this.currentUser.ID, orderID);
+            this.orderInfos = this.ocInfo.orderInfos;
+            this.FillProducts(this.orderInfos);
         }
 
         private void FillProducts(List<OrderInfo> orderInfos)

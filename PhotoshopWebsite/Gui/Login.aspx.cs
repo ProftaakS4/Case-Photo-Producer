@@ -16,27 +16,27 @@ namespace PhotoshopWebsite
     [ExcludeFromCodeCoverage]
     public partial class Login : System.Web.UI.Page
     {
- 
-        private Boolean rememberMe = false;
+
+        private bool rememberMe = false;
         LoginCodeController lcc;
-        
-        private String loginCode;
+
+        private string loginCode;
         HttpCookie _userInfoCookies;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                _userInfoCookies = Request.Cookies["Userinfo"];
-                if (_userInfoCookies != null)
+                this._userInfoCookies = Request.Cookies["Userinfo"];
+                if (this._userInfoCookies != null)
                 {
-                    string loginName = _userInfoCookies["loginName"];
-                    string  passWord = _userInfoCookies["passWord"];
+                    string loginName = this._userInfoCookies["loginName"];
+                    string passWord = this._userInfoCookies["passWord"];
                     tbInputEmail.Text = loginName;
                     tbInputPassword.Text = passWord;
                 }
             }
-        }       
+        }
         protected void BtnLogin_Click(object sender, EventArgs e)
         {
             string loginname = tbInputEmail.Text;
@@ -52,29 +52,29 @@ namespace PhotoshopWebsite
             {
                 Session["logindata"] = loginname;
                 Session["UserData"] = userWithData;
-                _userInfoCookies = Request.Cookies["Userinfo"];
-                
-                if (rememberMe && _userInfoCookies != null)
+                this._userInfoCookies = Request.Cookies["Userinfo"];
+
+                if (rememberMe && this._userInfoCookies != null)
                 {
-                    var expiredCookie = new HttpCookie(_userInfoCookies.Name) { Expires = DateTime.Now.AddDays(-1) };
+                    var expiredCookie = new HttpCookie(this._userInfoCookies.Name) { Expires = DateTime.Now.AddDays(-1) };
                     HttpContext.Current.Response.Cookies.Add(expiredCookie); // overwrite it
                     HttpContext.Current.Request.Cookies.Clear();
-                    createPersistentCookie(loginname, password);
+                    CreatePersistentCookie(loginname, password);
                 }
-                else if(rememberMe)
+                else if (rememberMe)
                 {
-                    createPersistentCookie(loginname, password);
+                    CreatePersistentCookie(loginname, password);
                 }
                 redirectToUserTypePage(userWithData.Type);
             }
             else
             {
-                Response.Write("<script>alert('"+Resources.LocalizedText.error_login+"')</script>");
+                Response.Write("<script>alert('" + Resources.LocalizedText.error_login + "')</script>");
             }
 
         }
 
-        private void createPersistentCookie(string loginName, string passWord)
+        private void CreatePersistentCookie(string loginName, string passWord)
         {
             HttpCookie _userInfoCookies = new HttpCookie("Userinfo");
 
@@ -113,7 +113,7 @@ namespace PhotoshopWebsite
             }
             else
             {
-                Response.Write("<script>alert('"+Resources.LocalizedText.error_user_type+"')</script>");
+                Response.Write("<script>alert('" + Resources.LocalizedText.error_user_type + "')</script>");
             }
         }
 
@@ -126,23 +126,24 @@ namespace PhotoshopWebsite
         {
             loginCode = tbInputCode.Text;
 
-            if (loginCode == String.Empty)
+            if (loginCode == string.Empty)
             {
-                Response.Write("<script>alert('"+Resources.LocalizedText.error_enter_code+"')</script>");
+                Response.Write("<script>alert('" + Resources.LocalizedText.error_enter_code + "')</script>");
             }
             else
             {
                 Session["loginCode"] = loginCode;
                 lcc = new LoginCodeController(Convert.ToInt32(loginCode), true);
-                if (lcc.validated) {
+                if (lcc.validated)
+                {
                     Response.Redirect("~/Gui/Client/CreateAccount.aspx?ReturnPath=" + Server.UrlEncode(Request.Url.AbsoluteUri));
                 }
                 else
                 {
-                    Response.Write("<script>alert('"+Resources.LocalizedText.error_wrong_code+"')</script>");
+                    Response.Write("<script>alert('" + Resources.LocalizedText.error_wrong_code + "')</script>");
                 }
             }
-            
+
         }
     }
 }

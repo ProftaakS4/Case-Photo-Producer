@@ -20,9 +20,9 @@ namespace PhotoshopWebsite.Gui.Client.Payment
     public class WebService : System.Web.Services.WebService
     {
 
-        [WebMethod (EnableSession = true)]
+        [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public String getUserData()
+        public string getUserData()
         {
 
             if (Session["UserData"] != null)
@@ -34,12 +34,12 @@ namespace PhotoshopWebsite.Gui.Client.Payment
             {
                 return null;
             }
-         
+
         }
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public String getOrderData()
+        public string getOrderData()
         {
             if (Session["shoppingCart"] != null)
             {

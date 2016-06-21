@@ -22,14 +22,18 @@ namespace PhotoshopWebsite.Gui.Photographer
         {
             User currentUser = (User)Session["UserData"];
             productController = new ProductController();
+
             Products = productController.products;
-            if (Session["products"] != null)
+
+            if (!(Session["products"] is List<ProductPerPhotographer>))
             {
-                ProductsChecked = Session["products"] as List<ProductPerPhotographer>;
+                Session["products"] = new List<ProductPerPhotographer>();
+                ProductsChecked = productController.getProductDataPerPhotographer(currentUser.ID);
+                Session["products"] = ProductsChecked;
             }
             else
             {
-                ProductsChecked = productController.getProductDataPerPhotographer(currentUser.ID);
+                ProductsChecked = Session["products"] as List<ProductPerPhotographer>;
             }
             Fillpage(this.Products);
         }
@@ -69,7 +73,7 @@ namespace PhotoshopWebsite.Gui.Photographer
                 TableCell descriptionCell = new TableCell();
                 descriptionCell.Text = product.Description;
                 TableCell priceCell = new TableCell();
-                //textbox
+                // textboxen
                 Label priceLabel = new Label();
                 priceLabel.Text = "€ ";
                 TextBox tbPrice = new TextBox();
@@ -137,7 +141,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
             Match match = regex.Match(cbAvailable.ID);
 
-            int num = Int32.Parse(match.Groups["Numeric"].Value);
+            int num = int.Parse(match.Groups["Numeric"].Value);
 
             foreach (ProductPerPhotographer productPerPhotographer in ProductsChecked)
             {
@@ -163,7 +167,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
             Match match = regex.Match(cbPrice.ID);
 
-            int num = Int32.Parse(match.Groups["Numeric"].Value);
+            int num = int.Parse(match.Groups["Numeric"].Value);
 
             foreach (ProductPerPhotographer productPerPhotographer in ProductsChecked)
             {

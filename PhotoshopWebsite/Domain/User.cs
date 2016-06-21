@@ -107,11 +107,11 @@ namespace PhotoshopWebsite.Domain
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_account_Email", new string[] { "string", emailaddress });
             parameters.Add("p_password", new string[] { "string", password });
-            DataTable dt = database.CallProcedure("getUserPassword", parameters);
+            DataTable dt = this.database.CallProcedure("getUserPassword", parameters);
 
             if (dt.Rows.Count != 0)
             {
-                returnUser = getUserData(emailaddress);
+                returnUser = this.getUserData(emailaddress);
             }
             return returnUser;
         }
@@ -125,7 +125,7 @@ namespace PhotoshopWebsite.Domain
         {
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_emailaddress", new string[] { "string", emailaddress });
-            DataTable dt = database.CallProcedure("getUserID", parameters);
+            DataTable dt = this.database.CallProcedure("getUserID", parameters);
             int userID = int.Parse(dt.Rows[0][0].ToString());
             // when user id is validated
             if (userID != -1)
@@ -134,10 +134,10 @@ namespace PhotoshopWebsite.Domain
                 List<ProductPerPhotographer> temp = new List<ProductPerPhotographer>();
                 parameters = new Dictionary<string, string[]>();
                 parameters.Add("p_id", new string[] { "int", userID.ToString() });
-                dt = database.CallProcedure("getUserInformation", parameters);
+                dt = this.database.CallProcedure("getUserInformation", parameters);
                 // when userdata is found and returned
                 if (dt.Rows.Count != 0)
-                { 
+                {
                     // set the data for the current user
                     this.Type = dt.Rows[0][0].ToString();
                     this.Firstname = dt.Rows[0][1].ToString();
@@ -145,8 +145,8 @@ namespace PhotoshopWebsite.Domain
                     this.Streetname = dt.Rows[0][3].ToString();
                     this.Housenumber = dt.Rows[0][4].ToString();
                     this.Zipcode = dt.Rows[0][5].ToString();
-                    this.City =dt.Rows[0][6].ToString();
-                    this.Phonenumber =dt.Rows[0][7].ToString();
+                    this.City = dt.Rows[0][6].ToString();
+                    this.Phonenumber = dt.Rows[0][7].ToString();
                     this.IBAN = dt.Rows[0][8].ToString();
                     // return the user with its data
                     return this;

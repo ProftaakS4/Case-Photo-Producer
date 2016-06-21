@@ -14,7 +14,7 @@ namespace PhotoshopWebsite.Gui
     [ExcludeFromCodeCoverage]
     public partial class Website : System.Web.UI.MasterPage
     {
-        private String clientName;
+        private string clientName;
         private User curUser;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,13 +24,13 @@ namespace PhotoshopWebsite.Gui
             }
             if (Session["logindata"] != null)
             {
-                clientName = Session["logindata"] as String;
+                this.clientName = Session["logindata"] as string;
             }
             else
             {
                 Response.Redirect("../Login.aspx");
             }
-            Labelklantnaam.Text = clientName;
+            Labelklantnaam.Text = this.clientName;
         }
     }
 }

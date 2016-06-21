@@ -42,21 +42,21 @@ namespace PhotoshopWebsite.Gui.Finance
             MainTable.CssClass = "table table-striped table-hover table-bordered";
             MainTable.Width = 600;
             TableHeaderRow MainHeaderRow = new TableHeaderRow();
-        
+
             TableHeaderCell IDHeader = new TableHeaderCell();
             IDHeader.Text = Resources.LocalizedText.purchase_id; // "Purchase ID";
             TableHeaderCell userHeader = new TableHeaderCell();
-            userHeader.Text = Resources.LocalizedText.account_id;// "Account ID";
+            userHeader.Text = Resources.LocalizedText.account_id; // "Account ID";
             TableHeaderCell dateHeader = new TableHeaderCell();
             dateHeader.Text = Resources.LocalizedText.date; // "Date";
             TableHeaderCell checkheader = new TableHeaderCell();
             checkheader.Text = Resources.LocalizedText.status; // "Status";
-        
+
             MainHeaderRow.Cells.Add(IDHeader);
             MainHeaderRow.Cells.Add(userHeader);
             MainHeaderRow.Cells.Add(dateHeader);
             MainHeaderRow.Cells.Add(checkheader);
-        
+
             MainTable.Rows.Add(MainHeaderRow);
 
 
@@ -71,7 +71,6 @@ namespace PhotoshopWebsite.Gui.Finance
                 TableCell Date = new TableCell();
                 Date.Text = pur.Date.ToString();
                 TableCell ButtonCell = new TableCell();
-                //ButtonCell.Text = pur.Status.ToString();
                 Label buttonCellText = new Label();
                 buttonCellText.Text = pur.ShippingStatus.ToString();
                 ButtonCell.Controls.Add(buttonCellText);
@@ -80,7 +79,7 @@ namespace PhotoshopWebsite.Gui.Finance
                 ltbr.Text = "<BR>";
                 ButtonCell.Controls.Add(ltbr);
 
-                if(buttonCellText.Text == "Not Ready")
+                if (buttonCellText.Text == "Not Ready")
                 {
                     CheckBox cbAdd = new CheckBox();
                     cbAdd.ID = pur.ID.ToString();
@@ -91,7 +90,7 @@ namespace PhotoshopWebsite.Gui.Finance
                     cbAdd.Checked = purchasesChecked.Contains(pur.ID);
                     ButtonCell.Controls.Add(cbAdd);
                 }
-                    
+
                 MainRow.Cells.Add(ID);
                 MainRow.Cells.Add(User);
                 MainRow.Cells.Add(Date);
@@ -111,7 +110,6 @@ namespace PhotoshopWebsite.Gui.Finance
             pnlCodes.Controls.Add(MainTable);
             pnlCodes.Controls.Add(closingcontrol);
             pnlCodes.Controls.Add(btPay);
-            //Response.Write("<script>alert('Wrong emailaddress or password')</script>");
         }
 
         private void Check_Clicked(object sender, EventArgs e)
@@ -146,6 +144,6 @@ namespace PhotoshopWebsite.Gui.Finance
             }
             Response.Redirect(Request.RawUrl);
         }
-        
+
     }
 }

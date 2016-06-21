@@ -16,7 +16,7 @@ namespace PhotoshopWebsite.Controller
 
         public FinanceController()
         {
-            this.finances = this.getAllFinances();
+            this.finances = this.GetAllFinances();
         }
 
         /// <summary>
@@ -24,11 +24,11 @@ namespace PhotoshopWebsite.Controller
         /// </summary>
         /// <param name="photographerID"></param>
         /// <returns></returns>
-        public List<Finance> getAllFinances()
+        public List<Finance> GetAllFinances()
         {
             List<Finance> temp = new List<Finance>();
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
-            DataTable dt = database.CallProcedure("getPricePerPhotographer", parameters);
+            DataTable dt = this.database.CallProcedure("getPricePerPhotographer", parameters);
             // when data is found and returned
             foreach (DataRow data in dt.Rows)
             {

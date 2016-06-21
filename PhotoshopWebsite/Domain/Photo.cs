@@ -52,14 +52,14 @@ namespace PhotoshopWebsite.Domain
 
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_id", new string[] { "string", photoID.ToString() });
-            DataTable dt = database.CallProcedure("getAccountIdperPhoto", parameters);
+            DataTable dt = this.database.CallProcedure("getAccountIdperPhoto", parameters);
             if (dt.Rows.Count == 0)
             {
                 return types;
             }
             parameters = new Dictionary<string, string[]>();
             parameters.Add("a_id", new string[] { "string", dt.Rows[0][0].ToString() });
-            dt = database.CallProcedure("getProductTypesByAccountId", parameters);
+            dt = this.database.CallProcedure("getProductTypesByAccountId", parameters);
 
             foreach (DataRow data in dt.Rows)
             {
@@ -96,7 +96,7 @@ namespace PhotoshopWebsite.Domain
             }
             return types;
         }
-        public override bool Equals(System.Object obj)
+        public override bool Equals(object obj)
         {
             // If parameter is null return false.
             if (obj == null)
@@ -105,12 +105,12 @@ namespace PhotoshopWebsite.Domain
             }
             // If parameter cannot be cast to Point return false.
             Photo p = obj as Photo;
-            if ((System.Object)p == null)
+            if ((object)p == null)
             {
                 return false;
             }
             // Return true if the fields match:
-            return (this.ID == p.ID);
+            return this.ID == p.ID;
         }
         public override int GetHashCode()
         {

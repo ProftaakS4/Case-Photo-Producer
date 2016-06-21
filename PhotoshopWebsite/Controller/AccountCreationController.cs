@@ -14,24 +14,24 @@ namespace PhotoshopWebsite.Controller
         {
 
         }
-        public int getAccountId(string email)
+        public int GetAccountId(string email)
         {
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_email", new string[] { "string", email });
-            DataTable dt = database.CallProcedure("getAccountWithEmail", parameters);
+            DataTable dt = this.database.CallProcedure("getAccountWithEmail", parameters);
             return int.Parse(dt.Rows[0][0].ToString());
         }
 
-        public Boolean insertAccountLoginCode(int accountId, int loginCode)
+        public bool insertAccountLoginCode(int accountId, int loginCode)
         {
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_account_ID", new string[] { "int", accountId.ToString() });
             parameters.Add("p_logincode", new string[] { "int", loginCode.ToString() });
-            DataTable dt = database.CallProcedure("insertAccountLoginCode", parameters);
+            DataTable dt = this.database.CallProcedure("insertAccountLoginCode", parameters);
             return dt.Rows.Count != 0;
         }
 
-        public DataTable createAccountandgetinformation(string customer, string firstname, string lastname, string streetname, string housenumber, string zipcode, string city, string phonenumber, string iban, string emailadress, string password)
+        public DataTable CreateAccountandgetinformation(string customer, string firstname, string lastname, string streetname, string housenumber, string zipcode, string city, string phonenumber, string iban, string emailadress, string password)
         {
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_type", new string[] { "string", customer });
@@ -45,7 +45,7 @@ namespace PhotoshopWebsite.Controller
             parameters.Add("p_iban", new string[] { "string", iban });
             parameters.Add("p_emailaddress", new string[] { "string", emailadress });
             parameters.Add("p_password", new string[] { "string", password });
-            DataTable dt = database.CallProcedure("insertUser", parameters);
+            DataTable dt = this.database.CallProcedure("insertUser", parameters);
             return dt;
         }
     }

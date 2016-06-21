@@ -33,19 +33,19 @@ namespace PhotoshopWebsite.Enumeration.Tests
             FilterTypes.FTypes result;
             FilterTypes.FTypes expResult;
 
-            result = FilterTypes.getFType("COLOR");
+            result = FilterTypes.GetFType("COLOR");
             expResult = FilterTypes.FTypes.COLOR;
             Assert.AreEqual(expResult, result);
 
-            result = FilterTypes.getFType("BLACKWHITE");
+            result = FilterTypes.GetFType("BLACKWHITE");
             expResult = FilterTypes.FTypes.BLACKWHITE;
             Assert.AreEqual(expResult, result);
 
-            result = FilterTypes.getFType("SEPIA");
+            result = FilterTypes.GetFType("SEPIA");
             expResult = FilterTypes.FTypes.SEPIA;
             Assert.AreEqual(expResult, result);
 
-            result = FilterTypes.getFType("default");
+            result = FilterTypes.GetFType("default");
             expResult = FilterTypes.FTypes.COLOR;
             Assert.AreEqual(expResult, result);
         }

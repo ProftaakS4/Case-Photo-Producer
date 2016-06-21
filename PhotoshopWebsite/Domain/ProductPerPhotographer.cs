@@ -30,7 +30,7 @@ namespace PhotoshopWebsite.Domain
             this.Price = price;
             this.Available = available == 1;
         }
-        public override bool Equals(System.Object obj)
+        public override bool Equals(object obj)
         {
             // If parameter is null return false.
             if (obj == null)
@@ -40,13 +40,13 @@ namespace PhotoshopWebsite.Domain
 
             // If parameter cannot be cast to Point return false.
             ProductPerPhotographer p = obj as ProductPerPhotographer;
-            if ((System.Object)p == null)
+            if ((object)p == null)
             {
                 return false;
             }
 
             // Return true if the fields match:
-            return (this.Product_ID == p.Product_ID);
+            return this.Product_ID == p.Product_ID;
         }
         public override int GetHashCode()
         {

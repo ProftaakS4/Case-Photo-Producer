@@ -15,7 +15,7 @@ namespace PhotoshopWebsite.Controller
         
         public PurchaseController()
         {
-            this.purchases = this.getAllPurchases();
+            this.purchases = this.GetAllPurchases();
         }
         
         public PurchaseController(int accountID)
@@ -28,11 +28,11 @@ namespace PhotoshopWebsite.Controller
         /// </summary>
         /// <param name="photographerID"></param>
         /// <returns></returns>
-        public List<Purchase> getAllPurchases()
+        public List<Purchase> GetAllPurchases()
         {
             List<Purchase> temp = new List<Purchase>();
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
-            DataTable dt = database.CallProcedure("getAllPurchases", parameters);
+            DataTable dt = this.database.CallProcedure("getAllPurchases", parameters);
             // when data is found and returned
             if (dt.Rows.Count != 0)
             {
@@ -50,7 +50,7 @@ namespace PhotoshopWebsite.Controller
             parameters.Add("p_purchase_ID", new string[] { "int", purchaseID.ToString() });
             parameters.Add("p_newPaidStatus", new string[] { "string", paidStatus.ToString() });
             parameters.Add("p_newShippingStatus", new string[] { "string", shippingStatus.ToString() });
-            database.CallProcedure("changeOrderStatus", parameters);
+            this.database.CallProcedure("changeOrderStatus", parameters);
         }
 
         public int getPrice(int product_ID, int photo_ID)
@@ -58,7 +58,7 @@ namespace PhotoshopWebsite.Controller
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_Product_ID", new string[] { "int", product_ID.ToString() });
             parameters.Add("p_Photo_ID", new string[] { "string", photo_ID.ToString() });
-            DataTable dt = database.CallProcedure("getPrice", parameters);
+            DataTable dt = this.database.CallProcedure("getPrice", parameters);
             if (dt.Rows.Count != 0)
             {
                 return int.Parse(dt.Rows[0][0].ToString());

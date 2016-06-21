@@ -14,15 +14,15 @@ namespace PhotoshopWebsite.Gui.Client
     [ExcludeFromCodeCoverage]
     public partial class CreateAccount : System.Web.UI.Page
     {
-        private String loginCode;
+        private string loginCode;
 
         AccountCreationController acc = new AccountCreationController();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["loginCode"] != null)
             {
-                loginCode = Session["loginCode"] as String;
-                tbloginCode.Text = loginCode;
+                this.loginCode = Session["loginCode"] as string;
+                tbloginCode.Text = this.loginCode;
                 tbloginCode.ReadOnly = true;
             }
             else
@@ -31,7 +31,7 @@ namespace PhotoshopWebsite.Gui.Client
             }
         }
 
-        protected void btnCreate_Click(object sender, EventArgs e)
+        protected void BtnCreate_Click(object sender, EventArgs e)
         {
             User newUser = new User(
                 tbFirstname.Text,
@@ -47,16 +47,16 @@ namespace PhotoshopWebsite.Gui.Client
             if (tbEMail.Text.Contains("@"))
             {
                 string customer = "Customer";
-                DataTable dt = acc.createAccountandgetinformation(customer, newUser.Firstname, newUser.Lastname, newUser.Streetname, newUser.Housenumber, newUser.Zipcode, newUser.City, newUser.Phonenumber, newUser.IBAN, newUser.Emailaddress, newUser.Password);
-                int id = acc.getAccountId(newUser.Emailaddress);
-                acc.insertAccountLoginCode(id, Convert.ToInt32(loginCode));
+                DataTable dt = this.acc.CreateAccountandgetinformation(customer, newUser.Firstname, newUser.Lastname, newUser.Streetname, newUser.Housenumber, newUser.Zipcode, newUser.City, newUser.Phonenumber, newUser.IBAN, newUser.Emailaddress, newUser.Password);
+                int id = this.acc.GetAccountId(newUser.Emailaddress);
+                this.acc.insertAccountLoginCode(id, Convert.ToInt32(this.loginCode));
                 Response.Redirect("../Login.aspx");
             }
             else
             {
-                Response.Write("<script>alert('"+Resources.LocalizedText.error_wrong_email+"')</script>");
+                Response.Write("<script>alert('" + Resources.LocalizedText.error_wrong_email + "')</script>");
             }
-            
+
         }
     }
 }

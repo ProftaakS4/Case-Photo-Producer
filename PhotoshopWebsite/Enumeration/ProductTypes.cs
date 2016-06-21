@@ -18,7 +18,7 @@ namespace PhotoshopWebsite.Enumeration
             MOK,
             CANVAS,
             DIBOND
-        };
+        }
 
         static public PTypes getPType(string eType)
         {
@@ -42,7 +42,7 @@ namespace PhotoshopWebsite.Enumeration
                     return PTypes.CANVAS;
                 case "DIBOND":
                     return PTypes.DIBOND;
-                //default to photo1x2
+                // default to photo1x2
                 default:
                     return PTypes.PHOTO1x2;
             }
@@ -70,7 +70,7 @@ namespace PhotoshopWebsite.Enumeration
                     return 8;
                 case "DIBOND":
                     return 9;
-                //default to 1
+                // default to 1
                 default:
                     return 1;
             }

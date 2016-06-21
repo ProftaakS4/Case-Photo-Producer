@@ -24,7 +24,7 @@ namespace PhotoshopWebsite.Controller
             List<int> result = new List<int>();
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_id", new string[] { "int", userID.ToString() });
-            DataTable dt = database.CallProcedure("getPhotosUser", parameters);
+            DataTable dt = this.database.CallProcedure("getPhotosUser", parameters);
             foreach (DataRow data in dt.Rows)
             {
                 result.Add(int.Parse(data[0].ToString()));
@@ -36,11 +36,11 @@ namespace PhotoshopWebsite.Controller
         /// </summary>
         /// <param name="userID"></param> the userID of the account
         /// <returns></returns>
-        public List<int> getGroupPhotos()
+        public List<int> GetGroupPhotos()
         {
             List<int> result = new List<int>();
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
-            DataTable dt = database.CallProcedure("getGroupPhotos", parameters);
+            DataTable dt = this.database.CallProcedure("getGroupPhotos", parameters);
             // when data is found and returned
             foreach (DataRow data in dt.Rows)
             {
@@ -60,7 +60,7 @@ namespace PhotoshopWebsite.Controller
         {
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_photo_ID", new string[] { "int", photoID.ToString() });
-            DataTable dt = database.CallProcedure("getPhoto", parameters);
+            DataTable dt = this.database.CallProcedure("getPhoto", parameters);
             DataRow row = dt.Rows[0];
             if (row != null)
             {
@@ -75,7 +75,7 @@ namespace PhotoshopWebsite.Controller
             List<int> result = new List<int>();
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_id", new string[] { "int", userID.ToString() });
-            DataTable dt = database.CallProcedure("getPhotosPhotographer", parameters);
+            DataTable dt = this.database.CallProcedure("getPhotosPhotographer", parameters);
             // when data is found and returned
             if (dt.Rows.Count != 0)
             {

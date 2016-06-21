@@ -19,7 +19,7 @@ namespace PhotoshopWebsite.DatabaseTier.Tests
         {
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_photographer_ID", new string[] { "int", 1.ToString() });
-            DataTable dt = database.CallProcedure("getLoginCodesFromPhotographer", parameters);
+            DataTable dt = this.database.CallProcedure("getLoginCodesFromPhotographer", parameters);
             Assert.IsNotNull(dt);
         }
     }

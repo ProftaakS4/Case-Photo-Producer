@@ -22,14 +22,6 @@ namespace PhotoshopWebsite.Gui
         {
             fc = new FinanceController();
             finances = fc.finances;
-            if (Session["FinancesPerPhotographer"] != null)
-            {
-                //productAmount = Session["FinancesPerPhotographer"] as Dictionary<int, int>;
-            }
-            else
-            {
-                //productAmount = new Dictionary<int, int>();
-            }
             Fillpage(finances);
         }
 
@@ -87,7 +79,6 @@ namespace PhotoshopWebsite.Gui
             pnlCodes.Controls.Add(firstcontrol);
             pnlCodes.Controls.Add(MainTable);
             pnlCodes.Controls.Add(closingcontrol);
-            //Response.Write("<script>alert('Wrong emailaddress or password')</script>");
         }
 
     }

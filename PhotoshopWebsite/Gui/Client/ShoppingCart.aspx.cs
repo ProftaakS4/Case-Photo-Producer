@@ -21,7 +21,7 @@ namespace PhotoshopWebsite.Gui
         private string orderName = "Photo Shop";
         private double totalAmount = 0;
         private User currentUser;
-       
+
 
         public List<Domain.ShoppingbasketItem> shoppingCart
         {
@@ -36,7 +36,7 @@ namespace PhotoshopWebsite.Gui
             }
         }
 
-      
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -104,14 +104,14 @@ namespace PhotoshopWebsite.Gui
 
                 TableCell PriceCell = new TableCell();
                 PriceCell.Text = "€" + item.Price.ToString() + ",00";
-                totalAmount = (totalAmount + (item.Price * item.Quantity));
+                totalAmount = totalAmount + (item.Price * item.Quantity);
 
 
                 TableCell ButtonCell = new TableCell();
                 CheckBox cbRemove = new CheckBox();
                 cbRemove.ID = item.GetHashCode().ToString();
                 cbRemove.CssClass = "checkbox";
-                cbRemove.CheckedChanged += Check_Clicked;
+                cbRemove.CheckedChanged += this.Check_Clicked;
                 cbRemove.Height = 30;
                 cbRemove.AutoPostBack = true;
                 cbRemove.Checked = false;
@@ -128,13 +128,13 @@ namespace PhotoshopWebsite.Gui
                 MainTable.Rows.Add(MainRow);
             }
 
-            
+
             // Fixed row
             TableRow FixedRow = new TableRow();
             FixedRow.Height = 60;
 
             TableCell TotalTextCell = new TableCell();
-            TotalTextCell.Text = "<B>"+Resources.LocalizedText.total+":</B>";
+            TotalTextCell.Text = "<B>" + Resources.LocalizedText.total + ":</B>";
             TableCell TotalAmountCell = new TableCell();
             TotalAmountCell.Text = "€" + totalAmount.ToString() + ",00";
             TotalAmountCell.ID = "tdTotalAmount";
@@ -157,7 +157,7 @@ namespace PhotoshopWebsite.Gui
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
         }
 
-  
+
         private void Check_Clicked(object sender, EventArgs e)
         {
             CheckBox cbremove = sender as CheckBox;
@@ -180,7 +180,7 @@ namespace PhotoshopWebsite.Gui
             Match match = regex.Match(tbQuantity.ID);
 
             string name = match.Groups["Alpha"].Value;
-            int num = Int32.Parse(match.Groups["Numeric"].Value);
+            int num = int.Parse(match.Groups["Numeric"].Value);
 
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
             {
@@ -200,12 +200,12 @@ namespace PhotoshopWebsite.Gui
             }
         }
 
-        protected void btnPaypal_Click1(object sender, ImageClickEventArgs e)
+        protected void BtnPaypal_Click(object sender, ImageClickEventArgs e)
         {
             Response.Redirect("https://www.paypal.com/us/cgi-bin/webscr?cmd=_xclick&business=stanniez%40live%2enl&item_name=" + orderName + "&currency_code=EUR&amount=" + totalAmount);
         }
 
-        protected void btnSubmit_Click(object sender, EventArgs e)
+        protected void BtnSubmit_Click(object sender, EventArgs e)
         {
             if (shoppingCart.Count == 0)
             {
@@ -225,7 +225,7 @@ namespace PhotoshopWebsite.Gui
                         // create socket string
                         ids = ids + " " + item.PhotoID.ToString();
 
-                        string photoIDQualtityType = item.PhotoID.ToString() + ";" + item.Quantity.ToString() + "#" + item.Filter + " " + item.getCropValues();                        
+                        string photoIDQualtityType = item.PhotoID.ToString() + ";" + item.Quantity.ToString() + "#" + item.Filter + " " + item.GetCropValues();
 
                         // send socket string to fileserver and check if string is correctly send
                         if (socket.sendData(photoIDQualtityType))
@@ -237,7 +237,7 @@ namespace PhotoshopWebsite.Gui
                     socket.sendData(ids + "?" + currentUser.ID.ToString());
                     socket.sendData("END");
 
-                    //send mail for the order overview
+                    // send mail for the order overview
                     try
                     {
                         MailMessage mail = new MailMessage();
@@ -265,7 +265,7 @@ namespace PhotoshopWebsite.Gui
                     {
                         Response.Write("<script>alert('" + Resources.LocalizedText.error_cant_send_mail + " " + currentUser.Emailaddress + "')</script>");
                     }
-                    //clear shoppingcart
+                    // clear shoppingcart
                     Session["shoppingCart"] = new List<Domain.ShoppingbasketItem>();
                     Response.Redirect(Request.RawUrl + "/../Mainstore.aspx");
                 }

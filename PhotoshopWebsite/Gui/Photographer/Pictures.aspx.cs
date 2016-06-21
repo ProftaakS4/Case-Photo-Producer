@@ -84,10 +84,10 @@ namespace PhotoshopWebsite.Gui.Photographer
 
         private void Fillpage(Domain.Photo x)
         {
-            //create buttons
+            // create buttons
             RadioButton btnSepia = new RadioButton();
             btnSepia.ID = "SEPIA" + x.ID;
-            btnSepia.CheckedChanged += filterChange;
+            btnSepia.CheckedChanged += FilterChange;
             btnSepia.AutoPostBack = true;
             btnSepia.GroupName = x.ID.ToString();
             btnSepia.Height = 30;
@@ -95,7 +95,7 @@ namespace PhotoshopWebsite.Gui.Photographer
 
             RadioButton btnBlackWhite = new RadioButton();
             btnBlackWhite.ID = "BLACKWHITE" + x.ID;
-            btnBlackWhite.CheckedChanged += filterChange;
+            btnBlackWhite.CheckedChanged += FilterChange;
             btnBlackWhite.AutoPostBack = true;
             btnBlackWhite.GroupName = x.ID.ToString();
             btnBlackWhite.Height = 30;
@@ -103,7 +103,7 @@ namespace PhotoshopWebsite.Gui.Photographer
 
             RadioButton btnColor = new RadioButton();
             btnColor.ID = "COLOR" + x.ID;
-            btnColor.CheckedChanged += filterChange;
+            btnColor.CheckedChanged += FilterChange;
             btnColor.AutoPostBack = true;
             btnColor.GroupName = x.ID.ToString();
             btnColor.Height = 30;
@@ -113,7 +113,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             btnDownload.ID = "download" + x.ID;
             btnDownload.Text = Resources.LocalizedText.download;
             btnDownload.CssClass = "btn btn-default";
-            btnDownload.Click += btnDownload_Click;
+            btnDownload.Click += this.BtnDownload_Click;
 
 
             if (!filters.ContainsKey(x.ID))
@@ -136,7 +136,7 @@ namespace PhotoshopWebsite.Gui.Photographer
                     btnColor.Checked = true;
                     break;
             }
-            colorChange(x.ID);
+            ColorChange(x.ID);
 
             System.Web.UI.WebControls.Image imgProduct = new System.Web.UI.WebControls.Image();
             imgProduct.ID = "image" + x.ID.ToString();
@@ -150,8 +150,8 @@ namespace PhotoshopWebsite.Gui.Photographer
             HtmlGenericControl secondControl = new HtmlGenericControl("div");
             HtmlGenericControl lastControl = new HtmlGenericControl("div");
 
-            String div = "<div class='col-sm-4'>";
-            //add buttons
+            string div = "<div class='col-sm-4'>";
+            // add buttons
             firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'><div class='caption'>";
 
             secondControl.InnerHtml = "<p>" + x.Description + "</p>";
@@ -169,35 +169,35 @@ namespace PhotoshopWebsite.Gui.Photographer
             pnlProduct.Controls.Add(lastControl);
         }
 
-        void btnDownload_Click(object sender, EventArgs e)
+        void BtnDownload_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
             Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
             Match match = regex.Match(button.ID);
-            int num = Int32.Parse(match.Groups["Numeric"].Value);
+            int num = int.Parse(match.Groups["Numeric"].Value);
 
             Response.Clear();
             Response.ContentType = "image/jpg";
-            Response.AppendHeader("Content-Disposition", "attachment; filename=" + photoController.getPhoto(num).ID+ ".jpeg");
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + photoController.getPhoto(num).ID + ".jpeg");
             Response.TransmitFile(Server.MapPath(photoController.getPhoto(num).Image));
             Response.End();
         }
 
-        void filterChange(object sender, EventArgs e)
+        void FilterChange(object sender, EventArgs e)
         {
             RadioButton button = sender as RadioButton;
             Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
             Match match = regex.Match(button.ID);
 
             string name = match.Groups["Alpha"].Value;
-            int num = Int32.Parse(match.Groups["Numeric"].Value);
+            int num = int.Parse(match.Groups["Numeric"].Value);
 
-            //set name on ID
-            filters[num] = FilterTypes.getFType(name);
-            //change color
-            colorChange(num);
+            // name on ID
+            filters[num] = FilterTypes.GetFType(name);
+            // change color
+            ColorChange(num);
         }
-        void colorChange(int num)
+        void ColorChange(int num)
         {
             foreach (Domain.Photo photo in photos)
             {
@@ -206,13 +206,13 @@ namespace PhotoshopWebsite.Gui.Photographer
                     switch (filters[num])
                     {
                         case FilterTypes.FTypes.COLOR:
-                            convertColor(photo);
+                            ConvertColor(photo);
                             break;
                         case FilterTypes.FTypes.BLACKWHITE:
-                            convertBlackWhite(photo);
+                            ConvertBlackWhite(photo);
                             break;
                         case FilterTypes.FTypes.SEPIA:
-                            convertSepia(photo);
+                            ConvertSepia(photo);
                             break;
                         default:
                             break;
@@ -222,7 +222,7 @@ namespace PhotoshopWebsite.Gui.Photographer
             }
         }
 
-        private void convertColor(Domain.Photo photo)
+        private void ConvertColor(Domain.Photo photo)
         {
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
@@ -241,10 +241,10 @@ namespace PhotoshopWebsite.Gui.Photographer
             }
         }
 
-        private void convertSepia(Domain.Photo photo)
+        private void ConvertSepia(Domain.Photo photo)
         {
-            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Image.ToString()));
-            Bitmap temp = (Bitmap)_current;
+            this._current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Image.ToString()));
+            Bitmap temp = (Bitmap)this._current;
             Bitmap bmap = (Bitmap)temp.Clone();
 
             for (int yCoordinate = 0; yCoordinate < bmap.Height; yCoordinate++)
@@ -257,8 +257,8 @@ namespace PhotoshopWebsite.Gui.Photographer
                     bmap.SetPixel(xCoordinate, yCoordinate, sepia);
                 }
             }
-            _current = (Bitmap)bmap.Clone();
-            _current.Save(Server.MapPath("Sepia" + photo.ID + ".png"));
+            this._current = (Bitmap)bmap.Clone();
+            this._current.Save(Server.MapPath("Sepia" + photo.ID + ".png"));
 
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
@@ -277,10 +277,10 @@ namespace PhotoshopWebsite.Gui.Photographer
             }
         }
 
-        private void convertBlackWhite(Domain.Photo photo)
+        private void ConvertBlackWhite(Domain.Photo photo)
         {
-            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Image.ToString()));
-            Bitmap temp = (Bitmap)_current;
+            this._current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Image.ToString()));
+            Bitmap temp = (Bitmap)this._current;
             Bitmap bmap = (Bitmap)temp.Clone();
             Color col;
             for (int i = 0; i < bmap.Width; i++)
@@ -292,10 +292,10 @@ namespace PhotoshopWebsite.Gui.Photographer
                     bmap.SetPixel(i, j, Color.FromArgb(grey, grey, grey));
                 }
             }
-            _current = (Bitmap)bmap.Clone();
+            this._current = (Bitmap)bmap.Clone();
             Random rnd = new Random();
             int a = rnd.Next();
-            _current.Save(Server.MapPath("BlackWhite" + photo.ID + ".png"));
+            this._current.Save(Server.MapPath("BlackWhite" + photo.ID + ".png"));
 
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {

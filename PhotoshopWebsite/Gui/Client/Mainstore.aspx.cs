@@ -125,9 +125,9 @@ namespace PhotoshopWebsite
                     Fillpage(photo);
                 }
             }
-            // if no search then show the normal photos
             else
             {
+                // if no search then show the normal photos
                 // fill the page with the users photos
                 foreach (Domain.Photo photo in photos)
                 {
@@ -139,17 +139,17 @@ namespace PhotoshopWebsite
 
         private void Fillpage(Domain.Photo x)
         {
-            //create buttons
+            // create buttons
             Button btnAddToCart = new Button();
             btnAddToCart.ID = "{" + x.Description + "}" + x.ID.ToString();
             btnAddToCart.CssClass = "btn btn-default";
-            btnAddToCart.Click += BtnAddToCart_Click1;
+            btnAddToCart.Click += this.BtnAddToCart_Click;
             btnAddToCart.Height = 30;
             btnAddToCart.Text = Resources.LocalizedText.order_image;
 
             RadioButton btnSepia = new RadioButton();
             btnSepia.ID = "SEPIA" + x.ID;
-            btnSepia.CheckedChanged += filterChange;
+            btnSepia.CheckedChanged += FilterChange;
             btnSepia.AutoPostBack = true;
             btnSepia.GroupName = x.ID.ToString();
             btnSepia.Height = 30;
@@ -160,7 +160,7 @@ namespace PhotoshopWebsite
 
             RadioButton btnBlackWhite = new RadioButton();
             btnBlackWhite.ID = "BLACKWHITE" + x.ID;
-            btnBlackWhite.CheckedChanged += filterChange;
+            btnBlackWhite.CheckedChanged += FilterChange;
             btnBlackWhite.AutoPostBack = true;
             btnBlackWhite.GroupName = x.ID.ToString();
             btnBlackWhite.Height = 30;
@@ -168,7 +168,7 @@ namespace PhotoshopWebsite
 
             RadioButton btnColor = new RadioButton();
             btnColor.ID = "COLOR" + x.ID;
-            btnColor.CheckedChanged += filterChange;
+            btnColor.CheckedChanged += FilterChange;
             btnColor.AutoPostBack = true;
             btnColor.GroupName = x.ID.ToString();
             btnColor.Height = 30;
@@ -176,7 +176,7 @@ namespace PhotoshopWebsite
 
             Button btnCrop = new Button();
             btnCrop.ID = "Crop" + x.ID.ToString();
-            btnCrop.Click += BtnCrop_Click;
+            btnCrop.Click += this.BtnCrop_Click;
             btnCrop.CssClass = "btn btn-default";
             btnCrop.Text = Resources.LocalizedText.crop;
             btnCrop.Height = 30;
@@ -205,15 +205,15 @@ namespace PhotoshopWebsite
                     btnColor.Checked = true;
                     break;
             }
-            colorChange(x.ID);
+            ColorChange(x.ID);
 
             DropDownList ddType = new DropDownList();
             ddType.ID = "ddType" + x.ID;
             ddType.CssClass = "form-control";
             ddType.Width = 94;
             ddType.Height = 30;
-            ddType.SelectedIndexChanged += ddType_SelectedIndexChanged;
-            //Gets the product types offered by the photographer per photo
+            ddType.SelectedIndexChanged += DDType_SelectedIndexChanged;
+            // Gets the product types offered by the photographer per photo
             List<ProductTypes.PTypes> types = x.getTypes(x.ID);
             foreach (ProductTypes.PTypes type in types)
             {
@@ -237,17 +237,14 @@ namespace PhotoshopWebsite
             HtmlGenericControl lastControl = new HtmlGenericControl("div");
             HtmlGenericControl cropControlLast = new HtmlGenericControl("div");
 
+            string div = "<div class='col-sm-4'>";
 
-            String div = "<div class='col-sm-4'>";
-
-
-            //firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'> <img src=" + x.Image + " " + "alt=" + x.Description + ">  <div class='caption'>";
             firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'><div class='caption'>";
             cropControl.InnerHtml = "<div class='modal fade' id='myModal" + x.ID + "' tabindex=' - 1' role='dialog' aria-labelledby='mymodallabel'>< div class='modal-dialog' role='document'><div class='modal-content'  style='width:400px'><div class='modal-header'><button type = 'button' class='close' data-dismiss='modal' aria-label='close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='mymodallabel'>" + Resources.LocalizedText.order_image + "</h4></div><div class='modal-body'> <img src='" + x.Image + "' class='cropbox' style='height:330px; width:200px;'></img></div><div class='modal-footer'><button type = 'button' class='btn btn-default' data-dismiss='modal'>" + Resources.LocalizedText.close + "</button>";
             cropControl.Controls.Add(btnCrop);
             cropControlLast.InnerHtml = "</div></div</div></div>";
 
-            //add buttons
+            // add buttons
             secondControl.InnerHtml = "<p>" + x.Description + "</p>";
             firstControl.Controls.Add(imgProduct);
             firstControl.Controls.Add(secondControl);
@@ -273,7 +270,7 @@ namespace PhotoshopWebsite
             // bij het aanmaken van de button wordt de photo id gebruikt als button id. 
             Button button = sender as Button;
             // get the fotoid by using the crop button id whicht contains the photoid
-            string photoId = button.ID.Replace("Crop", "");
+            string photoId = button.ID.Replace("Crop", string.Empty);
 
             if (input_X.Value.Contains("."))
             {
@@ -315,11 +312,11 @@ namespace PhotoshopWebsite
         }
 
 
-        private void BtnAddToCart_Click1(object sender, EventArgs e)
+        private void BtnAddToCart_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
             string name = button.ID.Split('{', '}')[1];
-            int num = Int32.Parse(button.ID.Split('{', '}')[2]); //photo ID
+            int num = int.Parse(button.ID.Split('{', '}')[2]); // photo ID
 
             Domain.ShoppingbasketItem found = null;
             foreach (Domain.ShoppingbasketItem item in shoppingCart)
@@ -336,7 +333,6 @@ namespace PhotoshopWebsite
             }
             else
             {
-                //TODO pakt ook de jaartallen niet alleen de ID's
                 PurchaseController purchaseController = new PurchaseController();
                 int product = ProductTypes.getInt(products[num].ToString());
                 int price = purchaseController.getPrice(product, num);
@@ -351,11 +347,9 @@ namespace PhotoshopWebsite
 
                 foreach (Domain.ShoppingbasketItem item in shoppingCart)
                 {
-                    //Response.Write("<script>alert('" + item.PhotoID.ToString() + "')</script>");
                     if (item.PhotoID.ToString() == photoid)
                     {
                         item.setCropValues("&" + cropValues[0].ToString() + " " + cropValues[1].ToString() + " " + cropValues[2].ToString() + " " + cropValues[3].ToString() + " " + cropValues[4].ToString() + " " + cropValues[5].ToString());
-                        //Response.Write("<script>alert('" + item.getCropValues() + "')</script>");
                         break;
                     }
                 }
@@ -365,32 +359,32 @@ namespace PhotoshopWebsite
 
         }
 
-        void ddType_SelectedIndexChanged(object sender, EventArgs e)
+        void DDType_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList ddl = sender as DropDownList;
             Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
             Match match = regex.Match(ddl.ID);
 
-            int num = Int32.Parse(match.Groups["Numeric"].Value);
-            //set EType on ID
+            int num = int.Parse(match.Groups["Numeric"].Value);
+            // set EType on ID
             products[num] = ProductTypes.getPType(ddl.SelectedValue);
         }
 
-        void filterChange(object sender, EventArgs e)
+        void FilterChange(object sender, EventArgs e)
         {
             RadioButton button = sender as RadioButton;
             Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>[0-9]*)");
             Match match = regex.Match(button.ID);
 
             string name = match.Groups["Alpha"].Value;
-            int num = Int32.Parse(match.Groups["Numeric"].Value);
+            int num = int.Parse(match.Groups["Numeric"].Value);
 
-            //set name on ID
-            filters[num] = FilterTypes.getFType(name);
-            //change color
-            colorChange(num);
+            // set name on ID
+            filters[num] = FilterTypes.GetFType(name);
+            // change color
+            ColorChange(num);
         }
-        void colorChange(int num)
+        void ColorChange(int num)
         {
             foreach (Domain.Photo photo in photos)
             {
@@ -399,13 +393,13 @@ namespace PhotoshopWebsite
                     switch (filters[num])
                     {
                         case FilterTypes.FTypes.COLOR:
-                            convertColor(photo);
+                            ConvertColor(photo);
                             break;
                         case FilterTypes.FTypes.BLACKWHITE:
-                            convertBlackWhite(photo);
+                            ConvertBlackWhite(photo);
                             break;
                         case FilterTypes.FTypes.SEPIA:
-                            convertSepia(photo);
+                            ConvertSepia(photo);
                             break;
                         default:
                             break;
@@ -416,33 +410,7 @@ namespace PhotoshopWebsite
             }
         }
 
-        void btnAddToCart_Click(object sender, EventArgs e)
-        {
-            Button button = sender as Button;
-            string name = button.ID.Split('{', '}')[1];
-            int num = Int32.Parse(button.ID.Split('{', '}')[2]);
-
-            Domain.ShoppingbasketItem found = null;
-            foreach (Domain.ShoppingbasketItem item in shoppingCart)
-            {
-                if (item.PhotoID == num && item.Filter == filters[num])
-                {
-                    found = item;
-                    break;
-                }
-            }
-            if (found != null)
-            {
-                found.Quantity++;
-            }
-            else
-            {
-                //TODO pakt ook de jaartallen niet alleen de ID's
-                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num], 0.0));
-            }
-        }
-
-        private void convertColor(Domain.Photo photo)
+        private void ConvertColor(Domain.Photo photo)
         {
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
@@ -461,10 +429,10 @@ namespace PhotoshopWebsite
             }
         }
 
-        private void convertSepia(Domain.Photo photo)
+        private void ConvertSepia(Domain.Photo photo)
         {
-            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Image.ToString()));
-            Bitmap temp = (Bitmap)_current;
+            this._current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Image.ToString()));
+            Bitmap temp = (Bitmap)this._current;
             Bitmap bmap = (Bitmap)temp.Clone();
 
             for (int yCoordinate = 0; yCoordinate < bmap.Height; yCoordinate++)
@@ -477,8 +445,8 @@ namespace PhotoshopWebsite
                     bmap.SetPixel(xCoordinate, yCoordinate, sepia);
                 }
             }
-            _current = (Bitmap)bmap.Clone();
-            _current.Save(Server.MapPath("Sepia" + photo.ID + ".png"));
+            this._current = (Bitmap)bmap.Clone();
+            this._current.Save(Server.MapPath("Sepia" + photo.ID + ".png"));
 
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {
@@ -497,10 +465,10 @@ namespace PhotoshopWebsite
             }
         }
 
-        private void convertBlackWhite(Domain.Photo photo)
+        private void ConvertBlackWhite(Domain.Photo photo)
         {
-            _current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Image.ToString()));
-            Bitmap temp = (Bitmap)_current;
+            this._current = (Bitmap)Bitmap.FromFile(Server.MapPath(photo.Image.ToString()));
+            Bitmap temp = (Bitmap)this._current;
             Bitmap bmap = (Bitmap)temp.Clone();
             Color col;
             for (int i = 0; i < bmap.Width; i++)
@@ -512,10 +480,10 @@ namespace PhotoshopWebsite
                     bmap.SetPixel(i, j, Color.FromArgb(grey, grey, grey));
                 }
             }
-            _current = (Bitmap)bmap.Clone();
+            this._current = (Bitmap)bmap.Clone();
             Random rnd = new Random();
             int a = rnd.Next();
-            _current.Save(Server.MapPath("BlackWhite" + photo.ID + ".png"));
+            this._current.Save(Server.MapPath("BlackWhite" + photo.ID + ".png"));
 
             foreach (HtmlGenericControl control in pnlProduct.Controls)
             {

@@ -33,7 +33,7 @@ namespace PhotoshopWebsite.Gui
             }
             else
             {
-                productAmount = new Dictionary<int,int>();
+                productAmount = new Dictionary<int, int>();
             }
             Fillpage(products);
         }
@@ -80,7 +80,7 @@ namespace PhotoshopWebsite.Gui
                 imgProduct.ImageUrl = prod.Image;
                 imgProduct.Height = 100;
                 imgProduct.Width = 150;
-                
+
                 Image.Controls.Add(imgProduct);
 
                 TableCell Description = new TableCell();
@@ -101,7 +101,6 @@ namespace PhotoshopWebsite.Gui
                 tbAmountStock.ID = prod.ID.ToString();
                 tbAmountStock.Text = "0";
                 tbAmountStock.TextChanged += new EventHandler(this.AmountText_TextChanged);
-                //tbAmountStock.CssClass = "textbox";
                 TextBoxCell.Controls.Add(tbAmountStock);
 
                 MainRow.Cells.Add(ID);
@@ -133,7 +132,7 @@ namespace PhotoshopWebsite.Gui
                     Session["NumericStock"] = true;
                 }
             }
-            
+
             if (Session["PositiveStock"] != null)
             {
                 bool PositiveStock = (bool)Session["PositiveStock"];
@@ -143,7 +142,7 @@ namespace PhotoshopWebsite.Gui
                     Session["PositiveStock"] = true;
                 }
             }
-            
+
         }
 
         private void AmountText_TextChanged(object sender, EventArgs e)
@@ -158,7 +157,6 @@ namespace PhotoshopWebsite.Gui
             else
             {
                 Session["NumericStock"] = false;
-                //Response.Write("<script>alertx('Vul numerice waarden in.')</script>");
             }
         }
 

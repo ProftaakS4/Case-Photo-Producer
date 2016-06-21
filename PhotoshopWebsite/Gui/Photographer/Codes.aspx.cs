@@ -85,9 +85,9 @@ namespace PhotoshopWebsite.Gui.Photographer
             TextBox tbMailTo = new TextBox();
             tbMailTo.ID = "TextBoxRow_mailto1";
             tbMailTo.Text = Resources.LocalizedText.email;
-            if (Session["mailTO"] as String != null)
+            if (Session["mailTO"] as string != null)
             {
-                tbMailTo.Text = Session["mailTO"] as String;
+                tbMailTo.Text = Session["mailTO"] as string;
             }
             tbMailTo.TextChanged += new EventHandler(this.tbMailTo_Change);
             tbMailTo.CssClass = "form-control";
@@ -116,7 +116,7 @@ namespace PhotoshopWebsite.Gui.Photographer
                 SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
                 // Mail Header
                 mail.From = new MailAddress("photoshopPTS4@gmail.com");
-                mail.To.Add(Session["mailTO"] as String);
+                mail.To.Add(Session["mailTO"] as string);
                 mail.Subject = Resources.LocalizedText.your_order_codes;
                 // Mail Body
                 StringBuilder sb = new StringBuilder();
@@ -132,11 +132,11 @@ namespace PhotoshopWebsite.Gui.Photographer
                 SmtpServer.Credentials = new System.Net.NetworkCredential("photoshopPTS4@gmail.com", "proftaak4");
                 SmtpServer.EnableSsl = true;
                 SmtpServer.Send(mail);
-                Response.Write("<script>alert('"+Resources.LocalizedText.mail_sent+" " + Session["mailTO"] as String + "')</script>");
+                Response.Write("<script>alert('" + Resources.LocalizedText.mail_sent + " " + Session["mailTO"] as string + "')</script>");
             }
             catch (Exception ex)
             {
-                Response.Write("<script>alert('"+Resources.LocalizedText.error_cant_send_mail+" " + Session["mailTO"] as String + "')</script>");
+                Response.Write("<script>alert('" + Resources.LocalizedText.error_cant_send_mail + " " + Session["mailTO"] as string + "')</script>");
             }
 
         }

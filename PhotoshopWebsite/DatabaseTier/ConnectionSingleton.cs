@@ -22,7 +22,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// </summary>
         private ConnectionSingleton()
         {
-        }        
+        }
 
         /// <summary>
         /// Get the one instance of the Connection singleton
@@ -30,11 +30,11 @@ namespace PhotoshopWebsite.DatabaseTier
         /// <returns></returns>
         public static ConnectionSingleton GetSingleton()
         {
-            if(_singleton == null)
+            if (_singleton == null)
             {
                 _singleton = new ConnectionSingleton();
                 return _singleton;
-            }             
+            }
             return _singleton;
         }
 
@@ -44,7 +44,7 @@ namespace PhotoshopWebsite.DatabaseTier
         /// <returns></returns>
         public MySqlConnection getSqlConnection()
         {
-            if(connection == null)
+            if (connection == null)
             {
                 connection = new MySqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
                 return connection;

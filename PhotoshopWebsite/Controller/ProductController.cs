@@ -16,18 +16,18 @@ namespace PhotoshopWebsite.Controller
 
         public ProductController()
         {
-            this.products = this.getAllProducts();
+            this.products = this.GetAllProducts();
         }
 
         /// <summary>
         /// Get all the products in the database.
         /// </summary>
         /// <returns>List with products</returns>
-        public List<Product> getAllProducts()
+        public List<Product> GetAllProducts()
         {
             List<Product> temp = new List<Product>();
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
-            DataTable dt = database.CallProcedure("getAllProducts", parameters);
+            DataTable dt = this.database.CallProcedure("getAllProducts", parameters);
             // when data is found and returned
             foreach (DataRow data in dt.Rows)
             {
@@ -41,7 +41,7 @@ namespace PhotoshopWebsite.Controller
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_product_ID", new string[] { "int", productID.ToString() });
             parameters.Add("p_amount", new string[] { "int", stock.ToString() });
-            database.CallProcedure("addStock", parameters);
+            this.database.CallProcedure("addStock", parameters);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace PhotoshopWebsite.Controller
             List<ProductPerPhotographer> temp = new List<ProductPerPhotographer>();
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_user_ID", new string[] { "int", photographerID.ToString() });
-            DataTable dt = database.CallProcedure("getProductAvailability", parameters);
+            DataTable dt = this.database.CallProcedure("getProductAvailability", parameters);
             // when userdata is found and returned
             foreach (DataRow data in dt.Rows)
             {
@@ -77,7 +77,7 @@ namespace PhotoshopWebsite.Controller
                 parameters.Add("p_Product_ID", new string[] { "int", p.Product_ID.ToString() });
                 parameters.Add("p_Price", new string[] { "int", p.Price.ToString() });
                 parameters.Add("p_available", new string[] { "int", available.ToString() });
-                database.CallProcedure("updateProductsPerPhotographer", parameters);
+                this.database.CallProcedure("updateProductsPerPhotographer", parameters);
             }
         }
     }

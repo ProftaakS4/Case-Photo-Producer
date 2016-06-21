@@ -16,7 +16,7 @@ namespace PhotoshopWebsite.Domain
         private DatabaseTier.QueryDatabase database = new DatabaseTier.QueryDatabase();
 
         public int ID { get; set; }
-        //public Dictionary<Product, int> Products { get; set; }
+        // public Dictionary<Product, int> Products { get; set; }
         public DateTime Date { get; set; }
         public PaymentType Type { get; set; }
         public string IBAN { get; set; }
@@ -34,7 +34,7 @@ namespace PhotoshopWebsite.Domain
         public Order(int id, DateTime date, PaymentType type, string iban, double price)
         {
             this.ID = id;
-            //this.Products = products;
+            // this.Products = products;
             this.Date = date;
             this.Type = type;
             this.IBAN = iban;
@@ -52,7 +52,7 @@ namespace PhotoshopWebsite.Domain
             parameters.Add("p_account_ID", new string[] { "int", accountID.ToString() });
             parameters.Add("p_date", new string[] { "date", date.ToString("yyyy-MM-dd") });
             parameters.Add("p_status", new string[] { "string", status.ToString() });
-            DataTable dt = database.CallProcedure("insertPurchase", parameters);
+            DataTable dt = this.database.CallProcedure("insertPurchase", parameters);
             int purchaseID = int.Parse(dt.Rows[0][0].ToString());
             if (purchaseID != 0)
             {
@@ -63,7 +63,7 @@ namespace PhotoshopWebsite.Domain
                 parameters.Add("p_photo_ID", new string[] { "int", photoID.ToString() });
                 parameters.Add("p_filterType", new string[] { "string", filterType.ToString() });
                 parameters.Add("p_quantity", new string[] { "int", quantity.ToString() });
-                database.CallProcedure("insertPurchaseProduct", parameters);
+                this.database.CallProcedure("insertPurchaseProduct", parameters);
 
                 parameters = new Dictionary<string, string[]>();
                 parameters.Add("p_purchase_ID", new string[] { "int", purchaseID.ToString() });
@@ -71,13 +71,13 @@ namespace PhotoshopWebsite.Domain
                 parameters.Add("p_type", new string[] { "string", paymentType.ToString() });
                 parameters.Add("p_iban", new string[] { "string", iban.ToString() });
                 parameters.Add("p_price", new string[] { "double", price.ToString() });
-                dt = database.CallProcedure("insertPayment", parameters);
+                dt = this.database.CallProcedure("insertPayment", parameters);
                 int paymentID = int.Parse(dt.Rows[0][0].ToString());
 
                 parameters = new Dictionary<string, string[]>();
                 parameters.Add("p_payment_ID", new string[] { "int", paymentID.ToString() });
                 parameters.Add("p_date", new string[] { "date", date.ToString("yyyy-MM-dd") });
-                dt = database.CallProcedure("insertPrintOrder", parameters);
+                dt = this.database.CallProcedure("insertPrintOrder", parameters);
                 if (dt.Rows.Count != 0)
                 {
                     int printOrderID = int.Parse(dt.Rows[0][0].ToString());
@@ -85,7 +85,7 @@ namespace PhotoshopWebsite.Domain
                     parameters = new Dictionary<string, string[]>();
                     parameters.Add("p_type", new string[] { "string", productType.ToString() });
                     parameters.Add("p_quantity", new string[] { "int", quantity.ToString() });
-                    database.CallProcedure("updateStock", parameters);
+                    this.database.CallProcedure("updateStock", parameters);
                     return printOrderID;
                 }
             }

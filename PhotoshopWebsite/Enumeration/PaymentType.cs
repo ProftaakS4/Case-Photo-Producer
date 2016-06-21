@@ -12,5 +12,5 @@ namespace PhotoshopWebsite.Enumeration
     /// GoogleCheckout
     /// Ogone
     /// </summary>
-    public enum PaymentType { Paypal, iDeal, GoogleCheckout, Ogone };
+    public enum PaymentType { Paypal, iDeal, GoogleCheckout, Ogone }
 }

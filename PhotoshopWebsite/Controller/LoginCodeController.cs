@@ -12,27 +12,27 @@ namespace PhotoshopWebsite.Controller
 
         public int ID { get; set; }
         public List<LoginCode> loginCodes { get; set; }
-        public Boolean validated { get; set; }
+        public bool validated { get; set; }
 
-        public LoginCodeController(int photographerID, Boolean singleLogincode)
+        public LoginCodeController(int photographerID, bool singleLogincode)
         {
             if (singleLogincode == true)
             {
                 this.ID = photographerID;
-                this.validated = loginCodeValidation(photographerID);
+                this.validated = this.loginCodeValidation(photographerID);
             }
         }
         public LoginCodeController(int photographerID)
         {
             this.ID = photographerID;
-            this.loginCodes = this.getLoginCodeData(ID);
+            this.loginCodes = this.getLoginCodeData(this.ID);
         }
 
         public bool loginCodeValidation(int loginCode)
         {
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_logincode", new string[] { "int", loginCode.ToString() });
-            DataTable dt = database.CallProcedure("checkLoginCode", parameters);
+            DataTable dt = this.database.CallProcedure("checkLoginCode", parameters);
             return dt.Rows.Count != 0;
         }
         /// <summary>
@@ -45,7 +45,7 @@ namespace PhotoshopWebsite.Controller
             List<LoginCode> temp = new List<LoginCode>();
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_photographer_ID", new string[] { "int", photographerID.ToString() });
-            DataTable dt = database.CallProcedure("getLoginCodesFromPhotographer", parameters);
+            DataTable dt = this.database.CallProcedure("getLoginCodesFromPhotographer", parameters);
             // when userdata is found and returned
             foreach (DataRow data in dt.Rows)
             {

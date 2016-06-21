@@ -12,9 +12,9 @@ namespace PhotoshopWebsite.Enumeration
             COLOR,
             BLACKWHITE,
             SEPIA
-        };
+        }
 
-        static public FTypes getFType(string eType)
+        static public FTypes GetFType(string eType)
         {
             switch (eType)
             {
@@ -24,7 +24,7 @@ namespace PhotoshopWebsite.Enumeration
                     return FTypes.BLACKWHITE;
                 case "SEPIA":
                     return FTypes.SEPIA;
-                    //default to color
+                    // default to color
                 default:
                     return FTypes.COLOR;
             }

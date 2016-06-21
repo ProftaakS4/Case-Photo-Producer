@@ -21,7 +21,7 @@ namespace PhotoshopWebsite.DatabaseTier.Tests
 
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_id", new string[] { "int", 4.ToString() });
-            DataTable dt = database.CallProcedure("getPhotosUser", parameters);
+            DataTable dt = this.database.CallProcedure("getPhotosUser", parameters);
             Assert.IsNotNull(dt);
         }
 
@@ -30,7 +30,7 @@ namespace PhotoshopWebsite.DatabaseTier.Tests
         {
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_photo_ID", new string[] { "int", 4.ToString() });
-            DataTable dt = database.CallProcedure("getPhoto", parameters);
+            DataTable dt = this.database.CallProcedure("getPhoto", parameters);
             Assert.IsNotNull(dt);
         }
     }

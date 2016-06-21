@@ -18,29 +18,29 @@ namespace PhotoshopWebsite.Gui
 
             if (Session["logindata"] != null)
             {
-                clientName = Session["logindata"] as String;
+                this.clientName = Session["logindata"] as string;
             }
             else
             {
                 Response.Redirect("../Login.aspx");
             }
-            Labelklantnaam.Text = clientName;
+            Labelklantnaam.Text = this.clientName;
             pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
             if (pageName.Contains("account"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.my_account+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.my_account + "</h1>";
             }
             else if (pageName.Contains("orders"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.orders+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.orders + "</h1>";
             }
             else if (pageName.Contains("stock"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.stock_overview+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.stock_overview + "</h1>";
             }
             else if (pageName.Contains("finance"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.finance+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.finance + "</h1>";
             }
         }
         protected void Btnlogout_Click(object sender, EventArgs e)

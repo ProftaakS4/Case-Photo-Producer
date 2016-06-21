@@ -16,8 +16,8 @@ namespace PhotoshopWebsite
     public partial class PhotoshopMaster : System.Web.UI.MasterPage
     {
         private QueryDatabase database = new QueryDatabase();
-        private String clientName;
-        private String pageName;
+        private string clientName;
+        private string pageName;
         private User curUser;
         private List<PhotoshopWebsite.Domain.Photo> searchedPhotos;
         private int size = 0;
@@ -43,50 +43,50 @@ namespace PhotoshopWebsite
             }
             if (Session["logindata"] != null)
             {
-                clientName = Session["logindata"] as String;
+                this.clientName = Session["logindata"] as string;
             }
             else
             {
                 Response.Redirect("../Login.aspx");
             }
-            Labelklantnaam.Text = clientName;
+            Labelklantnaam.Text = this.clientName;
             pageName = this.ContentPlaceHolder1.Page.GetType().FullName;
 
             if (pageName.Contains("account"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.my_account+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.my_account + "</h1>";
             }
             else if (pageName.Contains("mainstore"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.pictures+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.pictures + "</h1>";
             }
             else if (pageName.Contains("group"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.group_pictures+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.group_pictures + "</h1>";
             }
             else if (pageName.Contains("google"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.google_checkout_payment+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.google_checkout_payment + "</h1>";
             }
             else if (pageName.Contains("ideal"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.ideal_payment+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.ideal_payment + "</h1>";
             }
             else if (pageName.Contains("ogone"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.ogone_payment+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.ogone_payment + "</h1>";
             }
             else if (pageName.Contains("transfer"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.bank_transfer+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.bank_transfer + "</h1>";
             }
             else if (pageName.Contains("checkpayment"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.payment_check+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.payment_check + "</h1>";
             }
             else if (pageName.Contains("shoppingcart"))
             {
-                LabelTitle.Text = "<h1>"+Resources.LocalizedText.shopping_cart+"</h1>";
+                LabelTitle.Text = "<h1>" + Resources.LocalizedText.shopping_cart + "</h1>";
             }
         }
         protected void Btnlogout_Click(object sender, EventArgs e)
@@ -101,7 +101,7 @@ namespace PhotoshopWebsite
             if (pageName.Contains("group"))
             {
                 searchedPhotos = new List<Domain.Photo>();
-                if (tbSearch.Text != "")
+                if (tbSearch.Text != string.Empty)
                 {
                     Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
                     parameters.Add("p_searchedText", new string[] { "string", tbSearch.Text });
@@ -117,13 +117,13 @@ namespace PhotoshopWebsite
                 }
                 else
                 {
-                    Response.Write("<script>alert('"+Resources.LocalizedText.error_enter_search_term+"')</script>");
+                    Response.Write("<script>alert('" + Resources.LocalizedText.error_enter_search_term + "')</script>");
                 }
             }
             else
             {
                 searchedPhotos = new List<Domain.Photo>();
-                if (tbSearch.Text != "")
+                if (tbSearch.Text != string.Empty)
                 {
                     Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
                     parameters.Add("p_user_ID", new string[] { "int", curUser.ID.ToString() });
@@ -140,8 +140,8 @@ namespace PhotoshopWebsite
                 }
                 else
                 {
-        
-                    Response.Write("<script>alert('"+Resources.LocalizedText.error_enter_search_term+"')</script>");
+
+                    Response.Write("<script>alert('" + Resources.LocalizedText.error_enter_search_term + "')</script>");
                 }
             }
         }

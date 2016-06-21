@@ -18,20 +18,20 @@ namespace PhotoshopWebsite.Controller
 
         public OrderController(int accountID)
         {
-            this.orders = this.getAllOrders(accountID);
+            this.orders = this.GetAllOrders(accountID);
         }
 
         public OrderController(int accountID, int orderID)
         {
-            this.orderInfos = this.getAllOrderInfos(accountID, orderID);
+            this.orderInfos = this.GetAllOrderInfos(accountID, orderID);
         }
 
-        public List<Order> getAllOrders(int accountID)
+        public List<Order> GetAllOrders(int accountID)
         {
             List<Order> temp = new List<Order>();
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_account_ID", new string[] { "int", accountID.ToString() });
-            DataTable dt = database.CallProcedure("getAllPaymentsByAccount", parameters);
+            DataTable dt = this.database.CallProcedure("getAllPaymentsByAccount", parameters);
             // when data is found and returned
             foreach (DataRow data in dt.Rows)
             {
@@ -40,13 +40,13 @@ namespace PhotoshopWebsite.Controller
             return temp;
         }
 
-        public List<OrderInfo> getAllOrderInfos(int accountID, int orderID)
+        public List<OrderInfo> GetAllOrderInfos(int accountID, int orderID)
         {
             List<OrderInfo> temp = new List<OrderInfo>();
             Dictionary<string, string[]> parameters = new Dictionary<string, string[]>();
             parameters.Add("p_account_ID", new string[] { "int", accountID.ToString() });
             parameters.Add("p_order_ID", new string[] { "int", orderID.ToString() });
-            DataTable dt = database.CallProcedure("getAllOrderInfos", parameters);
+            DataTable dt = this.database.CallProcedure("getAllOrderInfos", parameters);
             // when data is found and returned
             foreach (DataRow data in dt.Rows)
             {
