@@ -41,6 +41,12 @@ namespace PhotoshopWebsite.DatabaseTier
                         case "string":
                             myCommand.Parameters.Add("@" + parameter.Key, MySqlDbType.VarChar).Value = parameter.Value[1];
                             break;
+                        case "date":
+                            myCommand.Parameters.Add("@" + parameter.Key, MySqlDbType.Date).Value = parameter.Value[1];
+                            break;
+                        case "double":
+                            myCommand.Parameters.Add("@" + parameter.Key, MySqlDbType.Decimal).Value = parameter.Value[1];
+                            break;
                         default:
                             break;
                     }                    
