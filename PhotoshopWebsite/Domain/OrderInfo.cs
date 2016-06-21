@@ -9,9 +9,7 @@ namespace PhotoshopWebsite.Domain
     /// OrderInfo class is created for the product info of the orders
     /// </summary>
     public class OrderInfo
-    {
-        private DatabaseTier.Order DB_Order;
-        
+    {        
         public int ID { get; set; }
         public string Description { get; set; }
         public string Filter { get; set; }
