@@ -36,7 +36,7 @@ namespace PhotoshopWebsite.Domain
             this.Product = product;
             this.Price = price;
             this.Boundaries = "";
-           
+
         }
 
         /// <summary>
@@ -45,8 +45,14 @@ namespace PhotoshopWebsite.Domain
         /// <param name="boundaries">boundaries for the shoppingbasketitem</param>
         public void setBoundaries(string boundaries)
         {
-            
+
             this.Boundaries = boundaries;
+        }
+
+
+        public override string ToString()
+        {
+            return "PhotoID: " + PhotoID + ", " + Description + ", quantity: " + Quantity + ", filter: " + Filter.ToString() + ", product: " + Product.ToString() + ", price per item: " + Price;
         }
     }
 }
