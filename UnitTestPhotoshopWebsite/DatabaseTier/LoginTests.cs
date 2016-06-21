@@ -13,7 +13,6 @@ namespace PhotoshopWebsite.DatabaseTier.Tests
     [TestClass()]
     public class LoginTests
     {
-        private Login login = new Login();
         private DatabaseTier.QueryDatabase database = new DatabaseTier.QueryDatabase();
         
        

@@ -115,12 +115,6 @@ namespace PhotoshopWebsite
                     Session["photos"] = photos;
                 }
             }
-            if(Session["cropValues"] != null)
-            {
-                cropValues = (int[])Session["cropValues"];
-                Response.Write(cropValues[0] + " " + cropValues[1] + " " + cropValues[2] + " " + cropValues[3]);
-
-            }
 
             // check if a search has taken place
             if (searchedPhotos.Count > 0)
@@ -276,10 +270,17 @@ namespace PhotoshopWebsite
 
         private void BtnCrop_Click(object sender, EventArgs e)
         {
+            // bij het aanmaken van de button wordt de photo id gebruikt als button id. 
+            Button button = sender as Button;
+            // get the fotoid by using the crop button id whicht contains the photoid
+            string photoId = button.ID.Replace("Crop", "");          
+
             cropValues[0] = Convert.ToInt32(input_X.Value);
             cropValues[1] = Convert.ToInt32(input_Y.Value);
             cropValues[2] = Convert.ToInt32(input_W.Value);
-            cropValues[3] = Convert.ToInt32(input_H.Value);            
+            cropValues[3] = Convert.ToInt32(input_H.Value);
+
+            Session["cropButton"] = photoId;
             Session["cropValues"] = cropValues;
         }
 
@@ -295,7 +296,7 @@ namespace PhotoshopWebsite
             {
                 if (item.PhotoID == num && item.Filter == filters[num])
                 {
-                    found = item;
+                    found = item;                    
                     break;
                 }
             }
@@ -309,8 +310,29 @@ namespace PhotoshopWebsite
                 PurchaseController purchaseController = new PurchaseController();
                 int product = ProductTypes.getInt(products[num].ToString());
                 int price = purchaseController.getPrice(product, num);
-                shoppingCart.Add(new Domain.ShoppingbasketItem(num, name, filters[num], products[num], price));
+                ShoppingbasketItem newItem = new ShoppingbasketItem(num, name, filters[num], products[num], price);
+                shoppingCart.Add(newItem);
             }
+
+            if (Session["cropValues"] != null && Session["cropButton"] != null)
+            {
+                string photoid = (string)Session["cropButton"];
+                cropValues = (int[])Session["cropValues"];
+
+                foreach (Domain.ShoppingbasketItem item in shoppingCart)
+                {
+                    //Response.Write("<script>alert('" + item.PhotoID.ToString() + "')</script>");
+                    if (item.PhotoID.ToString() == photoid)
+                    {
+                        item.setCropValues("&" + cropValues[0].ToString() + " " + cropValues[1].ToString() + " " + cropValues[2].ToString() + " " + cropValues[3].ToString());
+                        //Response.Write("<script>alert('" + item.getCropValues() + "')</script>");
+                        break;
+                    }
+                }
+                Session["shoppingCart"] = shoppingCart;
+            }
+
+
         }
 
         void ddType_SelectedIndexChanged(object sender, EventArgs e)

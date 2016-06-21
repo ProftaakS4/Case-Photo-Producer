@@ -15,7 +15,6 @@ namespace PhotoshopWebsite.Gui
     public partial class Website : System.Web.UI.MasterPage
     {
         private String clientName;
-        private String pageName;
         private User curUser;
         protected void Page_Load(object sender, EventArgs e)
         {
