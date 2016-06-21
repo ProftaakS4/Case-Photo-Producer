@@ -10,6 +10,8 @@ using System.Text.RegularExpressions;
 using System.Diagnostics.CodeAnalysis;
 using PhotoshopWebsite.Domain;
 using PhotoshopWebsite.Enumeration;
+using System.Net.Mail;
+using System.Text;
 
 namespace PhotoshopWebsite.Gui
 {
@@ -229,12 +231,43 @@ namespace PhotoshopWebsite.Gui
                         if (socket.sendData(photoIDQualtityType))
                         {
                             // insert order into database
-                            //newOrder.insertPrintOrder(currentUser.ID, DateTime.Now, "Paid", ProductTypes.getInt(item.Product.ToString()), item.PhotoID, item.Filter.ToString(), "iDeal", item.Product.ToString(), currentUser.IBAN, item.Price, item.Quantity);
+                            newOrder.insertPrintOrder(currentUser.ID, DateTime.Now, "Paid", ProductTypes.getInt(item.Product.ToString()), item.PhotoID, item.Filter.ToString(), "iDeal", item.Product.ToString(), currentUser.IBAN, item.Price, item.Quantity);
                         }
                     }
                     socket.sendData(ids + "?" + currentUser.ID.ToString());
                     socket.sendData("END");
-                    // Email senden
+
+                    //send mail for the order overview
+                    try
+                    {
+                        MailMessage mail = new MailMessage();
+                        SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                        // Mail Header
+                        mail.From = new MailAddress("photoshopPTS4@gmail.com");
+                        mail.To.Add(currentUser.Emailaddress);
+                        mail.Subject = "Uw bestelling.";
+                        // Mail Body
+                        StringBuilder sb = new StringBuilder();
+                        sb.Append("Dit is de inhoudt van uw bestelling:" + Environment.NewLine);
+                        foreach (Domain.ShoppingbasketItem item in shoppingCart)
+                        {
+                            sb.Append(item.ToString() + Environment.NewLine);
+                        }
+                        sb.Append(Environment.NewLine + "Uw betaling is goed gekeurd.");
+                        mail.Body = sb.ToString();
+                        // Mail Config
+                        SmtpServer.Port = 587;
+                        SmtpServer.Credentials = new System.Net.NetworkCredential("photoshopPTS4@gmail.com", "proftaak4");
+                        SmtpServer.EnableSsl = true;
+                        SmtpServer.Send(mail);
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Write("<script>alert('" + Resources.LocalizedText.error_cant_send_mail + " " + currentUser.Emailaddress + "')</script>");
+                    }
+                    //clear shoppingcart
+                    Session["shoppingCart"] = new List<Domain.ShoppingbasketItem>();
+                    Response.Redirect(Request.RawUrl + "/../Mainstore.aspx");
                 }
                 else
                 {

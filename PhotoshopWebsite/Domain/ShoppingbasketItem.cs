@@ -45,7 +45,7 @@ namespace PhotoshopWebsite.Domain
         /// </summary>
         /// <param name="boundaries">boundaries for the shoppingbasketitem</param>
         public void setBoundaries(string boundaries)
-        {            
+        {
             this.Boundaries = boundaries;
         }
 
@@ -57,7 +57,7 @@ namespace PhotoshopWebsite.Domain
         {
             this.cropValues = cropValues;
         }
-
+            
         /// <summary>
         /// get the cropvalues
         /// </summary>
@@ -65,6 +65,12 @@ namespace PhotoshopWebsite.Domain
         public string getCropValues()
         {
             return this.cropValues;
+        }
+
+
+        public override string ToString()
+        {
+            return "PhotoID: " + PhotoID + ", " + Description + ", quantity: " + Quantity + ", filter: " + Filter.ToString() + ", product: " + Product.ToString() + ", price per item: " + Price;
         }
     }
 }

@@ -13,8 +13,7 @@
                 onChange: getCoords,
                 onSelect: getCoords,
                 onSelect: showPreview,
-                onRelease: hidePreview,
-                aspectRatio: 1
+                onRelease: hidePreview
             });
 
             var $preview = $('.preview');
@@ -26,13 +25,6 @@
                 if (parseInt(coords.w) > 0) {
                     var rx = 100 / coords.w;
                     var ry = 100 / coords.h;
-
-                    $preview.css({
-                        width: Math.round(rx * width) + 'px',
-                        height: Math.round(ry * height) + 'px',
-                        marginLeft: '-' + Math.round(rx * coords.x) + 'px',
-                        marginTop: '-' + Math.round(ry * coords.y) + 'px'
-                    }).show();
                 }
             }
 
@@ -41,10 +33,12 @@
             }
             function getCoords(coords) {
 
-                $('#head_input_X').val(coords.x);
-                $('#head_input_Y').val(coords.y);
-                $('#head_input_W').val(coords.w);
-                $('#head_input_H').val(coords.h);
+                $('#head_input_X').val(1.2 * coords.x);
+                $('#head_input_Y').val(1.2 * coords.y);
+                $('#head_input_W').val(1.2 * coords.w);
+                $('#head_input_H').val(1.2 * coords.h);
+                //$('#head_input_height').val(height);
+                //$('#head_input_width').val(width);
             }
         });
     </script>
@@ -52,6 +46,8 @@
     <input id="input_Y" type="hidden" runat="server" />
     <input id="input_W" type="hidden" runat="server" />
     <input id="input_H" type="hidden" runat="server" />
+    <%-- <input id="head_input_height" type="hidden" runat="server" />
+    <input id="head_input_width" type="hidden" runat="server" />--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div id="panel-body" class="panel-bodybefore">

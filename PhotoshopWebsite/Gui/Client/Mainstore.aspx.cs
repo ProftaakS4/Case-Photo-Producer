@@ -20,7 +20,7 @@ namespace PhotoshopWebsite
 
         // create instance of the photoController for future database connections through busisness layer
         PhotoController photoController = new PhotoController();
-        int[] cropValues = new int[4];
+        int[] cropValues = new int[6];
 
         // create a list of all the current user photos
         public List<Domain.Photo> photos;
@@ -156,7 +156,7 @@ namespace PhotoshopWebsite
             btnSepia.Text = Resources.LocalizedText.sepia;
 
             HtmlGenericControl cropButtonControll = new HtmlGenericControl("div");
-            cropButtonControll.InnerHtml = "<button type='button' id='Cropbtn" + x.ID + "'class='btn btn-default' data-toggle='modal' data-target='#myModal" + x.ID + "' >"+Resources.LocalizedText.crop+"</ button >";
+            cropButtonControll.InnerHtml = "<button type='button' id='Cropbtn" + x.ID + "'class='btn btn-default' data-toggle='modal' data-target='#myModal" + x.ID + "' >" + Resources.LocalizedText.crop + "</ button >";
 
             RadioButton btnBlackWhite = new RadioButton();
             btnBlackWhite.ID = "BLACKWHITE" + x.ID;
@@ -243,7 +243,7 @@ namespace PhotoshopWebsite
 
             //firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'> <img src=" + x.Image + " " + "alt=" + x.Description + ">  <div class='caption'>";
             firstControl.InnerHtml = div + "<div class='thumbnail' style='max-width:330px max-height:150px;'><div class='caption'>";
-            cropControl.InnerHtml = "<div class='modal fade' id='myModal" + x.ID + "' tabindex=' - 1' role='dialog' aria-labelledby='mymodallabel'>< div class='modal-dialog' role='document'><div class='modal-content'  style='width:400px'><div class='modal-header'><button type = 'button' class='close' data-dismiss='modal' aria-label='close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='mymodallabel'>"+Resources.LocalizedText.order_image+"</h4></div><div class='modal-body'> <img src='" + x.Image + "' class='cropbox' style='height:330px; width:200px;'></img> <h1>"+Resources.LocalizedText.image_preview+"</h1><div style='width: 100px; height: 100px; overflow: hidden; margin - left:5px; '><img src='" + x.Image + "' class='preview'></img>'</div></div><div class='modal-footer'><button type = 'button' class='btn btn-default' data-dismiss='modal'>"+Resources.LocalizedText.close+"</button>";
+            cropControl.InnerHtml = "<div class='modal fade' id='myModal" + x.ID + "' tabindex=' - 1' role='dialog' aria-labelledby='mymodallabel'>< div class='modal-dialog' role='document'><div class='modal-content'  style='width:400px'><div class='modal-header'><button type = 'button' class='close' data-dismiss='modal' aria-label='close'><span aria-hidden='true'>&times;</span></button><h4 class='modal-title' id='mymodallabel'>" + Resources.LocalizedText.order_image + "</h4></div><div class='modal-body'> <img src='" + x.Image + "' class='cropbox' style='height:330px; width:200px;'></img></div><div class='modal-footer'><button type = 'button' class='btn btn-default' data-dismiss='modal'>" + Resources.LocalizedText.close + "</button>";
             cropControl.Controls.Add(btnCrop);
             cropControlLast.InnerHtml = "</div></div</div></div>";
 
@@ -273,12 +273,42 @@ namespace PhotoshopWebsite
             // bij het aanmaken van de button wordt de photo id gebruikt als button id. 
             Button button = sender as Button;
             // get the fotoid by using the crop button id whicht contains the photoid
-            string photoId = button.ID.Replace("Crop", "");          
+            string photoId = button.ID.Replace("Crop", "");
 
-            cropValues[0] = Convert.ToInt32(input_X.Value);
-            cropValues[1] = Convert.ToInt32(input_Y.Value);
-            cropValues[2] = Convert.ToInt32(input_W.Value);
-            cropValues[3] = Convert.ToInt32(input_H.Value);
+            if (input_X.Value.Contains("."))
+            {
+                cropValues[0] = Convert.ToInt32(input_X.Value.Substring(0, input_X.Value.IndexOf(".")));
+            }
+            else
+            {
+                cropValues[0] = Convert.ToInt32(input_X.Value);
+            }
+            if (input_Y.Value.Contains("."))
+            {
+                cropValues[1] = Convert.ToInt32(input_Y.Value.Substring(0, input_Y.Value.IndexOf(".")));
+            }
+            else
+            {
+                cropValues[1] = Convert.ToInt32(input_Y.Value);
+            }
+            if (input_W.Value.Contains("."))
+            {
+                cropValues[2] = Convert.ToInt32(input_W.Value.Substring(0, input_W.Value.IndexOf(".")));
+            }
+            else
+            {
+                cropValues[2] = Convert.ToInt32(input_W.Value);
+            }
+            if (input_H.Value.Contains("."))
+            {
+                cropValues[3] = Convert.ToInt32(input_H.Value.Substring(0, input_H.Value.IndexOf(".")));
+            }
+            else
+            {
+                cropValues[3] = Convert.ToInt32(input_H.Value);
+            }
+            cropValues[4] = Convert.ToInt32(360);
+            cropValues[5] = Convert.ToInt32(360);
 
             Session["cropButton"] = photoId;
             Session["cropValues"] = cropValues;
@@ -296,7 +326,7 @@ namespace PhotoshopWebsite
             {
                 if (item.PhotoID == num && item.Filter == filters[num])
                 {
-                    found = item;                    
+                    found = item;
                     break;
                 }
             }
@@ -324,7 +354,7 @@ namespace PhotoshopWebsite
                     //Response.Write("<script>alert('" + item.PhotoID.ToString() + "')</script>");
                     if (item.PhotoID.ToString() == photoid)
                     {
-                        item.setCropValues("&" + cropValues[0].ToString() + " " + cropValues[1].ToString() + " " + cropValues[2].ToString() + " " + cropValues[3].ToString());
+                        item.setCropValues("&" + cropValues[0].ToString() + " " + cropValues[1].ToString() + " " + cropValues[2].ToString() + " " + cropValues[3].ToString() + " " + cropValues[4].ToString() + " " + cropValues[5].ToString());
                         //Response.Write("<script>alert('" + item.getCropValues() + "')</script>");
                         break;
                     }
