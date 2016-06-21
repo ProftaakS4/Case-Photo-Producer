@@ -13,13 +13,11 @@ namespace PhotoshopWebsite.Gui.Client.Payment
 {
     public partial class PaymentMasterNested : System.Web.UI.MasterPage
     {
-
         private User currentUser;
         private RadioButton rabobank = new RadioButton();
         private RadioButton abn = new RadioButton();
         private RadioButton ingb = new RadioButton();
         private RadioButton sns = new RadioButton();
-
 
         public List<Domain.ShoppingbasketItem> shoppingCart
         {
@@ -193,4 +191,3 @@ namespace PhotoshopWebsite.Gui.Client.Payment
         }
     }
 }
-

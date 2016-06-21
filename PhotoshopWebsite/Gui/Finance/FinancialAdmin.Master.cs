@@ -14,8 +14,7 @@ namespace PhotoshopWebsite.Gui
         private string clientName;
         private string pageName;
         protected void Page_Load(object sender, EventArgs e)
-        {
-
+        { 
             if (Session["logindata"] != null)
             {
                 this.clientName = Session["logindata"] as string;

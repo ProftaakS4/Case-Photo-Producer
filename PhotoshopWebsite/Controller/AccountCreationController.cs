@@ -12,7 +12,7 @@ namespace PhotoshopWebsite.Controller
 
         public AccountCreationController()
         {
-
+            // empty constructor
         }
         public int GetAccountId(string email)
         {

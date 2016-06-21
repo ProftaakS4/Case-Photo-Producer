@@ -38,7 +38,6 @@ namespace PhotoshopWebsite.Gui.Photographer
 
         private Bitmap _current;
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -81,7 +80,6 @@ namespace PhotoshopWebsite.Gui.Photographer
             }
         }
 
-
         private void Fillpage(Domain.Photo x)
         {
             // create buttons
@@ -114,7 +112,6 @@ namespace PhotoshopWebsite.Gui.Photographer
             btnDownload.Text = Resources.LocalizedText.download;
             btnDownload.CssClass = "btn btn-default";
             btnDownload.Click += this.BtnDownload_Click;
-
 
             if (!filters.ContainsKey(x.ID))
             {

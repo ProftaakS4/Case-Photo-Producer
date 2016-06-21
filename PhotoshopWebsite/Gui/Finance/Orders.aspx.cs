@@ -59,7 +59,6 @@ namespace PhotoshopWebsite.Gui.Finance
 
             MainTable.Rows.Add(MainHeaderRow);
 
-
             foreach (Purchase pur in purchases)
             {
                 TableRow MainRow = new TableRow();
@@ -105,7 +104,6 @@ namespace PhotoshopWebsite.Gui.Finance
             btPay.Click += new EventHandler(this.PayOrder_Clicked);
             btPay.Height = 30;
 
-
             pnlCodes.Controls.Add(firstcontrol);
             pnlCodes.Controls.Add(MainTable);
             pnlCodes.Controls.Add(closingcontrol);
@@ -137,7 +135,6 @@ namespace PhotoshopWebsite.Gui.Finance
 
         private void PayOrder_Clicked(object sender, EventArgs e)
         {
-
             foreach (int pur in purchasesChecked)
             {
                 pc.updatePurchaseStatus(pur, "Paid", "Ready");

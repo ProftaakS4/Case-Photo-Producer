@@ -95,7 +95,6 @@ namespace PhotoshopWebsite
             Response.Redirect(Request.RawUrl);
         }
 
-
         protected void Btnsearch_Click(object sender, EventArgs e)
         {
             if (pageName.Contains("group"))
@@ -140,7 +139,6 @@ namespace PhotoshopWebsite
                 }
                 else
                 {
-
                     Response.Write("<script>alert('" + Resources.LocalizedText.error_enter_search_term + "')</script>");
                 }
             }

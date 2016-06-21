@@ -32,10 +32,5 @@ namespace PhotoshopWebsite.Domain
             this.Type = type;
             this.Amount = amount;
         }
-
-        public OrderInfo()
-        {
-
-        }
     }
 }

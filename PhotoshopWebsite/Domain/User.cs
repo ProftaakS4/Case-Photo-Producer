@@ -93,7 +93,6 @@ namespace PhotoshopWebsite.Domain
             this.Emailaddress = emailaddress;
         }
 
-
         /// <summary>
         /// login the user, when succesfull retrieve its data from the database
         /// </summary>

@@ -15,12 +15,10 @@ namespace PhotoshopWebsite.Gui
     [ExcludeFromCodeCoverage]
     public partial class Stock : System.Web.UI.Page
     {
-
         private List<Product> products = new List<Product>();
         private ProductController pc;
         private Dictionary<int, int> productAmount;
         private Dictionary<int, int> productStock;
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -67,7 +65,6 @@ namespace PhotoshopWebsite.Gui
             MainHeaderRow.Cells.Add(amountHeader);
 
             MainTable.Rows.Add(MainHeaderRow);
-
 
             foreach (Product prod in products)
             {
@@ -117,7 +114,6 @@ namespace PhotoshopWebsite.Gui
             btPay.Text = "Alter Amount";
             btPay.Click += new EventHandler(this.AddAmount_Clicked);
             btPay.Height = 30;
-
 
             pnlCodes.Controls.Add(firstcontrol);
             pnlCodes.Controls.Add(MainTable);

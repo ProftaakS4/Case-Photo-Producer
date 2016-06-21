@@ -9,15 +9,13 @@ namespace PhotoshopWebsite.WebSocket
 {
     public class WebSocketSingleton
     {
-
-
         // create instance of its owne class
         private static WebSocketSingleton _singleton = null;
 
         // create private constructor
         private WebSocketSingleton()
         {
-
+            // instance
         }
 
         /// <summary>
@@ -33,7 +31,6 @@ namespace PhotoshopWebsite.WebSocket
             }
             return _singleton;
         }
-
 
         /// <summary>
         /// 

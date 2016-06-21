@@ -43,7 +43,7 @@ namespace PhotoshopWebsite.Domain
 
         public Order()
         {
-
+            // empty constructor
         }
 
         public int insertPrintOrder(int accountID, DateTime date, string status, int productID, int photoID, string filterType, string paymentType, string productType, string iban, double price, int quantity)
@@ -56,7 +56,6 @@ namespace PhotoshopWebsite.Domain
             int purchaseID = int.Parse(dt.Rows[0][0].ToString());
             if (purchaseID != 0)
             {
-
                 parameters = new Dictionary<string, string[]>();
                 parameters.Add("p_purchase_ID", new string[] { "int", purchaseID.ToString() });
                 parameters.Add("p_product_ID", new string[] { "int", productID.ToString("yyyy-MM-dd") });

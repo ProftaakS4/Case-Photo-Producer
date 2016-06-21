@@ -11,7 +11,7 @@ namespace PhotoshopWebsite.Controller
         private DatabaseTier.QueryDatabase database = new DatabaseTier.QueryDatabase();
         public PhotoController()
         {
-
+            // empty constructor
         }
 
         /// <summary>
@@ -48,8 +48,6 @@ namespace PhotoshopWebsite.Controller
             }
             return result;
         }
-
-
 
         /// <summary>
         /// get the photoid from the database and create a photo object based on the stored information

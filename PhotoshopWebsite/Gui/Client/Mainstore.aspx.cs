@@ -17,7 +17,6 @@ namespace PhotoshopWebsite
     [ExcludeFromCodeCoverage]
     public partial class WebForm1 : System.Web.UI.Page
     {
-
         // create instance of the photoController for future database connections through busisness layer
         PhotoController photoController = new PhotoController();
         int[] cropValues = new int[6];
@@ -77,9 +76,7 @@ namespace PhotoshopWebsite
             }
         }
 
-
         private Bitmap _current;
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -135,7 +132,6 @@ namespace PhotoshopWebsite
                 }
             }
         }
-
 
         private void Fillpage(Domain.Photo x)
         {
@@ -311,7 +307,6 @@ namespace PhotoshopWebsite
             Session["cropValues"] = cropValues;
         }
 
-
         private void BtnAddToCart_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -355,8 +350,6 @@ namespace PhotoshopWebsite
                 }
                 Session["shoppingCart"] = shoppingCart;
             }
-
-
         }
 
         void DDType_SelectedIndexChanged(object sender, EventArgs e)
@@ -503,7 +496,3 @@ namespace PhotoshopWebsite
         }
     }
 }
-
-
-
-

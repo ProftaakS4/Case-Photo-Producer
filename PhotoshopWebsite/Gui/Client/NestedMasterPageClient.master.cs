@@ -43,7 +43,6 @@ namespace PhotoshopWebsite.Gui.Client
                 Label LabelTitle = (Label)Master.FindControl("LabelTitle");
                 if (pageName.Contains("account"))
                 {
-
                     LabelTitle.Text = "<h1>" + Resources.LocalizedText.my_account + "</h1>";
                 }
                 else if (pageName.Contains("mainstore"))
@@ -85,7 +84,6 @@ namespace PhotoshopWebsite.Gui.Client
             Session["logindata"] = null;
             Response.Redirect(Request.RawUrl);
         }
-
 
         protected void Btnsearch_Click(object sender, EventArgs e)
         {

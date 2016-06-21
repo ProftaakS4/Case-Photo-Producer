@@ -22,7 +22,6 @@ namespace PhotoshopWebsite.Gui
         private double totalAmount = 0;
         private User currentUser;
 
-
         public List<Domain.ShoppingbasketItem> shoppingCart
         {
             get
@@ -36,8 +35,6 @@ namespace PhotoshopWebsite.Gui
             }
         }
 
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserData"] != null)
@@ -48,7 +45,6 @@ namespace PhotoshopWebsite.Gui
         }
         private void Fillpage()
         {
-
             HtmlGenericControl firstcontrol = new HtmlGenericControl();
             firstcontrol.InnerHtml = "<div class='table-responsive'>";
             HtmlGenericControl closingcontrol = new HtmlGenericControl();
@@ -106,7 +102,6 @@ namespace PhotoshopWebsite.Gui
                 PriceCell.Text = "€" + item.Price.ToString() + ",00";
                 totalAmount = totalAmount + (item.Price * item.Quantity);
 
-
                 TableCell ButtonCell = new TableCell();
                 CheckBox cbRemove = new CheckBox();
                 cbRemove.ID = item.GetHashCode().ToString();
@@ -127,7 +122,6 @@ namespace PhotoshopWebsite.Gui
 
                 MainTable.Rows.Add(MainRow);
             }
-
 
             // Fixed row
             TableRow FixedRow = new TableRow();
@@ -157,7 +151,6 @@ namespace PhotoshopWebsite.Gui
             pnlProduct.Controls.Add(new LiteralControl(" <br />"));
         }
 
-
         private void Check_Clicked(object sender, EventArgs e)
         {
             CheckBox cbremove = sender as CheckBox;
@@ -171,7 +164,6 @@ namespace PhotoshopWebsite.Gui
                 }
             }
         }
-
 
         private void Quantity_Change(object sender, EventArgs e)
         {

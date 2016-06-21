@@ -75,7 +75,5 @@ namespace PhotoshopWebsite.Enumeration
                     return 1;
             }
         }
-
-
     }
 }

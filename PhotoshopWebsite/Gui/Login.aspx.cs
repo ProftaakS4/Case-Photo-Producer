@@ -9,14 +9,11 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-
-
 namespace PhotoshopWebsite
 {
     [ExcludeFromCodeCoverage]
     public partial class Login : System.Web.UI.Page
     {
-
         private bool rememberMe = false;
         LoginCodeController lcc;
 

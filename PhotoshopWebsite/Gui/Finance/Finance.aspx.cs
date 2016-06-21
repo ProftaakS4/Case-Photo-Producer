@@ -14,7 +14,6 @@ namespace PhotoshopWebsite.Gui
     [ExcludeFromCodeCoverage]
     public partial class Administration : System.Web.UI.Page
     {
-
         private List<Domain.Finance> finances = new List<Domain.Finance>();
         private FinanceController fc;
 
@@ -51,7 +50,6 @@ namespace PhotoshopWebsite.Gui
             MainHeaderRow.Cells.Add(moneyHeader);
 
             MainTable.Rows.Add(MainHeaderRow);
-
 
             foreach (Domain.Finance fin in finances)
             {

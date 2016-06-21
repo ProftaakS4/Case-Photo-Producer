@@ -64,7 +64,6 @@ namespace PhotoshopWebsite.Gui.Client
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             Reorders = new List<Order>();
             if (Session["UserData"] != null)
             {

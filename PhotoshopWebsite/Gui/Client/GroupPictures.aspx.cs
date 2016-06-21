@@ -74,9 +74,7 @@ namespace PhotoshopWebsite.Gui.Client
             }
         }
 
-
         private Bitmap _current;
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -176,7 +174,6 @@ namespace PhotoshopWebsite.Gui.Client
             btnCrop.CssClass = "btn btn-default";
             btnCrop.Text = Resources.LocalizedText.order_image;
             btnCrop.Height = 30;
-
 
             if (!this.filters.ContainsKey(x.ID))
             {
@@ -278,7 +275,6 @@ namespace PhotoshopWebsite.Gui.Client
             int h = Convert.ToInt32(this.input_H.Value);
         }
 
-
         private void BtnAddToCart_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -356,7 +352,6 @@ namespace PhotoshopWebsite.Gui.Client
                 }
             }
         }
-
 
         private void ConvertColor(Domain.Photo photo)
         {
@@ -451,7 +446,3 @@ namespace PhotoshopWebsite.Gui.Client
         }
     }
 }
-
-
-
-

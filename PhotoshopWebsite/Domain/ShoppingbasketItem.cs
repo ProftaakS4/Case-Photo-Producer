@@ -67,7 +67,6 @@ namespace PhotoshopWebsite.Domain
             return this.cropValues;
         }
 
-
         public override string ToString()
         {
             return "PhotoID: " + this.PhotoID + ", " + this.Description + ", quantity: " + this.Quantity + ", filter: " + this.Filter.ToString() + ", product: " + this.Product.ToString() + ", price per item: " + this.Price;

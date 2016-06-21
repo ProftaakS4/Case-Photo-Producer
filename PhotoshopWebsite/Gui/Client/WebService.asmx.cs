@@ -19,12 +19,10 @@ namespace PhotoshopWebsite.Gui.Client.Payment
     [System.Web.Script.Services.ScriptService]
     public class WebService : System.Web.Services.WebService
     {
-
         [WebMethod(EnableSession = true)]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public string getUserData()
         {
-
             if (Session["UserData"] != null)
             {
                 User user = Session["UserData"] as User;
