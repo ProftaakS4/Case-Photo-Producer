@@ -325,7 +325,7 @@ namespace PhotoshopWebsite
                     if (item.PhotoID.ToString() == photoid)
                     {
                         item.setCropValues("&" + cropValues[0].ToString() + " " + cropValues[1].ToString() + " " + cropValues[2].ToString() + " " + cropValues[3].ToString());
-                        Response.Write("<script>alert('" + item.getCropValues() + "')</script>");
+                        //Response.Write("<script>alert('" + item.getCropValues() + "')</script>");
                         break;
                     }
                 }
