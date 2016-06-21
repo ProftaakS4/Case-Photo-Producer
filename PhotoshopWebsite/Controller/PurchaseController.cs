@@ -21,7 +21,6 @@ namespace PhotoshopWebsite.Controller
         public PurchaseController(int accountID)
         {
             this.ID = accountID;
-            //this.purchases = this.getPurchases(ID);
         }
 
         /// <summary>

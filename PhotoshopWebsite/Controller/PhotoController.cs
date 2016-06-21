@@ -64,7 +64,7 @@ namespace PhotoshopWebsite.Controller
             DataRow row = dt.Rows[0];
             if (row != null)
             {
-                Domain.Photo photo = new Domain.Photo(int.Parse(row[0].ToString()), int.Parse(row[1].ToString()), int.Parse(row[2].ToString()),row[3].ToString(),row[4].ToString(),row[5].ToString());
+                Domain.Photo photo = new Domain.Photo(int.Parse(row[0].ToString()), int.Parse(row[1].ToString()), int.Parse(row[2].ToString()), row[3].ToString(), row[4].ToString(), row[5].ToString());
                 return photo;
             }
             return null;

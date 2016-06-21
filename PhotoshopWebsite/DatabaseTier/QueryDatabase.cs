@@ -10,7 +10,7 @@ namespace PhotoshopWebsite.DatabaseTier
 {
     public class QueryDatabase
     {
-        //Get the MySQL connection Singleton Instance
+        // Get the MySQL connection Singleton Instance
         private ConnectionSingleton connectionSingleton = ConnectionSingleton.GetSingleton();
 
         // Create a new MySQL connections
@@ -31,7 +31,7 @@ namespace PhotoshopWebsite.DatabaseTier
                 myCommand = new MySqlCommand(procedure, mysqlConnection);
                 myCommand.CommandType = CommandType.StoredProcedure;
 
-                foreach (KeyValuePair<string,string[]> parameter in parameters)
+                foreach (KeyValuePair<string, string[]> parameter in parameters)
                 {
                     switch (parameter.Value[0])
                     {
@@ -49,14 +49,14 @@ namespace PhotoshopWebsite.DatabaseTier
                             break;
                         default:
                             break;
-                    }                    
-                    myCommand.Parameters["@" + parameter.Key].Direction = ParameterDirection.Input;                                   
+                    }
+                    myCommand.Parameters["@" + parameter.Key].Direction = ParameterDirection.Input;
                 }
 
                 //execute query
                 mysqlConnection.Open();
                 MySqlDataReader dr = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
-                
+
                 dt.Load(dr);
                 //return datatable
                 return dt;

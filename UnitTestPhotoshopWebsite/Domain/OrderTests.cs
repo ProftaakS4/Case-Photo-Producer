@@ -19,7 +19,7 @@ namespace PhotoshopWebsite.Controller.Tests
         {
             DateTime datum = new DateTime();
             PaymentType pt = new PaymentType();
-            order = new Order(1,datum,pt,"NL16RABO1234567890",9.99);
+            order = new Order(1, datum, pt, "NL16RABO1234567890", 9.99);
             Assert.AreEqual(1, order.ID);
             Assert.IsNotNull(order.Date);
             Assert.IsNotNull(order.Type);
