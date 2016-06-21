@@ -216,18 +216,25 @@ namespace PhotoshopWebsite.Gui
                 {
                     PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
                     Domain.Order newOrder = new Domain.Order();
-
+                    socket.sendData("BEGIN");
+                    string ids = "INDEX ";
                     foreach (Domain.ShoppingbasketItem item in shoppingCart)
                     {
                         // create socket string
-                        string photoIDQualtityType = item.PhotoID.ToString() + ";" + item.Quantity.ToString() + "#" + item.Filter;
+                        ids = ids + " " + item.PhotoID.ToString();
+
+                        string photoIDQualtityType = item.PhotoID.ToString() + ";" + item.Quantity.ToString() + "#" + item.Filter + " " + item.getCropValues();                        
+
                         // send socket string to fileserver and check if string is correctly send
                         if (socket.sendData(photoIDQualtityType))
                         {
                             // insert order into database
-                            newOrder.insertPrintOrder(currentUser.ID, DateTime.Now, "Paid", ProductTypes.getInt(item.Product.ToString()), item.PhotoID, item.Filter.ToString(), "iDeal", item.Product.ToString(), currentUser.IBAN, item.Price, item.Quantity);
+                            //newOrder.insertPrintOrder(currentUser.ID, DateTime.Now, "Paid", ProductTypes.getInt(item.Product.ToString()), item.PhotoID, item.Filter.ToString(), "iDeal", item.Product.ToString(), currentUser.IBAN, item.Price, item.Quantity);
                         }
                     }
+                    socket.sendData(ids + "?" + currentUser.ID.ToString());
+                    socket.sendData("END");
+                    // Email senden
                 }
                 else
                 {
