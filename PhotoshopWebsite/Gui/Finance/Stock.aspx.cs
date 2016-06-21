@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using PhotoshopWebsite.Domain;
 using System.Web.UI.HtmlControls;
 using PhotoshopWebsite.Controller;
+using System.Text.RegularExpressions;
 
 namespace PhotoshopWebsite.Gui
 {
@@ -18,12 +19,14 @@ namespace PhotoshopWebsite.Gui
         private List<Product> products = new List<Product>();
         private ProductController pc;
         private Dictionary<int, int> productAmount;
+        private Dictionary<int, int> productStock;
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
             pc = new ProductController();
             products = pc.products;
+            productStock = new Dictionary<int, int>();
             if (Session["Stockpurchases"] != null)
             {
                 productAmount = Session["Stockpurchases"] as Dictionary<int, int>;
@@ -84,6 +87,7 @@ namespace PhotoshopWebsite.Gui
                 Description.Text = prod.Description.ToString();
                 TableCell Stock = new TableCell();
                 Stock.Text = prod.Stock.ToString();
+                productStock.Add(prod.ID, prod.Stock);
                 TableCell TextBoxCell = new TableCell();
                 Label buttonCellText = new Label();
                 buttonCellText.Text = "Amount: ";
@@ -120,23 +124,88 @@ namespace PhotoshopWebsite.Gui
             pnlCodes.Controls.Add(MainTable);
             pnlCodes.Controls.Add(closingcontrol);
             pnlCodes.Controls.Add(btPay);
-            //Response.Write("<script>alert('Wrong emailaddress or password')</script>");
+            if (Session["NumericStock"] != null)
+            {
+                bool NumericStock = (bool)Session["NumericStock"];
+                if (!NumericStock)
+                {
+                    Response.Write("<script>alert('Vul alleen een numerieke waarde in.')</script>");
+                    Session["NumericStock"] = true;
+                }
+            }
+            
+            if (Session["PositiveStock"] != null)
+            {
+                bool PositiveStock = (bool)Session["PositiveStock"];
+                if (!PositiveStock)
+                {
+                    Response.Write("<script>alert('Stock mag niet onder de 0 komen.')</script>");
+                    Session["PositiveStock"] = true;
+                }
+            }
+            
         }
 
         private void AmountText_TextChanged(object sender, EventArgs e)
         {
             TextBox tbAmount = sender as TextBox;
-            productAmount.Add(int.Parse(tbAmount.ID), int.Parse(tbAmount.Text));
+            //tbAmount.ValidationGroup = "Stock";
+            //tbAmount.CausesValidation = true;
+            //RegularExpressionValidator rev = new RegularExpressionValidator();
+            //rev.ValidationExpression = "\\-?[0-9]+";
+            ////rev.ValidationGroup = "Stock";
+            //rev.ControlToValidate = tbAmount.Text;
+            //Page.Validate("Stock");
+            //
+            Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>\\-?[0-9]+)");
+            Match match = regex.Match(tbAmount.Text);
+            if (match.Success)
+            {
+                productAmount.Add(int.Parse(tbAmount.ID), int.Parse(tbAmount.Text));
+            }
+            else
+            {
+                Session["NumericStock"] = false;
+                //Response.Write("<script>alertx('Vul numerice waarden in.')</script>");
+            }
+            //int amount = Int32.Parse(match.Groups["Numeric"].Value);
+            //
+            //if (Page.IsValid)
+            //{
+           
+                //productAmount.Add(int.Parse(tbAmount.ID), int.Parse(tbAmount.Text));
+            //productAmount.Add(int.Parse(tbAmount.ID), amount);
+            //} else {
+              //  rev.ErrorMessage = "Vul numerieke waarden in.";
+            //}
+                //Response.Write("<script>alert('Vul numerice waarden in.')</script>");
         }
 
         private void AddAmount_Clicked(object sender, EventArgs e)
         {
             foreach (KeyValuePair<int, int> item in productAmount)
             {
-                pc.updateProductStock(item.Key, item.Value);
+                foreach (KeyValuePair<int, int> prod in productStock)
+                {
+                    if (productAmount.ContainsKey(prod.Key))
+                    {
+                        if (item.Value != 0)
+                        {
+                            if (prod.Key == item.Key && prod.Value + item.Value >= 0)
+                            {
+                                pc.updateProductStock(item.Key, item.Value);
+                            }
+                            else
+                            {
+                                //Response.Write("<script>alert('Eén of meerdere waardes zijn onder 0. De stock mag niet onder 0 komen.')</script>");
+                                Session["PositiveStock"] = false;
+                            }
+                        }
+                    }
+                }
+
             }
             Response.Redirect(Request.RawUrl);
         }
-
     }
 }
