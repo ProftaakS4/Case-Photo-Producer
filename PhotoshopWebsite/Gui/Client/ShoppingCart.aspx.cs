@@ -218,11 +218,15 @@ namespace PhotoshopWebsite.Gui
                 {
                     PhotoshopWebsite.WebSocket.WebSocketSingleton socket = PhotoshopWebsite.WebSocket.WebSocketSingleton.GetSingleton();
                     Domain.Order newOrder = new Domain.Order();
-
+                    socket.sendData("BEGIN");
+                    string ids = "INDEX ";
                     foreach (Domain.ShoppingbasketItem item in shoppingCart)
                     {
                         // create socket string
-                        string photoIDQualtityType = item.PhotoID.ToString() + ";" + item.Quantity.ToString() + "#" + item.Filter;
+                        ids = ids + " " + item.PhotoID.ToString();
+
+                        string photoIDQualtityType = item.PhotoID.ToString() + ";" + item.Quantity.ToString() + "#" + item.Filter + " " + item.getCropValues();                        
+
                         // send socket string to fileserver and check if string is correctly send
                         if (socket.sendData(photoIDQualtityType))
                         {
@@ -230,6 +234,8 @@ namespace PhotoshopWebsite.Gui
                             newOrder.insertPrintOrder(currentUser.ID, DateTime.Now, "Paid", ProductTypes.getInt(item.Product.ToString()), item.PhotoID, item.Filter.ToString(), "iDeal", item.Product.ToString(), currentUser.IBAN, item.Price, item.Quantity);
                         }
                     }
+                    socket.sendData(ids + "?" + currentUser.ID.ToString());
+                    socket.sendData("END");
 
                     //send mail for the order overview
                     try
@@ -239,10 +245,10 @@ namespace PhotoshopWebsite.Gui
                         // Mail Header
                         mail.From = new MailAddress("photoshopPTS4@gmail.com");
                         mail.To.Add(currentUser.Emailaddress);
-                        mail.Subject = "Dit is de inhoudt van uw bestelling.";
+                        mail.Subject = "Uw bestelling.";
                         // Mail Body
                         StringBuilder sb = new StringBuilder();
-                        sb.Append(Resources.LocalizedText.your_codes_are + Environment.NewLine);
+                        sb.Append("Dit is de inhoudt van uw bestelling:" + Environment.NewLine);
                         foreach (Domain.ShoppingbasketItem item in shoppingCart)
                         {
                             sb.Append(item.ToString() + Environment.NewLine);
@@ -259,6 +265,9 @@ namespace PhotoshopWebsite.Gui
                     {
                         Response.Write("<script>alert('" + Resources.LocalizedText.error_cant_send_mail + " " + currentUser.Emailaddress + "')</script>");
                     }
+                    //clear shoppingcart
+                    Session["shoppingCart"] = new List<Domain.ShoppingbasketItem>();
+                    Response.Redirect(Request.RawUrl + "/../Mainstore.aspx");
                 }
                 else
                 {

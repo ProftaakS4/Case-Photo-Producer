@@ -18,6 +18,7 @@ namespace PhotoshopWebsite.Domain
         public ProductTypes.PTypes Product { get; set; }
         public double Price { get; set; }
         public string Boundaries { get; set; }
+        public string cropValues { get; set; }
 
         /// <summary>
         /// create a ShoppingbasketItem with all possible variables
@@ -36,7 +37,7 @@ namespace PhotoshopWebsite.Domain
             this.Product = product;
             this.Price = price;
             this.Boundaries = "";
-
+            this.cropValues = "";
         }
 
         /// <summary>
@@ -45,8 +46,25 @@ namespace PhotoshopWebsite.Domain
         /// <param name="boundaries">boundaries for the shoppingbasketitem</param>
         public void setBoundaries(string boundaries)
         {
-
             this.Boundaries = boundaries;
+        }
+
+        /// <summary>
+        /// set the crop values of the foto
+        /// </summary>
+        /// <param name="cropValues">the new cropvalues</param>
+        public void setCropValues(string cropValues)
+        {
+            this.cropValues = cropValues;
+        }
+            
+        /// <summary>
+        /// get the cropvalues
+        /// </summary>
+        /// <returns>the cropvalues</returns>
+        public string getCropValues()
+        {
+            return this.cropValues;
         }
 
 
