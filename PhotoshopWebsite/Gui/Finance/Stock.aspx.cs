@@ -149,14 +149,6 @@ namespace PhotoshopWebsite.Gui
         private void AmountText_TextChanged(object sender, EventArgs e)
         {
             TextBox tbAmount = sender as TextBox;
-            //tbAmount.ValidationGroup = "Stock";
-            //tbAmount.CausesValidation = true;
-            //RegularExpressionValidator rev = new RegularExpressionValidator();
-            //rev.ValidationExpression = "\\-?[0-9]+";
-            ////rev.ValidationGroup = "Stock";
-            //rev.ControlToValidate = tbAmount.Text;
-            //Page.Validate("Stock");
-            //
             Regex regex = new Regex("(?<Alpha>[a-zA-Z]*)(?<Numeric>\\-?[0-9]+)");
             Match match = regex.Match(tbAmount.Text);
             if (match.Success)
@@ -168,17 +160,6 @@ namespace PhotoshopWebsite.Gui
                 Session["NumericStock"] = false;
                 //Response.Write("<script>alertx('Vul numerice waarden in.')</script>");
             }
-            //int amount = Int32.Parse(match.Groups["Numeric"].Value);
-            //
-            //if (Page.IsValid)
-            //{
-           
-                //productAmount.Add(int.Parse(tbAmount.ID), int.Parse(tbAmount.Text));
-            //productAmount.Add(int.Parse(tbAmount.ID), amount);
-            //} else {
-              //  rev.ErrorMessage = "Vul numerieke waarden in.";
-            //}
-                //Response.Write("<script>alert('Vul numerice waarden in.')</script>");
         }
 
         private void AddAmount_Clicked(object sender, EventArgs e)
@@ -197,7 +178,6 @@ namespace PhotoshopWebsite.Gui
                             }
                             else
                             {
-                                //Response.Write("<script>alert('Eén of meerdere waardes zijn onder 0. De stock mag niet onder 0 komen.')</script>");
                                 Session["PositiveStock"] = false;
                             }
                         }
